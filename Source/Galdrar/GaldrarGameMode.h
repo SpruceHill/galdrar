@@ -9,11 +9,10 @@
  * 
  */
 UCLASS()
-class GALDRAR_API AGaldrarGameMode : public AGameMode
+class GALDRAR_API AgaldrarGameMode : public AGameMode
 {
 	GENERATED_BODY()
 	
-	
-	
-	
+public:
+	AgaldrarGameMode(const FObjectInitializer& ObjectInitializer);
 };
