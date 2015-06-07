@@ -39,8 +39,15 @@ void AHeroPlayerController::Zoom(float delta)
 {
 
 	AHeroCharacter* hero = Cast<AHeroCharacter>(GetPawn());
-	if (hero != nullptr) hero->SetCameraBoom(hero->GetCameraBoom()->TargetArmLength + delta);
-	
+	if (hero != nullptr)
+	{
+		// Clamping zoom between zoomMin and zoomMax
+		if ((delta < 0 && (hero->GetCameraBoom()->TargetArmLength > zoomMin))
+				|| (delta > 0 && (hero->GetCameraBoom()->TargetArmLength < zoomMax)))
+		{
+			hero->SetCameraBoom(hero->GetCameraBoom()->TargetArmLength + delta);
+		}
+	}
 }
 
 void AHeroPlayerController::MoveToMouseCursor()
