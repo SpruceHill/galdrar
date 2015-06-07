@@ -3,6 +3,7 @@
 #include "Galdrar.h"
 #include "HeroPlayerController.h"
 #include "AI/Navigation/NavigationSystem.h"
+#include "HeroCharacter.h"
 
 AHeroPlayerController::AHeroPlayerController(const FObjectInitializer& ObjectInitializer)
 	: Super(ObjectInitializer)
@@ -29,6 +30,17 @@ void AHeroPlayerController::SetupInputComponent()
 
 	InputComponent->BindAction("SetDestination", IE_Pressed, this, &AHeroPlayerController::OnSetDestinationPressed);
 	InputComponent->BindAction("SetDestination", IE_Released, this, &AHeroPlayerController::OnSetDestinationReleased);
+
+	InputComponent->BindAction("ZoomIn", IE_Released, this, &AHeroPlayerController::ZoomIn);
+	InputComponent->BindAction("ZoomOut", IE_Released, this, &AHeroPlayerController::ZoomOut);
+}
+
+void AHeroPlayerController::Zoom(float delta)
+{
+
+	AHeroCharacter* hero = Cast<AHeroCharacter>(GetPawn());
+	if (hero != nullptr) hero->SetCameraBoom(hero->GetCameraBoom()->TargetArmLength + delta);
+	
 }
 
 void AHeroPlayerController::MoveToMouseCursor()

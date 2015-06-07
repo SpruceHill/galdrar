@@ -19,6 +19,7 @@ public:
 private:
 	/** True if the controlled character should navigate to the mouse cursor. */
 	uint32 bMoveToMouseCursor : 1;
+	const float zoomStepLength = 100.f;
 
 	virtual void PlayerTick(float DeltaTime) override;
 	virtual void SetupInputComponent() override;
@@ -30,4 +31,8 @@ private:
 	// Input handlers for SetDestination action
 	void OnSetDestinationPressed();
 	void OnSetDestinationReleased();
+
+	void Zoom(float delta);
+	void ZoomIn(){ Zoom(-zoomStepLength); }
+	void ZoomOut(){ Zoom(zoomStepLength); }
 };
