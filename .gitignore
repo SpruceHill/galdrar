@@ -3,6 +3,7 @@
 /Binaries/*/*Debug*
 /Intermediate
 /Saved
+/Content
 
 # Visual studio files 
 Galdrar.opensdf
