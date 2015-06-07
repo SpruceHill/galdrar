@@ -10,6 +10,9 @@ AHeroPlayerController::AHeroPlayerController(const FObjectInitializer& ObjectIni
 {
 	bShowMouseCursor = true;
 	DefaultMouseCursor = EMouseCursor::Crosshairs;
+
+	bShouldZoom = false;
+	targetZoom = zoomMax;
 }
 
 void AHeroPlayerController::PlayerTick(float DeltaTime)
@@ -20,6 +23,23 @@ void AHeroPlayerController::PlayerTick(float DeltaTime)
 	if (bMoveToMouseCursor)
 	{
 		MoveToMouseCursor();
+	}
+
+	// Camera smooth zoom
+	if (bShouldZoom)
+	{
+		AHeroCharacter* hero = Cast<AHeroCharacter>(GetPawn());
+		if (hero->GetCameraBoom()->TargetArmLength < targetZoom){
+			hero->SetCameraBoom(hero->GetCameraBoom()->TargetArmLength + zoomSpeed);
+		}
+		else if (hero->GetCameraBoom()->TargetArmLength > targetZoom)
+		{
+			hero->SetCameraBoom(hero->GetCameraBoom()->TargetArmLength - zoomSpeed);
+		}
+		else
+		{
+			bShouldZoom = false;
+		}
 	}
 }
 
@@ -37,16 +57,12 @@ void AHeroPlayerController::SetupInputComponent()
 
 void AHeroPlayerController::Zoom(float delta)
 {
-
-	AHeroCharacter* hero = Cast<AHeroCharacter>(GetPawn());
-	if (hero != nullptr)
+	// Clamping zoom between zoomMin and zoomMax
+	if ((delta < 0 && (targetZoom > zoomMin))
+			|| (delta > 0 && (targetZoom < zoomMax)))
 	{
-		// Clamping zoom between zoomMin and zoomMax
-		if ((delta < 0 && (hero->GetCameraBoom()->TargetArmLength > zoomMin))
-				|| (delta > 0 && (hero->GetCameraBoom()->TargetArmLength < zoomMax)))
-		{
-			hero->SetCameraBoom(hero->GetCameraBoom()->TargetArmLength + delta);
-		}
+		bShouldZoom = true;
+		targetZoom += delta;
 	}
 }
 

@@ -20,8 +20,11 @@ private:
 	/** True if the controlled character should navigate to the mouse cursor. */
 	uint32 bMoveToMouseCursor : 1;
 	const float zoomStepLength = 100.f;
-	const float zoomMin = 600.f;
+	const float zoomSpeed = 20.f;
+	const float zoomMin = 500.f;
 	const float zoomMax = 1200.f;
+	float targetZoom;
+	bool bShouldZoom;
 
 	virtual void PlayerTick(float DeltaTime) override;
 	virtual void SetupInputComponent() override;

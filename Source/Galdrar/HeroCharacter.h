@@ -32,4 +32,5 @@ public:
 	void SetCameraBoom(float length)  { CameraBoom->TargetArmLength = length; }
 
 	void Zoom(float delta);
+
 };
