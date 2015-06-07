@@ -1,0 +1,11 @@
+# Unreal engine folders
+/Binaries/*/*.pdb
+/Binaries/*/*Debug*
+/Intermediate
+/Saved
+
+# Visual studio files 
+Galdrar.opensdf
+Galdrar.sdf
+Galdrar.sln
+Galdrar.v12.suo
