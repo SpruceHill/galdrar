@@ -14,6 +14,9 @@ class GALDRAR_API AEnemyAIController : public AAIController
 {
 	GENERATED_BODY()
 
+public:
+	AEnemyAIController(const FObjectInitializer& ObjectInitializer);
+
 	UPROPERTY(transient)
 	class UBlackboardComponent* blackboardComp;
 	
@@ -26,9 +29,6 @@ class GALDRAR_API AEnemyAIController : public AAIController
 
 	UFUNCTION(BlueprintCallable, Category = Behavior)
 	void SearchForEnemy();
-
-public:
-	AEnemyAIController(const FObjectInitializer& ObjectInitializer);
 
 protected:
 	uint8 enemyKeyID;
