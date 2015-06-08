@@ -5,6 +5,7 @@
 #include "AIController.h"
 #include "EnemyAIController.generated.h"
 
+
 /**
  * 
  */
@@ -19,9 +20,9 @@ class GALDRAR_API AEnemyAIController : public AAIController
 	UPROPERTY(transient)
 	class UBehaviorTreeComponent* behaviorTreeComp;
 
-	virtual void Possess(class APawn *inPawn);
+	virtual void Possess(class APawn* inPawn);
 
-	void SetEnemy(class APawn inPawn);
+	void SetEnemy(class APawn* inPawn);
 
 	UFUNCTION(BlueprintCallable, Category = Behavior)
 	void SearchForEnemy();
