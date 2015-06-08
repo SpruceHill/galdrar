@@ -11,6 +11,7 @@
 AEnemyAIController::AEnemyAIController(const FObjectInitializer& ObjectInitializer)
 	: Super(ObjectInitializer)
 {
+	aggroDistance = 600.f;
 	blackboardComp = CreateDefaultSubobject<UBlackboardComponent>(TEXT("BlackboardComp"));
 	behaviorTreeComp = CreateDefaultSubobject<UBehaviorTreeComponent>(TEXT("BehaviorTreeComp"));
 }
@@ -50,7 +51,7 @@ void AEnemyAIController::SearchForEnemy()
 		if (testPawn)
 		{
 			const float distanceSquared = FVector::Dist(testPawn->GetActorLocation(), location);
-			if (distanceSquared < bestDistanceSquared)
+			if (distanceSquared < bestDistanceSquared && distanceSquared < aggroDistance)
 			{
 				bestDistanceSquared = distanceSquared;
 				bestPawn = testPawn;

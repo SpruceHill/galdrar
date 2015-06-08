@@ -3,7 +3,8 @@
 /Binaries/*/*Debug*
 /Intermediate
 /Saved
-/Content
+/Content/StarterContent
+/Content/AnimStarterPack
 
 # Visual studio files 
 Galdrar.opensdf
