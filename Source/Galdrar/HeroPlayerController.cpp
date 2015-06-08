@@ -9,7 +9,8 @@ AHeroPlayerController::AHeroPlayerController(const FObjectInitializer& ObjectIni
 	: Super(ObjectInitializer)
 {
 	bShowMouseCursor = true;
-	DefaultMouseCursor = EMouseCursor::Crosshairs;
+	DefaultMouseCursor = EMouseCursor::Default;
+	bEnableMouseOverEvents = true;
 
 	bShouldZoom = false;
 	targetZoom = zoomMax;
