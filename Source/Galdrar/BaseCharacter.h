@@ -25,13 +25,17 @@ public:
 
 	
 
-/*private:
-	unsigned int maxHealth;
-	unsigned int health;
+protected:
+	UPROPERTY(BlueprintReadOnly, Category = character)
+	int32 maxHealth;
+	UPROPERTY(BlueprintReadOnly, Category = character)
+	int32 health;
+	UPROPERTY(BlueprintReadOnly, Category = character)
+	FString name;
 	double armour;
 	double frostResistance;
 	double fireResistance;
 	double shockResistance;
 	// List effects
-	// Array / variables spells*/
+	// Array / variables spells
 };
