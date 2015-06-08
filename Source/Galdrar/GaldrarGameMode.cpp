@@ -13,7 +13,7 @@ AgaldrarGameMode::AgaldrarGameMode(const FObjectInitializer& ObjectInitializer) 
 	DefaultPawnClass = AHeroCharacter::StaticClass();
 
 	// set default pawn class to our Blueprinted character
-	static ConstructorHelpers::FClassFinder<APawn> PlayerPawnBPClass(TEXT("/Game/AnimStarterPack/BPHeroCharacter"));
+	static ConstructorHelpers::FClassFinder<APawn> PlayerPawnBPClass(TEXT("/Game/BPHeroCharacter"));
 	if (PlayerPawnBPClass.Class != NULL)
 	{
 		DefaultPawnClass = PlayerPawnBPClass.Class;
