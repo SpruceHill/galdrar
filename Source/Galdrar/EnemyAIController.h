@@ -14,16 +14,16 @@ class GALDRAR_API AEnemyAIController : public AAIController
 	GENERATED_BODY()
 
 	UPROPERTY(transient)
-	TSubobjectPtr<class UBlackboardComponent> blackboardComp;
+	class UBlackboardComponent* blackboardComp;
 	
 	UPROPERTY(transient)
-	TSubobjectPtr<class UBehaviorTreeComponent> behaviorTreeComp;
+	class UBehaviorTreeComponent* behaviorTreeComp;
 
 	virtual void Possess(class APawn *inPawn);
 
 	void SetEnemy(class APawn inPawn);
 
-	UFUNCTION(BlueprintCallable, Category = Behaviour)
+	UFUNCTION(BlueprintCallable, Category = Behavior)
 	void SearchForEnemy();
 
 public:

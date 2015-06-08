@@ -2,6 +2,7 @@
 
 #include "Galdrar.h"
 #include "EnemyAIController.h"
+#include "EnemyCharacter.h"
 
 AEnemyAIController::AEnemyAIController(const FObjectInitializer& ObjectInitializer)
 	: Super(ObjectInitializer)
