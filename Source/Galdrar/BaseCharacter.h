@@ -19,6 +19,7 @@ public:
 	// Called every frame
 	virtual void Tick(float DeltaSeconds) override { Super::Tick(DeltaSeconds); }
 
+	FString GetName() { return name; }
 	float GetDamage() { return damage; }
 	float GetResistance(DamageType type) 
 	{

@@ -100,6 +100,14 @@ void AHeroPlayerController::OnSetDestinationPressed()
 {
 	// set flag to keep updating destination until released
 	bMoveToMouseCursor = true;
+	FHitResult TraceResult(ForceInit);
+	GetHitResultUnderCursorByChannel(UEngineTypes::ConvertToTraceType(ECC_Camera), true, TraceResult);
+	if (TraceResult.GetActor())
+	{
+		if (ABaseCharacter* character = dynamic_cast<ABaseCharacter*>(TraceResult.GetActor())) {
+			GEngine->AddOnScreenDebugMessage(-1, 15.0f, FColor::Red, character->GetName());
+		}
+	}
 }
 
 void AHeroPlayerController::OnSetDestinationReleased()

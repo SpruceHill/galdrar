@@ -14,4 +14,3 @@ AEnemyCharacter::AEnemyCharacter(const FObjectInitializer& ObjectInitializer)
 	damage = 10.f;
 	AIControllerClass = AEnemyAIController::StaticClass();
 }
-
