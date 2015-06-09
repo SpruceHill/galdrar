@@ -4,7 +4,7 @@
 #include "DamageType.h"
 #include "CombatHandler.h"
 
-float calcDamage(float damage, float resistance, float critPercentage, bool crit)
+static float calcDamage(float damage, float resistance, float critPercentage, bool crit)
 {
 	float calculatedDamage = damage;
 
@@ -15,16 +15,16 @@ float calcDamage(float damage, float resistance, float critPercentage, bool crit
 	return calculatedDamage;
 }
 
-void attack(ABaseCharacter attacker, ABaseCharacter defender, Attack* attack, bool crit)
+static void attack(ABaseCharacter* attacker, ABaseCharacter* defender, Attack* attack, bool crit)
 {
-	float damage = calcDamage(attacker.GetDamage(), defender.GetResistance(attack->GetAttackType()),
+	float damage = calcDamage(attacker->GetDamage(), defender->GetResistance(attack->GetAttackType()),
 		attack->GetCritPercent(), crit);
 
-	defender.wound(damage);
+	defender->wound(damage);
 
-	for(Effect* effect : attack->GetEffects())
-	{ 
-		defender.addEffect(effect);
-	}
+	//for(Effect* effect : attack->GetEffects())
+	//{ 
+	//	defender.addEffect(effect);
+	//}
 }
 

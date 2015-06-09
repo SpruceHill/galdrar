@@ -3,6 +3,7 @@
 #pragma once
 
 #include "DamageType.h"
+#include "Attack.h"
 #include <list>
 #include <algorithm>
 #include "Effect.h"
@@ -17,10 +18,18 @@ class GALDRAR_API ABaseCharacter : public ACharacter
 
 public:
 	// Called every frame
-	virtual void Tick(float DeltaSeconds) override { Super::Tick(DeltaSeconds); }
+	virtual void Tick(float DeltaSeconds) override { 
+		Super::Tick(DeltaSeconds); 
+		if (health <= 0)
+		{
+			GEngine->AddOnScreenDebugMessage(-1, 15.0f, FColor::Red, name + "Just died");
+			this->Destroy();
+		}
+	}
 
 	FString GetName() { return name; }
-	float GetDamage() { return damage; }
+	float GetDamage() { return weapon->GetDamage(); }
+	Attack* GetWeapon() { return weapon; }
 	float GetResistance(DamageType type) 
 	{
 		switch (type) {
@@ -61,8 +70,6 @@ protected:
 	UPROPERTY(BlueprintReadOnly, Category = character)
 	FString name;
 	UPROPERTY(BlueprintReadOnly, Category = character)
-	float damage;
-	UPROPERTY(BlueprintReadOnly, Category = character)
 	float armour;
 	UPROPERTY(BlueprintReadOnly, Category = character)
 	float frostResistance;
@@ -70,6 +77,10 @@ protected:
 	float fireResistance;
 	UPROPERTY(BlueprintReadOnly, Category = character)
 	float shockResistance;
+
 	std::list < Effect* > activeEffects;
+
+	Attack* weapon;
+	
 	// Array / variables spells
 };

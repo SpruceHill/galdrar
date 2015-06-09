@@ -4,6 +4,7 @@
 #include "HeroPlayerController.h"
 #include "AI/Navigation/NavigationSystem.h"
 #include "HeroCharacter.h"
+#include "CombatHandler.h"
 
 AHeroPlayerController::AHeroPlayerController(const FObjectInitializer& ObjectInitializer)
 	: Super(ObjectInitializer)
@@ -104,8 +105,17 @@ void AHeroPlayerController::OnSetDestinationPressed()
 	GetHitResultUnderCursorByChannel(UEngineTypes::ConvertToTraceType(ECC_Camera), true, TraceResult);
 	if (TraceResult.GetActor())
 	{
-		if (ABaseCharacter* character = dynamic_cast<ABaseCharacter*>(TraceResult.GetActor())) {
-			GEngine->AddOnScreenDebugMessage(-1, 15.0f, FColor::Red, character->GetName());
+		if (ABaseCharacter* character = dynamic_cast<ABaseCharacter*>(TraceResult.GetActor())) 
+		{
+			//Do not attack self
+			if (character != GetPawn())
+			{
+				character->wound(20.f);
+				AHeroCharacter* hero = Cast<AHeroCharacter>(GetPawn());
+				character->wound(hero->GetDamage());
+				//CombatHandler::attack(hero, character, hero->GetWeapon(), false);
+				//GEngine->AddOnScreenDebugMessage(-1, 15.0f, FColor::Red, character->GetName());
+			}
 		}
 	}
 }

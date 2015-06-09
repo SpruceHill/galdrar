@@ -2,13 +2,15 @@
 
 #include "Galdrar.h"
 #include "HeroCharacter.h"
+#include "Attack.h"
+#include "DamageType.h"
 
 AHeroCharacter::AHeroCharacter(const FObjectInitializer& ObjectInitializer)
 	: Super(ObjectInitializer)
 {
 	maxHealth = 100;
 	health = 100;
-	damage = 20.f;
+	weapon = new Attack(20.f, DamageType::PHYSICAL, 1);
 
 	// Set size for player capsule
 	GetCapsuleComponent()->InitCapsuleSize(42.f, 96.0f);
