@@ -10,3 +10,4 @@ Effect::Effect()
 Effect::~Effect()
 {
 }
+

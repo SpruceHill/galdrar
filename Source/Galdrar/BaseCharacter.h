@@ -4,6 +4,7 @@
 
 #include "DamageType.h"
 #include <list>
+#include <algorithm>
 #include "Effect.h"
 #include "GameFramework/Character.h"
 #include "BaseCharacter.generated.h"
@@ -27,9 +28,30 @@ public:
 		case DamageType::FIRE: return fireResistance;
 		case DamageType::SHOCK: return shockResistance;
 		case DamageType::TRUE: return 1.f;
+		default: return 1.f;
 		}
 	}
-
+	void heal(float amount)
+	{
+		health += amount;
+	}
+	void wound(float amount)
+	{
+		health -= amount;
+	}
+	void setHealth(float newHealth)
+	{
+		health = newHealth;
+	}
+	void addEffect(Effect* effect)
+	{
+		activeEffects.push_back(effect);
+	}
+	void removeEffect(Effect* effect)
+	{
+		bool found = (std::find(activeEffects.begin(), activeEffects.end(), effect) != activeEffects.end());
+		if (found) activeEffects.remove(effect);
+	}
 protected:
 	UPROPERTY(BlueprintReadOnly, Category = character)
 	float maxHealth;
@@ -47,6 +69,6 @@ protected:
 	float fireResistance;
 	UPROPERTY(BlueprintReadOnly, Category = character)
 	float shockResistance;
-	std::list < Effect > activeEffects;
+	std::list < Effect* > activeEffects;
 	// Array / variables spells
 };

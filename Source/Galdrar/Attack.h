@@ -15,9 +15,9 @@ public:
 	~Attack();
 	DamageType GetAttackType(){ return attackType; }
 	float GetCritPercent(){ return critPercentage; }
-	std::list<Effect> GetEffects(){ return effects; }
+	std::list < Effect* > GetEffects(){ return effects; }
 private:
 	DamageType attackType;
 	float critPercentage;
-	std::list < Effect > effects;
+	std::list < Effect* > effects;
 };

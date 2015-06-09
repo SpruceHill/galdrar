@@ -3,6 +3,6 @@
 #pragma once
 
 #include "Engine.h"
-#include "BehaviorTree/BehaviorTree.h" //TODO hack?
+#include "BehaviorTree/BehaviorTree.h"
 #include "BehaviorTree/BlackboardComponent.h"
 
