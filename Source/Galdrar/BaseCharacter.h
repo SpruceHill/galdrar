@@ -2,8 +2,12 @@
 
 #pragma once
 
+#include "DamageType.h"
+#include <list>
+#include "Effect.h"
 #include "GameFramework/Character.h"
 #include "BaseCharacter.generated.h"
+
 
 UCLASS(abstract)
 class GALDRAR_API ABaseCharacter : public ACharacter
@@ -11,19 +15,20 @@ class GALDRAR_API ABaseCharacter : public ACharacter
 	GENERATED_BODY()
 
 public:
-	// Sets default values for this character's properties
-
-
-	// Called when the game starts or when spawned
-	//virtual void BeginPlay() override;
-	
 	// Called every frame
 	virtual void Tick(float DeltaSeconds) override { Super::Tick(DeltaSeconds); }
 
-	// Called to bind functionality to input
-	//virtual void SetupPlayerInputComponent(class UInputComponent* InputComponent) override;
-
-	
+	float GetDamage() { return damage; }
+	float GetResistance(DamageType type) 
+	{
+		switch (type) {
+		case DamageType::PHYSICAL: return armour;
+		case DamageType::FROST: return frostResistance;
+		case DamageType::FIRE: return fireResistance;
+		case DamageType::SHOCK: return shockResistance;
+		case DamageType::TRUE: return 1.f;
+		}
+	}
 
 protected:
 	UPROPERTY(BlueprintReadOnly, Category = character)
@@ -32,10 +37,16 @@ protected:
 	float health;
 	UPROPERTY(BlueprintReadOnly, Category = character)
 	FString name;
-	double armour;
-	double frostResistance;
-	double fireResistance;
-	double shockResistance;
-	// List effects
+	UPROPERTY(BlueprintReadOnly, Category = character)
+	float damage;
+	UPROPERTY(BlueprintReadOnly, Category = character)
+	float armour;
+	UPROPERTY(BlueprintReadOnly, Category = character)
+	float frostResistance;
+	UPROPERTY(BlueprintReadOnly, Category = character)
+	float fireResistance;
+	UPROPERTY(BlueprintReadOnly, Category = character)
+	float shockResistance;
+	std::list < Effect > activeEffects;
 	// Array / variables spells
 };

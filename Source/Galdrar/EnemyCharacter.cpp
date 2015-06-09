@@ -9,8 +9,9 @@ AEnemyCharacter::AEnemyCharacter(const FObjectInitializer& ObjectInitializer)
 	: Super(ObjectInitializer)
 {
 	maxHealth = 100.f;
-	health = 20.f;
+	health = 100.f;
 	name = "New Name";
+	damage = 10.f;
 	AIControllerClass = AEnemyAIController::StaticClass();
 }
 

@@ -8,6 +8,7 @@ AHeroCharacter::AHeroCharacter(const FObjectInitializer& ObjectInitializer)
 {
 	maxHealth = 100;
 	health = 100;
+	damage = 20.f;
 
 	// Set size for player capsule
 	GetCapsuleComponent()->InitCapsuleSize(42.f, 96.0f);
