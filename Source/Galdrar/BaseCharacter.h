@@ -27,9 +27,9 @@ public:
 
 protected:
 	UPROPERTY(BlueprintReadOnly, Category = character)
-	int32 maxHealth;
+	float maxHealth;
 	UPROPERTY(BlueprintReadOnly, Category = character)
-	int32 health;
+	float health;
 	UPROPERTY(BlueprintReadOnly, Category = character)
 	FString name;
 	double armour;
