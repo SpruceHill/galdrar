@@ -99,8 +99,6 @@ void AHeroPlayerController::SetNewMoveDestination(const FVector DestLocation)
 
 void AHeroPlayerController::OnSetDestinationPressed()
 {
-	// set flag to keep updating destination until released
-	bMoveToMouseCursor = true;
 	FHitResult TraceResult(ForceInit);
 	GetHitResultUnderCursorByChannel(UEngineTypes::ConvertToTraceType(ECC_Camera), true, TraceResult);
 	if (TraceResult.GetActor())
@@ -111,10 +109,13 @@ void AHeroPlayerController::OnSetDestinationPressed()
 			if (character != GetPawn())
 			{
 				AHeroCharacter* hero = Cast<AHeroCharacter>(GetPawn());
-				//character->Wound(hero->GetDamage());
 				CombatHandler::AttackEnemy(hero, character, hero->GetWeapon(), false);
-				//GEngine->AddOnScreenDebugMessage(-1, 15.0f, FColor::Red, character->GetName());
 			}
+		}
+		else
+		{
+			// set flag to keep updating destination until released
+			bMoveToMouseCursor = true;
 		}
 	}
 }
