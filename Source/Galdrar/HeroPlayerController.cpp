@@ -21,7 +21,7 @@ void AHeroPlayerController::PlayerTick(float DeltaTime)
 {
 	Super::PlayerTick(DeltaTime);
 
-/*	FHitResult TraceResult(ForceInit);
+	/*FHitResult TraceResult(ForceInit);
 	GetHitResultUnderCursorByChannel(UEngineTypes::ConvertToTraceType(ECC_Camera), true, TraceResult);
 	if (TraceResult.GetActor())
 	{
@@ -31,9 +31,40 @@ void AHeroPlayerController::PlayerTick(float DeltaTime)
 			if (character != GetPawn())
 			{
 				character->drawHealthbar = true;
+				CurrentMouseCursor = EMouseCursor::Hand;
 			}
+			
+		}
+		else
+		{
+			CurrentMouseCursor = DefaultMouseCursor;
 		}
 	}*/
+
+
+
+	// Trace to see what is under the mouse cursor
+	FHitResult Hit;
+	GetHitResultUnderCursor(ECC_Visibility, false, Hit);
+
+	if (Hit.bBlockingHit)
+	{
+		if (ABaseCharacter* character = dynamic_cast<ABaseCharacter*>(Hit.GetActor()))
+		{
+			character->drawHealthbar = true;
+			CurrentMouseCursor = EMouseCursor::Hand;
+		}
+		else
+		{
+			CurrentMouseCursor = DefaultMouseCursor;
+		}
+	}
+
+
+
+
+
+
 
 	// keep updating the destination every tick while desired
 	if (bMoveToMouseCursor)
