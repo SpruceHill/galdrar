@@ -12,6 +12,7 @@ AHeroCharacter::AHeroCharacter(const FObjectInitializer& ObjectInitializer)
 	health = 100;
 	weapon = new Attack("Sword", 20.f, DamageType::PHYSICAL, 1.f, 200.f, 1.f);
 	drawHealthbar = false;
+	name = "Hero";
 
 	// Set size for player capsule
 	GetCapsuleComponent()->InitCapsuleSize(42.f, 96.0f);

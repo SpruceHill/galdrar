@@ -113,7 +113,6 @@ void AHeroPlayerController::SetNewMoveDestination(const FVector DestLocation)
 
 void AHeroPlayerController::OnSetDestinationPressed()
 {
-
 	// Trace to see what is under the mouse cursor
 	FHitResult Hit;
 	GetHitResultUnderCursor(ECC_Visibility, false, Hit);
@@ -131,30 +130,6 @@ void AHeroPlayerController::OnSetDestinationPressed()
 			bMoveToMouseCursor = true;
 		}
 	}
-
-
-
-
-	/*
-	FHitResult TraceResult(ForceInit);
-	GetHitResultUnderCursorByChannel(UEngineTypes::ConvertToTraceType(ECC_Camera), true, TraceResult);
-	if (TraceResult.GetActor())
-	{
-		if (ABaseCharacter* character = dynamic_cast<ABaseCharacter*>(TraceResult.GetActor())) 
-		{
-			//Do not attack self
-			if (character != GetPawn())
-			{
-				AHeroCharacter* hero = Cast<AHeroCharacter>(GetPawn());
-				CombatHandler::AttackEnemy(hero, character, hero->GetWeapon(), false);
-			}
-		}
-		else
-		{
-			// set flag to keep updating destination until released
-			bMoveToMouseCursor = true;
-		}
-	}*/
 }
 
 void AHeroPlayerController::OnSetDestinationReleased()
