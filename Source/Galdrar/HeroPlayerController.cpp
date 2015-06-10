@@ -122,7 +122,14 @@ void AHeroPlayerController::OnSetDestinationPressed()
 		if (ABaseCharacter* character = dynamic_cast<ABaseCharacter*>(Hit.GetActor()))
 		{
 			AHeroCharacter* hero = Cast<AHeroCharacter>(GetPawn());
-			CombatHandler::AttackEnemy(hero, character, hero->GetWeapon(), false);
+			if (hero->GetDistanceTo(character) < hero->GetWeapon()->GetRange())
+			{
+				CombatHandler::AttackEnemy(hero, character, hero->GetWeapon(), false);
+			}
+			else
+			{
+				GEngine->AddOnScreenDebugMessage(-1, 15.0f, FColor::Red, "Not in range");
+			}
 		}
 		else
 		{
