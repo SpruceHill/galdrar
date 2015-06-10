@@ -129,6 +129,7 @@ void AHeroPlayerController::OnSetDestinationPressed()
 			else
 			{
 				GEngine->AddOnScreenDebugMessage(-1, 15.0f, FColor::Red, "Not in range");
+				bMoveToMouseCursor = true;
 			}
 		}
 		else
