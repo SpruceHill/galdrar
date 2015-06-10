@@ -110,10 +110,9 @@ void AHeroPlayerController::OnSetDestinationPressed()
 			//Do not attack self
 			if (character != GetPawn())
 			{
-				character->wound(20.f);
 				AHeroCharacter* hero = Cast<AHeroCharacter>(GetPawn());
-				character->wound(hero->GetDamage());
-				//CombatHandler::attack(hero, character, hero->GetWeapon(), false);
+				//character->Wound(hero->GetDamage());
+				CombatHandler::AttackEnemy(hero, character, hero->GetWeapon(), false);
 				//GEngine->AddOnScreenDebugMessage(-1, 15.0f, FColor::Red, character->GetName());
 			}
 		}

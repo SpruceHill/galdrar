@@ -11,5 +11,6 @@ AEnemyCharacter::AEnemyCharacter(const FObjectInitializer& ObjectInitializer)
 	maxHealth = 100.f;
 	health = 100.f;
 	name = "New Name";
+	armour = 1;
 	AIControllerClass = AEnemyAIController::StaticClass();
 }

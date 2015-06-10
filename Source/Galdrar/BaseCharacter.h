@@ -28,7 +28,7 @@ public:
 	}
 
 	FString GetName() { return name; }
-	float GetDamage() { return weapon->GetDamage(); }
+	float GetDamage() {	return weapon->GetDamage(); }
 	Attack* GetWeapon() { return weapon; }
 	float GetResistance(DamageType type) 
 	{
@@ -41,23 +41,23 @@ public:
 		default: return 1.f;
 		}
 	}
-	void heal(float amount)
+	void Heal(float amount)
 	{
 		health += amount;
 	}
-	void wound(float amount)
+	void Wound(float amount)
 	{
 		health -= amount;
 	}
-	void setHealth(float newHealth)
+	void SetHealth(float newHealth)
 	{
 		health = newHealth;
 	}
-	void addEffect(Effect* effect)
+	void AddEffect(Effect* effect)
 	{
 		activeEffects.push_back(effect);
 	}
-	void removeEffect(Effect* effect)
+	void RemoveEffect(Effect* effect)
 	{
 		bool found = (std::find(activeEffects.begin(), activeEffects.end(), effect) != activeEffects.end());
 		if (found) activeEffects.remove(effect);
