@@ -21,28 +21,6 @@ void AHeroPlayerController::PlayerTick(float DeltaTime)
 {
 	Super::PlayerTick(DeltaTime);
 
-	/*FHitResult TraceResult(ForceInit);
-	GetHitResultUnderCursorByChannel(UEngineTypes::ConvertToTraceType(ECC_Camera), true, TraceResult);
-	if (TraceResult.GetActor())
-	{
-		if (ABaseCharacter* character = dynamic_cast<ABaseCharacter*>(TraceResult.GetActor()))
-		{
-			//Do not attack self
-			if (character != GetPawn())
-			{
-				character->drawHealthbar = true;
-				CurrentMouseCursor = EMouseCursor::Hand;
-			}
-			
-		}
-		else
-		{
-			CurrentMouseCursor = DefaultMouseCursor;
-		}
-	}*/
-
-
-
 	// Trace to see what is under the mouse cursor
 	FHitResult Hit;
 	GetHitResultUnderCursor(ECC_Visibility, false, Hit);
@@ -56,15 +34,15 @@ void AHeroPlayerController::PlayerTick(float DeltaTime)
 		}
 		else
 		{
+			// Floor, walls etc
 			CurrentMouseCursor = DefaultMouseCursor;
 		}
 	}
-
-
-
-
-
-
+	else
+	{
+		// If outside the map
+		CurrentMouseCursor = DefaultMouseCursor;
+	}
 
 	// keep updating the destination every tick while desired
 	if (bMoveToMouseCursor)
