@@ -21,7 +21,7 @@ public:
 
 	//UFUNCTION(BlueprintCallable, Category = hud)
 	ABaseCharacter* GetFocusedCharacter() { return focusedCharacter; }
-	UPROPERTY(BlueprintReadOnly, Category = hud)
+	UPROPERTY(BlueprintReadWrite, Category = hud)
 	ABaseCharacter* focusedCharacter;
 	
 private:
