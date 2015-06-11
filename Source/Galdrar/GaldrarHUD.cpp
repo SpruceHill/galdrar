@@ -3,19 +3,18 @@
 #include "Galdrar.h"
 #include "GaldrarHUD.h"
 #include "HeroPlayerController.h"
-#include "EnemyCharacter.h"
+#include "BaseCharacter.h"
 
 void AGaldrarHUD::DrawHUD()
 {
-	APlayerController* PC = GetOwningPlayerController();
-	AHeroPlayerController* HPC = Cast<AHeroPlayerController>(PC);
-
-	DrawHealthbar();
-	//DrawAbilitybar();
-
+	Super::DrawHUD();
+//	APlayerController* PC = GetOwningPlayerController();
+//	AHeroPlayerController* HPC = Cast<AHeroPlayerController>(PC);
+	DrawHealthbar(focusedCharacter);
 }
 
-void AGaldrarHUD::DrawHealthbar()
+void AGaldrarHUD::DrawHealthbar(ABaseCharacter* baseCharacter)
 {
-	return;
+	if (focusedCharacter) GEngine->AddOnScreenDebugMessage(-1, 15.0f, FColor::Red, baseCharacter->GetName() + " is in focus");
+	focusedCharacter = NULL;
 }

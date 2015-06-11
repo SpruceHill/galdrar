@@ -5,6 +5,7 @@
 #include "AI/Navigation/NavigationSystem.h"
 #include "HeroCharacter.h"
 #include "CombatHandler.h"
+#include "GaldrarHUD.h"
 
 AHeroPlayerController::AHeroPlayerController(const FObjectInitializer& ObjectInitializer)
 	: Super(ObjectInitializer)
@@ -29,7 +30,10 @@ void AHeroPlayerController::PlayerTick(float DeltaTime)
 	{
 		if (ABaseCharacter* character = dynamic_cast<ABaseCharacter*>(Hit.GetActor()))
 		{
-			character->drawHealthbar = true;
+			if (AGaldrarHUD* hud = dynamic_cast<AGaldrarHUD*>(GetHUD()))
+			{
+				hud->SetFocusedCharacter(character);
+			}
 			CurrentMouseCursor = EMouseCursor::Hand;
 		}
 		else
