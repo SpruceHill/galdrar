@@ -8,13 +8,12 @@
 void AGaldrarHUD::DrawHUD()
 {
 	Super::DrawHUD();
-//	APlayerController* PC = GetOwningPlayerController();
-//	AHeroPlayerController* HPC = Cast<AHeroPlayerController>(PC);
-	DrawHealthbar(focusedCharacter);
+
+	//if (focusedCharacter) DrawHealthbar(focusedCharacter);
+	//focusedCharacter = NULL;
 }
 
 void AGaldrarHUD::DrawHealthbar(ABaseCharacter* baseCharacter)
 {
-	if (focusedCharacter) GEngine->AddOnScreenDebugMessage(-1, 15.0f, FColor::Red, baseCharacter->GetName() + " is in focus");
-	focusedCharacter = NULL;
+	//if(baseCharacter) baseCharacter->drawHealthbar = true;
 }
