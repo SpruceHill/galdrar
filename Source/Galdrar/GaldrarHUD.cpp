@@ -8,12 +8,4 @@
 void AGaldrarHUD::DrawHUD()
 {
 	Super::DrawHUD();
-
-	//if (focusedCharacter) DrawHealthbar(focusedCharacter);
-	//focusedCharacter = NULL;
-}
-
-void AGaldrarHUD::DrawHealthbar(ABaseCharacter* baseCharacter)
-{
-	//if(baseCharacter) baseCharacter->drawHealthbar = true;
 }

@@ -18,12 +18,8 @@ public:
 	virtual void DrawHUD() override;
 
 	void SetFocusedCharacter(ABaseCharacter* character) { focusedCharacter = character; }
-
-	//UFUNCTION(BlueprintCallable, Category = hud)
 	ABaseCharacter* GetFocusedCharacter() { return focusedCharacter; }
+
 	UPROPERTY(BlueprintReadWrite, Category = hud)
 	ABaseCharacter* focusedCharacter;
-	
-private:
-	void DrawHealthbar(ABaseCharacter* character);
 };
