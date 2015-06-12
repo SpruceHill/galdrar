@@ -40,6 +40,10 @@ void AHeroPlayerController::PlayerTick(float DeltaTime)
 		{
 			// Floor, walls etc
 			CurrentMouseCursor = DefaultMouseCursor;
+			if (AGaldrarHUD* hud = dynamic_cast<AGaldrarHUD*>(GetHUD()))
+			{
+				hud->SetFocusedCharacter(NULL);
+			}
 		}
 	}
 	else
