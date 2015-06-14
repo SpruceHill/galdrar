@@ -22,10 +22,6 @@ float CombatHandler::AttackEnemy(ABaseCharacter* attacker, ABaseCharacter* defen
 		attack->GetCritPercent(), crit);
 
 	defender->Wound(damage);
-	//defender->ApplyDamageMomentum
-	//defender->TakeDamage(damage, nullptr, NULL, NULL);
-	
-	//UGameplayStatics::ApplyPointDamage(defender, damage, FVector(0,0,0), FHitResult::, );
 	return damage;
 
 	//for(Effect* effect : attack->GetEffects())
