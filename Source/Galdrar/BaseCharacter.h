@@ -22,10 +22,12 @@ public:
 		Super::Tick(DeltaSeconds); 
 		if (health <= 0)
 		{
-			GEngine->AddOnScreenDebugMessage(-1, 15.0f, FColor::Red, name + "Just died");
+			GEngine->AddOnScreenDebugMessage(-1, 15.0f, FColor::Red, name + " just died");
 			this->Destroy();
 		}
 	}
+
+	//virtual float TakeDamage(float DamageAmount, struct FDamageEvent const& DamageEvent, class AController* EventInstigator, class AActor* DamageCauser);
 
 	FString GetName() { return name; }
 	float GetDamage() {	return weapon->GetDamage(); }
@@ -40,6 +42,7 @@ public:
 		case DamageType::TRUE: return 1.f;
 		default: return 1.f;
 		}
+		return 1.f;
 	}
 	void Heal(float amount)
 	{

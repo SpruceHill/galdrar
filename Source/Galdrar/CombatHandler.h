@@ -11,7 +11,7 @@ class GALDRAR_API CombatHandler
 {
 public:
 	UFUNCTION(BlueprintCallable, Category = Combat)
-	static void AttackEnemy(ABaseCharacter* attacker, ABaseCharacter* defender, Attack* attack, bool crit);
+	static float AttackEnemy(ABaseCharacter* attacker, ABaseCharacter* defender, Attack* attack, bool crit);
 
 private:
 	static float CalcDamage(float damage, float resistance, float critPercentage, bool crit);

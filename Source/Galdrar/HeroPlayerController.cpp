@@ -141,7 +141,13 @@ void AHeroPlayerController::OnSetDestinationPressed()
 			AHeroCharacter* hero = Cast<AHeroCharacter>(GetPawn());
 			if (hero->GetDistanceTo(character) < hero->GetWeapon()->GetRange())
 			{
-				CombatHandler::AttackEnemy(hero, character, hero->GetWeapon(), false);
+				//CombatHandler::AttackEnemy(hero, character, hero->GetWeapon(), false);
+				if (AGaldrarHUD* hud = dynamic_cast<AGaldrarHUD*>(GetHUD()))
+				{
+					CombatHandler::AttackEnemy(hero, character, hero->GetWeapon(), false);
+					//hud->CreateDamageIndicator(character->GetActorLocation(), damage, hero->GetWeapon()->GetAttackType(), false);
+				}
+				//UGameplayStatics::ApplyDamage(character, damage, this, hero, DamageType::StaticClass());
 			}
 			else
 			{
