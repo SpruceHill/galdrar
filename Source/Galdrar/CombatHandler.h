@@ -14,6 +14,7 @@ public:
 	static float AttackEnemy(ABaseCharacter* attacker, ABaseCharacter* defender, Attack* attack);
 
 private:
+	// Degrees behind the player which will allow for backstabs (times 2)
 	static const uint8 backStabDegree = 45;
 	static float CalcDamage(float damage, float resistance, float critPercentage, bool crit);
 };

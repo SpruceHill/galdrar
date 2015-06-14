@@ -13,5 +13,4 @@ AEnemyCharacter::AEnemyCharacter(const FObjectInitializer& ObjectInitializer)
 	name = "Old Name";
 	armour = 1;
 	AIControllerClass = AEnemyAIController::StaticClass();
-	drawHealthbar = false;
 }

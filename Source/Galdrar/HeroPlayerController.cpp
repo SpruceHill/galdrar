@@ -141,21 +141,13 @@ void AHeroPlayerController::OnSetDestinationPressed()
 			AHeroCharacter* hero = Cast<AHeroCharacter>(GetPawn());
 			if (hero->GetDistanceTo(character) < hero->GetWeapon()->GetRange())
 			{
-				float damage;
-				//CombatHandler::AttackEnemy(hero, character, hero->GetWeapon(), false);
-				if (AGaldrarHUD* hud = dynamic_cast<AGaldrarHUD*>(GetHUD()))
-				{
-					/*FVector heroLookAt = hero->GetActorForwardVector();
-					FVector characterLookAt = character->GetActorForwardVector();
-					bool crit = FVector::DotProduct(heroLookAt, characterLookAt) > FMath::Cos(FMath::DegreesToRadians(30));*/
-					damage = CombatHandler::AttackEnemy(hero, character, hero->GetWeapon());
-					//hud->CreateDamageIndicator(character->GetActorLocation(), damage, hero->GetWeapon()->GetAttackType(), false);
-				}
-				UGameplayStatics::ApplyDamage(character, damage, this, hero, UDamageType::StaticClass());
+				// Rotate attacker towards the defender
+				FVector newLookAt = character->GetActorLocation().operator-=(hero->GetActorLocation());
+				hero->SetActorRotation(newLookAt.Rotation());
+				CombatHandler::AttackEnemy(hero, character, hero->GetWeapon());
 			}
 			else
 			{
-				GEngine->AddOnScreenDebugMessage(-1, 15.0f, FColor::Red, "Not in range");
 				bMoveToMouseCursor = true;
 			}
 		}

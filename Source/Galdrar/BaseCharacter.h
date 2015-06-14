@@ -65,8 +65,6 @@ public:
 		bool found = (std::find(activeEffects.begin(), activeEffects.end(), effect) != activeEffects.end());
 		if (found) activeEffects.remove(effect);
 	}
-	UPROPERTY(BlueprintReadOnly, Category = character)
-	bool drawHealthbar;
 protected:
 	UPROPERTY(BlueprintReadOnly, Category = character)
 	float maxHealth;
