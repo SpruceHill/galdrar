@@ -10,7 +10,7 @@ AHeroCharacter::AHeroCharacter(const FObjectInitializer& ObjectInitializer)
 {
 	maxHealth = 100;
 	health = 100;
-	weapon = new Attack("Sword", 20.f, DamageType::PHYSICAL, 1.f, 200.f, 1.f);
+	weapon = new Attack("Sword", 20.f, DamageType::PHYSICAL, 2, 200.f, 1.f);
 	drawHealthbar = false;
 	name = "Hero";
 

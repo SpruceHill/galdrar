@@ -33,5 +33,5 @@ public:
 protected:
 	uint8 enemyKeyID;
 	uint8 enemyLocationID;
-	float aggroDistance;
+	float aggroDistance = 400.f;
 };

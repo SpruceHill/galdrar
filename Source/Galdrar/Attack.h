@@ -11,11 +11,11 @@
 class GALDRAR_API Attack
 {
 public:
-	Attack(FString name, float damage, DamageType type, float critPercentage, float range, float attackSpeed);
+	Attack(FString name, float damage, DamageType type, float critMultiplier, float range, float attackSpeed);
 	//, std::list < Effect* > effects
 	float GetDamage(){ return damage; }
 	DamageType GetAttackType(){ return attackType; }
-	float GetCritPercent(){ return critPercentage; }
+	float GetCritMultiplier(){ return critMultiplier; }
 	std::list < Effect* > GetEffects(){ return effects; }
 	float GetRange(){ return range; }
 	float GetAttackSpeed(){ return attackSpeed; }
@@ -25,7 +25,7 @@ public:
 private:
 	float damage;
 	DamageType attackType;
-	float critPercentage;
+	float critMultiplier;
 	std::list < Effect* > effects;
 	float range;
 	float attackSpeed;

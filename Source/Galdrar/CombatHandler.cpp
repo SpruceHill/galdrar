@@ -16,10 +16,15 @@ float CombatHandler::CalcDamage(float damage, float resistance, float critPercen
 	return calculatedDamage;
 }
 
-float CombatHandler::AttackEnemy(ABaseCharacter* attacker, ABaseCharacter* defender, Attack* attack, bool crit)
+float CombatHandler::AttackEnemy(ABaseCharacter* attacker, ABaseCharacter* defender, Attack* attack)
 {
+	FVector attackerLookAt = attacker->GetActorForwardVector();
+	FVector defenderLookAt = defender->GetActorForwardVector();
+	bool crit = FVector::DotProduct(attackerLookAt, defenderLookAt) > FMath::Cos(FMath::DegreesToRadians(backStabDegree));
+	if (crit)GEngine->AddOnScreenDebugMessage(-1, 15.0f, FColor::Blue, "CRIT");
+
 	float damage = CalcDamage(attacker->GetDamage(), defender->GetResistance(attack->GetAttackType()),
-		attack->GetCritPercent(), crit);
+		attack->GetCritMultiplier(), crit);
 
 	defender->Wound(damage);
 	return damage;

@@ -145,7 +145,10 @@ void AHeroPlayerController::OnSetDestinationPressed()
 				//CombatHandler::AttackEnemy(hero, character, hero->GetWeapon(), false);
 				if (AGaldrarHUD* hud = dynamic_cast<AGaldrarHUD*>(GetHUD()))
 				{
-					damage = CombatHandler::AttackEnemy(hero, character, hero->GetWeapon(), false);
+					/*FVector heroLookAt = hero->GetActorForwardVector();
+					FVector characterLookAt = character->GetActorForwardVector();
+					bool crit = FVector::DotProduct(heroLookAt, characterLookAt) > FMath::Cos(FMath::DegreesToRadians(30));*/
+					damage = CombatHandler::AttackEnemy(hero, character, hero->GetWeapon());
 					//hud->CreateDamageIndicator(character->GetActorLocation(), damage, hero->GetWeapon()->GetAttackType(), false);
 				}
 				UGameplayStatics::ApplyDamage(character, damage, this, hero, UDamageType::StaticClass());
