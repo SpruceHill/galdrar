@@ -26,8 +26,7 @@ float CombatHandler::AttackEnemy(ABaseCharacter* attacker, ABaseCharacter* defen
 	float damage = CalcDamage(attacker->GetDamage(), defender->GetResistance(attack->GetAttackType()),
 		attack->GetCritMultiplier(), crit);
 
-	UGameplayStatics::ApplyDamage(defender, damage, NULL, attacker, UDamageType::StaticClass());
-	defender->Wound(damage);
+	//UGameplayStatics::ApplyDamage(defender, damage, NULL, attacker, UDamageType::StaticClass());
 	return damage;
 
 	//for(Effect* effect : attack->GetEffects())

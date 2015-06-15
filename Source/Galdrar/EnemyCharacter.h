@@ -18,4 +18,13 @@ public:
 
 	UPROPERTY(EditAnywhere, Category = Behavior)
 	class UBehaviorTree* botBehavior;
+
+	//UFUNCTION(BlueprintNativeEvent, BlueprintCallable, Category = "Damage")
+	//float TakeDamage(float DamageAmount, struct FDamageEvent const& DamageEvent, class AController* EventInstigator, class AActor* DamageCauser) override;
+	/*
+	{
+		Super::TakeDamage(DamageAmount, DamageEvent, EventInstigator, DamageCauser);
+		GEngine->AddOnScreenDebugMessage(-1, 15.0f, FColor::Red, "IM HERE");
+		return DamageAmount;
+	}*/
 };

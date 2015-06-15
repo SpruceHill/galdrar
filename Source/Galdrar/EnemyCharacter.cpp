@@ -3,6 +3,7 @@
 #include "Galdrar.h"
 #include "EnemyCharacter.h"
 #include "EnemyAIController.h"
+#include "BaseCharacter.h"
 
 
 AEnemyCharacter::AEnemyCharacter(const FObjectInitializer& ObjectInitializer)

@@ -2,6 +2,3 @@
 
 #include "Galdrar.h"
 #include "BaseCharacter.h"
-
-
-

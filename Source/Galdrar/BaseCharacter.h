@@ -27,11 +27,12 @@ public:
 		}
 	}
 
-	//virtual float TakeDamage(float DamageAmount, struct FDamageEvent const& DamageEvent, class AController* EventInstigator, class AActor* DamageCauser);
-
 	FString GetName() { return name; }
+
 	float GetDamage() {	return weapon->GetDamage(); }
+
 	Attack* GetWeapon() { return weapon; }
+
 	float GetResistance(DamageType type) 
 	{
 		switch (type) {
@@ -44,31 +45,44 @@ public:
 		}
 		return 1.f;
 	}
+
 	void Heal(float amount)
 	{
 		health += amount;
 	}
+
 	void Wound(float amount)
 	{
 		health -= amount;
 	}
+
 	void SetHealth(float newHealth)
 	{
 		health = newHealth;
 	}
+
 	void AddEffect(Effect* effect)
 	{
 		activeEffects.push_back(effect);
 	}
+
 	void RemoveEffect(Effect* effect)
 	{
 		bool found = (std::find(activeEffects.begin(), activeEffects.end(), effect) != activeEffects.end());
 		if (found) activeEffects.remove(effect);
 	}
+
+	UFUNCTION(BlueprintImplementableEvent, BlueprintCallable, Category = "Damage")
+	float TakeDamage(float DamageAmount, struct FDamageEvent const& DamageEvent, class AController* EventInstigator, class AActor* DamageCauser) override;/*
+	{
+		Wound(DamageAmount);
+		return DamageAmount;
+	}*/
+
 protected:
 	UPROPERTY(BlueprintReadOnly, Category = character)
 	float maxHealth;
-	UPROPERTY(BlueprintReadOnly, Category = character)
+	UPROPERTY(BlueprintReadWrite, Category = character)
 	float health;
 	UPROPERTY(BlueprintReadOnly, Category = character)
 	FString name;
