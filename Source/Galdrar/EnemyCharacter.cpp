@@ -13,5 +13,8 @@ AEnemyCharacter::AEnemyCharacter(const FObjectInitializer& ObjectInitializer)
 	health = 100.f;
 	name = "Old Name";
 	armour = 1;
+	fireResistance = 1;
+	frostResistance = 1;
+	shockResistance = 1;
 	AIControllerClass = AEnemyAIController::StaticClass();
 }

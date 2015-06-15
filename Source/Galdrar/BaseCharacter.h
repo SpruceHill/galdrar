@@ -72,12 +72,13 @@ public:
 		if (found) activeEffects.remove(effect);
 	}
 
-	UFUNCTION(BlueprintImplementableEvent, BlueprintCallable, Category = "Damage")
-	float TakeDamage(float DamageAmount, struct FDamageEvent const& DamageEvent, class AController* EventInstigator, class AActor* DamageCauser) override;/*
+	//UFUNCTION(BlueprintImplementableEvent, BlueprintCallable, Category = "Damage")
+	float TakeDamage(float DamageAmount, struct FDamageEvent const& DamageEvent, class AController* EventInstigator, class AActor* DamageCauser) override
 	{
+		//DamageEvent.DamageTypeClass;
 		Wound(DamageAmount);
 		return DamageAmount;
-	}*/
+	}
 
 protected:
 	UPROPERTY(BlueprintReadOnly, Category = character)

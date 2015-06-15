@@ -4,6 +4,7 @@
 #include "DamageType.h"
 #include "CombatHandler.h"
 #include "GaldrarHUD.h"
+#include "GaldrarColor.h"
 
 float CombatHandler::CalcDamage(float damage, float resistance, float critPercentage, bool crit)
 {
