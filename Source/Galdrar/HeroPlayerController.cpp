@@ -6,6 +6,7 @@
 #include "HeroCharacter.h"
 #include "CombatHandler.h"
 #include "GaldrarHUD.h"
+#include "GaldrarColor.h"
 
 AHeroPlayerController::AHeroPlayerController(const FObjectInitializer& ObjectInitializer)
 	: Super(ObjectInitializer)
@@ -145,7 +146,13 @@ void AHeroPlayerController::OnSetDestinationPressed()
 				FVector newLookAt = character->GetActorLocation().operator-=(hero->GetActorLocation());
 				hero->SetActorRotation(newLookAt.Rotation());
 				//CombatHandler::AttackEnemy(hero, character, hero->GetWeapon());
-				UGameplayStatics::ApplyDamage(character, CombatHandler::AttackEnemy(hero, character, hero->GetWeapon()), NULL, hero, UDamageType::StaticClass());
+				float damage = CombatHandler::AttackEnemy(hero, character, hero->GetWeapon());
+				UGameplayStatics::ApplyDamage(character, damage, NULL, hero, UDamageType::StaticClass());
+				
+				if (AGaldrarHUD* hud = dynamic_cast<AGaldrarHUD*>(GetHUD()))
+				{
+					hud->CreateDamageIndicator(character, damage, GaldrarColor::GetDamageTypeColor(hero->GetWeapon()->GetDamageType()), false);
+				}
 			}
 			else
 			{

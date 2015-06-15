@@ -14,7 +14,7 @@ public:
 	Attack(FString name, float damage, DamageType type, float critMultiplier, float range, float attackSpeed);
 	//, std::list < Effect* > effects
 	float GetDamage(){ return damage; }
-	DamageType GetAttackType(){ return attackType; }
+	DamageType GetDamageType(){ return damageType; }
 	float GetCritMultiplier(){ return critMultiplier; }
 	std::list < Effect* > GetEffects(){ return effects; }
 	float GetRange(){ return range; }
@@ -24,7 +24,7 @@ public:
 	void setOnCoolDown(bool b) { onCooldown = b; }
 private:
 	float damage;
-	DamageType attackType;
+	DamageType damageType;
 	float critMultiplier;
 	std::list < Effect* > effects;
 	float range;

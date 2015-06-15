@@ -11,7 +11,7 @@ Attack::Attack(FString name, float damage, DamageType type, float critMultiplier
 	this->name = name;
 	this->damage = damage;
 	//this->effects = effects;
-	this->attackType = type;
+	this->damageType = type;
 	this->critMultiplier = critMultiplier;
 	this->range = range;
 	this->attackSpeed = attackSpeed;

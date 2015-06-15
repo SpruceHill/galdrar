@@ -23,9 +23,9 @@ float CombatHandler::AttackEnemy(ABaseCharacter* attacker, ABaseCharacter* defen
 	bool crit = FVector::DotProduct(attackerLookAt, defenderLookAt) > FMath::Cos(FMath::DegreesToRadians(backStabDegree));
 	if (crit)GEngine->AddOnScreenDebugMessage(-1, 15.0f, FColor::Blue, "CRIT");
 
-	float damage = CalcDamage(attacker->GetDamage(), defender->GetResistance(attack->GetAttackType()),
+	float damage = CalcDamage(attacker->GetDamage(), defender->GetResistance(attack->GetDamageType()),
 		attack->GetCritMultiplier(), crit);
-
+	
 	//UGameplayStatics::ApplyDamage(defender, damage, NULL, attacker, UDamageType::StaticClass());
 	return damage;
 

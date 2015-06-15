@@ -12,7 +12,13 @@ AgaldrarGameMode::AgaldrarGameMode(const FObjectInitializer& ObjectInitializer) 
 	// Controller
 	PlayerControllerClass = AHeroPlayerController::StaticClass();
 	DefaultPawnClass = AHeroCharacter::StaticClass();
-	HUDClass = AGaldrarHUD::StaticClass();
+
+	static ConstructorHelpers::FClassFinder<AHUD> BPHUDClass(TEXT("/Game/UI/BPHUD"));
+	if (BPHUDClass.Class != NULL)
+	{
+		HUDClass = BPHUDClass.Class;
+	}
+	//HUDClass = AGaldrarHUD::StaticClass();
 
 	// set default pawn class to our Blueprinted character
 	static ConstructorHelpers::FClassFinder<APawn> PlayerPawnBPClass(TEXT("/Game/BPHeroCharacter"));
