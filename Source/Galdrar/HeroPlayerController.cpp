@@ -151,7 +151,8 @@ void AHeroPlayerController::OnSetDestinationPressed()
 				
 				if (AGaldrarHUD* hud = dynamic_cast<AGaldrarHUD*>(GetHUD()))
 				{
-					hud->CreateDamageIndicator(character, damage, GaldrarColor::GetDamageTypeColor(hero->GetWeapon()->GetDamageType()), false);
+					hud->CreateDamageIndicator(character, damage, GaldrarColor::GetDamageTypeColor(hero->GetWeapon()->GetDamageType()), 
+						CombatHandler::IsCritical(hero->GetActorForwardVector(), character->GetActorForwardVector()));
 				}
 			}
 			else

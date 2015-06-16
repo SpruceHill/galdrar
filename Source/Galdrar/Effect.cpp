@@ -3,11 +3,4 @@
 #include "Galdrar.h"
 #include "Effect.h"
 
-Effect::Effect()
-{
-}
-
-Effect::~Effect()
-{
-}
 
