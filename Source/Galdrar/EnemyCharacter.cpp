@@ -17,4 +17,10 @@ AEnemyCharacter::AEnemyCharacter(const FObjectInitializer& ObjectInitializer)
 	frostResistance = 1;
 	shockResistance = 1;
 	AIControllerClass = AEnemyAIController::StaticClass();
+
+	// Configure character movement
+	bUseControllerRotationYaw = false;
+	GetCharacterMovement()->bOrientRotationToMovement = true; // Rotate character to moving direction
+	GetCharacterMovement()->RotationRate = FRotator(0.f, 200.f, 0.f);
+	GetCharacterMovement()->MaxWalkSpeed = 200.f;
 }

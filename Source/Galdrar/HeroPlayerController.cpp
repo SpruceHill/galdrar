@@ -144,8 +144,8 @@ void AHeroPlayerController::OnSetDestinationPressed()
 			{
 				// Rotate attacker towards the defender
 				FVector newLookAt = character->GetActorLocation().operator-=(hero->GetActorLocation());
+				newLookAt.Z = 1; // Make sure character is always upright (attacking on stairs etc.)
 				hero->SetActorRotation(newLookAt.Rotation());
-				//CombatHandler::AttackEnemy(hero, character, hero->GetWeapon());
 				float damage = CombatHandler::AttackEnemy(hero, character, hero->GetWeapon());
 				UGameplayStatics::ApplyDamage(character, damage, NULL, hero, UDamageType::StaticClass());
 				
