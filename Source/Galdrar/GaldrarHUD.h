@@ -22,6 +22,7 @@ public:
 	void CreateDamageIndicator(ABaseCharacter* character, float damage, FColor indicatorColor, bool crit);
 
 	void SetFocusedCharacter(ABaseCharacter* character) { focusedCharacter = character; }
+	
 	ABaseCharacter* GetFocusedCharacter() { return focusedCharacter; }
 
 	void SetFocusedLoot(ALoot* loot) { focusedLoot = loot; }

@@ -37,6 +37,14 @@ void AHeroPlayerController::PlayerTick(float DeltaTime)
 			}
 			CurrentMouseCursor = EMouseCursor::Hand;
 		}
+		else if (ALoot* loot = dynamic_cast<ALoot*>(Hit.GetActor()))
+		{
+			if (AGaldrarHUD* hud = dynamic_cast<AGaldrarHUD*>(GetHUD()))
+			{
+				hud->SetFocusedLoot(loot);
+			}
+			CurrentMouseCursor = EMouseCursor::Hand;
+		}
 		else
 		{
 			// Floor, walls etc
@@ -44,6 +52,7 @@ void AHeroPlayerController::PlayerTick(float DeltaTime)
 			if (AGaldrarHUD* hud = dynamic_cast<AGaldrarHUD*>(GetHUD()))
 			{
 				hud->SetFocusedCharacter(NULL);
+				hud->SetFocusedLoot(NULL);
 			}
 		}
 	}
