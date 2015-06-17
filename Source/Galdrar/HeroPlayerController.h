@@ -3,6 +3,8 @@
 #pragma once
 
 #include "GameFramework/PlayerController.h"
+#include "BaseCharacter.h"
+#include "Loot.h"
 #include "HeroPlayerController.generated.h"
 
 /**
@@ -40,4 +42,12 @@ private:
 	void Zoom(float delta);
 	void ZoomIn(){ Zoom(-zoomStepLength); }
 	void ZoomOut(){ Zoom(zoomStepLength); }
+
+	void Attack(ABaseCharacter* character);
+	void AHeroPlayerController::Pickup(ALoot* loot);
+
+	ABaseCharacter* targetCharacter;
+	ALoot* targetLoot;
+
+	float pickUpRange = 120.f;
 };

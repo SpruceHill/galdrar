@@ -67,6 +67,14 @@ void AHeroPlayerController::PlayerTick(float DeltaTime)
 	{
 		MoveToMouseCursor();
 	}
+	if (targetCharacter)
+	{
+		Attack(targetCharacter);
+	}
+	else if (targetLoot)
+	{
+		Pickup(targetLoot);
+	}
 
 	// Camera smooth zoom
 	if (bShouldZoom)
@@ -148,32 +156,59 @@ void AHeroPlayerController::OnSetDestinationPressed()
 	{
 		if (ABaseCharacter* character = dynamic_cast<ABaseCharacter*>(Hit.GetActor()))
 		{
-			AHeroCharacter* hero = Cast<AHeroCharacter>(GetPawn());
-			if (hero->GetDistanceTo(character) < hero->GetWeapon()->GetRange())
-			{
-				// Rotate attacker towards the defender
-				FVector newLookAt = character->GetActorLocation().operator-=(hero->GetActorLocation());
-				newLookAt.Z = 1; // Make sure character is always upright (attacking on stairs etc.)
-				hero->SetActorRotation(newLookAt.Rotation());
-				float damage = CombatHandler::AttackEnemy(hero, character, hero->GetWeapon());
-				UGameplayStatics::ApplyDamage(character, damage, NULL, hero, UDamageType::StaticClass());
-				
-				if (AGaldrarHUD* hud = dynamic_cast<AGaldrarHUD*>(GetHUD()))
-				{
-					hud->CreateDamageIndicator(character, damage, GaldrarColor::GetDamageTypeColor(hero->GetWeapon()->GetDamageType()), 
-						CombatHandler::IsCritical(hero->GetActorForwardVector(), character->GetActorForwardVector()));
-				}
-			}
-			else
-			{
-				bMoveToMouseCursor = true;
-			}
+			Attack(character);
+		}
+		else if (ALoot* loot = dynamic_cast<ALoot*>(Hit.GetActor()))
+		{
+			Pickup(loot);
 		}
 		else
 		{
 			// set flag to keep updating destination until released
+			targetCharacter = NULL;
 			bMoveToMouseCursor = true;
 		}
+	}
+}
+
+void AHeroPlayerController::Attack(ABaseCharacter* character)
+{
+	AHeroCharacter* hero = Cast<AHeroCharacter>(GetPawn());
+	if (hero->GetDistanceTo(character) < hero->GetWeapon()->GetRange())
+	{
+		// Rotate attacker towards the defender
+		FVector newLookAt = character->GetActorLocation().operator-=(hero->GetActorLocation());
+		newLookAt.Z = 1; // Make sure character is always upright (attacking on stairs etc.)
+		hero->SetActorRotation(newLookAt.Rotation());
+		float damage = CombatHandler::AttackEnemy(hero, character, hero->GetWeapon());
+		UGameplayStatics::ApplyDamage(character, damage, NULL, hero, UDamageType::StaticClass());
+
+		if (AGaldrarHUD* hud = dynamic_cast<AGaldrarHUD*>(GetHUD()))
+		{
+			hud->CreateDamageIndicator(character, damage, GaldrarColor::GetDamageTypeColor(hero->GetWeapon()->GetDamageType()),
+				CombatHandler::IsCritical(hero->GetActorForwardVector(), character->GetActorForwardVector()));
+		}
+		targetCharacter = NULL;
+	}
+	else // Not in range
+	{
+		targetCharacter = character;
+		SetNewMoveDestination(targetCharacter->GetActorLocation());
+	}
+}
+
+void AHeroPlayerController::Pickup(ALoot* loot)
+{
+	AHeroCharacter* hero = Cast<AHeroCharacter>(GetPawn());
+	if (hero->GetDistanceTo(loot) < pickUpRange)
+	{
+		loot->Destroy();
+		targetLoot = NULL;
+	}
+	else // Not in range
+	{
+		targetLoot = loot;
+		SetNewMoveDestination(targetLoot->GetActorLocation());
 	}
 }
 
