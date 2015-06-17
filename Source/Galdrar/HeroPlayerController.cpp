@@ -166,6 +166,7 @@ void AHeroPlayerController::OnSetDestinationPressed()
 		{
 			// set flag to keep updating destination until released
 			targetCharacter = NULL;
+			targetLoot = NULL;
 			bMoveToMouseCursor = true;
 		}
 	}
