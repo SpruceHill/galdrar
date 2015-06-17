@@ -4,6 +4,7 @@
 
 #include "GameFramework/HUD.h"
 #include "BaseCharacter.h"
+#include "Loot.h"
 #include "GaldrarHUD.generated.h"
 
 /**
@@ -23,6 +24,12 @@ public:
 	void SetFocusedCharacter(ABaseCharacter* character) { focusedCharacter = character; }
 	ABaseCharacter* GetFocusedCharacter() { return focusedCharacter; }
 
+	void SetFocusedLoot(ALoot* loot) { focusedLoot = loot; }
+	ALoot* GetFocusedLoot() { return focusedLoot; }
+
 	UPROPERTY(BlueprintReadWrite, Category = hud)
 	ABaseCharacter* focusedCharacter;
+
+	UPROPERTY(BlueprintReadWrite, Category = hud)
+	ALoot* focusedLoot;
 };
