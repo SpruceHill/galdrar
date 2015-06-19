@@ -38,7 +38,6 @@ public:
 	void AddValuable(AValuable* valuable) 
 	{ 
 		lootValue += valuable->GetValue();
-		GEngine->AddOnScreenDebugMessage(-1, 15.0f, FColor::Red, FString::FromInt(valuable->GetValue()));
 	}
 
 	void AddLoot(ALoot* loot) {
