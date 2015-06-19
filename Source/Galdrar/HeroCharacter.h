@@ -3,6 +3,8 @@
 #pragma once
 
 #include "BaseCharacter.h"
+#include "Loot.h"
+#include "Valuable.h"
 #include "HeroCharacter.generated.h"
 
 /**
@@ -32,5 +34,18 @@ public:
 	void SetCameraBoom(float length)  { CameraBoom->TargetArmLength = length; }
 
 	void Zoom(float delta);
+
+	void AddValuable(AValuable* valuable) 
+	{ 
+		lootValue += valuable->GetValue();
+		GEngine->AddOnScreenDebugMessage(-1, 15.0f, FColor::Red, FString::FromInt(valuable->GetValue()));
+	}
+
+	void AddLoot(ALoot* loot) {
+		inventory.Add(loot);
+	}
+protected:
+	int32 lootValue;
+	TArray<ALoot*> inventory;
 
 };

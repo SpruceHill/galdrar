@@ -5,6 +5,7 @@
 #include "GameFramework/PlayerController.h"
 #include "BaseCharacter.h"
 #include "Loot.h"
+#include "Valuable.h"
 #include "HeroPlayerController.generated.h"
 
 /**
@@ -44,7 +45,7 @@ private:
 	void ZoomOut(){ Zoom(zoomStepLength); }
 
 	void Attack(ABaseCharacter* character);
-	void AHeroPlayerController::Pickup(ALoot* loot);
+	void Pickup(ALoot* loot);
 
 	ABaseCharacter* targetCharacter;
 	ALoot* targetLoot;

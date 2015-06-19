@@ -12,11 +12,11 @@ UCLASS(abstract)
 class GALDRAR_API AValuable : public ALoot
 {
 	GENERATED_BODY()
-	
-	uint8 GetValue(){ return value; }
+public:
+	int32 GetValue(){ return value; }
 protected:
 	UPROPERTY(BlueprintReadWrite, Category = Loot)
-	uint8 value;
+	int32 value;
 	
 	
 };

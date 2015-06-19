@@ -203,6 +203,10 @@ void AHeroPlayerController::Pickup(ALoot* loot)
 	AHeroCharacter* hero = Cast<AHeroCharacter>(GetPawn());
 	if (hero->GetDistanceTo(loot) < pickUpRange)
 	{
+		if (AValuable* valuable = dynamic_cast<AValuable*>(loot))
+		{
+			hero->AddValuable(valuable);
+		}
 		loot->Destroy();
 		targetLoot = NULL;
 	}
