@@ -3,6 +3,22 @@
 #include "Galdrar.h"
 #include "BaseCharacter.h"
 
+void ABaseCharacter::Tick(float DeltaSeconds)
+{
+	 Super::Tick(DeltaSeconds);
+	 if (stats->health <= 0)
+	 {
+		 GEngine->AddOnScreenDebugMessage(-1, 15.0f, FColor::Red, name + " just died");
+		 this->Destroy();
+	 }
+	 for (Effect* effect : activeEffects)
+	 {
+		 effect->Tick2(DeltaSeconds);
+	 }
+}
+
+
+
 void ABaseCharacter::Heal(float amount)
 {
 	stats->health += amount;

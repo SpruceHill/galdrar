@@ -12,7 +12,7 @@ class GALDRAR_API Effect
 public:
 	Effect(CharacterStats* stats);
 	~Effect();
-	virtual	void Tick(float delta);
+	void Tick2(float delta);
 
 protected:
 	UPROPERTY(BlueprintReadOnly, Category = Effect)

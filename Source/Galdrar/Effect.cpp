@@ -9,16 +9,17 @@ Effect::Effect(CharacterStats* stats)
 	duration = 5.f;
 	timeLeft = 5.f;
 	damageType = DamageType::PHYSICAL;
+	time = 0.f;
 }
-void Effect::Tick(float delta)
+void Effect::Tick2(float delta)
 {
 	time += delta;
 	if (time > 5)
 	{
 		GEngine->AddOnScreenDebugMessage(-1, 15.0f, FColor::Red, "ASDASD");
 		timeLeft -= 0.5f;
-		stats->health -= 1.f;
-		//oldTime = time;
+		stats->health -= 20.f;
+		time -= 5;
 	}
 	/*
 	GEngine->AddOnScreenDebugMessage(-1, 15.0f, FColor::Red, FString::SanitizeFloat(time));

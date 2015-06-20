@@ -19,19 +19,8 @@ class GALDRAR_API ABaseCharacter : public ACharacter
 
 public:
 	// Called every frame
-	virtual void Tick(float DeltaSeconds) override { 
-		Super::Tick(DeltaSeconds); 
-		if (stats->health <= 0)
-		{
-			GEngine->AddOnScreenDebugMessage(-1, 15.0f, FColor::Red, name + " just died");
-			this->Destroy();
-		}
 
-		for (Effect* effect : activeEffects)
-		{
-			effect->Tick(DeltaSeconds);
-		}
-	}
+	virtual void Tick(float DeltaSeconds) override;
 
 	FString GetName() { return name; }
 
