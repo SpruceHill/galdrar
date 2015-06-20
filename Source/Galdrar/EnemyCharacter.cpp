@@ -17,6 +17,8 @@ AEnemyCharacter::AEnemyCharacter(const FObjectInitializer& ObjectInitializer)
 	stats->defaultMovementSpeed = 200.f;
 	stats->movementSpeed = 200.f;
 
+	AddEffect(new Effect(stats));
+
 	AIControllerClass = AEnemyAIController::StaticClass();
 
 	// Configure character movement

@@ -26,6 +26,11 @@ public:
 			GEngine->AddOnScreenDebugMessage(-1, 15.0f, FColor::Red, name + " just died");
 			this->Destroy();
 		}
+
+		for (Effect* effect : activeEffects)
+		{
+			effect->Tick(DeltaSeconds);
+		}
 	}
 
 	FString GetName() { return name; }
