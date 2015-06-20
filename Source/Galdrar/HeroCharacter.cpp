@@ -10,8 +10,6 @@ AHeroCharacter::AHeroCharacter(const FObjectInitializer& ObjectInitializer)
 {
 	name = "Hero";
 	stats = new CharacterStats();
-	stats->maxHealth = 100;
-	stats->health = 100;
 	weapon = new Attack("Sword", 20.f, DamageType::PHYSICAL, 1.5f, 200.f, 1.f);
 	inventory.Init(NULL, 6);
 

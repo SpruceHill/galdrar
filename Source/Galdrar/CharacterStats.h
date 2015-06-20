@@ -3,7 +3,8 @@
 #pragma once
 
 /**
- * 
+ * This class contains all stats for a given BaseCharacter. All values are set in the 
+ * constructor to the default values. Override in character class other values are needed.
  */
 class GALDRAR_API CharacterStats
 {
@@ -12,29 +13,29 @@ public:
 	~CharacterStats();
 
 	/* COMBAT STATS */
-	float defaultMaxHealth = 100.f;
-	float maxHealth = 100.f;
-	float health = 100.f;
+	float defaultMaxHealth;
+	float maxHealth;
+	float health;
 
-	float defaultArmour = 1.f;
-	float armour = 1.f;
+	float defaultArmour;
+	float armour;
 
-	float defaultFrostRes = 1.f;
-	float frostResistance = 1.f;
+	float defaultFrostRes;
+	float frostResistance;
 
-	float defaultFireRes = 1.f;
-	float fireResistance = 1.f;
+	float defaultFireRes;
+	float fireResistance;
 
-	float defaultShockRes = 1.f;
-	float shockResistance = 1.f;
+	float defaultShockRes;
+	float shockResistance;
 
-	float defaultDamageMultiplier = 1.f;
-	float damageMultiplier = 1.f;
+	float defaultDamageMultiplier;
+	float damageMultiplier;
 
 	/* MOVEMENT STATS */
-	float defaultRotationRate = 640.f;
-	float rotationRate = 640.f;
+	float defaultRotationRate;
+	float rotationRate;
 
-	float defaultMovementSpeed = 640.f;
-	float movementSpeed = 640.f;
+	float defaultMovementSpeed;
+	float movementSpeed;
 };

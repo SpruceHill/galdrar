@@ -10,13 +10,13 @@ AEnemyCharacter::AEnemyCharacter(const FObjectInitializer& ObjectInitializer)
 	: Super(ObjectInitializer)
 {
 	name = "Old Name";
+
 	stats = new CharacterStats();
-	stats->maxHealth = 100.f;
-	stats->health = 100.f;
-	stats->armour = 1;
-	stats->fireResistance = 1;
-	stats->frostResistance = 1;
-	stats->shockResistance = 1;
+	stats->defaultRotationRate = 200.f;
+	stats->rotationRate = 200.f;
+	stats->defaultMovementSpeed = 200.f;
+	stats->movementSpeed = 200.f;
+
 	AIControllerClass = AEnemyAIController::StaticClass();
 
 	// Configure character movement
