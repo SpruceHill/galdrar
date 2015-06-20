@@ -4,7 +4,6 @@
 #include "GaldrarHUD.h"
 #include "HeroPlayerController.h"
 #include "BaseCharacter.h"
-#include "DamageIndicator.h"
 
 void AGaldrarHUD::DrawHUD()
 {

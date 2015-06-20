@@ -8,10 +8,11 @@
 AHeroCharacter::AHeroCharacter(const FObjectInitializer& ObjectInitializer)
 	: Super(ObjectInitializer)
 {
-	maxHealth = 100;
-	health = 100;
-	weapon = new Attack("Sword", 20.f, DamageType::PHYSICAL, 1.5f, 200.f, 1.f);
 	name = "Hero";
+	stats = new CharacterStats();
+	stats->maxHealth = 100;
+	stats->health = 100;
+	weapon = new Attack("Sword", 20.f, DamageType::PHYSICAL, 1.5f, 200.f, 1.f);
 	inventory.Init(NULL, 6);
 
 	// Set size for player capsule
