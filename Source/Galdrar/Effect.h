@@ -6,22 +6,23 @@
 /**
  * 
  */
-
 class GALDRAR_API Effect
 {
 public:
+	Effect();
 	Effect(CharacterStats* stats);
 	~Effect();
-	void Tick2(float delta);
+	bool Tick(float delta);
+
+	float GetDamage() { return damage; }
+	DamageType GetType() { return damageType; }
 
 protected:
-	UPROPERTY(BlueprintReadOnly, Category = Effect)
 	float timeLeft;
-	UPROPERTY(BlueprintReadOnly, Category = Effect)
 	float duration;
-	UPROPERTY(BlueprintReadOnly, Category = Effect)
+	float tickRate;
+	float damage;
 	FString name;
-	UPROPERTY(BlueprintReadOnly, Category = Effect)
 	FString desc;
 	DamageType damageType;
 

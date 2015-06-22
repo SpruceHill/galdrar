@@ -2,6 +2,8 @@
 
 #include "Galdrar.h"
 #include "BaseCharacter.h"
+#include "HUDAdapter.h"
+#include "GaldrarColor.h"
 
 void ABaseCharacter::Tick(float DeltaSeconds)
 {
@@ -13,7 +15,12 @@ void ABaseCharacter::Tick(float DeltaSeconds)
 	 }
 	 for (Effect* effect : activeEffects)
 	 {
-		 effect->Tick2(DeltaSeconds);
+		 if (effect->Tick(DeltaSeconds))
+		 {
+			 HUDAdapter HA;
+			 HA.CreateDamageIndicator(this, effect->GetDamage(), GaldrarColor::GetDamageTypeColor(effect->GetType()), false);
+			 Wound(effect->GetDamage());
+		 }
 	 }
 }
 

@@ -6,6 +6,7 @@
 #include "BaseCharacter.h"
 #include "Loot.h"
 #include "Valuable.h"
+#include "HUDAdapter.h"
 #include "HeroPlayerController.generated.h"
 
 /**
@@ -47,8 +48,12 @@ private:
 	void Attack(ABaseCharacter* character);
 	void Pickup(ALoot* loot);
 
+	void FaceActor(AActor* actorToFace);
+
 	ABaseCharacter* targetCharacter;
 	ALoot* targetLoot;
 
 	float pickUpRange = 120.f;
+
+	HUDAdapter HA;
 };

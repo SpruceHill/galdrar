@@ -17,11 +17,17 @@ AHeroPlayerController::AHeroPlayerController(const FObjectInitializer& ObjectIni
 
 	bShouldZoom = false;
 	targetZoom = zoomMax;
+
 }
 
 void AHeroPlayerController::PlayerTick(float DeltaTime)
 {
 	Super::PlayerTick(DeltaTime);
+
+	if (AGaldrarHUD* hud = dynamic_cast<AGaldrarHUD*>(GetHUD()))
+	{
+		HA.SetHUD(hud);
+	}
 
 	// Trace to see what is under the mouse cursor
 	FHitResult Hit;
@@ -177,18 +183,19 @@ void AHeroPlayerController::Attack(ABaseCharacter* character)
 	AHeroCharacter* hero = Cast<AHeroCharacter>(GetPawn());
 	if (hero->GetDistanceTo(character) < hero->GetWeapon()->GetRange())
 	{
-		// Rotate attacker towards the defender
+		/*// Rotate attacker towards the defender
 		FVector newLookAt = character->GetActorLocation().operator-=(hero->GetActorLocation());
 		newLookAt.Z = 1; // Make sure character is always upright (attacking on stairs etc.)
-		hero->SetActorRotation(newLookAt.Rotation());
-		float damage = CombatHandler::AttackEnemy(hero, character, hero->GetWeapon());
-		UGameplayStatics::ApplyDamage(character, damage, NULL, hero, UDamageType::StaticClass());
+		hero->SetActorRotation(newLookAt.Rotation());*/
+		FaceActor(character);
+		CombatHandler::AttackEnemy(hero, character, hero->GetWeapon());
+		//UGameplayStatics::ApplyDamage(character, damage, NULL, hero, UDamageType::StaticClass());
 
-		if (AGaldrarHUD* hud = dynamic_cast<AGaldrarHUD*>(GetHUD()))
+		/*if (AGaldrarHUD* hud = dynamic_cast<AGaldrarHUD*>(GetHUD()))
 		{
 			hud->CreateDamageIndicator(character, damage, GaldrarColor::GetDamageTypeColor(hero->GetWeapon()->GetDamageType()),
 				CombatHandler::IsCritical(hero->GetActorForwardVector(), character->GetActorForwardVector()));
-		}
+		}*/
 		targetCharacter = NULL;
 	}
 	else // Not in range
@@ -196,6 +203,14 @@ void AHeroPlayerController::Attack(ABaseCharacter* character)
 		targetCharacter = character;
 		SetNewMoveDestination(targetCharacter->GetActorLocation());
 	}
+}
+
+void AHeroPlayerController::FaceActor(AActor* actorToFace)
+{
+	// Rotate attacker towards the defender
+	FVector newLookAt = actorToFace->GetActorLocation().operator-=(GetPawn()->GetActorLocation());
+	newLookAt.Z = 1; // Make sure character is always upright (attacking on stairs etc.)
+	GetPawn()->SetActorRotation(newLookAt.Rotation());
 }
 
 void AHeroPlayerController::Pickup(ALoot* loot)

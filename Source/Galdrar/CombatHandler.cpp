@@ -6,6 +6,7 @@
 #include "DamageType.h"
 #include "GaldrarHUD.h"
 #include "GaldrarColor.h"
+#include "HUDAdapter.h"
 
 float CombatHandler::CalcDamage(float damage, float resistance, float critPercentage, bool crit)
 {
@@ -18,12 +19,16 @@ float CombatHandler::CalcDamage(float damage, float resistance, float critPercen
 	return calculatedDamage;
 }
 
-float CombatHandler::AttackEnemy(ABaseCharacter* attacker, ABaseCharacter* defender, Attack* attack)
+void CombatHandler::AttackEnemy(ABaseCharacter* attacker, ABaseCharacter* defender, Attack* attack)
 {
 	float damage = CalcDamage(attacker->GetDamage(), defender->GetResistance(attack->GetDamageType()),
 		attack->GetCritMultiplier(), IsCritical(attacker->GetActorForwardVector(), defender->GetActorForwardVector()));
 
-	return damage;
+	HUDAdapter HA;
+	HA.CreateDamageIndicator(defender, damage, GaldrarColor::GetDamageTypeColor(attack->GetDamageType()), 
+		IsCritical(attacker->GetActorForwardVector(), defender->GetActorForwardVector()));
+
+	defender->Wound(damage);
 
 	//for(Effect* effect : attack->GetEffects())
 	//{ 
@@ -34,6 +39,11 @@ float CombatHandler::AttackEnemy(ABaseCharacter* attacker, ABaseCharacter* defen
 bool CombatHandler::IsCritical(FVector attackerForward, FVector defenderForward)
 {
 	return FVector::DotProduct(attackerForward, defenderForward) > FMath::Cos(FMath::DegreesToRadians(backStabDegree));
+}
+
+void CombatHandler::Affect(ABaseCharacter* attacker, Effect* effect)
+{
+
 }
 
 
