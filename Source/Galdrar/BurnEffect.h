@@ -13,5 +13,5 @@ public:
 	BurnEffect();
 	BurnEffect(CharacterStats* stats);
 	
-	virtual bool Tick(float delta) override;
+	virtual void Tick(float delta) override;
 };

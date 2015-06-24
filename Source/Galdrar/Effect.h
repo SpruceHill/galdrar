@@ -11,10 +11,14 @@ class GALDRAR_API Effect
 public:
 	Effect();
 	Effect(CharacterStats* stats);
-	virtual bool Tick(float delta);
+	virtual void Tick(float delta);
 
 	float GetDamage() { return damage; }
+	float GetTimeLeft() { return timeLeft; }
 	DamageType GetType() { return damageType; }
+
+	bool bShouldTick;
+	bool bPrintDI;
 
 protected:
 	float timeLeft;

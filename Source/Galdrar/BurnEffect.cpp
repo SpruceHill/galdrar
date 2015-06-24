@@ -20,16 +20,21 @@ BurnEffect::BurnEffect(CharacterStats* stats)
 	tickRate = 0.5f;
 	damageType = DamageType::FIRE;
 	time = 0.f;
+	bShouldTick = true;
+	bPrintDI = false;
 }
 
-bool BurnEffect::Tick(float delta)
+void BurnEffect::Tick(float delta)
 {
 	time += delta;
 	if (time > tickRate)
 	{
 		timeLeft -= 0.5f;
 		time -= 0.5f;
-		return true;
+		bPrintDI = true;
 	}
-	return false;
+	else
+	{
+		bPrintDI = false;
+	}
 }
