@@ -18,7 +18,7 @@ void ABaseCharacter::Tick(float DeltaSeconds)
 		 if (effect->Tick(DeltaSeconds))
 		 {
 			 HUDAdapter HA;
-			 HA.CreateDamageIndicator(this, effect->GetDamage(), GaldrarColor::GetDamageTypeColor(effect->GetType()), false);
+			 HA.CreateDamageIndicator(this, FString::FromInt((int32)effect->GetDamage()), GaldrarColor::GetDamageTypeColor(effect->GetType()), false);
 			 Wound(effect->GetDamage());
 		 }
 	 }

@@ -6,9 +6,9 @@
 //HUDAdapter HUDAdapter::AdapterInstance;
 AGaldrarHUD* HUDAdapter::HUDInstance;
 
-void HUDAdapter::CreateDamageIndicator(ABaseCharacter* character, float damage, FColor indicatorColor, bool crit)
+void HUDAdapter::CreateDamageIndicator(ABaseCharacter* character, const FString& text, FColor indicatorColor, bool crit)
 {
-	HUDInstance->CreateDamageIndicator(character, damage, indicatorColor, crit);
+	HUDInstance->CreateDamageIndicator(character, text, indicatorColor, crit);
 }
 
 AGaldrarHUD* HUDAdapter::GetHUD()

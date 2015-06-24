@@ -4,7 +4,7 @@
 #include "EnemyCharacter.h"
 #include "EnemyAIController.h"
 #include "BaseCharacter.h"
-
+#include "BurnEffect.h"
 
 AEnemyCharacter::AEnemyCharacter(const FObjectInitializer& ObjectInitializer)
 	: Super(ObjectInitializer)
@@ -16,8 +16,8 @@ AEnemyCharacter::AEnemyCharacter(const FObjectInitializer& ObjectInitializer)
 	stats->rotationRate = 200.f;
 	stats->defaultMovementSpeed = 200.f;
 	stats->movementSpeed = 200.f;
-
-	AddEffect(new Effect(stats));
+	
+	AddEffect(new BurnEffect(stats));
 
 	AIControllerClass = AEnemyAIController::StaticClass();
 

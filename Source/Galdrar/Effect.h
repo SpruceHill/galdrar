@@ -11,8 +11,7 @@ class GALDRAR_API Effect
 public:
 	Effect();
 	Effect(CharacterStats* stats);
-	~Effect();
-	bool Tick(float delta);
+	virtual bool Tick(float delta);
 
 	float GetDamage() { return damage; }
 	DamageType GetType() { return damageType; }
@@ -25,9 +24,6 @@ protected:
 	FString name;
 	FString desc;
 	DamageType damageType;
-
-private:
 	CharacterStats* stats;
 	float time;
-	float oldTime;
 };

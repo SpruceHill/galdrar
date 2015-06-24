@@ -19,7 +19,7 @@ public:
 	virtual void DrawHUD() override;
 
 	UFUNCTION(BlueprintImplementableEvent, BlueprintCallable, Category = "Damage")
-	void CreateDamageIndicator(ABaseCharacter* character, float damage, FColor indicatorColor, bool crit);
+	void CreateDamageIndicator(ABaseCharacter* character, const FString& text, FColor indicatorColor, bool crit);
 
 	void SetFocusedCharacter(ABaseCharacter* character) { focusedCharacter = character; }
 	

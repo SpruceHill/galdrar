@@ -25,7 +25,7 @@ void CombatHandler::AttackEnemy(ABaseCharacter* attacker, ABaseCharacter* defend
 		attack->GetCritMultiplier(), IsCritical(attacker->GetActorForwardVector(), defender->GetActorForwardVector()));
 
 	HUDAdapter HA;
-	HA.CreateDamageIndicator(defender, damage, GaldrarColor::GetDamageTypeColor(attack->GetDamageType()), 
+	HA.CreateDamageIndicator(defender, FString::FromInt((int32)damage), GaldrarColor::GetDamageTypeColor(attack->GetDamageType()), 
 		IsCritical(attacker->GetActorForwardVector(), defender->GetActorForwardVector()));
 
 	defender->Wound(damage);
@@ -39,11 +39,6 @@ void CombatHandler::AttackEnemy(ABaseCharacter* attacker, ABaseCharacter* defend
 bool CombatHandler::IsCritical(FVector attackerForward, FVector defenderForward)
 {
 	return FVector::DotProduct(attackerForward, defenderForward) > FMath::Cos(FMath::DegreesToRadians(backStabDegree));
-}
-
-void CombatHandler::Affect(ABaseCharacter* attacker, Effect* effect)
-{
-
 }
 
 

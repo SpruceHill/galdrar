@@ -4,24 +4,29 @@
 #include "Effect.h"
 #include "CombatHandler.h"
 
+Effect::Effect()
+{
+	//Should not be called
+}
+
 Effect::Effect(CharacterStats* stats)
 {
-	this->stats = stats;
+/*	this->stats = stats;
 	damage = 5.f;
 	duration = 5.f;
 	timeLeft = 5.f;
 	damageType = DamageType::FIRE;
 	time = 0.f;
+	*/
 }
 bool Effect::Tick(float delta)
 {
-	time += delta;
+	/*time += delta;
 	if (time > 0.5f)
 	{
 		timeLeft -= 0.5f;
-		//stats->health -= 20.f;
 		time -= 0.5f;
 		return true;
-	}
+	}*/
 	return false;
 }
