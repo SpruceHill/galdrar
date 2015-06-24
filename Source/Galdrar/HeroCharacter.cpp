@@ -4,13 +4,16 @@
 #include "HeroCharacter.h"
 #include "Attack.h"
 #include "DamageType.h"
+#include "BurnEffect.h"
 
 AHeroCharacter::AHeroCharacter(const FObjectInitializer& ObjectInitializer)
 	: Super(ObjectInitializer)
 {
 	name = "Hero";
 	stats = new CharacterStats();
-	weapon = new Attack("Sword", 20.f, DamageType::PHYSICAL, 1.5f, 200.f, 1.f);
+	std::list < Effect* > effects;
+	effects.push_back(new BurnEffect(stats));
+	weapon = new Attack("Sword", 20.f, DamageType::PHYSICAL, 1.5f, 200.f, 1.f, effects);
 	inventory.Init(NULL, 6);
 
 	// Set size for player capsule

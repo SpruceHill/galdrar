@@ -30,10 +30,10 @@ void CombatHandler::AttackEnemy(ABaseCharacter* attacker, ABaseCharacter* defend
 
 	defender->Wound(damage);
 
-	//for(Effect* effect : attack->GetEffects())
-	//{ 
-	//	defender.addEffect(effect);
-	//}
+	for(Effect* effect : attack->GetEffects())
+	{ 
+		defender->AddEffect(effect);
+	}
 }
 
 bool CombatHandler::IsCritical(FVector attackerForward, FVector defenderForward)
