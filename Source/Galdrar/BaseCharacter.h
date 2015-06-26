@@ -63,6 +63,8 @@ public:
 		if (found) activeEffects.remove(effect);
 	}
 
+	std::list < Effect* > GetActiveEffects() { return activeEffects; }
+
 	//UFUNCTION(BlueprintImplementableEvent, BlueprintCallable, Category = "Damage")
 	float TakeDamage(float DamageAmount, struct FDamageEvent const& DamageEvent, class AController* EventInstigator, class AActor* DamageCauser) override
 	{
@@ -78,22 +80,7 @@ protected:
 	CharacterStats* stats;
 	UPROPERTY(BlueprintReadOnly, Category = character)
 	FString name;
-	/*UPROPERTY(BlueprintReadOnly, Category = character)
-	float maxHealth;
-	UPROPERTY(BlueprintReadWrite, Category = character)
-	float health;
-	UPROPERTY(BlueprintReadOnly, Category = character)
-	float armour;
-	UPROPERTY(BlueprintReadOnly, Category = character)
-	float frostResistance;
-	UPROPERTY(BlueprintReadOnly, Category = character)
-	float fireResistance;
-	UPROPERTY(BlueprintReadOnly, Category = character)
-	float shockResistance;
-	*/
 	std::list < Effect* > activeEffects;
-
 	Attack* weapon;
-	
 	// Array / variables spells
 };

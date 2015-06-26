@@ -20,6 +20,8 @@ BurnEffect::BurnEffect(CharacterStats* stats)
 	tickRate = 0.5f;
 	damageType = DamageType::FIRE;
 	time = 0.f;
+	bStackable = false;
+	effectType = EffectType::BURNING;
 	bShouldTick = true;
 	bPrintDI = false;
 }

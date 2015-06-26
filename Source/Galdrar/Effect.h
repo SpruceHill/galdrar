@@ -3,6 +3,7 @@
 #pragma once
 #include "DamageType.h"
 #include "CharacterStats.h"
+#include "EffectType.h"
 /**
  * 
  */
@@ -15,7 +16,12 @@ public:
 
 	float GetDamage() { return damage; }
 	float GetTimeLeft() { return timeLeft; }
-	DamageType GetType() { return damageType; }
+	DamageType GetDamageType() { return damageType; }
+	EffectType GetEffectType() { return effectType; }
+	void ResetTimer() { timeLeft = duration; }
+
+	bool bStackable;
+	EffectType effectType;
 
 	bool bShouldTick;
 	bool bPrintDI;
