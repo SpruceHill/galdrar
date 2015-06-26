@@ -21,8 +21,6 @@ void ABaseCharacter::Tick(float DeltaSeconds)
 
 		if (effect->bShouldTick)
 		{
-			GEngine->AddOnScreenDebugMessage(-1, 15.0f, FColor::Red, "Effect ticking");
-
 			effect->Tick(DeltaSeconds);
 			if (effect->bPrintDI)
 			{

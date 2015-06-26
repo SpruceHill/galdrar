@@ -41,16 +41,19 @@ void CombatHandler::AttackEnemy(ABaseCharacter* attacker, ABaseCharacter* defend
 				found = true;
 				if (e->bStackable)
 				{
+					// Effect stackable, add new instance.
 					defender->AddEffect(EffectFactory::GenerateEffect(defender->GetStats(), effectType));
 				}
 				else
 				{
+					// Effect not stackable, reset timer.
 					e->ResetTimer();
 				}
 			}
 		}
 		if (!found)
 		{
+			// Adding new effect.
 			defender->AddEffect(EffectFactory::GenerateEffect(defender->GetStats(), effectType));
 		}
 	}
