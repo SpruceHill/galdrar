@@ -4,6 +4,7 @@
 #include "DamageType.h"
 #include <list>
 #include "Effect.h"
+#include "EffectType.h"
 
 /**
  * An attack is a data container including all data needed to calculate damage and add effects.
@@ -11,11 +12,11 @@
 class GALDRAR_API Attack
 {
 public:
-	Attack(FString name, float damage, DamageType type, float critMultiplier, float range, float attackSpeed, const std::list < Effect* > effects);
+	Attack(FString name, float damage, DamageType type, float critMultiplier, float range, float attackSpeed, const std::list < EffectType > effectTypes);
 	float GetDamage(){ return damage; }
 	DamageType GetDamageType(){ return damageType; }
 	float GetCritMultiplier(){ return critMultiplier; }
-	std::list < Effect* > GetEffects(){ return effects; }
+	std::list < EffectType > GetEffectTypes(){ return effectTypes; }
 	float GetRange(){ return range; }
 	float GetAttackSpeed(){ return attackSpeed; }
 	FString GetName(){ return name; }
@@ -25,7 +26,7 @@ private:
 	float damage;
 	DamageType damageType;
 	float critMultiplier;
-	std::list < Effect* > effects;
+	std::list < EffectType > effectTypes;
 	float range;
 	float attackSpeed;
 	FString name;

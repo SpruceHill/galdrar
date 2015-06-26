@@ -7,6 +7,7 @@
 #include "GaldrarHUD.h"
 #include "GaldrarColor.h"
 #include "HUDAdapter.h"
+#include "EffectFactory.h"
 
 float CombatHandler::CalcDamage(float damage, float resistance, float critPercentage, bool crit)
 {
@@ -30,9 +31,9 @@ void CombatHandler::AttackEnemy(ABaseCharacter* attacker, ABaseCharacter* defend
 
 	defender->Wound(damage);
 
-	for(Effect* effect : attack->GetEffects())
-	{ 
-		defender->AddEffect(effect);
+	for(EffectType effectType : attack->GetEffectTypes())
+	{
+		defender->AddEffect(EffectFactory::GenerateEffect(defender->GetStats(), effectType));
 	}
 }
 

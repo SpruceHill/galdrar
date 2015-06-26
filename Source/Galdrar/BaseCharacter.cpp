@@ -7,20 +7,22 @@
 
 void ABaseCharacter::Tick(float DeltaSeconds)
 {
-	 Super::Tick(DeltaSeconds);
-	 if (stats->health <= 0)
-	 {
+	Super::Tick(DeltaSeconds);
+	if (stats->health <= 0)
+	{
 		 GEngine->AddOnScreenDebugMessage(-1, 15.0f, FColor::Red, name + " just died");
 		 this->Destroy();
-	 }
+	}
 
-	 std::list<Effect*>::iterator it = activeEffects.begin();
-	 while (it != activeEffects.end())
-	 {
+	std::list<Effect*>::iterator it = activeEffects.begin();
+	while (it != activeEffects.end())
+	{
 		Effect* effect = (*it);
 
 		if (effect->bShouldTick)
 		{
+			GEngine->AddOnScreenDebugMessage(-1, 15.0f, FColor::Red, "Effect ticking");
+
 			effect->Tick(DeltaSeconds);
 			if (effect->bPrintDI)
 			{
@@ -36,28 +38,7 @@ void ABaseCharacter::Tick(float DeltaSeconds)
 		}
 		++it;
 	}
-	 /*
-	 for (Effect* effect : activeEffects)
-	 {
-		 if (effect->bShouldTick)
-		 {
-			 effect->Tick(DeltaSeconds);
-			 if (effect->bPrintDI)
-			 {
-				 HUDAdapter HA;
-				 HA.CreateDamageIndicator(this, FString::FromInt((int32)effect->GetDamage()), GaldrarColor::GetDamageTypeColor(effect->GetType()), false);
-				 Wound(effect->GetDamage());
-				 effect->bPrintDI = false;
-			 }
-			 if (effect->GetTimeLeft() <= 0.f)
-			 {
-				 //activeEffects.remove(effect);
-			 }
-		 }
-	 }*/
 }
-
-
 
 void ABaseCharacter::Heal(float amount)
 {

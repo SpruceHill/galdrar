@@ -28,6 +28,8 @@ public:
 
 	Attack* GetWeapon() { return weapon; }
 
+	CharacterStats* GetStats() { return stats; }
+
 	float GetResistance(DamageType type) 
 	{
 		switch (type) {

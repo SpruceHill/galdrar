@@ -6,11 +6,11 @@
 #include "DamageType.h"
 #include <list>
 
-Attack::Attack(FString name, float damage, DamageType type, float critMultiplier, float range, float attackSpeed, const std::list < Effect* > effects)
+Attack::Attack(FString name, float damage, DamageType type, float critMultiplier, float range, float attackSpeed, const std::list < EffectType > effectTypes)
 {
 	this->name = name;
 	this->damage = damage;
-	this->effects = effects;
+	this->effectTypes = effectTypes;
 	this->damageType = type;
 	this->critMultiplier = critMultiplier;
 	this->range = range;
