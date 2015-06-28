@@ -8,6 +8,7 @@
 #include <algorithm>
 #include "Effect.h"
 #include "CharacterStats.h"
+#include "Spell.h"
 #include "GameFramework/Character.h"
 #include "BaseCharacter.generated.h"
 
@@ -65,6 +66,11 @@ public:
 
 	std::list < Effect* > GetActiveEffects() { return activeEffects; }
 
+	Spell* GetSpell(int8 index)
+	{
+		return spells[index];
+	}
+
 	//UFUNCTION(BlueprintImplementableEvent, BlueprintCallable, Category = "Damage")
 	float TakeDamage(float DamageAmount, struct FDamageEvent const& DamageEvent, class AController* EventInstigator, class AActor* DamageCauser) override
 	{
@@ -82,5 +88,5 @@ protected:
 	FString name;
 	std::list < Effect* > activeEffects;
 	Attack* weapon;
-	// Array / variables spells
+	Spell* spells [4];
 };

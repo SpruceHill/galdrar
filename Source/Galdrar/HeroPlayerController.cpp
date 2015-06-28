@@ -110,6 +110,11 @@ void AHeroPlayerController::SetupInputComponent()
 
 	InputComponent->BindAction("ZoomIn", IE_Released, this, &AHeroPlayerController::ZoomIn);
 	InputComponent->BindAction("ZoomOut", IE_Released, this, &AHeroPlayerController::ZoomOut);
+
+	InputComponent->BindAction("Spell1", IE_Released, this, &AHeroPlayerController::Spell1);
+	InputComponent->BindAction("Spell2", IE_Released, this, &AHeroPlayerController::Spell2);
+	InputComponent->BindAction("Spell3", IE_Released, this, &AHeroPlayerController::Spell3);
+	InputComponent->BindAction("Spell4", IE_Released, this, &AHeroPlayerController::Spell3);
 }
 
 void AHeroPlayerController::Zoom(float delta)
@@ -183,19 +188,8 @@ void AHeroPlayerController::Attack(ABaseCharacter* character)
 	AHeroCharacter* hero = Cast<AHeroCharacter>(GetPawn());
 	if (hero->GetDistanceTo(character) < hero->GetWeapon()->GetRange())
 	{
-		/*// Rotate attacker towards the defender
-		FVector newLookAt = character->GetActorLocation().operator-=(hero->GetActorLocation());
-		newLookAt.Z = 1; // Make sure character is always upright (attacking on stairs etc.)
-		hero->SetActorRotation(newLookAt.Rotation());*/
 		FaceActor(character);
 		CombatHandler::AttackEnemy(hero, character, hero->GetWeapon());
-		//UGameplayStatics::ApplyDamage(character, damage, NULL, hero, UDamageType::StaticClass());
-
-		/*if (AGaldrarHUD* hud = dynamic_cast<AGaldrarHUD*>(GetHUD()))
-		{
-			hud->CreateDamageIndicator(character, damage, GaldrarColor::GetDamageTypeColor(hero->GetWeapon()->GetDamageType()),
-				CombatHandler::IsCritical(hero->GetActorForwardVector(), character->GetActorForwardVector()));
-		}*/
 		targetCharacter = NULL;
 	}
 	else // Not in range
@@ -236,4 +230,26 @@ void AHeroPlayerController::OnSetDestinationReleased()
 {
 	// clear flag to indicate we should stop updating the destination
 	bMoveToMouseCursor = false;
+}
+
+void AHeroPlayerController::Spell1(){ Spell(0); }
+void AHeroPlayerController::Spell2(){ Spell(1); }
+void AHeroPlayerController::Spell3(){ Spell(2); }
+void AHeroPlayerController::Spell4(){ Spell(3); }
+
+void AHeroPlayerController::Spell(int8 index)
+{
+	AHeroCharacter* hero = Cast<AHeroCharacter>(GetPawn());
+	if (hero->GetSpell(index)->GetSpellType() == Spell::SpellType::TARGET)
+	{
+		GEngine->AddOnScreenDebugMessage(-1, 15.0f, FColor::Red, "Target");
+	}
+	else if (hero->GetSpell(index)->GetSpellType() == Spell::SpellType::AOE)
+	{
+		GEngine->AddOnScreenDebugMessage(-1, 15.0f, FColor::Red, "AoE");
+	}
+	else if (hero->GetSpell(index)->GetSpellType() == Spell::SpellType::PASSIVE)
+	{
+		GEngine->AddOnScreenDebugMessage(-1, 15.0f, FColor::Red, "Passive");
+	}
 }

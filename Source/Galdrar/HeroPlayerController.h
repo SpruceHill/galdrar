@@ -45,6 +45,12 @@ private:
 	void ZoomIn(){ Zoom(-zoomStepLength); }
 	void ZoomOut(){ Zoom(zoomStepLength); }
 
+	void Spell1();
+	void Spell2();
+	void Spell3();
+	void Spell4();
+	void Spell(int8 index);
+
 	void Attack(ABaseCharacter* character);
 	void Pickup(ALoot* loot);
 
