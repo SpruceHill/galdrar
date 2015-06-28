@@ -22,7 +22,7 @@ public:
 	FString GetName(){ return name; }
 	bool isOnCoolDown(){ return onCooldown; }
 	void setOnCoolDown(bool b) { onCooldown = b; }
-private:
+protected:
 	float damage;
 	DamageType damageType;
 	float critMultiplier;

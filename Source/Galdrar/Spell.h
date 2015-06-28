@@ -7,7 +7,7 @@
 #include "DamageType.h"
 #include <list>
 
-class GALDRAR_API Spell : Attack
+class GALDRAR_API Spell : public Attack
 {
 public:
 	enum SpellType { TARGET, PASSIVE, AOE };
@@ -15,21 +15,12 @@ public:
 	virtual void Activate();
 
 	SpellType GetSpellType() { return spellType; }
-	float GetDamage(){ return damage; }
 	float GetManaCost(){ return manaCost; }
-	float GetCooldown(){ return cooldown; }
-	std::list < EffectType* > GetEffectTypes(){ return effectTypes; }
-	DamageType GetDamageType(){ return damageType; }
 
 	Spell();
 	~Spell();
 
-private:
+protected:
 	SpellType spellType;
-	float damage;
 	float manaCost;
-	float cooldown;
-	float time;
-	std::list < EffectType* > effectTypes;
-	DamageType damageType;
 };
