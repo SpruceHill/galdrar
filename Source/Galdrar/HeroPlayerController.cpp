@@ -240,16 +240,22 @@ void AHeroPlayerController::Spell4(){ Spell(3); }
 void AHeroPlayerController::Spell(int8 index)
 {
 	AHeroCharacter* hero = Cast<AHeroCharacter>(GetPawn());
-	if (hero->GetSpell(index)->GetSpellType() == Spell::SpellType::TARGET)
+	switch (hero->GetSpell(index)->GetActivation())
 	{
-		GEngine->AddOnScreenDebugMessage(-1, 15.0f, FColor::Red, "Target");
-	}
-	else if (hero->GetSpell(index)->GetSpellType() == Spell::SpellType::AOE)
-	{
-		GEngine->AddOnScreenDebugMessage(-1, 15.0f, FColor::Red, "AoE");
-	}
-	else if (hero->GetSpell(index)->GetSpellType() == Spell::SpellType::PASSIVE)
-	{
+	case Spell::Activation::TARGET_UNIT : 
+		GEngine->AddOnScreenDebugMessage(-1, 15.0f, FColor::Red, "Target Unit");
+	
+	case Spell::Activation::TARGET_GROUND :
+		GEngine->AddOnScreenDebugMessage(-1, 15.0f, FColor::Red, "Target Ground");
+	
+	case Spell::Activation::PASSIVE :
 		GEngine->AddOnScreenDebugMessage(-1, 15.0f, FColor::Red, "Passive");
+	
+	case Spell::Activation::ATTACK_MODIFIER :
+		GEngine->AddOnScreenDebugMessage(-1, 15.0f, FColor::Red, "Attack Modifier");
+	
+	case Spell::Activation::SELF :
+		GEngine->AddOnScreenDebugMessage(-1, 15.0f, FColor::Red, "Self");
 	}
+	
 }

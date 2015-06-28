@@ -5,7 +5,8 @@
 
 DragonsBreath::DragonsBreath()
 {
-	spellType = SpellType::TARGET;
+	activation = Activation::TARGET_GROUND;
+	spellTarget = SpellTarget::CONE;
 	float damage = 20.f;
 	float manaCost = 40.f;
 	float cooldown = 5.f;
