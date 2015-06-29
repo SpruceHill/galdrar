@@ -16,3 +16,6 @@ Attack::Attack(FString name, float damage, DamageType type, float critMultiplier
 	this->range = range;
 	this->attackSpeed = attackSpeed;
 }
+
+Attack::Attack(){};
+Attack::~Attack(){};

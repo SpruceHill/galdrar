@@ -3,4 +3,7 @@
 #include "Galdrar.h"
 #include "Spell.h"
 
+Spell::Spell(){};
+Spell::~Spell(){};
+
 void Spell::Activate(){};

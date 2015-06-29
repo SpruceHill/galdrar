@@ -20,8 +20,10 @@ public:
 	float GetRange(){ return range; }
 	float GetAttackSpeed(){ return attackSpeed; }
 	FString GetName(){ return name; }
-	bool isOnCoolDown(){ return onCooldown; }
-	void setOnCoolDown(bool b) { onCooldown = b; }
+	bool isOnCoolDown(){ return currentCooldown > 0; }
+
+	Attack();
+	~Attack();
 protected:
 	float damage;
 	DamageType damageType;
@@ -30,5 +32,6 @@ protected:
 	float range;
 	float attackSpeed;
 	FString name;
-	bool onCooldown;
+	float cooldown;
+	float currentCooldown;
 };

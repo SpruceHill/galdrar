@@ -14,6 +14,7 @@ DragonsBreath::DragonsBreath()
 	effectTypes.push_back(EffectType::BURNING);
 	damageType = DamageType::FIRE;
 	range = 600.f;
+	radius = 200.f;
 }
 
 DragonsBreath::~DragonsBreath()
