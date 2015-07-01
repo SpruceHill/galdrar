@@ -14,9 +14,6 @@ AHeroCharacter::AHeroCharacter(const FObjectInitializer& ObjectInitializer)
 {
 	name = "Hero";
 	stats = new CharacterStats();
-	//std::list < EffectType > effectTypes;
-	//effectTypes.push_back(EffectType::BURNING);
-	//weapon = new Attack("Sword", 20.f, DamageType::PHYSICAL, 1.5f, 200.f, 1.f, effectTypes);
 	weapon = new Sword();
 	inventory.Init(NULL, 6);
 	spells[0] = new DragonsBreath();

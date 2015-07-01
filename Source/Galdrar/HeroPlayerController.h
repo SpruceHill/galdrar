@@ -23,12 +23,19 @@ public:
 private:
 	/** True if the controlled character should navigate to the mouse cursor. */
 	uint32 bMoveToMouseCursor : 1;
+
 	const float zoomStepLength = 100.f;
 	const float zoomSpeed = 20.f;
 	const float zoomMin = 500.f;
 	const float zoomMax = 1200.f;
 	float targetZoom;
 	bool bShouldZoom;
+	bool bSelectingUnitTarget;
+	bool bSelectingGroundTarget;
+	float pickUpRange = 120.f;
+	ABaseCharacter* targetCharacter;
+	ALoot* targetLoot;
+	HUDAdapter HA;
 
 	virtual void PlayerTick(float DeltaTime) override;
 	virtual void SetupInputComponent() override;
@@ -37,7 +44,7 @@ private:
 
 	void SetNewMoveDestination(const FVector DestLocation);
 
-	// Input handlers for SetDestination action
+	// Input handlers
 	void OnSetDestinationPressed();
 	void OnSetDestinationReleased();
 
@@ -51,15 +58,12 @@ private:
 	void Spell4();
 	void Spell(int8 index);
 
+	void CancelAction();
+	
+	// Helpers
 	void Attack(ABaseCharacter* character);
 	void Pickup(ALoot* loot);
 
 	void FaceActor(AActor* actorToFace);
 
-	ABaseCharacter* targetCharacter;
-	ALoot* targetLoot;
-
-	float pickUpRange = 120.f;
-
-	HUDAdapter HA;
 };

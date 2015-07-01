@@ -35,6 +35,7 @@ void AHeroPlayerController::PlayerTick(float DeltaTime)
 
 	if (Hit.bBlockingHit)
 	{
+		// If cursor is over a character
 		if (ABaseCharacter* character = dynamic_cast<ABaseCharacter*>(Hit.GetActor()))
 		{
 			if (AGaldrarHUD* hud = dynamic_cast<AGaldrarHUD*>(GetHUD()))
@@ -43,6 +44,7 @@ void AHeroPlayerController::PlayerTick(float DeltaTime)
 			}
 			CurrentMouseCursor = EMouseCursor::Hand;
 		}
+		// If cursor is over loot
 		else if (ALoot* loot = dynamic_cast<ALoot*>(Hit.GetActor()))
 		{
 			if (AGaldrarHUD* hud = dynamic_cast<AGaldrarHUD*>(GetHUD()))
@@ -51,9 +53,9 @@ void AHeroPlayerController::PlayerTick(float DeltaTime)
 			}
 			CurrentMouseCursor = EMouseCursor::Hand;
 		}
+		// Floor, walls etc
 		else
 		{
-			// Floor, walls etc
 			CurrentMouseCursor = DefaultMouseCursor;
 			if (AGaldrarHUD* hud = dynamic_cast<AGaldrarHUD*>(GetHUD()))
 			{
@@ -62,9 +64,9 @@ void AHeroPlayerController::PlayerTick(float DeltaTime)
 			}
 		}
 	}
+	// Cursor is outside the map
 	else
 	{
-		// If outside the map
 		CurrentMouseCursor = DefaultMouseCursor;
 	}
 
@@ -73,6 +75,7 @@ void AHeroPlayerController::PlayerTick(float DeltaTime)
 	{
 		MoveToMouseCursor();
 	}
+	
 	if (targetCharacter)
 	{
 		Attack(targetCharacter);
@@ -115,6 +118,8 @@ void AHeroPlayerController::SetupInputComponent()
 	InputComponent->BindAction("Spell2", IE_Released, this, &AHeroPlayerController::Spell2);
 	InputComponent->BindAction("Spell3", IE_Released, this, &AHeroPlayerController::Spell3);
 	InputComponent->BindAction("Spell4", IE_Released, this, &AHeroPlayerController::Spell3);
+
+	InputComponent->BindAction("CancelAction", IE_Released, this, &AHeroPlayerController::CancelAction);
 }
 
 void AHeroPlayerController::Zoom(float delta)
@@ -237,16 +242,25 @@ void AHeroPlayerController::Spell2(){ Spell(1); }
 void AHeroPlayerController::Spell3(){ Spell(2); }
 void AHeroPlayerController::Spell4(){ Spell(3); }
 
+void AHeroPlayerController::CancelAction()
+{
+	bSelectingUnitTarget = false;
+	bSelectingGroundTarget = false;
+	bMoveToMouseCursor = false;
+}
+
 void AHeroPlayerController::Spell(int8 index)
 {
 	AHeroCharacter* hero = Cast<AHeroCharacter>(GetPawn());
 	switch (hero->GetSpell(index)->GetActivation())
 	{
-	case Spell::Activation::TARGET_UNIT : 
+	case Spell::Activation::TARGET_UNIT :
+		bSelectingUnitTarget = true;
 		GEngine->AddOnScreenDebugMessage(-1, 15.0f, FColor::Red, "Target Unit");
 		break;
 	
 	case Spell::Activation::TARGET_GROUND :
+		bSelectingGroundTarget = true;
 		GEngine->AddOnScreenDebugMessage(-1, 15.0f, FColor::Red, "Target Ground");
 		break;
 
