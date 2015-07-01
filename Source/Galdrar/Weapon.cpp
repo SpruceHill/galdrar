@@ -2,3 +2,6 @@
 
 #include "Galdrar.h"
 #include "Weapon.h"
+
+Weapon::Weapon(){};
+Weapon::~Weapon(){};

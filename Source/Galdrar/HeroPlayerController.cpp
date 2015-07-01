@@ -244,18 +244,23 @@ void AHeroPlayerController::Spell(int8 index)
 	{
 	case Spell::Activation::TARGET_UNIT : 
 		GEngine->AddOnScreenDebugMessage(-1, 15.0f, FColor::Red, "Target Unit");
+		break;
 	
 	case Spell::Activation::TARGET_GROUND :
 		GEngine->AddOnScreenDebugMessage(-1, 15.0f, FColor::Red, "Target Ground");
-	
+		break;
+
 	case Spell::Activation::PASSIVE :
 		GEngine->AddOnScreenDebugMessage(-1, 15.0f, FColor::Red, "Passive");
-	
+		break;
+
 	case Spell::Activation::ATTACK_MODIFIER :
 		GEngine->AddOnScreenDebugMessage(-1, 15.0f, FColor::Red, "Attack Modifier");
-	
+		break;
+
 	case Spell::Activation::SELF :
 		GEngine->AddOnScreenDebugMessage(-1, 15.0f, FColor::Red, "Self");
+		break;
 	}
 	
 }

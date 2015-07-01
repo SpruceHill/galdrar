@@ -34,4 +34,5 @@ protected:
 	FString name;
 	float cooldown;
 	float currentCooldown;
+	float time;
 };
