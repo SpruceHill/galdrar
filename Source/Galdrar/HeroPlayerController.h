@@ -36,6 +36,7 @@ private:
 	ABaseCharacter* targetCharacter;
 	ALoot* targetLoot;
 	HUDAdapter HA;
+	Attack* scheduledAttack;
 
 	virtual void PlayerTick(float DeltaTime) override;
 	virtual void SetupInputComponent() override;
@@ -61,7 +62,7 @@ private:
 	void CancelAction();
 	
 	// Helpers
-	void Attack(ABaseCharacter* character);
+	void AttackEnemy(ABaseCharacter* character, Attack* attack);
 	void Pickup(ALoot* loot);
 
 	void FaceActor(AActor* actorToFace);

@@ -5,6 +5,7 @@
 #include "AI/Navigation/NavigationSystem.h"
 #include "HeroCharacter.h"
 #include "CombatHandler.h"
+#include "Attack.h"
 #include "GaldrarHUD.h"
 #include "GaldrarColor.h"
 
@@ -42,6 +43,7 @@ void AHeroPlayerController::PlayerTick(float DeltaTime)
 			{
 				hud->SetFocusedCharacter(character);
 			}
+			if(!(bSelectingUnitTarget || bSelectingGroundTarget))
 			CurrentMouseCursor = EMouseCursor::Hand;
 		}
 		// If cursor is over loot
@@ -51,11 +53,13 @@ void AHeroPlayerController::PlayerTick(float DeltaTime)
 			{
 				hud->SetFocusedLoot(loot);
 			}
+			if (!(bSelectingUnitTarget || bSelectingGroundTarget))
 			CurrentMouseCursor = EMouseCursor::Hand;
 		}
 		// Floor, walls etc
 		else
 		{
+			if(!(bSelectingUnitTarget || bSelectingGroundTarget))
 			CurrentMouseCursor = DefaultMouseCursor;
 			if (AGaldrarHUD* hud = dynamic_cast<AGaldrarHUD*>(GetHUD()))
 			{
@@ -67,6 +71,7 @@ void AHeroPlayerController::PlayerTick(float DeltaTime)
 	// Cursor is outside the map
 	else
 	{
+		if (!(bSelectingUnitTarget || bSelectingGroundTarget))
 		CurrentMouseCursor = DefaultMouseCursor;
 	}
 
@@ -78,7 +83,9 @@ void AHeroPlayerController::PlayerTick(float DeltaTime)
 	
 	if (targetCharacter)
 	{
-		Attack(targetCharacter);
+		// TODO SPELLS ALSO
+		AHeroCharacter* hero = Cast<AHeroCharacter>(GetPawn());
+		AttackEnemy(targetCharacter, hero->GetWeapon());
 	}
 	else if (targetLoot)
 	{
@@ -154,8 +161,8 @@ void AHeroPlayerController::SetNewMoveDestination(const FVector DestLocation)
 		UNavigationSystem* const NavSys = GetWorld()->GetNavigationSystem();
 		float const Distance = FVector::Dist(DestLocation, Pawn->GetActorLocation());
 
-		// We need to issue move command only if far enough in order for walk animation to play correctly
-		if (NavSys && (Distance > 120.0f))
+		// Walk if far enough or ordered stand still (HACK)
+		if (NavSys && ( (Distance > 120.0f) || DestLocation == Pawn->GetActorLocation()))
 		{
 			NavSys->SimpleMoveToLocation(this, DestLocation);
 		}
@@ -172,7 +179,8 @@ void AHeroPlayerController::OnSetDestinationPressed()
 	{
 		if (ABaseCharacter* character = dynamic_cast<ABaseCharacter*>(Hit.GetActor()))
 		{
-			Attack(character);
+			AHeroCharacter* hero = Cast<AHeroCharacter>(GetPawn());
+			AttackEnemy(character, hero->GetWeapon());
 		}
 		else if (ALoot* loot = dynamic_cast<ALoot*>(Hit.GetActor()))
 		{
@@ -188,13 +196,13 @@ void AHeroPlayerController::OnSetDestinationPressed()
 	}
 }
 
-void AHeroPlayerController::Attack(ABaseCharacter* character)
+void AHeroPlayerController::AttackEnemy(ABaseCharacter* character, Attack* attack)
 {
 	AHeroCharacter* hero = Cast<AHeroCharacter>(GetPawn());
-	if (hero->GetDistanceTo(character) < hero->GetWeapon()->GetRange())
+	if (hero->GetDistanceTo(character) < attack->GetRange())
 	{
 		FaceActor(character);
-		CombatHandler::AttackEnemy(hero, character, hero->GetWeapon());
+		CombatHandler::AttackEnemy(hero, character, attack);
 		targetCharacter = NULL;
 	}
 	else // Not in range
@@ -246,7 +254,16 @@ void AHeroPlayerController::CancelAction()
 {
 	bSelectingUnitTarget = false;
 	bSelectingGroundTarget = false;
-	bMoveToMouseCursor = false;
+	if (targetCharacter)
+	{
+		SetNewMoveDestination(GetPawn()->GetActorLocation());
+		targetCharacter = NULL;
+	}
+	else if (targetLoot)
+	{
+		SetNewMoveDestination(GetPawn()->GetActorLocation());
+		targetLoot = NULL;
+	}
 }
 
 void AHeroPlayerController::Spell(int8 index)
@@ -255,12 +272,16 @@ void AHeroPlayerController::Spell(int8 index)
 	switch (hero->GetSpell(index)->GetActivation())
 	{
 	case Spell::Activation::TARGET_UNIT :
+		bSelectingGroundTarget = false;
 		bSelectingUnitTarget = true;
+		CurrentMouseCursor = EMouseCursor::Crosshairs;
 		GEngine->AddOnScreenDebugMessage(-1, 15.0f, FColor::Red, "Target Unit");
 		break;
 	
 	case Spell::Activation::TARGET_GROUND :
+		bSelectingUnitTarget = false;
 		bSelectingGroundTarget = true;
+		CurrentMouseCursor = EMouseCursor::CardinalCross;
 		GEngine->AddOnScreenDebugMessage(-1, 15.0f, FColor::Red, "Target Ground");
 		break;
 
@@ -276,5 +297,4 @@ void AHeroPlayerController::Spell(int8 index)
 		GEngine->AddOnScreenDebugMessage(-1, 15.0f, FColor::Red, "Self");
 		break;
 	}
-	
 }
