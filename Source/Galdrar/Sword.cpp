@@ -9,9 +9,8 @@ Sword::Sword()
 	damage = 20.f; 
 	damageType = DamageType::PHYSICAL;
 	critMultiplier = 1.5f;
-	range = 200.f;
+	range = 100.f;
 	attackSpeed = 1.f;
-	effectTypes.push_back(EffectType::BURNING);
 	cooldown = 1.f;
 
 	weight = 1.f;

@@ -22,7 +22,7 @@ float CombatHandler::CalcDamage(float damage, float resistance, float critPercen
 
 void CombatHandler::AttackEnemy(ABaseCharacter* attacker, ABaseCharacter* defender, Attack* attack)
 {
-	float damage = CalcDamage(attacker->GetDamage(), defender->GetResistance(attack->GetDamageType()),
+	float damage = CalcDamage(attacker->GetStats()->damageMultiplier * attack->GetDamage(), defender->GetResistance(attack->GetDamageType()),
 		attack->GetCritMultiplier(), IsCritical(attacker->GetActorForwardVector(), defender->GetActorForwardVector()));
 
 	HUDAdapter HA;

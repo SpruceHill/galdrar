@@ -43,8 +43,11 @@ void AHeroPlayerController::PlayerTick(float DeltaTime)
 			{
 				hud->SetFocusedCharacter(character);
 			}
-			if(!(bSelectingUnitTarget || bSelectingGroundTarget))
-			CurrentMouseCursor = EMouseCursor::Hand;
+			if (!(bSelectingGroundTarget))
+			{
+				if (bSelectingUnitTarget) CurrentMouseCursor = EMouseCursor::EyeDropper;
+				else CurrentMouseCursor = EMouseCursor::Hand;
+			}
 		}
 		// If cursor is over loot
 		else if (ALoot* loot = dynamic_cast<ALoot*>(Hit.GetActor()))
@@ -83,9 +86,7 @@ void AHeroPlayerController::PlayerTick(float DeltaTime)
 	
 	if (targetCharacter)
 	{
-		// TODO SPELLS ALSO
-		AHeroCharacter* hero = Cast<AHeroCharacter>(GetPawn());
-		AttackEnemy(targetCharacter, hero->GetWeapon());
+		AttackEnemy(targetCharacter, scheduledAttack);
 	}
 	else if (targetLoot)
 	{
@@ -180,7 +181,8 @@ void AHeroPlayerController::OnSetDestinationPressed()
 		if (ABaseCharacter* character = dynamic_cast<ABaseCharacter*>(Hit.GetActor()))
 		{
 			AHeroCharacter* hero = Cast<AHeroCharacter>(GetPawn());
-			AttackEnemy(character, hero->GetWeapon());
+			if(!scheduledAttack) scheduledAttack = hero->GetWeapon();
+			AttackEnemy(character, scheduledAttack);
 		}
 		else if (ALoot* loot = dynamic_cast<ALoot*>(Hit.GetActor()))
 		{
@@ -189,9 +191,11 @@ void AHeroPlayerController::OnSetDestinationPressed()
 		else
 		{
 			// set flag to keep updating destination until released
+			bMoveToMouseCursor = true;
+			
 			targetCharacter = NULL;
 			targetLoot = NULL;
-			bMoveToMouseCursor = true;
+			scheduledAttack = NULL;
 		}
 	}
 }
@@ -201,9 +205,16 @@ void AHeroPlayerController::AttackEnemy(ABaseCharacter* character, Attack* attac
 	AHeroCharacter* hero = Cast<AHeroCharacter>(GetPawn());
 	if (hero->GetDistanceTo(character) < attack->GetRange())
 	{
+		// Stop moving (HACK)
+		SetNewMoveDestination(hero->GetActorLocation());
+
 		FaceActor(character);
 		CombatHandler::AttackEnemy(hero, character, attack);
+		
 		targetCharacter = NULL;
+		scheduledAttack = NULL;
+		bSelectingUnitTarget = false;
+		bSelectingUnitTarget = false;
 	}
 	else // Not in range
 	{
@@ -274,6 +285,7 @@ void AHeroPlayerController::Spell(int8 index)
 	case Spell::Activation::TARGET_UNIT :
 		bSelectingGroundTarget = false;
 		bSelectingUnitTarget = true;
+		scheduledAttack = hero->GetSpell(index);
 		CurrentMouseCursor = EMouseCursor::Crosshairs;
 		GEngine->AddOnScreenDebugMessage(-1, 15.0f, FColor::Red, "Target Unit");
 		break;
@@ -281,6 +293,7 @@ void AHeroPlayerController::Spell(int8 index)
 	case Spell::Activation::TARGET_GROUND :
 		bSelectingUnitTarget = false;
 		bSelectingGroundTarget = true;
+		scheduledAttack = hero->GetSpell(index);
 		CurrentMouseCursor = EMouseCursor::CardinalCross;
 		GEngine->AddOnScreenDebugMessage(-1, 15.0f, FColor::Red, "Target Ground");
 		break;

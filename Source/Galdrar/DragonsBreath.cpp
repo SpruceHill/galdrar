@@ -10,7 +10,7 @@ DragonsBreath::DragonsBreath()
 	manaCost = 40.f;
 	radius = 200.f;
 
-	damage = 20.f;
+	damage = 50.f;
 	cooldown = 5.f;
 	time = 5.f;
 	effectTypes.push_back(EffectType::BURNING);
