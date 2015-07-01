@@ -45,6 +45,8 @@ private:
 
 	void SetNewMoveDestination(const FVector DestLocation);
 
+	void UpdateCursorOverState();
+
 	// Input handlers
 	void OnSetDestinationPressed();
 	void OnSetDestinationReleased();

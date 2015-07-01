@@ -19,6 +19,8 @@ AHeroPlayerController::AHeroPlayerController(const FObjectInitializer& ObjectIni
 	bShouldZoom = false;
 	targetZoom = zoomMax;
 
+	bSelectingUnitTarget = false;
+	bSelectingGroundTarget = false;
 }
 
 void AHeroPlayerController::PlayerTick(float DeltaTime)
@@ -30,53 +32,7 @@ void AHeroPlayerController::PlayerTick(float DeltaTime)
 		HA.SetHUD(hud);
 	}
 
-	// Trace to see what is under the mouse cursor
-	FHitResult Hit;
-	GetHitResultUnderCursor(ECC_Visibility, false, Hit);
-
-	if (Hit.bBlockingHit)
-	{
-		// If cursor is over a character
-		if (ABaseCharacter* character = dynamic_cast<ABaseCharacter*>(Hit.GetActor()))
-		{
-			if (AGaldrarHUD* hud = dynamic_cast<AGaldrarHUD*>(GetHUD()))
-			{
-				hud->SetFocusedCharacter(character);
-			}
-			if (!(bSelectingGroundTarget))
-			{
-				if (bSelectingUnitTarget) CurrentMouseCursor = EMouseCursor::EyeDropper;
-				else CurrentMouseCursor = EMouseCursor::Hand;
-			}
-		}
-		// If cursor is over loot
-		else if (ALoot* loot = dynamic_cast<ALoot*>(Hit.GetActor()))
-		{
-			if (AGaldrarHUD* hud = dynamic_cast<AGaldrarHUD*>(GetHUD()))
-			{
-				hud->SetFocusedLoot(loot);
-			}
-			if (!(bSelectingUnitTarget || bSelectingGroundTarget))
-			CurrentMouseCursor = EMouseCursor::Hand;
-		}
-		// Floor, walls etc
-		else
-		{
-			if(!(bSelectingUnitTarget || bSelectingGroundTarget))
-			CurrentMouseCursor = DefaultMouseCursor;
-			if (AGaldrarHUD* hud = dynamic_cast<AGaldrarHUD*>(GetHUD()))
-			{
-				hud->SetFocusedCharacter(NULL);
-				hud->SetFocusedLoot(NULL);
-			}
-		}
-	}
-	// Cursor is outside the map
-	else
-	{
-		if (!(bSelectingUnitTarget || bSelectingGroundTarget))
-		CurrentMouseCursor = DefaultMouseCursor;
-	}
+	UpdateCursorOverState();
 
 	// keep updating the destination every tick while desired
 	if (bMoveToMouseCursor)
@@ -108,6 +64,67 @@ void AHeroPlayerController::PlayerTick(float DeltaTime)
 		{
 			bShouldZoom = false;
 		}
+	}
+}
+
+void AHeroPlayerController::UpdateCursorOverState()
+{
+	// Trace to see what is under the mouse cursor
+	FHitResult Hit;
+	GetHitResultUnderCursor(ECC_Visibility, false, Hit);
+
+	if (Hit.bBlockingHit)
+	{
+		if (bSelectingGroundTarget)
+		{
+			CurrentMouseCursor = EMouseCursor::CardinalCross;
+		}
+		else if (bSelectingUnitTarget)
+		{
+			CurrentMouseCursor = EMouseCursor::Crosshairs;
+		}
+		// If cursor is over a character
+		if (ABaseCharacter* character = dynamic_cast<ABaseCharacter*>(Hit.GetActor()))
+		{
+			if (AGaldrarHUD* hud = dynamic_cast<AGaldrarHUD*>(GetHUD()))
+			{
+				hud->SetFocusedCharacter(character);
+			}
+
+			// Set cursor style when on character
+			if (!bSelectingGroundTarget)
+				CurrentMouseCursor = (bSelectingUnitTarget ? EMouseCursor::EyeDropper : EMouseCursor::Hand);
+		}
+		// If cursor is over loot
+		else if (ALoot* loot = dynamic_cast<ALoot*>(Hit.GetActor()))
+		{
+			if (AGaldrarHUD* hud = dynamic_cast<AGaldrarHUD*>(GetHUD()))
+			{
+				hud->SetFocusedLoot(loot);
+			}
+
+			// Set cursor style when on loot
+			if (!(bSelectingUnitTarget || bSelectingGroundTarget)) CurrentMouseCursor = EMouseCursor::Hand;
+		}
+		// Floor, walls etc
+		else
+		{
+			if (!(bSelectingUnitTarget || bSelectingGroundTarget))
+			{
+				CurrentMouseCursor = DefaultMouseCursor;
+			}
+
+			if (AGaldrarHUD* hud = dynamic_cast<AGaldrarHUD*>(GetHUD()))
+			{
+				hud->SetFocusedCharacter(NULL);
+				hud->SetFocusedLoot(NULL);
+			}
+		}
+	}
+	// Cursor is outside the map
+	else
+	{
+		CurrentMouseCursor = EMouseCursor::SlashedCircle;
 	}
 }
 
@@ -193,6 +210,8 @@ void AHeroPlayerController::OnSetDestinationPressed()
 			// set flag to keep updating destination until released
 			bMoveToMouseCursor = true;
 			
+			bSelectingGroundTarget = false;
+			bSelectingUnitTarget = false;
 			targetCharacter = NULL;
 			targetLoot = NULL;
 			scheduledAttack = NULL;
@@ -213,11 +232,14 @@ void AHeroPlayerController::AttackEnemy(ABaseCharacter* character, Attack* attac
 		
 		targetCharacter = NULL;
 		scheduledAttack = NULL;
-		bSelectingUnitTarget = false;
+		bSelectingGroundTarget = false;
 		bSelectingUnitTarget = false;
 	}
 	else // Not in range
 	{
+		bSelectingUnitTarget = false;
+		bSelectingUnitTarget = false;
+
 		targetCharacter = character;
 		SetNewMoveDestination(targetCharacter->GetActorLocation());
 	}
@@ -286,15 +308,13 @@ void AHeroPlayerController::Spell(int8 index)
 		bSelectingGroundTarget = false;
 		bSelectingUnitTarget = true;
 		scheduledAttack = hero->GetSpell(index);
-		CurrentMouseCursor = EMouseCursor::Crosshairs;
 		GEngine->AddOnScreenDebugMessage(-1, 15.0f, FColor::Red, "Target Unit");
 		break;
 	
 	case Spell::Activation::TARGET_GROUND :
-		bSelectingUnitTarget = false;
 		bSelectingGroundTarget = true;
+		bSelectingUnitTarget = false;
 		scheduledAttack = hero->GetSpell(index);
-		CurrentMouseCursor = EMouseCursor::CardinalCross;
 		GEngine->AddOnScreenDebugMessage(-1, 15.0f, FColor::Red, "Target Ground");
 		break;
 
