@@ -21,6 +21,12 @@ public:
 	UFUNCTION(BlueprintImplementableEvent, BlueprintCallable, Category = "Damage")
 	void CreateDamageIndicator(ABaseCharacter* character, const FString& text, FColor indicatorColor, bool crit);
 
+	UFUNCTION(BlueprintImplementableEvent, BlueprintCallable, Category = "Spells")
+	void CreateAOECircle(ABaseCharacter* character, float radius, FColor damageTypeColor);
+
+	UFUNCTION(BlueprintImplementableEvent, BlueprintCallable, Category = "Spells")
+	void CreateAOECone(ABaseCharacter* character, float range, float radius, FColor damageTypeColor);
+
 	void SetFocusedCharacter(ABaseCharacter* character) { focusedCharacter = character; }
 	
 	ABaseCharacter* GetFocusedCharacter() { return focusedCharacter; }

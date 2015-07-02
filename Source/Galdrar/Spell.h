@@ -10,13 +10,14 @@
 class GALDRAR_API Spell : public Attack
 {
 public:
-	enum SpellTarget { UNIT, RADIUS, CONE, AURA };
+	enum SpellTarget { UNIT, CIRCLE, CONE, AURA };
 	enum Activation { TARGET_UNIT, TARGET_GROUND, PASSIVE, ATTACK_MODIFIER, SELF };
 	virtual void Activate();
 
 	SpellTarget GetSpellTarget() { return spellTarget; }
 	Activation GetActivation() { return activation; }
 	float GetManaCost(){ return manaCost; }
+	float GetRadius(){ return radius; }
 
 	Spell();
 	~Spell();

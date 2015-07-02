@@ -34,7 +34,7 @@ void AHeroPlayerController::PlayerTick(float DeltaTime)
 
 	UpdateCursorOverState();
 
-	// keep updating the destination every tick while desired
+	// Keep updating the destination every tick while desired
 	if (bMoveToMouseCursor)
 	{
 		MoveToMouseCursor();
@@ -315,6 +315,22 @@ void AHeroPlayerController::Spell(int8 index)
 		bSelectingGroundTarget = true;
 		bSelectingUnitTarget = false;
 		scheduledAttack = hero->GetSpell(index);
+		if (hero->GetSpell(index)->GetSpellTarget() == Spell::SpellTarget::CIRCLE)
+		{
+			if (AGaldrarHUD* hud = dynamic_cast<AGaldrarHUD*>(GetHUD()))
+			{
+				hud->CreateAOECircle(hero, hero->GetSpell(index)->GetRadius(), 
+					GaldrarColor::GetDamageTypeColor(hero->GetSpell(index)->GetDamageType()));
+			}
+		}
+		else if (hero->GetSpell(index)->GetSpellTarget() == Spell::SpellTarget::CONE)
+		{
+			if (AGaldrarHUD* hud = dynamic_cast<AGaldrarHUD*>(GetHUD()))
+			{
+				hud->CreateAOECone(hero, hero->GetSpell(index)->GetRadius(), hero->GetSpell(index)->GetRange(),
+					GaldrarColor::GetDamageTypeColor(hero->GetSpell(index)->GetDamageType()));
+			}
+		}
 		GEngine->AddOnScreenDebugMessage(-1, 15.0f, FColor::Red, "Target Ground");
 		break;
 

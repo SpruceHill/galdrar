@@ -13,9 +13,9 @@ public:
 	{
 		switch (type)
 		{
-		case DamageType::FIRE: return FColor::Red;
-		case DamageType::FROST: return FColor::Blue;
-		case DamageType::SHOCK: return FColor::Magenta;
+		case DamageType::FIRE: return FColor::FromHex("FF5300FF");
+		case DamageType::FROST: return FColor::FromHex("6BBEFFFF");
+		case DamageType::SHOCK: return FColor::FromHex("B410FFFF");
 		case DamageType::PHYSICAL: return FColor::White;
 		default: return FColor::Black;
 		}
