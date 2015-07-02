@@ -26,7 +26,10 @@ public:
 
 	UFUNCTION(BlueprintImplementableEvent, BlueprintCallable, Category = "Spells")
 	void CreateAOECone(ABaseCharacter* character, float range, float radius, FColor damageTypeColor);
-
+	
+	UFUNCTION(BlueprintImplementableEvent, BlueprintCallable, Category = "Spells")
+	void RemoveAOETemplate();
+	
 	void SetFocusedCharacter(ABaseCharacter* character) { focusedCharacter = character; }
 	
 	ABaseCharacter* GetFocusedCharacter() { return focusedCharacter; }

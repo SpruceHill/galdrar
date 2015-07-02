@@ -215,6 +215,11 @@ void AHeroPlayerController::OnSetDestinationPressed()
 			targetCharacter = NULL;
 			targetLoot = NULL;
 			scheduledAttack = NULL;
+
+			if (AGaldrarHUD* hud = dynamic_cast<AGaldrarHUD*>(GetHUD()))
+			{
+				hud->RemoveAOETemplate();
+			}
 		}
 	}
 }
@@ -234,11 +239,21 @@ void AHeroPlayerController::AttackEnemy(ABaseCharacter* character, Attack* attac
 		scheduledAttack = NULL;
 		bSelectingGroundTarget = false;
 		bSelectingUnitTarget = false;
+
+		if (AGaldrarHUD* hud = dynamic_cast<AGaldrarHUD*>(GetHUD()))
+		{
+			hud->RemoveAOETemplate();
+		}
 	}
 	else // Not in range
 	{
 		bSelectingUnitTarget = false;
 		bSelectingUnitTarget = false;
+
+		if (AGaldrarHUD* hud = dynamic_cast<AGaldrarHUD*>(GetHUD()))
+		{
+			hud->RemoveAOETemplate();
+		}
 
 		targetCharacter = character;
 		SetNewMoveDestination(targetCharacter->GetActorLocation());
@@ -296,6 +311,11 @@ void AHeroPlayerController::CancelAction()
 	{
 		SetNewMoveDestination(GetPawn()->GetActorLocation());
 		targetLoot = NULL;
+	}
+
+	if (AGaldrarHUD* hud = dynamic_cast<AGaldrarHUD*>(GetHUD()))
+	{
+		hud->RemoveAOETemplate();
 	}
 }
 
