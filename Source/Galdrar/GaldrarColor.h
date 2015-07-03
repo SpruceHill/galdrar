@@ -16,6 +16,7 @@ public:
 		case DamageType::FIRE: return FColor::FromHex("FF5300FF");
 		case DamageType::FROST: return FColor::FromHex("6BBEFFFF");
 		case DamageType::SHOCK: return FColor::FromHex("B410FFFF");
+		case DamageType::POISON: return FColor::FromHex("007A0600");
 		case DamageType::PHYSICAL: return FColor::White;
 		default: return FColor::Black;
 		}

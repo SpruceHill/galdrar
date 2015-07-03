@@ -8,6 +8,8 @@
 #include "BurnEffect.h"
 #include "EffectType.h"
 #include "DragonsBreath.h"
+#include "GasCloud.h"
+#include "LightningBolt.h"
 
 AHeroCharacter::AHeroCharacter(const FObjectInitializer& ObjectInitializer)
 	: Super(ObjectInitializer)
@@ -17,6 +19,8 @@ AHeroCharacter::AHeroCharacter(const FObjectInitializer& ObjectInitializer)
 	weapon = new Sword();
 	inventory.Init(NULL, 6);
 	spells[0] = new DragonsBreath();
+	spells[1] = new GasCloud();
+	spells[2] = new LightningBolt();
 
 	// Set size for player capsule
 	GetCapsuleComponent()->InitCapsuleSize(42.f, 96.0f);

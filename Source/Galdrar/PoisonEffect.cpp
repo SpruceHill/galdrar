@@ -1,32 +1,32 @@
 // Copyright Spruce Hill, All rights reserved.
 
 #include "Galdrar.h"
-#include "BurnEffect.h"
+#include "PoisonEffect.h"
 #include "CharacterStats.h"
 
-BurnEffect::BurnEffect()
+PoisonEffect::PoisonEffect()
 {
 	//Should not be called
 }
 
-BurnEffect::BurnEffect(CharacterStats* stats)
+PoisonEffect::PoisonEffect(CharacterStats* stats)
 {
 	this->stats = stats;
-	name = "Burning";
-	desc = "On fire";
-	damage = 5.f;
-	duration = 2.f;
-	timeLeft = 2.f;
-	tickRate = 0.5f;
-	damageType = DamageType::FIRE;
+	name = "Poisoned";
+	desc = "You are poisoned.";
+	damage = 3.f;
+	duration = 10.f;
+	timeLeft = 10.f;
+	tickRate = 1.f;
+	damageType = DamageType::POISON;
 	time = 0.f;
 	bStackable = false;
-	effectType = EffectType::POISON_MILD;
+	effectType = EffectType::BURNING;
 	bShouldTick = true;
 	bPrintDI = false;
 }
 
-void BurnEffect::Tick(float delta)
+void PoisonEffect::Tick(float delta)
 {
 	time += delta;
 	if (time > tickRate)

@@ -7,9 +7,9 @@
 /**
  * 
  */
-class GALDRAR_API GasCloud : public Spell
+class GALDRAR_API LightningBolt : public Spell
 {
 public:
-	GasCloud();
-	~GasCloud();
+	LightningBolt();
+	~LightningBolt();
 };

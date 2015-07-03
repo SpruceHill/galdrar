@@ -1,2 +1,2 @@
 #pragma once
-enum class DamageType { PHYSICAL, FIRE, FROST, SHOCK, TRUE };
+enum class DamageType { PHYSICAL, FIRE, FROST, SHOCK, POISON, TRUE };
