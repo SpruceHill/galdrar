@@ -21,7 +21,7 @@ BurnEffect::BurnEffect(CharacterStats* stats)
 	damageType = DamageType::FIRE;
 	time = 0.f;
 	bStackable = false;
-	effectType = EffectType::POISON_MILD;
+	effectType = EffectType::BURNING;
 	bShouldTick = true;
 	bPrintDI = false;
 }

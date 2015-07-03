@@ -21,7 +21,7 @@ PoisonEffect::PoisonEffect(CharacterStats* stats)
 	damageType = DamageType::POISON;
 	time = 0.f;
 	bStackable = false;
-	effectType = EffectType::BURNING;
+	effectType = EffectType::POISON_MILD;
 	bShouldTick = true;
 	bPrintDI = false;
 }
