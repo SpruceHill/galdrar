@@ -26,6 +26,6 @@ void AAOETemplate::Tick( float DeltaTime )
 
 	GetOverlappingActors(affectedCharacters, ABaseCharacter::StaticClass());
 
-	GEngine->AddOnScreenDebugMessage(-1, 15.0f, FColor::Red, FString::FromInt(affectedCharacters.Num()));
+	//GEngine->AddOnScreenDebugMessage(-1, 15.0f, FColor::Red, FString::FromInt(affectedCharacters.Num()));
 }
 

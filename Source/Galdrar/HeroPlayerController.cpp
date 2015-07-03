@@ -390,6 +390,7 @@ void AHeroPlayerController::Spell(int8 index)
 		{
 			if (AGaldrarHUD* hud = dynamic_cast<AGaldrarHUD*>(GetHUD()))
 			{
+				hud->RemoveAOETemplate();
 				hud->CreateAOECircle(hero, hero->GetSpell(index)->GetRadius(), 
 					GaldrarColor::GetDamageTypeColor(hero->GetSpell(index)->GetDamageType()));
 			}
@@ -398,6 +399,7 @@ void AHeroPlayerController::Spell(int8 index)
 		{
 			if (AGaldrarHUD* hud = dynamic_cast<AGaldrarHUD*>(GetHUD()))
 			{
+				hud->RemoveAOETemplate();
 				hud->CreateAOECone(hero, hero->GetSpell(index)->GetRadius(), hero->GetSpell(index)->GetRange(),
 					GaldrarColor::GetDamageTypeColor(hero->GetSpell(index)->GetDamageType()));
 			}
