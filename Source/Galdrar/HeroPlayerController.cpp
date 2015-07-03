@@ -21,6 +21,8 @@ AHeroPlayerController::AHeroPlayerController(const FObjectInitializer& ObjectIni
 
 	bSelectingUnitTarget = false;
 	bSelectingGroundTarget = false;
+
+	groundTarget = FVector::ZeroVector;
 }
 
 void AHeroPlayerController::PlayerTick(float DeltaTime)
@@ -40,7 +42,11 @@ void AHeroPlayerController::PlayerTick(float DeltaTime)
 		MoveToMouseCursor();
 	}
 	
-	if (targetCharacter)
+	if (groundTarget != FVector::ZeroVector)
+	{
+		AttackGround(groundTarget, scheduledAttack);
+	}
+	else if (targetCharacter)
 	{
 		AttackEnemy(targetCharacter, scheduledAttack);
 	}
@@ -195,10 +201,17 @@ void AHeroPlayerController::OnSetDestinationPressed()
 
 	if (Hit.bBlockingHit)
 	{
-		if (ABaseCharacter* character = dynamic_cast<ABaseCharacter*>(Hit.GetActor()))
+		if (bSelectingGroundTarget)
 		{
-			AHeroCharacter* hero = Cast<AHeroCharacter>(GetPawn());
-			if(!scheduledAttack) scheduledAttack = hero->GetWeapon();
+			AttackGround(Hit.Location, scheduledAttack);
+		}
+		else if (ABaseCharacter* character = dynamic_cast<ABaseCharacter*>(Hit.GetActor()))
+		{
+			if (!scheduledAttack)
+			{
+				AHeroCharacter* hero = Cast<AHeroCharacter>(GetPawn());
+				scheduledAttack = hero->GetWeapon();
+			}
 			AttackEnemy(character, scheduledAttack);
 		}
 		else if (ALoot* loot = dynamic_cast<ALoot*>(Hit.GetActor()))
@@ -234,16 +247,11 @@ void AHeroPlayerController::AttackEnemy(ABaseCharacter* character, Attack* attac
 
 		FaceActor(character);
 		CombatHandler::AttackEnemy(hero, character, attack);
-		
+
 		targetCharacter = NULL;
 		scheduledAttack = NULL;
 		bSelectingGroundTarget = false;
 		bSelectingUnitTarget = false;
-
-		if (AGaldrarHUD* hud = dynamic_cast<AGaldrarHUD*>(GetHUD()))
-		{
-			hud->RemoveAOETemplate();
-		}
 	}
 	else // Not in range
 	{
@@ -257,6 +265,47 @@ void AHeroPlayerController::AttackEnemy(ABaseCharacter* character, Attack* attac
 
 		targetCharacter = character;
 		SetNewMoveDestination(targetCharacter->GetActorLocation());
+	}
+}
+
+void AHeroPlayerController::AttackGround(FVector location, Attack* attack)
+{
+	AHeroCharacter* hero = Cast<AHeroCharacter>(GetPawn());
+	if (FVector::Dist(hero->GetActorLocation(), location) < attack->GetRange())
+	{
+		// Stop moving (HACK)
+		SetNewMoveDestination(hero->GetActorLocation());
+
+		if (AGaldrarHUD* hud = dynamic_cast<AGaldrarHUD*>(GetHUD()))
+		{
+			for (AActor* c : hud->AOETemplate->affectedCharacters)
+			{
+				if (ABaseCharacter* bc = dynamic_cast<ABaseCharacter*>(c))
+				{
+					CombatHandler::AttackEnemy(hero, bc, attack);
+				}
+			}
+			hud->RemoveAOETemplate();
+		}
+
+		groundTarget = FVector::ZeroVector;
+		targetCharacter = NULL;
+		scheduledAttack = NULL;
+		bSelectingGroundTarget = false;
+		bSelectingUnitTarget = false;
+	}
+	else // Not in range
+	{
+		bSelectingUnitTarget = false;
+		bSelectingUnitTarget = false;
+
+		if (AGaldrarHUD* hud = dynamic_cast<AGaldrarHUD*>(GetHUD()))
+		{
+			hud->RemoveAOETemplate();
+		}
+
+		groundTarget = location;
+		SetNewMoveDestination(location);
 	}
 }
 
@@ -302,6 +351,8 @@ void AHeroPlayerController::CancelAction()
 {
 	bSelectingUnitTarget = false;
 	bSelectingGroundTarget = false;
+	scheduledAttack = NULL;
+
 	if (targetCharacter)
 	{
 		SetNewMoveDestination(GetPawn()->GetActorLocation());

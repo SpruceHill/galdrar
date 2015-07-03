@@ -34,6 +34,7 @@ private:
 	bool bSelectingGroundTarget;
 	float pickUpRange = 120.f;
 	ABaseCharacter* targetCharacter;
+	FVector groundTarget;
 	ALoot* targetLoot;
 	HUDAdapter HA;
 	Attack* scheduledAttack;
@@ -65,6 +66,7 @@ private:
 	
 	// Helpers
 	void AttackEnemy(ABaseCharacter* character, Attack* attack);
+	void AttackGround(FVector location, Attack* attack);
 	void Pickup(ALoot* loot);
 
 	void FaceActor(AActor* actorToFace);

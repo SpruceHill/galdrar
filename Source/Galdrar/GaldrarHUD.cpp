@@ -9,3 +9,8 @@ void AGaldrarHUD::DrawHUD()
 {
 	Super::DrawHUD();
 }
+
+void AGaldrarHUD::RemoveAOETemplate()
+{
+	if (AOETemplate) AOETemplate->Destroy();
+}

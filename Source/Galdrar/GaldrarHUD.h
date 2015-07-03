@@ -5,6 +5,7 @@
 #include "GameFramework/HUD.h"
 #include "BaseCharacter.h"
 #include "Loot.h"
+#include "AOETemplate.h"
 #include "GaldrarHUD.generated.h"
 
 /**
@@ -27,7 +28,7 @@ public:
 	UFUNCTION(BlueprintImplementableEvent, BlueprintCallable, Category = "Spells")
 	void CreateAOECone(ABaseCharacter* character, float range, float radius, FColor damageTypeColor);
 	
-	UFUNCTION(BlueprintImplementableEvent, BlueprintCallable, Category = "Spells")
+	UFUNCTION(BlueprintCallable, Category = "Spells")
 	void RemoveAOETemplate();
 	
 	void SetFocusedCharacter(ABaseCharacter* character) { focusedCharacter = character; }
@@ -42,4 +43,7 @@ public:
 
 	UPROPERTY(BlueprintReadWrite, Category = hud)
 	ALoot* focusedLoot;
+
+	UPROPERTY(BlueprintReadWrite, Category = hud)
+	AAOETemplate* AOETemplate;
 };

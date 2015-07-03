@@ -3,16 +3,17 @@
 #pragma once
 
 #include "GameFramework/Actor.h"
-#include "Aura.generated.h"
+#include "BaseCharacter.h"
+#include "AOETemplate.generated.h"
 
 UCLASS()
-class GALDRAR_API AAura : public AActor
+class GALDRAR_API AAOETemplate : public AActor
 {
 	GENERATED_BODY()
 	
 public:	
 	// Sets default values for this actor's properties
-	AAura();
+	AAOETemplate();
 
 	// Called when the game starts or when spawned
 	virtual void BeginPlay() override;
@@ -20,6 +21,5 @@ public:
 	// Called every frame
 	virtual void Tick( float DeltaSeconds ) override;
 
-	
-	
+	TArray< AActor * > affectedCharacters;
 };
