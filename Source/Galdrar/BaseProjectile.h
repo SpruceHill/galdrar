@@ -36,7 +36,8 @@ public:
 		range = attack->GetRange();
 	}
 
-	TSubclassOf<class ABaseProjectile> BluePrintReference;
+	TSubclassOf<class ABaseProjectile> DragonsBreathBluePrintReference;
+	TSubclassOf<class ABaseProjectile> JavelinBluePrintReference;
 
 protected:
 	UPROPERTY(BlueprintReadOnly, Category = Projectile)

@@ -5,6 +5,8 @@
 
 DragonsBreath::DragonsBreath()
 {
+	name = "Dragon's Breath";
+	spellType = SpellType::DRAGONS_BREATH;
 	activation = Activation::TARGET_GROUND;
 	spellTarget = SpellTarget::CONE;
 	manaCost = 40.f;

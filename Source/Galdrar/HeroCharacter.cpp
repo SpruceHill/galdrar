@@ -10,6 +10,7 @@
 #include "DragonsBreath.h"
 #include "GasCloud.h"
 #include "LightningBolt.h"
+#include "Javelin.h"
 
 AHeroCharacter::AHeroCharacter(const FObjectInitializer& ObjectInitializer)
 	: Super(ObjectInitializer)
@@ -20,7 +21,8 @@ AHeroCharacter::AHeroCharacter(const FObjectInitializer& ObjectInitializer)
 	inventory.Init(NULL, 6);
 	spells[0] = new DragonsBreath();
 	spells[1] = new GasCloud();
-	spells[2] = new LightningBolt();
+	spells[2] = new Javelin();
+	spells[3] = new LightningBolt();
 
 	// Set size for player capsule
 	GetCapsuleComponent()->InitCapsuleSize(42.f, 96.0f);

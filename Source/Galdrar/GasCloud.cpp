@@ -5,6 +5,8 @@
 
 GasCloud::GasCloud()
 {
+	name = "Gas Cloud";
+	spellType = SpellType::GAS_CLOUD;
 	activation = Activation::TARGET_GROUND;
 	spellTarget = SpellTarget::CIRCLE;
 	manaCost = 20.f;

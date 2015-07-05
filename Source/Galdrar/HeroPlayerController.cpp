@@ -150,7 +150,7 @@ void AHeroPlayerController::SetupInputComponent()
 	InputComponent->BindAction("Spell1", IE_Released, this, &AHeroPlayerController::Spell1);
 	InputComponent->BindAction("Spell2", IE_Released, this, &AHeroPlayerController::Spell2);
 	InputComponent->BindAction("Spell3", IE_Released, this, &AHeroPlayerController::Spell3);
-	InputComponent->BindAction("Spell4", IE_Released, this, &AHeroPlayerController::Spell3);
+	InputComponent->BindAction("Spell4", IE_Released, this, &AHeroPlayerController::Spell4);
 
 	InputComponent->BindAction("CancelAction", IE_Released, this, &AHeroPlayerController::CancelAction);
 }
@@ -278,28 +278,8 @@ void AHeroPlayerController::AttackGround(FVector location, Attack* attack)
 		// Stop moving (HACK)
 		SetNewMoveDestination(hero->GetActorLocation());
 
-		//UProjectileFactory::SpawnProjectile(hero, location, attack);
-
-		//Set up spawn parameters
-		FActorSpawnParameters SpawnParameters;
-		SpawnParameters.Instigator = GetPawn();
-
 		FaceLocation(location);
-
-		//Spawn actor
-		ABaseProjectile* dsa = GetWorld()->SpawnActor<ABaseProjectile>(ABaseProjectile::StaticClass(), hero->GetActorLocation(), hero->GetActorForwardVector().Rotation(), SpawnParameters);
-		ABaseProjectile* asd = GetWorld()->SpawnActor<ABaseProjectile>(dsa->BluePrintReference, hero->GetActorLocation(), hero->GetActorForwardVector().Rotation(), SpawnParameters);
-		dsa->Destroy();
-		if (asd)
-		{
-			asd->Initialize(hero, attack);
-		}
-		else
-		{
-			GEngine->AddOnScreenDebugMessage(-1, 15.0f, FColor::Red, "Projectile Spawn Failed");
-		}
-		
-
+		UProjectileFactory::SpawnAttackEffect(GetWorld(), hero, location, attack);
 
 		if (AGaldrarHUD* hud = dynamic_cast<AGaldrarHUD*>(GetHUD()))
 		{
@@ -414,6 +394,10 @@ void AHeroPlayerController::Spell(int8 index)
 	case Spell::Activation::TARGET_UNIT :
 		bSelectingGroundTarget = false;
 		bSelectingUnitTarget = true;
+		if (AGaldrarHUD* hud = dynamic_cast<AGaldrarHUD*>(GetHUD()))
+		{
+			hud->RemoveAOETemplate();
+		}
 		scheduledAttack = hero->GetSpell(index);
 		break;
 	

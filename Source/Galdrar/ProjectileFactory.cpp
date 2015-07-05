@@ -4,13 +4,47 @@
 #include "ProjectileFactory.h"
 #include "BaseProjectile.h"
 
-void UProjectileFactory::SpawnProjectile(ABaseCharacter* caster, FVector targetLocation, Attack* attack)
+void UProjectileFactory::SpawnAttackEffect(UWorld* world, ABaseCharacter* attacker, FVector targetLocation, Attack* attack)
 {
-	//ABaseProjectile* MyObject = ConstructObject<ABaseProjectile>(ABaseProjectile::StaticClass());
-	/*static ConstructorHelpers::FClassFinder<ABaseProjectile> ThisResource(TEXT("/Game/DragonsBreathProjectile"));
-	if (ThisResource.Class != NULL)
+	Spell* spell = (Spell*)attack;
+	if (spell)
 	{
-		UClass* DragonsBreathProjectile = ThisResource.Class;
-		ABaseProjectile* NewProjectile = world->SpawnActor<ABaseProjectile*>(DragonsBreathProjectile, location, FRotator(0,0,0), NULL);
-	}*/
+		switch (spell->GetSpellType())
+		{
+		case Spell::SpellType::DRAGONS_BREATH : UProjectileFactory::SpawnProjectile(world, attacker, targetLocation, spell); break;
+		case Spell::SpellType::GAS_CLOUD : return;
+		case Spell::SpellType::LIGHNING_BOLT : return;
+		case Spell::SpellType::JAVELIN: UProjectileFactory::SpawnProjectile(world, attacker, targetLocation, spell); break;
+		}
+	}
+}
+
+void UProjectileFactory::SpawnProjectile(UWorld* world, ABaseCharacter* attacker, FVector targetLocation, Attack* attack)
+{
+	FActorSpawnParameters SpawnParameters;
+	ABaseProjectile* base = world->SpawnActor<ABaseProjectile>(ABaseProjectile::StaticClass(), attacker->GetActorLocation(), attacker->GetActorForwardVector().Rotation(), SpawnParameters);
+	ABaseProjectile* BPProjectile = NULL;
+	Spell* spell = (Spell*)attack;
+	if (spell)
+	{
+		// All spell projectiles must be listed here
+		switch (spell->GetSpellType())
+		{
+		case Spell::SpellType::DRAGONS_BREATH: 
+			BPProjectile = world->SpawnActor<ABaseProjectile>(base->DragonsBreathBluePrintReference, attacker->GetActorLocation(), attacker->GetActorForwardVector().Rotation(), SpawnParameters);
+			break;
+		case Spell::SpellType::JAVELIN:
+			BPProjectile = world->SpawnActor<ABaseProjectile>(base->JavelinBluePrintReference, attacker->GetActorLocation(), attacker->GetActorForwardVector().Rotation(), SpawnParameters);
+			break;
+		}
+	}
+	base->Destroy();
+	if (BPProjectile)
+	{
+		BPProjectile->Initialize(attacker, attack);
+	}
+	else
+	{
+		GEngine->AddOnScreenDebugMessage(-1, 15.0f, FColor::Red, "Projectile Spawn Failed");
+	}
 }

@@ -11,11 +11,15 @@ ABaseProjectile::ABaseProjectile()
  	// Set this actor to call Tick() every frame.  You can turn this off to improve performance if you don't need it.
 	PrimaryActorTick.bCanEverTick = true;
 	
-	static ConstructorHelpers::FObjectFinder<UBlueprint> MyCharacterBlueprint(TEXT("Blueprint'/Game/DragonsBreathProjectile'")); //You can obtain this reference from editor
-
-	if (MyCharacterBlueprint.Object)
+	static ConstructorHelpers::FObjectFinder<UBlueprint> DBprojectileBlueprint(TEXT("Blueprint'/Game/Projectiles/DragonsBreathProjectile'"));
+	if (DBprojectileBlueprint.Object)
 	{
-		BluePrintReference = (UClass*)MyCharacterBlueprint.Object->GeneratedClass;
+		DragonsBreathBluePrintReference = (UClass*)DBprojectileBlueprint.Object->GeneratedClass;
+	}
+	static ConstructorHelpers::FObjectFinder<UBlueprint> JprojectileBlueprint(TEXT("Blueprint'/Game/Projectiles/JavelinProjectile'"));
+	if (JprojectileBlueprint.Object)
+	{
+		JavelinBluePrintReference = (UClass*)JprojectileBlueprint.Object->GeneratedClass;
 	}
 }
 

@@ -22,13 +22,6 @@ float CombatHandler::CalcDamage(float damage, float resistance, float critPercen
 
 void CombatHandler::AttackEnemy(ABaseCharacter* attacker, ABaseCharacter* defender, Attack* attack)
 {
-	/*if (attacker) GEngine->AddOnScreenDebugMessage(-1, 15.0f, FColor::Red, "attacker exists");
-	else GEngine->AddOnScreenDebugMessage(-1, 15.0f, FColor::Red, "ATTACKER ERROR");
-	if (defender) GEngine->AddOnScreenDebugMessage(-1, 15.0f, FColor::Red, "defender exists");
-	else GEngine->AddOnScreenDebugMessage(-1, 15.0f, FColor::Red, "DEFENDER ERROR");
-	if (attack) GEngine->AddOnScreenDebugMessage(-1, 15.0f, FColor::Red, "attack exists");
-	else GEngine->AddOnScreenDebugMessage(-1, 15.0f, FColor::Red, "ATTACK ERROR");*/
-	
 	float damage = CalcDamage(attacker->GetStats()->damageMultiplier * attack->GetDamage(), defender->GetResistance(attack->GetDamageType()),
 		attack->GetCritMultiplier(), IsCritical(attacker->GetActorForwardVector(), defender->GetActorForwardVector()));
 

@@ -5,6 +5,8 @@
 
 LightningBolt::LightningBolt()
 {
+	name = "Lighning Bolt";
+	spellType = SpellType::LIGHNING_BOLT;
 	activation = Activation::TARGET_UNIT;
 	spellTarget = SpellTarget::UNIT;
 	manaCost = 40.f;
