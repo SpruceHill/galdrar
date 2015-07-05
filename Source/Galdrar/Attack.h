@@ -20,7 +20,11 @@ public:
 	float GetRange(){ return range; }
 	float GetAttackSpeed(){ return attackSpeed; }
 	FString GetName(){ return name; }
-	bool isOnCoolDown(){ return currentCooldown > 0; }
+	bool IsOnCoolDown(){ return currentCooldown > 0; }
+	bool IsProjectile(){ return bProjectile; }
+	bool IsProjectilePenetrating(){ return bProjectilePenetration; }
+	float GetProjectileWidth(){ return projectileWidth; }
+	float GetProjectileSpeed(){ return projectileSpeed; }
 
 	Attack();
 	~Attack();
@@ -35,4 +39,9 @@ protected:
 	float cooldown;
 	float currentCooldown;
 	float time;
+	
+	bool bProjectile;
+	bool bProjectilePenetration;
+	float projectileWidth;
+	float projectileSpeed;
 };

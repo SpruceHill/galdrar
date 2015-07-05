@@ -70,5 +70,6 @@ private:
 	void Pickup(ALoot* loot);
 
 	void FaceActor(AActor* actorToFace);
+	void FaceLocation(FVector location);
 
 };

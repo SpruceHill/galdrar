@@ -8,6 +8,8 @@
 #include "Attack.h"
 #include "GaldrarHUD.h"
 #include "GaldrarColor.h"
+#include "BaseProjectile.h"
+#include "ProjectileFactory.h"
 
 AHeroPlayerController::AHeroPlayerController(const FObjectInitializer& ObjectInitializer)
 	: Super(ObjectInitializer)
@@ -276,13 +278,36 @@ void AHeroPlayerController::AttackGround(FVector location, Attack* attack)
 		// Stop moving (HACK)
 		SetNewMoveDestination(hero->GetActorLocation());
 
+		//UProjectileFactory::SpawnProjectile(hero, location, attack);
+
+		//Set up spawn parameters
+		FActorSpawnParameters SpawnParameters;
+		SpawnParameters.Instigator = GetPawn();
+
+		FaceLocation(location);
+
+		//Spawn actor
+		ABaseProjectile* dsa = GetWorld()->SpawnActor<ABaseProjectile>(ABaseProjectile::StaticClass(), hero->GetActorLocation(), hero->GetActorForwardVector().Rotation(), SpawnParameters);
+		ABaseProjectile* asd = GetWorld()->SpawnActor<ABaseProjectile>(dsa->BluePrintReference, hero->GetActorLocation(), hero->GetActorForwardVector().Rotation(), SpawnParameters);
+		dsa->Destroy();
+		if (asd)
+		{
+			asd->Initialize(hero, attack);
+		}
+		else
+		{
+			GEngine->AddOnScreenDebugMessage(-1, 15.0f, FColor::Red, "Projectile Spawn Failed");
+		}
+		
+
+
 		if (AGaldrarHUD* hud = dynamic_cast<AGaldrarHUD*>(GetHUD()))
 		{
 			for (AActor* c : hud->AOETemplate->affectedCharacters)
 			{
 				if (ABaseCharacter* bc = dynamic_cast<ABaseCharacter*>(c))
 				{
-					CombatHandler::AttackEnemy(hero, bc, attack);
+					//CombatHandler::AttackEnemy(hero, bc, attack);
 				}
 			}
 			hud->RemoveAOETemplate();
@@ -312,10 +337,20 @@ void AHeroPlayerController::AttackGround(FVector location, Attack* attack)
 void AHeroPlayerController::FaceActor(AActor* actorToFace)
 {
 	// Rotate attacker towards the defender
-	FVector newLookAt = actorToFace->GetActorLocation().operator-=(GetPawn()->GetActorLocation());
+	//FVector newLookAt = actorToFace->GetActorLocation().operator-=(GetPawn()->GetActorLocation());
+	//newLookAt.Z = 1; // Make sure character is always upright (attacking on stairs etc.)
+	//GetPawn()->SetActorRotation(newLookAt.Rotation());
+	FaceLocation(actorToFace->GetActorLocation());
+}
+
+void AHeroPlayerController::FaceLocation(FVector location)
+{
+	// Rotate attacker towards the defender
+	FVector newLookAt = location.operator-=(GetPawn()->GetActorLocation());
 	newLookAt.Z = 1; // Make sure character is always upright (attacking on stairs etc.)
 	GetPawn()->SetActorRotation(newLookAt.Rotation());
 }
+
 
 void AHeroPlayerController::Pickup(ALoot* loot)
 {
@@ -342,10 +377,6 @@ void AHeroPlayerController::OnSetDestinationReleased()
 	bMoveToMouseCursor = false;
 }
 
-void AHeroPlayerController::Spell1(){ Spell(0); }
-void AHeroPlayerController::Spell2(){ Spell(1); }
-void AHeroPlayerController::Spell3(){ Spell(2); }
-void AHeroPlayerController::Spell4(){ Spell(3); }
 
 void AHeroPlayerController::CancelAction()
 {
@@ -370,6 +401,11 @@ void AHeroPlayerController::CancelAction()
 	}
 }
 
+void AHeroPlayerController::Spell1(){ Spell(0); }
+void AHeroPlayerController::Spell2(){ Spell(1); }
+void AHeroPlayerController::Spell3(){ Spell(2); }
+void AHeroPlayerController::Spell4(){ Spell(3); }
+
 void AHeroPlayerController::Spell(int8 index)
 {
 	AHeroCharacter* hero = Cast<AHeroCharacter>(GetPawn());
@@ -379,7 +415,6 @@ void AHeroPlayerController::Spell(int8 index)
 		bSelectingGroundTarget = false;
 		bSelectingUnitTarget = true;
 		scheduledAttack = hero->GetSpell(index);
-		GEngine->AddOnScreenDebugMessage(-1, 15.0f, FColor::Red, "Target Unit");
 		break;
 	
 	case Spell::Activation::TARGET_GROUND :
@@ -404,7 +439,6 @@ void AHeroPlayerController::Spell(int8 index)
 					GaldrarColor::GetDamageTypeColor(hero->GetSpell(index)->GetDamageType()));
 			}
 		}
-		GEngine->AddOnScreenDebugMessage(-1, 15.0f, FColor::Red, "Target Ground");
 		break;
 
 	case Spell::Activation::PASSIVE :
