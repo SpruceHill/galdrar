@@ -11,6 +11,7 @@ LightningBolt::LightningBolt()
 	spellTarget = SpellTarget::UNIT;
 	manaCost = 40.f;
 	radius = 0.f;
+	bProjectile = false;
 
 	damage = 10.f;
 	cooldown = 5.f;

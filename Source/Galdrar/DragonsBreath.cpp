@@ -11,6 +11,7 @@ DragonsBreath::DragonsBreath()
 	spellTarget = SpellTarget::CONE;
 	manaCost = 40.f;
 	radius = 200.f;
+	bProjectile = true;
 
 	damage = 20.f;
 	cooldown = 5.f;

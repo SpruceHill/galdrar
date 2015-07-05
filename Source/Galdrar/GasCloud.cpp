@@ -11,6 +11,7 @@ GasCloud::GasCloud()
 	spellTarget = SpellTarget::CIRCLE;
 	manaCost = 20.f;
 	radius = 300.f;
+	bProjectile = false;
 
 	damage = 0.f;
 	cooldown = 5.f;

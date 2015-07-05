@@ -3,18 +3,40 @@
 #include "Galdrar.h"
 #include "ProjectileFactory.h"
 #include "BaseProjectile.h"
+#include "SpellEffect.h"
 
 void UProjectileFactory::SpawnAttackEffect(UWorld* world, ABaseCharacter* attacker, FVector targetLocation, Attack* attack)
 {
 	Spell* spell = (Spell*)attack;
 	if (spell)
 	{
-		switch (spell->GetSpellType())
+		if (spell->IsProjectile())
 		{
-		case Spell::SpellType::DRAGONS_BREATH : UProjectileFactory::SpawnProjectile(world, attacker, targetLocation, spell); break;
-		case Spell::SpellType::GAS_CLOUD : return;
-		case Spell::SpellType::LIGHNING_BOLT : return;
-		case Spell::SpellType::JAVELIN: UProjectileFactory::SpawnProjectile(world, attacker, targetLocation, spell); break;
+			UProjectileFactory::SpawnProjectile(world, attacker, targetLocation, spell);
+		}
+		else
+		{
+			FActorSpawnParameters SpawnParameters;
+			ASpellEffect* base = world->SpawnActor<ASpellEffect>(ASpellEffect::StaticClass(), attacker->GetActorLocation(), attacker->GetActorForwardVector().Rotation(), SpawnParameters);
+			ASpellEffect* blueprintSpellEffect = NULL;
+		
+			switch (spell->GetSpellType())
+			{
+			case Spell::SpellType::GAS_CLOUD:
+				blueprintSpellEffect = world->SpawnActor<ASpellEffect>(base->GasCloudBluePrintReference, targetLocation, FRotator(0, 0, 0), SpawnParameters);
+				break;
+			case Spell::SpellType::LIGHNING_BOLT: break;
+			}
+
+			base->Destroy();
+			if (blueprintSpellEffect)
+			{
+				blueprintSpellEffect->Initialize(attacker, attack);
+			}
+			else
+			{
+				GEngine->AddOnScreenDebugMessage(-1, 15.0f, FColor::Red, "SpellEffect Spawn Failed");
+			}
 		}
 	}
 }

@@ -11,6 +11,7 @@ Javelin::Javelin()
 	spellTarget = SpellTarget::CONE;
 	manaCost = 40.f;
 	radius = 50.f;
+	bProjectile = true;
 
 	damage = 30.f;
 	cooldown = 5.f;

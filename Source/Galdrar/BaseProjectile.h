@@ -3,12 +3,13 @@
 #pragma once
 
 #include "GameFramework/Actor.h"
+#include "SpellEffect.h"
 #include "BaseCharacter.h"
 #include "Attack.h"
 #include "BaseProjectile.generated.h"
 
 UCLASS()
-class GALDRAR_API ABaseProjectile : public AActor
+class GALDRAR_API ABaseProjectile : public ASpellEffect
 {
 	GENERATED_BODY()
 	
