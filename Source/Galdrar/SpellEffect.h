@@ -26,9 +26,19 @@ public:
 	{
 		this->caster = caster;
 		this->attack = attack;
+		this->time = attack->GetTime();
 	}
 
+	UFUNCTION(BlueprintCallable, Category = SpellEffect)
+	void Trigger(AActor* actor);
+
 	TSubclassOf<class ASpellEffect> GasCloudBluePrintReference;
+
+	TSubclassOf<class ABaseProjectile> DragonsBreathBluePrintReference;
+	TSubclassOf<class ABaseProjectile> JavelinBluePrintReference;
+
+	UPROPERTY(BlueprintReadOnly, Category = SpellEffect)
+	float time;
 
 	ABaseCharacter* caster;
 	Attack* attack;

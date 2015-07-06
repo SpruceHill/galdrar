@@ -25,6 +25,7 @@ public:
 	bool IsProjectilePenetrating(){ return bProjectilePenetration; }
 	float GetProjectileWidth(){ return projectileWidth; }
 	float GetProjectileSpeed(){ return projectileSpeed; }
+	float GetTime(){ return time; }
 
 	Attack();
 	~Attack();

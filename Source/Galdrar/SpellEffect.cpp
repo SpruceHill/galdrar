@@ -2,6 +2,7 @@
 
 #include "Galdrar.h"
 #include "SpellEffect.h"
+#include "CombatHandler.h"
 
 
 // Sets default values
@@ -31,3 +32,10 @@ void ASpellEffect::Tick( float DeltaTime )
 
 }
 
+void ASpellEffect::Trigger(AActor* actor)
+{
+	if (ABaseCharacter* bc = dynamic_cast<ABaseCharacter*>(actor))
+	{
+		if (caster && bc && attack) CombatHandler::AttackEnemy(caster, bc, attack);
+	}
+}
