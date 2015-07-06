@@ -16,6 +16,7 @@ AEnemyCharacter::AEnemyCharacter(const FObjectInitializer& ObjectInitializer)
 	stats->rotationRate = 200.f;
 	stats->defaultMovementSpeed = 200.f;
 	stats->movementSpeed = 200.f;
+	this->GetMesh()->bReceivesDecals = false;
 	
 	AIControllerClass = AEnemyAIController::StaticClass();
 

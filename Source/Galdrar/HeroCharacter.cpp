@@ -23,6 +23,7 @@ AHeroCharacter::AHeroCharacter(const FObjectInitializer& ObjectInitializer)
 	spells[1] = new GasCloud();
 	spells[2] = new Javelin();
 	spells[3] = new LightningBolt();
+	this->GetMesh()->bReceivesDecals = false;
 
 	// Set size for player capsule
 	GetCapsuleComponent()->InitCapsuleSize(42.f, 96.0f);
