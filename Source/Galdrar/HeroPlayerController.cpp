@@ -234,6 +234,7 @@ void AHeroPlayerController::OnSetDestinationPressed()
 			if (AGaldrarHUD* hud = dynamic_cast<AGaldrarHUD*>(GetHUD()))
 			{
 				hud->RemoveAOETemplate();
+				hud->RemoveRangeIndicator();
 			}
 		}
 	}
@@ -263,6 +264,7 @@ void AHeroPlayerController::AttackEnemy(ABaseCharacter* character, Attack* attac
 		if (AGaldrarHUD* hud = dynamic_cast<AGaldrarHUD*>(GetHUD()))
 		{
 			hud->RemoveAOETemplate();
+			hud->RemoveRangeIndicator();
 		}
 
 		targetCharacter = character;
@@ -280,9 +282,9 @@ void AHeroPlayerController::AttackGround(FVector location, Attack* attack)
 
 		FaceLocation(location);
 		UProjectileFactory::SpawnAttackEffect(GetWorld(), hero, location, attack);
-
+		
 		if (AGaldrarHUD* hud = dynamic_cast<AGaldrarHUD*>(GetHUD()))
-		{
+		{/*
 			for (AActor* c : hud->AOETemplate->affectedCharacters)
 			{
 				if (ABaseCharacter* bc = dynamic_cast<ABaseCharacter*>(c))
@@ -290,7 +292,9 @@ void AHeroPlayerController::AttackGround(FVector location, Attack* attack)
 					//CombatHandler::AttackEnemy(hero, bc, attack);
 				}
 			}
+			*/
 			hud->RemoveAOETemplate();
+			hud->RemoveRangeIndicator();
 		}
 
 		groundTarget = FVector::ZeroVector;
@@ -307,6 +311,7 @@ void AHeroPlayerController::AttackGround(FVector location, Attack* attack)
 		if (AGaldrarHUD* hud = dynamic_cast<AGaldrarHUD*>(GetHUD()))
 		{
 			hud->RemoveAOETemplate();
+			hud->RemoveRangeIndicator();
 		}
 
 		groundTarget = location;
@@ -378,6 +383,7 @@ void AHeroPlayerController::CancelAction()
 	if (AGaldrarHUD* hud = dynamic_cast<AGaldrarHUD*>(GetHUD()))
 	{
 		hud->RemoveAOETemplate();
+		hud->RemoveRangeIndicator();
 	}
 }
 
@@ -397,6 +403,9 @@ void AHeroPlayerController::Spell(int8 index)
 		if (AGaldrarHUD* hud = dynamic_cast<AGaldrarHUD*>(GetHUD()))
 		{
 			hud->RemoveAOETemplate();
+			hud->RemoveRangeIndicator();
+			
+			hud->CreateRangeIndicator(hero, hero->GetSpell(index)->GetRange(), GaldrarColor::GetDamageTypeColor(hero->GetSpell(index)->GetDamageType()));
 		}
 		scheduledAttack = hero->GetSpell(index);
 		break;
@@ -410,6 +419,10 @@ void AHeroPlayerController::Spell(int8 index)
 			if (AGaldrarHUD* hud = dynamic_cast<AGaldrarHUD*>(GetHUD()))
 			{
 				hud->RemoveAOETemplate();
+				hud->RemoveRangeIndicator();
+				
+				hud->CreateRangeIndicator(hero, hero->GetSpell(index)->GetRange(), GaldrarColor::GetDamageTypeColor(hero->GetSpell(index)->GetDamageType()));
+				
 				hud->CreateAOECircle(hero, hero->GetSpell(index)->GetRadius(), 
 					GaldrarColor::GetDamageTypeColor(hero->GetSpell(index)->GetDamageType()));
 			}
@@ -419,6 +432,10 @@ void AHeroPlayerController::Spell(int8 index)
 			if (AGaldrarHUD* hud = dynamic_cast<AGaldrarHUD*>(GetHUD()))
 			{
 				hud->RemoveAOETemplate();
+				hud->RemoveRangeIndicator();
+				
+				hud->CreateRangeIndicator(hero, hero->GetSpell(index)->GetRange(), GaldrarColor::GetDamageTypeColor(hero->GetSpell(index)->GetDamageType()));
+				
 				hud->CreateAOECone(hero, hero->GetSpell(index)->GetRadius(), hero->GetSpell(index)->GetRange(),
 					GaldrarColor::GetDamageTypeColor(hero->GetSpell(index)->GetDamageType()));
 			}

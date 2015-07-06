@@ -28,9 +28,15 @@ public:
 	UFUNCTION(BlueprintImplementableEvent, BlueprintCallable, Category = "Spells")
 	void CreateAOECone(ABaseCharacter* character, float range, float radius, FColor damageTypeColor);
 	
+	UFUNCTION(BlueprintImplementableEvent, BlueprintCallable, Category = "Spells")
+	void CreateRangeIndicator(ABaseCharacter* character, float spellRange, FColor damageTypeColor);
+
 	UFUNCTION(BlueprintCallable, Category = "Spells")
 	void RemoveAOETemplate();
 	
+	UFUNCTION(BlueprintCallable, Category = "Spells")
+	void RemoveRangeIndicator();
+
 	void SetFocusedCharacter(ABaseCharacter* character) { focusedCharacter = character; }
 	
 	ABaseCharacter* GetFocusedCharacter() { return focusedCharacter; }
@@ -46,4 +52,7 @@ public:
 
 	UPROPERTY(BlueprintReadWrite, Category = hud)
 	AAOETemplate* AOETemplate;
+
+	UPROPERTY(BlueprintReadWrite, Category = hud)
+	UDecalComponent* rangeIndicator;
 };

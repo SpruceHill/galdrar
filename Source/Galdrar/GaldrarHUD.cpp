@@ -14,3 +14,8 @@ void AGaldrarHUD::RemoveAOETemplate()
 {
 	if (AOETemplate) AOETemplate->Destroy();
 }
+
+void AGaldrarHUD::RemoveRangeIndicator()
+{
+	if (rangeIndicator) rangeIndicator->DestroyComponent();
+}
