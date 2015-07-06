@@ -8,11 +8,6 @@
 void ABaseCharacter::Tick(float DeltaSeconds)
 {
 	Super::Tick(DeltaSeconds);
-	if (stats->health <= 0)
-	{
-		 GEngine->AddOnScreenDebugMessage(-1, 15.0f, FColor::Red, name + " just died");
-		 this->Destroy();
-	}
 
 	std::list<Effect*>::iterator it = activeEffects.begin();
 	while (it != activeEffects.end())
@@ -46,6 +41,13 @@ void ABaseCharacter::Heal(float amount)
 void ABaseCharacter::Wound(float amount)
 {
 	stats->health -= amount;
+
+	if (stats->health <= 0)
+	{
+		GEngine->AddOnScreenDebugMessage(-1, 15.0f, FColor::Red, name + " just died");
+		this->SetActorEnableCollision(false);
+		this->SetActorHiddenInGame(true);
+	}
 }
 
 void ABaseCharacter::SetHealth(float newHealth)

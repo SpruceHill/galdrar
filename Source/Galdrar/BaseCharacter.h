@@ -45,13 +45,13 @@ public:
 	}
 
 	UFUNCTION(BlueprintCallable, Category = Stat)
-		void Heal(float amount);
+	void Heal(float amount);
 
 	UFUNCTION(BlueprintCallable, Category = Stat)
-		void Wound(float amount);
+	void Wound(float amount);
 
 	UFUNCTION(BlueprintCallable, Category = Stat)
-		void SetHealth(float newHealth);
+	void SetHealth(float newHealth);
 
 	void AddEffect(Effect* effect)
 	{
