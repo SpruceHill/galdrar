@@ -55,4 +55,7 @@ public:
 
 	UPROPERTY(BlueprintReadWrite, Category = hud)
 	UDecalComponent* rangeIndicator;
+
+	UPROPERTY(BlueprintReadWrite, Category = hud)
+	UDecalComponent* AOEDecal;
 };

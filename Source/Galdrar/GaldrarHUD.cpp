@@ -13,6 +13,7 @@ void AGaldrarHUD::DrawHUD()
 void AGaldrarHUD::RemoveAOETemplate()
 {
 	if (AOETemplate) AOETemplate->Destroy();
+	if (AOEDecal) AOEDecal->DestroyComponent();
 }
 
 void AGaldrarHUD::RemoveRangeIndicator()
