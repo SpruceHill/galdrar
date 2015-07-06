@@ -25,7 +25,6 @@ void UProjectileFactory::SpawnAttackEffect(UWorld* world, ABaseCharacter* attack
 			case Spell::SpellType::GAS_CLOUD:
 				blueprintSpellEffect = world->SpawnActor<ASpellEffect>(base->GasCloudBluePrintReference, targetLocation, FRotator(0, 0, 0), SpawnParameters);
 				break;
-			case Spell::SpellType::LIGHNING_BOLT: break;
 			}
 
 			base->Destroy();
@@ -57,6 +56,9 @@ void UProjectileFactory::SpawnProjectile(UWorld* world, ABaseCharacter* attacker
 			break;
 		case Spell::SpellType::JAVELIN:
 			BPProjectile = world->SpawnActor<ABaseProjectile>(base->JavelinBluePrintReference, attacker->GetActorLocation(), attacker->GetActorForwardVector().Rotation(), SpawnParameters);
+			break;
+		case Spell::SpellType::LIGHNING_BOLT:
+			BPProjectile = world->SpawnActor<ABaseProjectile>(base->LightningBoltBluePrintReference, attacker->GetActorLocation(), attacker->GetActorForwardVector().Rotation(), SpawnParameters);
 			break;
 		}
 	}

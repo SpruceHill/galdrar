@@ -36,6 +36,7 @@ public:
 
 	TSubclassOf<class ABaseProjectile> DragonsBreathBluePrintReference;
 	TSubclassOf<class ABaseProjectile> JavelinBluePrintReference;
+	TSubclassOf<class ABaseProjectile> LightningBoltBluePrintReference;
 
 	UPROPERTY(BlueprintReadOnly, Category = SpellEffect)
 	float time;

@@ -7,11 +7,11 @@ LightningBolt::LightningBolt()
 {
 	name = "Lighning Bolt";
 	spellType = SpellType::LIGHNING_BOLT;
-	activation = Activation::TARGET_UNIT;
-	spellTarget = SpellTarget::UNIT;
+	activation = Activation::TARGET_GROUND;
+	spellTarget = SpellTarget::CONE;
 	manaCost = 40.f;
 	radius = 0.f;
-	bProjectile = false;
+	bProjectile = true;
 
 	damage = 10.f;
 	cooldown = 5.f;
