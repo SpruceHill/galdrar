@@ -23,7 +23,8 @@ float CombatHandler::CalcDamage(float damage, float resistance, float critPercen
 
 void CombatHandler::AttackEnemy(ABaseCharacter* attacker, ABaseCharacter* defender, Attack* attack)
 {
-	bool crit = IsCritical(attacker->GetActorForwardVector(), defender->GetActorForwardVector());
+	bool crit = false;
+	if(attack->GetCritMultiplier() > 1.f) crit = IsCritical(attacker->GetActorForwardVector(), defender->GetActorForwardVector());
 
 	float damage = CalcDamage(attacker->GetStats()->damageMultiplier * attack->GetDamage(), defender->GetResistance(attack->GetDamageType()),
 		attack->GetCritMultiplier(), crit);
