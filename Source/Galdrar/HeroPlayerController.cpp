@@ -424,7 +424,7 @@ void AHeroPlayerController::Spell(int8 index)
 				
 				hud->CreateRangeIndicator(hero, hero->GetSpell(index)->GetRange(), GaldrarColor::GetDamageTypeColor(hero->GetSpell(index)->GetDamageType()));
 				
-				hud->CreateAOECone(hero, hero->GetSpell(index)->GetRadius(), hero->GetSpell(index)->GetRange(),
+				hud->CreateAOECone(hero, hero->GetSpell(index)->GetRange(), hero->GetSpell(index)->GetRadius(),
 					GaldrarColor::GetDamageTypeColor(hero->GetSpell(index)->GetDamageType()));
 			}
 		}

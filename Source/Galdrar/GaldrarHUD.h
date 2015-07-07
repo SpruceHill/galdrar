@@ -58,4 +58,7 @@ public:
 
 	UPROPERTY(BlueprintReadWrite, Category = hud)
 	UDecalComponent* AOEDecal;
+
+	UPROPERTY(BlueprintReadWrite, Category = hud)
+	ADecalActor* AOERangeTemplate;
 };
