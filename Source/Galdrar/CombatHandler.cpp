@@ -7,6 +7,7 @@
 #include "GaldrarHUD.h"
 #include "GaldrarColor.h"
 #include "HUDAdapter.h"
+#include "Weapon.h"
 #include "EffectFactory.h"
 
 float CombatHandler::CalcDamage(float damage, float resistance, float critPercentage, bool crit)
@@ -22,12 +23,13 @@ float CombatHandler::CalcDamage(float damage, float resistance, float critPercen
 
 void CombatHandler::AttackEnemy(ABaseCharacter* attacker, ABaseCharacter* defender, Attack* attack)
 {
+	bool crit = IsCritical(attacker->GetActorForwardVector(), defender->GetActorForwardVector());
+
 	float damage = CalcDamage(attacker->GetStats()->damageMultiplier * attack->GetDamage(), defender->GetResistance(attack->GetDamageType()),
-		attack->GetCritMultiplier(), IsCritical(attacker->GetActorForwardVector(), defender->GetActorForwardVector()));
+		attack->GetCritMultiplier(), crit);
 
 	HUDAdapter HA;
-	HA.CreateDamageIndicator(defender, FString::FromInt((int32)damage), GaldrarColor::GetDamageTypeColor(attack->GetDamageType()), 
-		IsCritical(attacker->GetActorForwardVector(), defender->GetActorForwardVector()));
+	HA.CreateDamageIndicator(defender, FString::FromInt(damage), GaldrarColor::GetDamageTypeColor(attack->GetDamageType()), crit);
 
 	defender->Wound(damage);
 

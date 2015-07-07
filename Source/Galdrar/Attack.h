@@ -19,7 +19,7 @@ public:
 	std::list < EffectType > GetEffectTypes(){ return effectTypes; }
 	float GetRange(){ return range; }
 	float GetAttackSpeed(){ return attackSpeed; }
-	FString GetName(){ return name; }
+	virtual FString GetName(){ return name; }
 	bool IsOnCoolDown(){ return currentCooldown > 0; }
 	bool IsProjectile(){ return bProjectile; }
 	bool IsProjectilePenetrating(){ return bProjectilePenetration; }

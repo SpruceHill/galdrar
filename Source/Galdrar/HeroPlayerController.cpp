@@ -284,15 +284,7 @@ void AHeroPlayerController::AttackGround(FVector location, Attack* attack)
 		UProjectileFactory::SpawnAttackEffect(GetWorld(), hero, location, attack);
 		
 		if (AGaldrarHUD* hud = dynamic_cast<AGaldrarHUD*>(GetHUD()))
-		{/*
-			for (AActor* c : hud->AOETemplate->affectedCharacters)
-			{
-				if (ABaseCharacter* bc = dynamic_cast<ABaseCharacter*>(c))
-				{
-					//CombatHandler::AttackEnemy(hero, bc, attack);
-				}
-			}
-			*/
+		{
 			hud->RemoveAOETemplate();
 			hud->RemoveRangeIndicator();
 		}
@@ -321,10 +313,6 @@ void AHeroPlayerController::AttackGround(FVector location, Attack* attack)
 
 void AHeroPlayerController::FaceActor(AActor* actorToFace)
 {
-	// Rotate attacker towards the defender
-	//FVector newLookAt = actorToFace->GetActorLocation().operator-=(GetPawn()->GetActorLocation());
-	//newLookAt.Z = 1; // Make sure character is always upright (attacking on stairs etc.)
-	//GetPawn()->SetActorRotation(newLookAt.Rotation());
 	FaceLocation(actorToFace->GetActorLocation());
 }
 
