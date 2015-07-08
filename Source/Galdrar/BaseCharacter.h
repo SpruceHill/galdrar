@@ -84,7 +84,7 @@ public:
 	float GetMaxHealth();
 protected:
 	CharacterStats* stats;
-	UPROPERTY(BlueprintReadOnly, Category = character)
+	UPROPERTY(BlueprintReadWrite, Category = character)
 	FString name;
 	std::list < Effect* > activeEffects;
 	Attack* weapon;
