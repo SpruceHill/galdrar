@@ -190,6 +190,10 @@ void AHeroPlayerController::SetNewMoveDestination(const FVector DestLocation)
 		// Walk if far enough or ordered stand still (HACK)
 		if (NavSys && ( (Distance > 120.0f) || DestLocation == Pawn->GetActorLocation()))
 		{
+			if (AGaldrarHUD* hud = dynamic_cast<AGaldrarHUD*>(GetHUD()))
+			{
+				hud->CreateMovementLocationIndicator(DestLocation);
+			}
 			NavSys->SimpleMoveToLocation(this, DestLocation);
 		}
 	}

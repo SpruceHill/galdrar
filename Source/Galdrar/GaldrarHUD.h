@@ -31,6 +31,9 @@ public:
 	UFUNCTION(BlueprintImplementableEvent, BlueprintCallable, Category = "Spells")
 	void CreateRangeIndicator(ABaseCharacter* character, float spellRange, FColor damageTypeColor);
 
+	UFUNCTION(BlueprintImplementableEvent, BlueprintCallable, Category = HUD)
+	void CreateMovementLocationIndicator(FVector location);
+
 	UFUNCTION(BlueprintCallable, Category = "Spells")
 	void RemoveAOETemplate();
 	
