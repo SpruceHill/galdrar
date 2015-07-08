@@ -10,7 +10,7 @@ LightningBolt::LightningBolt()
 	activation = Activation::TARGET_GROUND;
 	spellTarget = SpellTarget::CONE;
 	manaCost = 40.f;
-	radius = 0.f;
+	radius = 50.f;
 	bProjectile = true;
 
 	damage = 10.f;
