@@ -31,11 +31,6 @@ void AHeroPlayerController::PlayerTick(float DeltaTime)
 {
 	Super::PlayerTick(DeltaTime);
 
-	if (AGaldrarHUD* hud = dynamic_cast<AGaldrarHUD*>(GetHUD()))
-	{
-		HA.SetHUD(hud);
-	}
-
 	UpdateCursorOverState();
 
 	// Keep updating the destination every tick while desired
@@ -72,6 +67,16 @@ void AHeroPlayerController::PlayerTick(float DeltaTime)
 		{
 			bShouldZoom = false;
 		}
+	}
+}
+
+void AHeroPlayerController::BeginPlay()
+{
+	Super::BeginPlay();
+	
+	if (AGaldrarHUD* hud = dynamic_cast<AGaldrarHUD*>(GetHUD()))
+	{
+		HA.SetHUD(hud);
 	}
 }
 

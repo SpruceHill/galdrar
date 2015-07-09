@@ -27,7 +27,7 @@ private:
 	const float zoomStepLength = 100.f;
 	const float zoomSpeed = 20.f;
 	const float zoomMin = 500.f;
-	const float zoomMax = 1200.f;
+	const float zoomMax = 1000.f;
 	float targetZoom;
 	bool bShouldZoom;
 	bool bSelectingUnitTarget;
@@ -39,6 +39,7 @@ private:
 	HUDAdapter HA;
 	Attack* scheduledAttack;
 
+	virtual void BeginPlay() override;
 	virtual void PlayerTick(float DeltaTime) override;
 	virtual void SetupInputComponent() override;
 
