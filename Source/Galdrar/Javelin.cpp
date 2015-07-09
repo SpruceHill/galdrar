@@ -12,6 +12,7 @@ Javelin::Javelin()
 	manaCost = 40.f;
 	radius = 50.f;
 	bProjectile = true;
+	bDoesDamage = true;
 
 	damage = 30.f;
 	cooldown = 5.f;

@@ -23,17 +23,19 @@ float CombatHandler::CalcDamage(float damage, float resistance, float critPercen
 
 void CombatHandler::AttackEnemy(ABaseCharacter* attacker, ABaseCharacter* defender, Attack* attack)
 {
-	bool crit = false;
-	if(attack->GetCritMultiplier() > 1.f) crit = IsCritical(attacker->GetActorForwardVector(), defender->GetActorForwardVector());
+	if (attack->DoesDamage())
+	{
+		bool crit = false;
+		if (attack->GetCritMultiplier() > 1.f) crit = IsCritical(attacker->GetActorForwardVector(), defender->GetActorForwardVector());
 
-	float damage = CalcDamage(attacker->GetStats()->damageMultiplier * attack->GetDamage(), defender->GetResistance(attack->GetDamageType()),
-		attack->GetCritMultiplier(), crit);
+		float damage = CalcDamage(attacker->GetStats()->damageMultiplier * attack->GetDamage(), defender->GetResistance(attack->GetDamageType()),
+			attack->GetCritMultiplier(), crit);
 
-	HUDAdapter HA;
-	HA.CreateDamageIndicator(defender, FString::FromInt(damage), GaldrarColor::GetDamageTypeColor(attack->GetDamageType()), crit);
+		HUDAdapter HA;
+		HA.CreateDamageIndicator(defender, FString::FromInt(damage), GaldrarColor::GetDamageTypeColor(attack->GetDamageType()), crit);
 
-	defender->Wound(damage);
-
+		defender->Wound(damage);
+	}
 	for(EffectType effectType : attack->GetEffectTypes())
 	{
 		bool found = false;

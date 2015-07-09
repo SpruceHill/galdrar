@@ -12,6 +12,7 @@ DragonsBreath::DragonsBreath()
 	manaCost = 40.f;
 	radius = 200.f;
 	bProjectile = true;
+	bDoesDamage = true;
 
 	damage = 20.f;
 	cooldown = 5.f;

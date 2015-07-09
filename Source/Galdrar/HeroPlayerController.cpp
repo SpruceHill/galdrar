@@ -147,12 +147,12 @@ void AHeroPlayerController::SetupInputComponent()
 	InputComponent->BindAction("ZoomIn", IE_Released, this, &AHeroPlayerController::ZoomIn);
 	InputComponent->BindAction("ZoomOut", IE_Released, this, &AHeroPlayerController::ZoomOut);
 
-	InputComponent->BindAction("Spell1", IE_Released, this, &AHeroPlayerController::Spell1);
-	InputComponent->BindAction("Spell2", IE_Released, this, &AHeroPlayerController::Spell2);
-	InputComponent->BindAction("Spell3", IE_Released, this, &AHeroPlayerController::Spell3);
-	InputComponent->BindAction("Spell4", IE_Released, this, &AHeroPlayerController::Spell4);
+	InputComponent->BindAction("Spell1", IE_Pressed, this, &AHeroPlayerController::Spell1);
+	InputComponent->BindAction("Spell2", IE_Pressed, this, &AHeroPlayerController::Spell2);
+	InputComponent->BindAction("Spell3", IE_Pressed, this, &AHeroPlayerController::Spell3);
+	InputComponent->BindAction("Spell4", IE_Pressed, this, &AHeroPlayerController::Spell4);
 
-	InputComponent->BindAction("CancelAction", IE_Released, this, &AHeroPlayerController::CancelAction);
+	InputComponent->BindAction("CancelAction", IE_Pressed, this, &AHeroPlayerController::CancelAction);
 }
 
 void AHeroPlayerController::Zoom(float delta)
@@ -190,10 +190,6 @@ void AHeroPlayerController::SetNewMoveDestination(const FVector DestLocation)
 		// Walk if far enough or ordered stand still (HACK)
 		if (NavSys && ( (Distance > 120.0f) || DestLocation == Pawn->GetActorLocation()))
 		{
-			if (AGaldrarHUD* hud = dynamic_cast<AGaldrarHUD*>(GetHUD()))
-			{
-				hud->CreateMovementLocationIndicator(DestLocation);
-			}
 			NavSys->SimpleMoveToLocation(this, DestLocation);
 		}
 	}
@@ -239,6 +235,7 @@ void AHeroPlayerController::OnSetDestinationPressed()
 			{
 				hud->RemoveAOETemplate();
 				hud->RemoveRangeIndicator();
+				hud->CreateMovementLocationIndicator(Hit.Location);
 			}
 		}
 	}

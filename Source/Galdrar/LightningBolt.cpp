@@ -12,11 +12,11 @@ LightningBolt::LightningBolt()
 	manaCost = 40.f;
 	radius = 50.f;
 	bProjectile = true;
+	bDoesDamage = true;
 
 	damage = 10.f;
 	cooldown = 5.f;
 	time = 5.f;
-	//effectTypes.push_back(EffectType::BURNING);
 	damageType = DamageType::SHOCK;
 	range = 400.f;
 }

@@ -54,14 +54,8 @@ public:
 	ALoot* focusedLoot;
 
 	UPROPERTY(BlueprintReadWrite, Category = hud)
-	AAOETemplate* AOETemplate;
-
-	UPROPERTY(BlueprintReadWrite, Category = hud)
 	UDecalComponent* rangeIndicator;
 
 	UPROPERTY(BlueprintReadWrite, Category = hud)
 	UDecalComponent* AOEDecal;
-
-	UPROPERTY(BlueprintReadWrite, Category = hud)
-	ADecalActor* AOERangeTemplate;
 };

@@ -32,6 +32,19 @@ void ASpellEffect::Tick( float DeltaTime )
 
 }
 
+void ASpellEffect::Initialize(ABaseCharacter* caster, Attack* attack)
+{
+	this->caster = caster;
+	this->attack = attack;
+	this->time = attack->GetTime();
+	TArray<AActor*> overlappingActors;
+	GetOverlappingActors(overlappingActors, ABaseCharacter::StaticClass());
+	for (AActor* actor : overlappingActors)
+	{
+		Trigger(actor);
+	}
+}
+
 void ASpellEffect::Trigger(AActor* actor)
 {
 	if (ABaseCharacter* bc = dynamic_cast<ABaseCharacter*>(actor))

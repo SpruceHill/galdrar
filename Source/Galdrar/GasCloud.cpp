@@ -12,6 +12,7 @@ GasCloud::GasCloud()
 	manaCost = 20.f;
 	radius = 300.f;
 	bProjectile = false;
+	bDoesDamage = false;
 
 	damage = 0.f;
 	cooldown = 5.f;

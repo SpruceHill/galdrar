@@ -26,10 +26,12 @@ public:
 	float GetProjectileWidth(){ return projectileWidth; }
 	float GetProjectileSpeed(){ return projectileSpeed; }
 	float GetTime(){ return time; }
+	bool DoesDamage(){ return bDoesDamage; }
 
 	Attack();
 	~Attack();
 protected:
+	bool bDoesDamage;
 	float damage;
 	DamageType damageType;
 	float critMultiplier;

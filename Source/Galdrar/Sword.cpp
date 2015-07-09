@@ -12,6 +12,7 @@ Sword::Sword()
 	range = 100.f;
 	attackSpeed = 1.f;
 	cooldown = 1.f;
+	bDoesDamage = true;
 
 	weight = 1.f;
 	kills = 0;

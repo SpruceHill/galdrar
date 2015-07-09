@@ -26,9 +26,8 @@ public:
 	UFUNCTION(BlueprintCallable, Category = Projectile)
 	void Hit(AActor* actor);
 
-	//void SetDirection(FVector targetLocation){ this->targetLocation = targetLocation; }
 	void Initialize(ABaseCharacter* caster, Attack* attack)
-	{ 
+	{
 		this->caster = caster;
 		this->attack = attack; 
 		bPenetrating = attack->IsProjectilePenetrating();

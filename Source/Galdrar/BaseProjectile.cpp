@@ -10,7 +10,7 @@ ABaseProjectile::ABaseProjectile()
 {
  	// Set this actor to call Tick() every frame.  You can turn this off to improve performance if you don't need it.
 	PrimaryActorTick.bCanEverTick = true;
-	
+
 	// Dragon's Breath
 	static ConstructorHelpers::FObjectFinder<UBlueprint> DBprojectileBlueprint(TEXT("Blueprint'/Game/SpellEffects/Projectiles/DragonsBreathProjectile'"));
 	if (DBprojectileBlueprint.Object)
@@ -44,7 +44,6 @@ void ABaseProjectile::BeginPlay()
 void ABaseProjectile::Tick( float DeltaTime )
 {
 	Super::Tick( DeltaTime );
-
 }
 
 void ABaseProjectile::Hit(AActor* actor)
@@ -54,4 +53,3 @@ void ABaseProjectile::Hit(AActor* actor)
 		if (caster && bc && attack) CombatHandler::AttackEnemy(caster, bc, attack);
 	}
 }
-

@@ -43,6 +43,7 @@ void UProjectileFactory::SpawnAttackEffect(UWorld* world, ABaseCharacter* attack
 void UProjectileFactory::SpawnProjectile(UWorld* world, ABaseCharacter* attacker, FVector targetLocation, Attack* attack)
 {
 	FActorSpawnParameters SpawnParameters;
+	SpawnParameters.bNoCollisionFail = true; //TODO: NOW WORKING
 	ABaseProjectile* base = world->SpawnActor<ABaseProjectile>(ABaseProjectile::StaticClass(), attacker->GetActorLocation(), attacker->GetActorForwardVector().Rotation(), SpawnParameters);
 	ABaseProjectile* BPProjectile = NULL;
 	Spell* spell = (Spell*)attack;

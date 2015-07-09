@@ -22,12 +22,7 @@ public:
 	// Called every frame
 	virtual void Tick( float DeltaSeconds ) override;
 
-	void Initialize(ABaseCharacter* caster, Attack* attack)
-	{
-		this->caster = caster;
-		this->attack = attack;
-		this->time = attack->GetTime();
-	}
+	void Initialize(ABaseCharacter* caster, Attack* attack);
 
 	UFUNCTION(BlueprintCallable, Category = SpellEffect)
 	void Trigger(AActor* actor);
