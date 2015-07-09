@@ -214,6 +214,8 @@ void AHeroPlayerController::OnSetDestinationPressed()
 		}
 		else if (ABaseCharacter* character = dynamic_cast<ABaseCharacter*>(Hit.GetActor()))
 		{
+			targetLoot = NULL;
+			groundTarget = FVector::ZeroVector;
 			if (!scheduledAttack)
 			{
 				AHeroCharacter* hero = Cast<AHeroCharacter>(GetPawn());
@@ -223,6 +225,8 @@ void AHeroPlayerController::OnSetDestinationPressed()
 		}
 		else if (ALoot* loot = dynamic_cast<ALoot*>(Hit.GetActor()))
 		{
+			targetCharacter = NULL;
+			groundTarget = FVector::ZeroVector;
 			Pickup(loot);
 		}
 		else
@@ -235,6 +239,7 @@ void AHeroPlayerController::OnSetDestinationPressed()
 			targetCharacter = NULL;
 			targetLoot = NULL;
 			scheduledAttack = NULL;
+			groundTarget = FVector::ZeroVector;
 
 			if (AGaldrarHUD* hud = dynamic_cast<AGaldrarHUD*>(GetHUD()))
 			{
@@ -304,7 +309,7 @@ void AHeroPlayerController::AttackGround(FVector location, Attack* attack)
 	else // Not in range
 	{
 		bSelectingUnitTarget = false;
-		bSelectingUnitTarget = false;
+		bSelectingGroundTarget = false;
 
 		if (AGaldrarHUD* hud = dynamic_cast<AGaldrarHUD*>(GetHUD()))
 		{
@@ -362,6 +367,12 @@ void AHeroPlayerController::CancelAction()
 	bSelectingUnitTarget = false;
 	bSelectingGroundTarget = false;
 	scheduledAttack = NULL;
+
+	if (groundTarget != FVector::ZeroVector)
+	{
+		groundTarget = FVector::ZeroVector;
+		SetNewMoveDestination(GetPawn()->GetActorLocation());
+	}
 
 	if (targetCharacter)
 	{
@@ -442,10 +453,12 @@ void AHeroPlayerController::Spell(int8 index)
 
 	case Spell::Activation::ATTACK_MODIFIER :
 		GEngine->AddOnScreenDebugMessage(-1, 15.0f, FColor::Red, "Attack Modifier");
+		groundTarget = FVector::ZeroVector;
 		break;
 
 	case Spell::Activation::SELF :
 		GEngine->AddOnScreenDebugMessage(-1, 15.0f, FColor::Red, "Self");
+		groundTarget = FVector::ZeroVector;
 		break;
 	}
 }
