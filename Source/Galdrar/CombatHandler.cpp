@@ -16,7 +16,7 @@ float CombatHandler::CalcDamage(float damage, float resistance, float critPercen
 
 	if (crit) calculatedDamage *= critPercentage;
 
-	calculatedDamage *= resistance;
+	calculatedDamage *= 1 - (resistance / 100.f);
 
 	return calculatedDamage;
 }
@@ -34,7 +34,7 @@ void CombatHandler::AttackEnemy(ABaseCharacter* attacker, ABaseCharacter* defend
 		HUDAdapter HA;
 		HA.CreateDamageIndicator(defender, FString::FromInt(damage), GaldrarColor::GetDamageTypeColor(attack->GetDamageType()), crit);
 
-		defender->Wound(damage);
+		defender->Wound((int32)damage);
 	}
 	for(EffectType effectType : attack->GetEffectTypes())
 	{

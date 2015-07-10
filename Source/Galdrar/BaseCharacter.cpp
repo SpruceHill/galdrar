@@ -20,7 +20,7 @@ void ABaseCharacter::Tick(float DeltaSeconds)
 			if (effect->bPrintDI)
 			{
 				float effectDamage = effect->GetDamage();
-				effectDamage *= GetResistance(effect->GetDamageType());
+				effectDamage *= 1 - (GetResistance(effect->GetDamageType()) / 100.f);
 				HUDAdapter HA;
 				HA.CreateDamageIndicator(this, FString::FromInt((int32)effectDamage), GaldrarColor::GetDamageTypeColor(effect->GetDamageType()), false);
 				Wound((int32)effectDamage);
