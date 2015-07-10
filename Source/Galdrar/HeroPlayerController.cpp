@@ -31,8 +31,6 @@ void AHeroPlayerController::PlayerTick(float DeltaTime)
 {
 	Super::PlayerTick(DeltaTime);
 
-	if (primedAttack)GEngine->AddOnScreenDebugMessage(-1, 15.0f, FColor::Red, "primedattack");
-
 	UpdateCursorOverState();
 
 	// Keep updating the destination every tick while desired
@@ -301,32 +299,12 @@ void AHeroPlayerController::AttackGround(FVector location, Attack* attack)
 
 		FaceLocation(location);
 		UProjectileFactory::SpawnAttackEffect(GetWorld(), hero, location, attack);
-		
-		/*if (AGaldrarHUD* hud = dynamic_cast<AGaldrarHUD*>(GetHUD()))
-		{
-			hud->RemoveAOETemplate();
-			hud->RemoveRangeIndicator();
-		}
 
-		groundTarget = FVector::ZeroVector;
-		targetCharacter = NULL;
-		bSelectingGroundTarget = false;
-		bSelectingUnitTarget = false;*/
 		if (attack == primedAttack) primedAttack = NULL;
 		scheduledAttack = NULL;
 	}
 	else // Not in range
 	{
-		//bSelectingUnitTarget = false;
-		//bSelectingGroundTarget = false;
-
-		/*if (AGaldrarHUD* hud = dynamic_cast<AGaldrarHUD*>(GetHUD()))
-		{
-			hud->RemoveAOETemplate();
-			hud->RemoveRangeIndicator();
-		}
-		*/
-		//if (attack == primedAttack) primedAttack = NULL;
 		scheduledAttack = attack;
 		groundTarget = location;
 		SetNewMoveDestination(location);
