@@ -38,8 +38,9 @@ void CombatHandler::AttackEnemy(ABaseCharacter* attacker, ABaseCharacter* defend
 	}
 	for(EffectType effectType : attack->GetEffectTypes())
 	{
+		ABaseCharacter* character = (EffectFactory::IsDefensive(effectType) ? attacker : defender);
 		bool found = false;
-		for (Effect* e : defender->GetActiveEffects())
+		for (Effect* e : character->GetActiveEffects())
 		{
 			if (e->GetEffectType() == effectType)
 			{
@@ -47,7 +48,7 @@ void CombatHandler::AttackEnemy(ABaseCharacter* attacker, ABaseCharacter* defend
 				if (e->bStackable)
 				{
 					// Effect stackable, add new instance.
-					defender->AddEffect(EffectFactory::GenerateEffect(defender->GetStats(), effectType));
+					character->AddEffect(EffectFactory::GenerateEffect(character->GetStats(), effectType));
 				}
 				else
 				{
@@ -59,7 +60,7 @@ void CombatHandler::AttackEnemy(ABaseCharacter* attacker, ABaseCharacter* defend
 		if (!found)
 		{
 			// Adding new effect.
-			defender->AddEffect(EffectFactory::GenerateEffect(defender->GetStats(), effectType));
+			character->AddEffect(EffectFactory::GenerateEffect(character->GetStats(), effectType));
 		}
 	}
 }

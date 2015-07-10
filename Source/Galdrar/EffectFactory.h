@@ -10,4 +10,5 @@ class GALDRAR_API EffectFactory
 {
 public:
 	static Effect* GenerateEffect(CharacterStats* stats, EffectType type);
+	static bool IsDefensive(EffectType type);
 };

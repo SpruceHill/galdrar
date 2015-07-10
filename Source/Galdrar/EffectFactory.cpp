@@ -14,3 +14,12 @@ Effect* EffectFactory::GenerateEffect(CharacterStats* stats, EffectType type)
 	}
 	return new Effect();
 }
+
+bool EffectFactory::IsDefensive(EffectType type)
+{
+	return false;
+	//switch (type)
+	//{
+	//default: return false;
+	//}
+}

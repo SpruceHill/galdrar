@@ -19,7 +19,6 @@ public:
 	DamageType GetDamageType() { return damageType; }
 	EffectType GetEffectType() { return effectType; }
 	void ResetTimer() { timeLeft = duration; }
-
 	bool bStackable;
 	EffectType effectType;
 
