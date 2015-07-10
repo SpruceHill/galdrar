@@ -31,6 +31,8 @@ void AHeroPlayerController::PlayerTick(float DeltaTime)
 {
 	Super::PlayerTick(DeltaTime);
 
+	if (primedAttack)GEngine->AddOnScreenDebugMessage(-1, 15.0f, FColor::Red, "primedattack");
+
 	UpdateCursorOverState();
 
 	// Keep updating the destination every tick while desired
@@ -41,6 +43,7 @@ void AHeroPlayerController::PlayerTick(float DeltaTime)
 	
 	if (groundTarget != FVector::ZeroVector)
 	{
+		if (scheduledAttack)
 		AttackGround(groundTarget, scheduledAttack);
 	}
 	else if (targetCharacter)
@@ -202,6 +205,11 @@ void AHeroPlayerController::SetNewMoveDestination(const FVector DestLocation)
 
 void AHeroPlayerController::OnSetDestinationPressed()
 {
+	scheduledAttack = NULL;
+	targetCharacter = NULL;
+	targetLoot = NULL;
+	groundTarget = FVector::ZeroVector;
+
 	// Trace to see what is under the mouse cursor
 	FHitResult Hit;
 	GetHitResultUnderCursor(ECC_Visibility, false, Hit);
@@ -210,44 +218,44 @@ void AHeroPlayerController::OnSetDestinationPressed()
 	{
 		if (bSelectingGroundTarget)
 		{
-			AttackGround(Hit.Location, scheduledAttack);
+			AttackGround(Hit.Location, primedAttack);
+			primedAttack = NULL;
 		}
 		else if (ABaseCharacter* character = dynamic_cast<ABaseCharacter*>(Hit.GetActor()))
 		{
-			targetLoot = NULL;
-			groundTarget = FVector::ZeroVector;
-			if (!scheduledAttack)
+			if (!primedAttack)
 			{
 				AHeroCharacter* hero = Cast<AHeroCharacter>(GetPawn());
-				scheduledAttack = hero->GetWeapon();
+				primedAttack = hero->GetWeapon();
 			}
-			AttackEnemy(character, scheduledAttack);
+			AttackEnemy(character, primedAttack);
+			primedAttack = NULL;
 		}
 		else if (ALoot* loot = dynamic_cast<ALoot*>(Hit.GetActor()))
 		{
-			targetCharacter = NULL;
-			groundTarget = FVector::ZeroVector;
+			primedAttack = NULL;
 			Pickup(loot);
 		}
 		else
 		{
 			// set flag to keep updating destination until released
 			bMoveToMouseCursor = true;
-			
-			bSelectingGroundTarget = false;
-			bSelectingUnitTarget = false;
-			targetCharacter = NULL;
-			targetLoot = NULL;
-			scheduledAttack = NULL;
-			groundTarget = FVector::ZeroVector;
+		
+			primedAttack = NULL;
 
 			if (AGaldrarHUD* hud = dynamic_cast<AGaldrarHUD*>(GetHUD()))
 			{
-				hud->RemoveAOETemplate();
-				hud->RemoveRangeIndicator();
 				hud->CreateMovementLocationIndicator(Hit.Location);
 			}
+
 		}
+		if (AGaldrarHUD* hud = dynamic_cast<AGaldrarHUD*>(GetHUD()))
+		{
+			hud->RemoveAOETemplate();
+			hud->RemoveRangeIndicator();
+		}
+		bSelectingGroundTarget = false;
+		bSelectingUnitTarget = false;
 	}
 }
 
@@ -263,9 +271,8 @@ void AHeroPlayerController::AttackEnemy(ABaseCharacter* character, Attack* attac
 		CombatHandler::AttackEnemy(hero, character, attack);
 
 		targetCharacter = NULL;
+		primedAttack = NULL;
 		scheduledAttack = NULL;
-		bSelectingGroundTarget = false;
-		bSelectingUnitTarget = false;
 	}
 	else // Not in range
 	{
@@ -278,6 +285,7 @@ void AHeroPlayerController::AttackEnemy(ABaseCharacter* character, Attack* attac
 			hud->RemoveRangeIndicator();
 		}
 
+		scheduledAttack = attack;
 		targetCharacter = character;
 		SetNewMoveDestination(targetCharacter->GetActorLocation());
 	}
@@ -294,7 +302,7 @@ void AHeroPlayerController::AttackGround(FVector location, Attack* attack)
 		FaceLocation(location);
 		UProjectileFactory::SpawnAttackEffect(GetWorld(), hero, location, attack);
 		
-		if (AGaldrarHUD* hud = dynamic_cast<AGaldrarHUD*>(GetHUD()))
+		/*if (AGaldrarHUD* hud = dynamic_cast<AGaldrarHUD*>(GetHUD()))
 		{
 			hud->RemoveAOETemplate();
 			hud->RemoveRangeIndicator();
@@ -302,21 +310,24 @@ void AHeroPlayerController::AttackGround(FVector location, Attack* attack)
 
 		groundTarget = FVector::ZeroVector;
 		targetCharacter = NULL;
-		scheduledAttack = NULL;
 		bSelectingGroundTarget = false;
-		bSelectingUnitTarget = false;
+		bSelectingUnitTarget = false;*/
+		if (attack == primedAttack) primedAttack = NULL;
+		scheduledAttack = NULL;
 	}
 	else // Not in range
 	{
-		bSelectingUnitTarget = false;
-		bSelectingGroundTarget = false;
+		//bSelectingUnitTarget = false;
+		//bSelectingGroundTarget = false;
 
-		if (AGaldrarHUD* hud = dynamic_cast<AGaldrarHUD*>(GetHUD()))
+		/*if (AGaldrarHUD* hud = dynamic_cast<AGaldrarHUD*>(GetHUD()))
 		{
 			hud->RemoveAOETemplate();
 			hud->RemoveRangeIndicator();
 		}
-
+		*/
+		//if (attack == primedAttack) primedAttack = NULL;
+		scheduledAttack = attack;
 		groundTarget = location;
 		SetNewMoveDestination(location);
 	}
@@ -361,18 +372,18 @@ void AHeroPlayerController::OnSetDestinationReleased()
 	bMoveToMouseCursor = false;
 }
 
-
 void AHeroPlayerController::CancelAction()
 {
 	bSelectingUnitTarget = false;
 	bSelectingGroundTarget = false;
-	scheduledAttack = NULL;
 
-	if (groundTarget != FVector::ZeroVector)
+	if (groundTarget != FVector::ZeroVector && !primedAttack)
 	{
+		scheduledAttack = NULL;
 		groundTarget = FVector::ZeroVector;
 		SetNewMoveDestination(GetPawn()->GetActorLocation());
 	}
+	primedAttack = NULL;
 
 	if (targetCharacter)
 	{
@@ -405,6 +416,7 @@ void AHeroPlayerController::Spell(int8 index)
 	case Spell::Activation::TARGET_UNIT :
 		bSelectingGroundTarget = false;
 		bSelectingUnitTarget = true;
+		primedAttack = hero->GetSpell(index);
 		if (AGaldrarHUD* hud = dynamic_cast<AGaldrarHUD*>(GetHUD()))
 		{
 			hud->RemoveAOETemplate();
@@ -412,13 +424,12 @@ void AHeroPlayerController::Spell(int8 index)
 			
 			hud->CreateRangeIndicator(hero, hero->GetSpell(index)->GetRange(), GaldrarColor::GetDamageTypeColor(hero->GetSpell(index)->GetDamageType()));
 		}
-		scheduledAttack = hero->GetSpell(index);
 		break;
 	
 	case Spell::Activation::TARGET_GROUND :
 		bSelectingGroundTarget = true;
 		bSelectingUnitTarget = false;
-		scheduledAttack = hero->GetSpell(index);
+		primedAttack = hero->GetSpell(index);
 		if (hero->GetSpell(index)->GetSpellTarget() == Spell::SpellTarget::CIRCLE)
 		{
 			if (AGaldrarHUD* hud = dynamic_cast<AGaldrarHUD*>(GetHUD()))

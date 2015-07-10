@@ -38,6 +38,7 @@ private:
 	ALoot* targetLoot;
 	HUDAdapter HA;
 	Attack* scheduledAttack;
+	Attack* primedAttack;
 
 	virtual void BeginPlay() override;
 	virtual void PlayerTick(float DeltaTime) override;
