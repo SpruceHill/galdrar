@@ -29,6 +29,9 @@ public:
 	float defaultShockRes;
 	float shockResistance;
 
+	float defaultPoisonRes;
+	float poisonResistance;
+
 	float defaultDamageMultiplier;
 	float damageMultiplier;
 

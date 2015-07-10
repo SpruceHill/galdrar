@@ -19,9 +19,11 @@ void ABaseCharacter::Tick(float DeltaSeconds)
 			effect->Tick(DeltaSeconds);
 			if (effect->bPrintDI)
 			{
+				float effectDamage = effect->GetDamage();
+				effectDamage *= GetResistance(effect->GetDamageType());
 				HUDAdapter HA;
-				HA.CreateDamageIndicator(this, FString::FromInt((int32)effect->GetDamage()), GaldrarColor::GetDamageTypeColor(effect->GetDamageType()), false);
-				Wound(effect->GetDamage());
+				HA.CreateDamageIndicator(this, FString::FromInt((int32)effectDamage), GaldrarColor::GetDamageTypeColor(effect->GetDamageType()), false);
+				Wound((int32)effectDamage);
 				effect->bPrintDI = false;
 			}
 		}
@@ -55,12 +57,10 @@ void ABaseCharacter::SetHealth(float newHealth)
 	stats->health = newHealth;
 }
 
-void ABaseCharacter::InitStats(float health, float armour, float frostRes, float fireRes, float shockRes, float dmgMultiplier, float rotRate, float movementSpeed)
+void ABaseCharacter::InitStats(float health, float armour, float frostRes, float fireRes, float shockRes, float poisonRes, float dmgMultiplier, float rotRate, float movementSpeed)
 {
-	GEngine->AddOnScreenDebugMessage(-1, 15.0f, FColor::Red, "MaxHealth was: " + FString::SanitizeFloat(stats->maxHealth));
 	if (health != 0.f)
 	{
-		GEngine->AddOnScreenDebugMessage(-1, 15.0f, FColor::Red, "Setting maxhealth to: " + FString::SanitizeFloat(health));
 		stats->defaultMaxHealth = health;
 		stats->maxHealth = health;
 		stats->health = health;
@@ -80,6 +80,16 @@ void ABaseCharacter::InitStats(float health, float armour, float frostRes, float
 		stats->defaultFireRes = fireRes;
 		stats->fireResistance = fireRes;
 	}
+	if (shockRes != 0.f)
+	{
+		stats->defaultShockRes = shockRes;
+		stats->shockResistance = shockRes;
+	}
+	if (poisonRes != 0.f)
+	{
+		stats->defaultPoisonRes = poisonRes;
+		stats->poisonResistance = poisonRes;
+	}
 	if (dmgMultiplier != 0.f)
 	{
 		stats->defaultDamageMultiplier = dmgMultiplier;
@@ -97,7 +107,6 @@ void ABaseCharacter::InitStats(float health, float armour, float frostRes, float
 		stats->movementSpeed = movementSpeed;
 		GetCharacterMovement()->MaxWalkSpeed = movementSpeed;
 	}
-	GEngine->AddOnScreenDebugMessage(-1, 15.0f, FColor::Red, "Maxhealth is now: " + FString::SanitizeFloat(stats->maxHealth));
 }
 
 float ABaseCharacter::GetHealth()

@@ -22,6 +22,9 @@ CharacterStats::CharacterStats()
 	defaultShockRes = 1.f;
 	shockResistance = 1.f;
 
+	defaultPoisonRes = 1.f;
+	poisonResistance = 1.f;
+
 	defaultDamageMultiplier = 1.f;
 	damageMultiplier = 1.f;
 

@@ -38,6 +38,7 @@ public:
 		case DamageType::FROST: return stats->frostResistance;
 		case DamageType::FIRE: return stats->fireResistance;
 		case DamageType::SHOCK: return stats->shockResistance;
+		case DamageType::POISON: return stats->poisonResistance;
 		case DamageType::TRUE: return 1.f;
 		default: return 1.f;
 		}
@@ -54,7 +55,7 @@ public:
 	void SetHealth(float newHealth);
 
 	UFUNCTION(BlueprintCallable, Category = Stats)
-	void InitStats(float health, float armour, float frostRes, float fireRes, float shockRes, float dmgMultiplier, float rotRate, float movementSpeed);
+	void InitStats(float health, float armour, float frostRes, float fireRes, float shockRes, float poisonRes, float dmgMultiplier, float rotRate, float movementSpeed);
 
 	void AddEffect(Effect* effect)
 	{
