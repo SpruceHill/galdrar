@@ -12,10 +12,6 @@ AEnemyCharacter::AEnemyCharacter(const FObjectInitializer& ObjectInitializer)
 	name = "Old Name";
 
 	stats = new CharacterStats();
-	stats->defaultRotationRate = 200.f;
-	stats->rotationRate = 200.f;
-	stats->defaultMovementSpeed = 200.f;
-	stats->movementSpeed = 200.f;
 	this->GetMesh()->bReceivesDecals = false;
 	
 	AIControllerClass = AEnemyAIController::StaticClass();
@@ -23,6 +19,4 @@ AEnemyCharacter::AEnemyCharacter(const FObjectInitializer& ObjectInitializer)
 	// Configure character movement
 	bUseControllerRotationYaw = false;
 	GetCharacterMovement()->bOrientRotationToMovement = true; // Rotate character to moving direction
-	GetCharacterMovement()->RotationRate = FRotator(0.f, 200.f, 0.f);
-	GetCharacterMovement()->MaxWalkSpeed = 200.f;
 }

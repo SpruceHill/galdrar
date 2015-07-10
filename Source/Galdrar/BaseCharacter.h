@@ -44,14 +44,17 @@ public:
 		return 1.f;
 	}
 
-	UFUNCTION(BlueprintCallable, Category = Stat)
+	UFUNCTION(BlueprintCallable, Category = Stats)
 	void Heal(float amount);
 
-	UFUNCTION(BlueprintCallable, Category = Stat)
+	UFUNCTION(BlueprintCallable, Category = Stats)
 	void Wound(float amount);
 
-	UFUNCTION(BlueprintCallable, Category = Stat)
+	UFUNCTION(BlueprintCallable, Category = Stats)
 	void SetHealth(float newHealth);
+
+	UFUNCTION(BlueprintCallable, Category = Stats)
+	void InitStats(float health, float armour, float frostRes, float fireRes, float shockRes, float dmgMultiplier, float rotRate, float movementSpeed);
 
 	void AddEffect(Effect* effect)
 	{
@@ -71,7 +74,6 @@ public:
 		return spells[index];
 	}
 
-	//UFUNCTION(BlueprintImplementableEvent, BlueprintCallable, Category = "Damage")
 	float TakeDamage(float DamageAmount, struct FDamageEvent const& DamageEvent, class AController* EventInstigator, class AActor* DamageCauser) override
 	{
 		Wound(DamageAmount);
