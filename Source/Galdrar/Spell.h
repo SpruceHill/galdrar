@@ -10,7 +10,7 @@
 class GALDRAR_API Spell : public Attack
 {
 public:
-	enum SpellType { DRAGONS_BREATH, GAS_CLOUD, LIGHNING_BOLT, JAVELIN, HEAL };
+	enum SpellType { DRAGONS_BREATH, GAS_CLOUD, LIGHNING_BOLT, JAVELIN, HEAL, TELEPORT };
 	enum SpellTarget { UNIT, CIRCLE, CONE, AURA };
 	enum Activation { TARGET_UNIT, TARGET_GROUND, PASSIVE, ATTACK_MODIFIER, SELF };
 	virtual void Activate();

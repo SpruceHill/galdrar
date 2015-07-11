@@ -35,6 +35,9 @@ void SpellHandler::ActivateSpell(Attack* attack, UWorld* world, FVector location
 	case Spell::SpellType::LIGHNING_BOLT: 
 		UProjectileFactory::SpawnAttackEffect(world, caster, location, spell); 
 		break;
+	case Spell::SpellType::TELEPORT:
+		caster->SetActorLocation(location);
+		break;
 	default: return;
 	}
 }

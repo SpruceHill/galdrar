@@ -12,6 +12,7 @@
 #include "LightningBolt.h"
 #include "Heal.h"
 #include "Javelin.h"
+#include "Teleport.h"
 
 AHeroCharacter::AHeroCharacter(const FObjectInitializer& ObjectInitializer)
 	: Super(ObjectInitializer)
@@ -23,7 +24,7 @@ AHeroCharacter::AHeroCharacter(const FObjectInitializer& ObjectInitializer)
 	spells[0] = new DragonsBreath();
 	spells[1] = new GasCloud();
 	spells[2] = new Javelin();
-	spells[3] = new HealSpell();
+	spells[3] = new Teleport();
 	this->GetMesh()->bReceivesDecals = false;
 
 	// Set size for player capsule
