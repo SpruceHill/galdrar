@@ -36,6 +36,7 @@ void SpellHandler::ActivateSpell(Attack* attack, UWorld* world, FVector location
 		UProjectileFactory::SpawnAttackEffect(world, caster, location, spell); 
 		break;
 	case Spell::SpellType::TELEPORT:
+		location.Z += caster->GetCapsuleComponent()->GetScaledCapsuleHalfHeight();
 		caster->SetActorLocation(location);
 		break;
 	default: return;
