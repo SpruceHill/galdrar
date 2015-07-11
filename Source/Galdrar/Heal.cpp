@@ -3,7 +3,7 @@
 #include "Galdrar.h"
 #include "Heal.h"
 
-Heal::Heal()
+HealSpell::HealSpell()
 {
 	name = "Heal";
 	spellType = SpellType::HEAL;
@@ -17,10 +17,10 @@ Heal::Heal()
 	damage = 10.f;
 	cooldown = 5.f;
 	time = 5.f;
-	damageType = DamageType::PHYSICAL;
+	damageType = DamageType::TRUE;
 	range = 200.f;
 }
 
-Heal::~Heal()
+HealSpell::~HealSpell()
 {
 }

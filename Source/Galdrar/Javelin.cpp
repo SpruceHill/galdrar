@@ -17,7 +17,6 @@ Javelin::Javelin()
 	damage = 30.f;
 	cooldown = 5.f;
 	time = 5.f;
-	//effectTypes.push_back(EffectType::BURNING);
 	damageType = DamageType::PHYSICAL;
 	range = 1600.f;
 }

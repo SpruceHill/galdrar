@@ -12,9 +12,9 @@ class GALDRAR_API SpellHandler
 {
 public:
 	// Target unit
-	static void ActivateSpell(Spell* spell, ABaseCharacter* caster, ABaseCharacter* target);
+	static void ActivateSpell(Attack* attack, ABaseCharacter* caster, ABaseCharacter* target);
 	// Target ground
-	static void ActivateSpell(Spell* spell, UWorld* world, const FVector &location, ABaseCharacter* caster);
+	static void ActivateSpell(Attack* attack, UWorld* world, FVector location, ABaseCharacter* caster);
 	// Self
-	static void ActivateSpell(Spell* spell, ABaseCharacter* caster);
+	static void ActivateSpell(Attack* attack, ABaseCharacter* caster);
 };

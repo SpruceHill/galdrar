@@ -5,6 +5,7 @@
 #include "HUDAdapter.h"
 #include "GaldrarColor.h"
 
+
 void ABaseCharacter::Tick(float DeltaSeconds)
 {
 	Super::Tick(DeltaSeconds);
@@ -23,7 +24,7 @@ void ABaseCharacter::Tick(float DeltaSeconds)
 				effectDamage *= 1 - (GetResistance(effect->GetDamageType()) / 100.f);
 				HUDAdapter HA;
 				HA.CreateDamageIndicator(this, FString::FromInt((int32)effectDamage), GaldrarColor::GetDamageTypeColor(effect->GetDamageType()), false);
-				Wound((int32)effectDamage);
+				Wound((int32)effectDamage, effect->GetDamageType(), false);
 				effect->bPrintDI = false;
 			}
 		}
@@ -37,11 +38,23 @@ void ABaseCharacter::Tick(float DeltaSeconds)
 
 void ABaseCharacter::Heal(float amount)
 {
-	stats->health += amount;
+	HUDAdapter HA;
+	HA.CreateDamageIndicator(this, "+"+FString::FromInt(amount), FColor::Green, false);
+	if (stats->health + amount > stats->maxHealth)
+	{
+		stats->health = stats->maxHealth;
+	}
+	else
+	{
+		stats->health += amount;
+	}
 }
 
-void ABaseCharacter::Wound(float amount)
+void ABaseCharacter::Wound(float amount, DamageType type, bool crit)
 {
+	HUDAdapter HA;
+	HA.CreateDamageIndicator(this, FString::FromInt(amount), GaldrarColor::GetDamageTypeColor(type), crit);
+
 	stats->health -= amount;
 	if (stats->health <= 0 && stats->health + amount > 0)
 		GEngine->AddOnScreenDebugMessage(-1, 15.0f, FColor::Red, name + " just died");

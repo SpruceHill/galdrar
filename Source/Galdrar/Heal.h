@@ -7,9 +7,9 @@
 /**
  * 
  */
-class GALDRAR_API Heal : public Spell
+class GALDRAR_API HealSpell : public Spell
 {
 public:
-	Heal();
-	~Heal();
+	HealSpell();
+	~HealSpell();
 };

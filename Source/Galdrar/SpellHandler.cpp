@@ -5,20 +5,41 @@
 #include "ProjectileFactory.h"
 
 // Target unit
-void SpellHandler::ActivateSpell(Spell* spell, ABaseCharacter* caster, ABaseCharacter* target)
+void SpellHandler::ActivateSpell(Attack* attack, ABaseCharacter* caster, ABaseCharacter* target)
 {
-
+	Spell* spell = (Spell*)attack;
+	switch (spell->GetSpellType())
+	{
+	case Spell::SpellType::HEAL: 
+		target->Heal(spell->GetDamage());
+		break;
+	default: return;
+	}
 }
 // Target ground
-void SpellHandler::ActivateSpell(Spell* spell, UWorld* world, const FVector &location, ABaseCharacter* caster)
+void SpellHandler::ActivateSpell(Attack* attack, UWorld* world, FVector location, ABaseCharacter* caster)
 {
-	if (spell->IsProjectile())
+	Spell* spell = (Spell*)attack;
+	switch (spell->GetSpellType())
 	{
+	case Spell::SpellType::DRAGONS_BREATH: 
+		UProjectileFactory::SpawnAttackEffect(world, caster, location, spell); 
+		break;
+	case Spell::SpellType::JAVELIN: 
 		UProjectileFactory::SpawnAttackEffect(world, caster, location, spell);
+		caster->Heal(2);
+		break;
+	case Spell::SpellType::GAS_CLOUD: 
+		UProjectileFactory::SpawnAttackEffect(world, caster, location, spell); 
+		break;
+	case Spell::SpellType::LIGHNING_BOLT: 
+		UProjectileFactory::SpawnAttackEffect(world, caster, location, spell); 
+		break;
+	default: return;
 	}
 }
 // Self
-void SpellHandler::ActivateSpell(Spell* spell, ABaseCharacter* caster)
+void SpellHandler::ActivateSpell(Attack* attack, ABaseCharacter* caster)
 {
 
 }

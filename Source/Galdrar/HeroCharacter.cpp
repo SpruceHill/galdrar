@@ -1,4 +1,4 @@
-// Fill out your copyright notice in the Description page of Project Settings.
+// Copyright Spruce Hill, All rights reserved.
 
 #include "Galdrar.h"
 #include "HeroCharacter.h"
@@ -10,6 +10,7 @@
 #include "DragonsBreath.h"
 #include "GasCloud.h"
 #include "LightningBolt.h"
+#include "Heal.h"
 #include "Javelin.h"
 
 AHeroCharacter::AHeroCharacter(const FObjectInitializer& ObjectInitializer)
@@ -22,7 +23,7 @@ AHeroCharacter::AHeroCharacter(const FObjectInitializer& ObjectInitializer)
 	spells[0] = new DragonsBreath();
 	spells[1] = new GasCloud();
 	spells[2] = new Javelin();
-	spells[3] = new LightningBolt();
+	spells[3] = new HealSpell();
 	this->GetMesh()->bReceivesDecals = false;
 
 	// Set size for player capsule

@@ -31,10 +31,10 @@ void CombatHandler::AttackEnemy(ABaseCharacter* attacker, ABaseCharacter* defend
 		float damage = CalcDamage(attacker->GetStats()->damageMultiplier * attack->GetDamage(), defender->GetResistance(attack->GetDamageType()),
 			attack->GetCritMultiplier(), crit);
 
-		HUDAdapter HA;
-		HA.CreateDamageIndicator(defender, FString::FromInt(damage), GaldrarColor::GetDamageTypeColor(attack->GetDamageType()), crit);
+		//HUDAdapter HA;
+		//HA.CreateDamageIndicator(defender, FString::FromInt(damage), GaldrarColor::GetDamageTypeColor(attack->GetDamageType()), crit);
 
-		defender->Wound((int32)damage);
+		defender->Wound((int32)damage, attack->GetDamageType(), crit);
 	}
 	for(EffectType effectType : attack->GetEffectTypes())
 	{

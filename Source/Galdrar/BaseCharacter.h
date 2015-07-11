@@ -9,6 +9,7 @@
 #include "Effect.h"
 #include "CharacterStats.h"
 #include "Spell.h"
+#include "DamageType.h"
 #include "GameFramework/Character.h"
 #include "BaseCharacter.generated.h"
 
@@ -39,17 +40,16 @@ public:
 		case DamageType::FIRE: return stats->fireResistance;
 		case DamageType::SHOCK: return stats->shockResistance;
 		case DamageType::POISON: return stats->poisonResistance;
-		case DamageType::TRUE: return 1.f;
-		default: return 1.f;
+		case DamageType::TRUE: return 0.f;
+		default: return 0.f;
 		}
-		return 1.f;
+		return 0.f;
 	}
 
 	UFUNCTION(BlueprintCallable, Category = Stats)
 	void Heal(float amount);
 
-	UFUNCTION(BlueprintCallable, Category = Stats)
-	void Wound(float amount);
+	void Wound(float amount, DamageType type, bool crit);
 
 	UFUNCTION(BlueprintCallable, Category = Stats)
 	void SetHealth(float newHealth);
@@ -77,7 +77,7 @@ public:
 
 	float TakeDamage(float DamageAmount, struct FDamageEvent const& DamageEvent, class AController* EventInstigator, class AActor* DamageCauser) override
 	{
-		Wound(DamageAmount);
+		//Wound(DamageAmount);
 		return DamageAmount;
 	}
 

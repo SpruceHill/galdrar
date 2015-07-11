@@ -10,6 +10,7 @@
 #include "GaldrarColor.h"
 #include "BaseProjectile.h"
 #include "ProjectileFactory.h"
+#include "SpellHandler.h"
 
 AHeroPlayerController::AHeroPlayerController(const FObjectInitializer& ObjectInitializer)
 	: Super(ObjectInitializer)
@@ -221,6 +222,11 @@ void AHeroPlayerController::OnSetDestinationPressed()
 		}
 		else if (ABaseCharacter* character = dynamic_cast<ABaseCharacter*>(Hit.GetActor()))
 		{
+			//if (bSelectingUnitTarget)
+			//{
+			//	AHeroCharacter* hero = Cast<AHeroCharacter>(GetPawn());
+			//	SpellHandler::ActivateSpell(primedAttack, hero, character);
+			//}
 			if (!primedAttack)
 			{
 				AHeroCharacter* hero = Cast<AHeroCharacter>(GetPawn());
@@ -267,6 +273,7 @@ void AHeroPlayerController::AttackEnemy(ABaseCharacter* character, Attack* attac
 
 		FaceActor(character);
 		CombatHandler::AttackEnemy(hero, character, attack);
+		SpellHandler::ActivateSpell(attack, hero, character);
 
 		targetCharacter = NULL;
 		primedAttack = NULL;
@@ -298,7 +305,8 @@ void AHeroPlayerController::AttackGround(FVector location, Attack* attack)
 		SetNewMoveDestination(hero->GetActorLocation());
 
 		FaceLocation(location);
-		UProjectileFactory::SpawnAttackEffect(GetWorld(), hero, location, attack);
+		SpellHandler::ActivateSpell(attack, GetWorld(), location, hero);
+		//UProjectileFactory::SpawnAttackEffect(GetWorld(), hero, location, attack);
 
 		if (attack == primedAttack) primedAttack = NULL;
 		scheduledAttack = NULL;
