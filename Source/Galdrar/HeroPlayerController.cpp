@@ -41,8 +41,8 @@ void AHeroPlayerController::PlayerTick(float DeltaTime)
 	
 	if (groundTarget != FVector::ZeroVector)
 	{
-		if (scheduledAttack)
-		AttackGround(groundTarget, scheduledAttack);
+		if (scheduledAttack) 
+			AttackGround(groundTarget, scheduledAttack);
 	}
 	else if (targetCharacter)
 	{

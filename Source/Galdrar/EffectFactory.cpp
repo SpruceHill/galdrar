@@ -4,6 +4,7 @@
 #include "EffectFactory.h"
 #include "BurnEffect.h"
 #include "PoisonEffect.h"
+#include "HealEffect.h"
 
 Effect* EffectFactory::GenerateEffect(CharacterStats* stats, EffectType type)
 {
@@ -11,6 +12,7 @@ Effect* EffectFactory::GenerateEffect(CharacterStats* stats, EffectType type)
 	{
 	case EffectType::BURNING: return new BurnEffect(stats);
 	case EffectType::POISON_MILD: return new PoisonEffect(stats);
+	case EffectType::HEAL: return new HealEffect(stats);
 	}
 	return new Effect();
 }
