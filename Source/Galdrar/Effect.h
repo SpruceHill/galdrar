@@ -19,6 +19,8 @@ public:
 	DamageType GetDamageType() { return damageType; }
 	EffectType GetEffectType() { return effectType; }
 	void ResetTimer() { timeLeft = duration; }
+	FString GetPrint(){ return toBePrinted; bPrintDI = false; }
+
 	bool bStackable;
 	EffectType effectType;
 
@@ -29,10 +31,11 @@ protected:
 	float timeLeft;
 	float duration;
 	float tickRate;
+	float time;
 	float damage;
 	FString name;
 	FString desc;
+	FString toBePrinted;
 	DamageType damageType;
 	CharacterStats* stats;
-	float time;
 };
