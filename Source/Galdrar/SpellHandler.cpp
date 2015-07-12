@@ -7,6 +7,7 @@
 // Target unit
 void SpellHandler::ActivateSpell(Attack* attack, ABaseCharacter* caster, ABaseCharacter* target)
 {
+	attack->Activate();
 	Spell* spell = (Spell*)attack;
 	switch (spell->GetSpellType())
 	{
@@ -19,6 +20,7 @@ void SpellHandler::ActivateSpell(Attack* attack, ABaseCharacter* caster, ABaseCh
 // Target ground
 void SpellHandler::ActivateSpell(Attack* attack, UWorld* world, FVector location, ABaseCharacter* caster)
 {
+	attack->Activate();
 	Spell* spell = (Spell*)attack;
 	switch (spell->GetSpellType())
 	{
@@ -45,5 +47,5 @@ void SpellHandler::ActivateSpell(Attack* attack, UWorld* world, FVector location
 // Self
 void SpellHandler::ActivateSpell(Attack* attack, ABaseCharacter* caster)
 {
-
+	attack->Activate();
 }

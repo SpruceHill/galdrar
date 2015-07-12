@@ -5,5 +5,3 @@
 
 Spell::Spell(){};
 Spell::~Spell(){};
-
-void Spell::Activate(){};

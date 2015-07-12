@@ -34,6 +34,11 @@ void ABaseCharacter::Tick(float DeltaSeconds)
 		}
 		++it;
 	}
+
+	for (Spell* s : spells)
+	{
+		if (s) s->Tick(DeltaSeconds);
+	}
 }
 
 void ABaseCharacter::Heal(float amount)

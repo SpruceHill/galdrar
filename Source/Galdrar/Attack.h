@@ -13,6 +13,7 @@ class GALDRAR_API Attack
 {
 public:
 	Attack(FString name, float damage, DamageType type, float critMultiplier, float range, float attackSpeed, const std::list < EffectType > effectTypes);
+	
 	float GetDamage(){ return damage; }
 	DamageType GetDamageType(){ return damageType; }
 	float GetCritMultiplier(){ return critMultiplier; }
@@ -20,12 +21,17 @@ public:
 	float GetRange(){ return range; }
 	float GetAttackSpeed(){ return attackSpeed; }
 	virtual FString GetName(){ return name; }
-	bool IsOnCoolDown(){ return currentCooldown > 0; }
+	
 	bool IsProjectile(){ return bProjectile; }
 	bool IsProjectilePenetrating(){ return bProjectilePenetration; }
 	float GetProjectileWidth(){ return projectileWidth; }
 	float GetProjectileSpeed(){ return projectileSpeed; }
+
+	void Activate();
+	void Tick(float deltaSeconds);
+	bool IsOnCoolDown(){ return time > 0; }
 	float GetTime(){ return time; }
+
 	bool DoesDamage(){ return bDoesDamage; }
 
 	Attack();
@@ -39,8 +45,8 @@ protected:
 	float range;
 	float attackSpeed;
 	FString name;
+
 	float cooldown;
-	float currentCooldown;
 	float time;
 	
 	bool bProjectile;

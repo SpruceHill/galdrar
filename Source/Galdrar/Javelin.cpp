@@ -16,7 +16,7 @@ Javelin::Javelin()
 
 	damage = 30.f;
 	cooldown = 5.f;
-	time = 5.f;
+	time = 0.f;
 	damageType = DamageType::PHYSICAL;
 	range = 1600.f;
 }

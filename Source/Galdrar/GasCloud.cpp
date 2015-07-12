@@ -16,7 +16,7 @@ GasCloud::GasCloud()
 
 	damage = 0.f;
 	cooldown = 5.f;
-	time = 5.f;
+	time = 0.f;
 	effectTypes.push_back(EffectType::POISON_MILD);
 	damageType = DamageType::POISON;
 	range = 600.f;

@@ -16,7 +16,7 @@ DragonsBreath::DragonsBreath()
 
 	damage = 20.f;
 	cooldown = 5.f;
-	time = 5.f;
+	time = 0.f;
 	effectTypes.push_back(EffectType::BURNING);
 	damageType = DamageType::FIRE;
 	range = 600.f;

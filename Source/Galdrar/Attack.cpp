@@ -27,7 +27,6 @@ Attack::Attack()
 	attackSpeed = 1.f;
 	name = "No name";
 	cooldown = 1.f;
-	currentCooldown = 0.f;
 	time = 0.f;
 
 	bProjectile = false;
@@ -35,4 +34,18 @@ Attack::Attack()
 	projectileWidth = 0.f;
 	projectileSpeed = 0.f;
 }
+
+void Attack::Activate()
+{
+	time = cooldown;
+}
+
+void Attack::Tick(float deltaSeconds)
+{
+	if (time > 0.f)
+	{
+		time -= deltaSeconds;
+	}
+}
+
 Attack::~Attack(){};
