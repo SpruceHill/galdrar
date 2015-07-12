@@ -24,6 +24,8 @@ BurnEffect::BurnEffect(CharacterStats* stats)
 	effectType = EffectType::BURNING;
 	bShouldTick = true;
 	bPrintDI = false;
+	doDamage = false;
+	toBePrinted = desc;
 }
 
 void BurnEffect::Tick(float delta)
@@ -33,10 +35,10 @@ void BurnEffect::Tick(float delta)
 	{
 		timeLeft -= tickRate;
 		time -= tickRate;
-		bPrintDI = true;
+		doDamage = true;
 	}
 	else
 	{
-		bPrintDI = false;
+		doDamage = false;
 	}
 }

@@ -18,14 +18,17 @@ void ABaseCharacter::Tick(float DeltaSeconds)
 		if (effect->bShouldTick)
 		{
 			effect->Tick(DeltaSeconds);
-			if (effect->bPrintDI)
+			if (effect->doDamage)
 			{
 				float effectDamage = effect->GetDamage();
 				effectDamage *= 1 - (GetResistance(effect->GetDamageType()) / 100.f);
-				HUDAdapter HA;
-				HA.CreateDamageIndicator(this, FString::FromInt((int32)effectDamage), GaldrarColor::GetDamageTypeColor(effect->GetDamageType()), false);
 				Wound((int32)effectDamage, effect->GetDamageType(), false);
 				effect->bPrintDI = false;
+			}
+			if (effect->bPrintDI)
+			{
+				HUDAdapter HA;
+				HA.CreateDamageIndicator(this, effect->GetPrint(), GaldrarColor::GetDamageTypeColor(effect->GetDamageType()), false);
 			}
 		}
 		if (effect->GetTimeLeft() <= 0.f)

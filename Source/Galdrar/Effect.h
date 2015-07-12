@@ -19,11 +19,11 @@ public:
 	DamageType GetDamageType() { return damageType; }
 	EffectType GetEffectType() { return effectType; }
 	void ResetTimer() { timeLeft = duration; }
-	FString GetPrint(){ return toBePrinted; bPrintDI = false; }
+	FString GetPrint(){ bPrintDI = false; return toBePrinted; }
 
 	bool bStackable;
 	EffectType effectType;
-
+	bool doDamage;
 	bool bShouldTick;
 	bool bPrintDI;
 

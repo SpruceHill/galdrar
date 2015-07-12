@@ -23,6 +23,8 @@ HealEffect::HealEffect(CharacterStats* stats)
 	effectType = EffectType::HEAL;
 	bShouldTick = true;
 	bPrintDI = false;
+	doDamage = false;
+	toBePrinted = "+"+FString::FromInt(damage);
 }
 
 void HealEffect::Tick(float delta)
@@ -32,6 +34,7 @@ void HealEffect::Tick(float delta)
 	{
 		timeLeft -= tickRate;
 		time -= tickRate;
+		stats->health += damage;
 		bPrintDI = true;
 	}
 	else

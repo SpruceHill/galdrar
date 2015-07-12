@@ -23,7 +23,9 @@ PoisonEffect::PoisonEffect(CharacterStats* stats)
 	bStackable = false;
 	effectType = EffectType::POISON_MILD;
 	bShouldTick = true;
-	bPrintDI = false;
+	bPrintDI = true;
+	doDamage = false;
+	toBePrinted = name;
 }
 
 void PoisonEffect::Tick(float delta)
@@ -31,12 +33,13 @@ void PoisonEffect::Tick(float delta)
 	time += delta;
 	if (time > tickRate)
 	{
+		toBePrinted = FString::FromInt(damage * (1 - (stats->poisonResistance / 100.f))); // In case resistance has changed
 		timeLeft -= tickRate;
 		time -= tickRate;
-		bPrintDI = true;
+		doDamage = true;
 	}
 	else
 	{
-		bPrintDI = false;
+		doDamage = false;
 	}
 }
