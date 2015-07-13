@@ -14,7 +14,6 @@ void SpellHandler::ActivateSpell(Attack* attack, ABaseCharacter* caster, ABaseCh
 	case Spell::SpellType::HEAL: 
 		target->Heal(spell->GetDamage());
 		break;
-	default: return;
 	}
 }
 // Target ground
@@ -38,10 +37,35 @@ void SpellHandler::ActivateSpell(Attack* attack, UWorld* world, FVector location
 		UProjectileFactory::SpawnAttackEffect(world, caster, location, spell); 
 		break;
 	case Spell::SpellType::TELEPORT:
-		location.Z += caster->GetCapsuleComponent()->GetScaledCapsuleHalfHeight();
-		caster->SetActorLocation(location);
+		
+		FCollisionQueryParams TraceParams(FName(TEXT("VictoreCore Trace")), true, NULL);
+		TraceParams.bTraceComplex = true;
+		TraceParams.AddIgnoredActor(caster);
+		FHitResult HitOut = FHitResult(ForceInit);
+		FVector start = location;
+		start.Z += 200;
+		FVector end = location;
+		end.Z -= 300;
+		ECollisionChannel CollisionChannel = ECC_WorldStatic;
+		world->LineTraceSingle(HitOut, start, end, CollisionChannel, TraceParams);
+
+		FVector result = HitOut.Location;
+		if (ABaseCharacter* character = dynamic_cast<ABaseCharacter*>(HitOut.GetActor()))
+		{
+			GEngine->AddOnScreenDebugMessage(-1, 15.0f, FColor::Red, "debug msg");
+			result.X += 100.f;
+			result.Z -= character->GetCapsuleComponent()->GetScaledCapsuleHalfHeight();
+			caster->TeleportTo(result, caster->GetActorRotation(), false, false);
+		}
+		else
+		{
+			result.Z += caster->GetCapsuleComponent()->GetScaledCapsuleHalfHeight();
+			caster->SetActorLocation(result);
+		}
+		FVector rotation = caster->GetActorLocation();
+		rotation.Z = 1;
+		caster->SetActorRotation(rotation.Rotation());
 		break;
-	default: return;
 	}
 }
 // Self

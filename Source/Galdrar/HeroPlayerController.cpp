@@ -222,11 +222,6 @@ void AHeroPlayerController::OnSetDestinationPressed()
 		}
 		else if (ABaseCharacter* character = dynamic_cast<ABaseCharacter*>(Hit.GetActor()))
 		{
-			//if (bSelectingUnitTarget)
-			//{
-			//	AHeroCharacter* hero = Cast<AHeroCharacter>(GetPawn());
-			//	SpellHandler::ActivateSpell(primedAttack, hero, character);
-			//}
 			if (!primedAttack)
 			{
 				AHeroCharacter* hero = Cast<AHeroCharacter>(GetPawn());

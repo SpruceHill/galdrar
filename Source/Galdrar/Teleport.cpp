@@ -15,7 +15,7 @@ Teleport::Teleport()
 	bDoesDamage = false;
 
 	damage = 10.f;
-	cooldown = 5.f;
+	cooldown = 0.2f;
 	time = 0.f;
 	damageType = DamageType::TRUE;
 	range = 600.f;
