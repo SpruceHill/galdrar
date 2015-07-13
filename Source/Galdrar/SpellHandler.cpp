@@ -28,7 +28,6 @@ void SpellHandler::ActivateSpell(Attack* attack, UWorld* world, FVector location
 		break;
 	case Spell::SpellType::JAVELIN: 
 		UProjectileFactory::SpawnAttackEffect(world, caster, location, spell);
-		caster->Heal(2);
 		break;
 	case Spell::SpellType::GAS_CLOUD: 
 		UProjectileFactory::SpawnAttackEffect(world, caster, location, spell); 
@@ -50,9 +49,9 @@ void SpellHandler::ActivateSpell(Attack* attack, UWorld* world, FVector location
 		world->LineTraceSingle(HitOut, start, end, CollisionChannel, TraceParams);
 
 		FVector result = HitOut.Location;
+		FVector forward = caster->GetActorForwardVector();
 		if (ABaseCharacter* character = dynamic_cast<ABaseCharacter*>(HitOut.GetActor()))
 		{
-			GEngine->AddOnScreenDebugMessage(-1, 15.0f, FColor::Red, "debug msg");
 			result.X += 100.f;
 			result.Z -= character->GetCapsuleComponent()->GetScaledCapsuleHalfHeight();
 			caster->TeleportTo(result, caster->GetActorRotation(), false, false);
@@ -62,9 +61,7 @@ void SpellHandler::ActivateSpell(Attack* attack, UWorld* world, FVector location
 			result.Z += caster->GetCapsuleComponent()->GetScaledCapsuleHalfHeight();
 			caster->SetActorLocation(result);
 		}
-		FVector rotation = caster->GetActorLocation();
-		rotation.Z = 1;
-		caster->SetActorRotation(rotation.Rotation());
+		caster->SetActorRotation(forward.Rotation());
 		break;
 	}
 }

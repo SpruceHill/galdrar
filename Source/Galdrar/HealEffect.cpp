@@ -11,12 +11,12 @@ HealEffect::HealEffect()
 HealEffect::HealEffect(CharacterStats* stats)
 {
 	this->stats = stats;
-	name = "Heal";
+	name = "Regeneration";
 	desc = "A burst of life";
-	damage = 5.f;
-	duration = 2.f;
-	timeLeft = 2.f;
-	tickRate = 0.5f;
+	damage = 2.f;
+	duration = 10.f;
+	timeLeft = 10.f;
+	tickRate = 1.f;
 	damageType = DamageType::PHYSICAL;
 	time = 0.f;
 	bStackable = false;
