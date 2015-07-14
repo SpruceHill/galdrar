@@ -10,6 +10,10 @@ CharacterStats::CharacterStats()
 	maxHealth = 100.f;
 	health = 100.f;
 
+	defaultMaxMana = 100.f;
+	maxMana = 100.f;
+	mana = 100.f;
+
 	defaultArmour = 0.f;
 	armour = 0.f;
 

@@ -78,13 +78,30 @@ void ABaseCharacter::SetHealth(float newHealth)
 	stats->health = newHealth;
 }
 
-void ABaseCharacter::InitStats(float health, float armour, float frostRes, float fireRes, float shockRes, float poisonRes, float dmgMultiplier, float rotRate, float movementSpeed)
+void ABaseCharacter::SetMana(float newMana)
+{
+	stats->mana = newMana;
+}
+
+void ABaseCharacter::DecreaseMana(float amount)
+{
+	if (stats->mana - amount <= 0.f) stats->mana = 0.f;
+	else stats->mana -= amount;
+}
+
+void ABaseCharacter::InitStats(float health, float mana, float armour, float frostRes, float fireRes, float shockRes, float poisonRes, float dmgMultiplier, float rotRate, float movementSpeed)
 {
 	if (health != 0.f)
 	{
 		stats->defaultMaxHealth = health;
 		stats->maxHealth = health;
 		stats->health = health;
+	}
+	if (mana != 0.f)
+	{
+		stats->defaultMaxMana = mana;
+		stats->maxMana = mana;
+		stats->mana = mana;
 	}
 	if (armour != 0.f)
 	{
@@ -138,4 +155,14 @@ float ABaseCharacter::GetHealth()
 float ABaseCharacter::GetMaxHealth()
 {
 	return stats->maxHealth;
+}
+
+float ABaseCharacter::GetMaxMana()
+{
+	return stats->maxMana;
+}
+
+float ABaseCharacter::GetMana()
+{
+	return stats->mana;
 }

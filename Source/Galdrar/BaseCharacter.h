@@ -55,7 +55,13 @@ public:
 	void SetHealth(float newHealth);
 
 	UFUNCTION(BlueprintCallable, Category = Stats)
-	void InitStats(float health, float armour, float frostRes, float fireRes, float shockRes, float poisonRes, float dmgMultiplier, float rotRate, float movementSpeed);
+	void SetMana(float newMana);
+
+	UFUNCTION(BlueprintCallable, Category = Stats)
+	void DecreaseMana(float amount);
+
+	UFUNCTION(BlueprintCallable, Category = Stats)
+	void InitStats(float health, float mana, float armour, float frostRes, float fireRes, float shockRes, float poisonRes, float dmgMultiplier, float rotRate, float movementSpeed);
 
 	void AddEffect(Effect* effect)
 	{
@@ -85,6 +91,10 @@ public:
 	float GetHealth();
 	UFUNCTION(BlueprintCallable, Category = Stat)
 	float GetMaxHealth();
+	UFUNCTION(BlueprintCallable, Category = Stat)
+	float GetMaxMana();
+	UFUNCTION(BlueprintCallable, Category = Stat)
+	float GetMana();
 protected:
 	CharacterStats* stats;
 	UPROPERTY(BlueprintReadWrite, Category = character)

@@ -21,6 +21,7 @@ void SpellHandler::ActivateSpell(Attack* attack, UWorld* world, FVector location
 {
 	attack->Activate();
 	Spell* spell = (Spell*)attack;
+	caster->DecreaseMana(spell->GetManaCost());
 	switch (spell->GetSpellType())
 	{
 	case Spell::SpellType::DRAGONS_BREATH: 

@@ -396,6 +396,11 @@ void AHeroPlayerController::Spell(int8 index)
 		GEngine->AddOnScreenDebugMessage(-1, 15.0f, FColor::Red, hero->GetSpell(index)->GetName() + " is not ready");
 		return;
 	}
+	if (hero->GetStats()->mana < hero->GetSpell(index)->GetManaCost())
+	{
+		GEngine->AddOnScreenDebugMessage(-1, 15.0f, FColor::Red, "Not enough mana");
+		return;
+	}
 
 	switch (hero->GetSpell(index)->GetActivation())
 	{

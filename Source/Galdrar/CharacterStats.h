@@ -17,6 +17,10 @@ public:
 	float maxHealth;
 	float health;
 
+	float defaultMaxMana;
+	float maxMana;
+	float mana;
+
 	float defaultArmour;
 	float armour;
 
