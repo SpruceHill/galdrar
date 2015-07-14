@@ -10,6 +10,14 @@ void ABaseCharacter::Tick(float DeltaSeconds)
 {
 	Super::Tick(DeltaSeconds);
 
+	/*time += DeltaSeconds;
+	if (time >= 1.f)
+	{
+		time = 0.f;
+		if(stats->mana < stats->maxMana) stats->mana += stats->manaReg;
+	}*/
+	if (stats->mana < stats->maxMana) stats->mana += stats->manaReg*DeltaSeconds;
+
 	std::list<Effect*>::iterator it = activeEffects.begin();
 	while (it != activeEffects.end())
 	{

@@ -102,4 +102,6 @@ protected:
 	std::list < Effect* > activeEffects;
 	Attack* weapon;
 	Spell* spells [4];
+private:
+	float time = 0.f;
 };

@@ -9,7 +9,7 @@ Teleport::Teleport()
 	spellType = SpellType::TELEPORT;
 	activation = Activation::TARGET_GROUND;
 	spellTarget = SpellTarget::CIRCLE;
-	manaCost = 40.f;
+	manaCost = 5.f;
 	radius = 50.f;
 	bProjectile = false;
 	bDoesDamage = false;

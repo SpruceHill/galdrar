@@ -21,6 +21,9 @@ public:
 	float maxMana;
 	float mana;
 
+	float defaultManaReg;
+	float manaReg;
+
 	float defaultArmour;
 	float armour;
 
