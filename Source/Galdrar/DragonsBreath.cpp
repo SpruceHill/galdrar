@@ -20,6 +20,9 @@ DragonsBreath::DragonsBreath()
 	effectTypes.push_back(EffectType::BURNING);
 	damageType = DamageType::FIRE;
 	range = 600.f;
+
+	// 2 = Spell, ID = 0001
+	ID = 20001;
 }
 
 DragonsBreath::~DragonsBreath()

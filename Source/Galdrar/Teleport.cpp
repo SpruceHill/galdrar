@@ -19,6 +19,9 @@ Teleport::Teleport()
 	time = 0.f;
 	damageType = DamageType::TRUE;
 	range = 600.f;
+
+	// 2 = Spell, ID = 0006
+	ID = 20006;
 }
 
 Teleport::~Teleport()

@@ -5,6 +5,7 @@
 #include <list>
 #include "Effect.h"
 #include "EffectType.h"
+#include "Runtime/Engine/Classes/Slate/SlateBrushAsset.h"
 
 /**
  * An attack is a data container including all data needed to calculate damage and add effects.
@@ -31,8 +32,11 @@ public:
 	void Tick(float deltaSeconds);
 	bool IsOnCoolDown(){ return time > 0; }
 	float GetTime(){ return time; }
+	float GetCooldown(){ return cooldown; }
 
 	bool DoesDamage(){ return bDoesDamage; }
+
+	float GetID(){ return ID; }
 
 	Attack();
 	~Attack();
@@ -53,4 +57,6 @@ protected:
 	bool bProjectilePenetration;
 	float projectileWidth;
 	float projectileSpeed;
+
+	float ID;
 };

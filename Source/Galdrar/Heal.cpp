@@ -19,6 +19,9 @@ HealSpell::HealSpell()
 	time = 0.f;
 	damageType = DamageType::TRUE;
 	range = 200.f;
+
+	// 2 = Spell, ID = 0003
+	ID = 20003;
 }
 
 HealSpell::~HealSpell()

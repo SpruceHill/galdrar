@@ -17,6 +17,9 @@ Sword::Sword()
 	weight = 1.f;
 	kills = 0;
 	twoHanded = false;
+
+	// 1 = Weapon, ID 0001
+	ID = 10001;
 }
 
 Sword::~Sword()

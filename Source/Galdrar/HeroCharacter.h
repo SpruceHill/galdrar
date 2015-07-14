@@ -43,6 +43,16 @@ public:
 	void AddLoot(ALoot* loot) {
 		inventory.Add(loot);
 	}
+
+	UFUNCTION(BlueprintCallable, Category = Spells)
+	int32 GetSpellIdAtIndex(int32 index);
+
+	UFUNCTION(BlueprintCallable, Category = Spells)
+	float GetSpellCooldownAtIndex(int32 index);
+	
+	UFUNCTION(BlueprintCallable, Category = Spells)
+	float GetSpellTimeAtIndex(int32 index);
+
 protected:
 	int32 lootValue;
 	TArray<ALoot*> inventory;

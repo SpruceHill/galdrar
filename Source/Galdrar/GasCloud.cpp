@@ -20,6 +20,9 @@ GasCloud::GasCloud()
 	effectTypes.push_back(EffectType::POISON_MILD);
 	damageType = DamageType::POISON;
 	range = 600.f;
+
+	// 2 = Spell, ID = 0002
+	ID = 20002;
 }
 
 GasCloud::~GasCloud()

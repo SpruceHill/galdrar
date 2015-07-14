@@ -19,6 +19,9 @@ Javelin::Javelin()
 	time = 0.f;
 	damageType = DamageType::PHYSICAL;
 	range = 1600.f;
+
+	// 2 = Spell, ID = 0004
+	ID = 20004;
 }
 
 Javelin::~Javelin()

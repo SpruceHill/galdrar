@@ -19,6 +19,9 @@ LightningBolt::LightningBolt()
 	time = 5.f;
 	damageType = DamageType::SHOCK;
 	range = 400.f;
+
+	// 2 = Spell, ID = 0005
+	ID = 20005;
 }
 
 LightningBolt::~LightningBolt()

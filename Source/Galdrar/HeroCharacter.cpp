@@ -63,4 +63,17 @@ void AHeroCharacter::Zoom(float delta)
 	CameraBoom->TargetArmLength += delta;
 }
 
+int32 AHeroCharacter::GetSpellIdAtIndex(int32 index)
+{
+	return spells[index]->GetID();
+}
 
+float AHeroCharacter::GetSpellCooldownAtIndex(int32 index)
+{
+	return spells[index]->GetCooldown();
+}
+
+float AHeroCharacter::GetSpellTimeAtIndex(int32 index)
+{
+	return spells[index]->GetTime();
+}
