@@ -57,4 +57,9 @@ public:
 	{
 		return FColor::FromHex("DAA520FF");
 	}
+
+	static FColor GetHealColor()
+	{
+		return FColor::Green;
+	}
 };

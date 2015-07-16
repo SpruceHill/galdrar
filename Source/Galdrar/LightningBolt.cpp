@@ -16,7 +16,7 @@ LightningBolt::LightningBolt()
 
 	damage = 10.f;
 	cooldown = 5.f;
-	time = 5.f;
+	time = 0.f;
 	damageType = DamageType::SHOCK;
 	range = 400.f;
 

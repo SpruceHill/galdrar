@@ -55,7 +55,7 @@ void ABaseCharacter::Tick(float DeltaSeconds)
 void ABaseCharacter::Heal(float amount)
 {
 	HUDAdapter HA;
-	HA.CreateDamageIndicator(this, "+"+FString::FromInt(amount), FColor::Green, false);
+	HA.CreateDamageIndicator(this, "+"+FString::FromInt(amount), GaldrarColor::GetHealColor(), false);
 	if (stats->health + amount > stats->maxHealth)
 	{
 		stats->health = stats->maxHealth;
