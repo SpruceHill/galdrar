@@ -23,12 +23,18 @@ public:
 	// Called every frame
 	virtual void Tick( float DeltaSeconds ) override;
 
-	FString GetName() { return name; }
-	FString GetDesc() { return desc; }
+	UFUNCTION(BlueprintCallable, Category = Loot)
+	FString GetName();
+	UFUNCTION(BlueprintCallable, Category = Loot)
+	FString GetDesc();
+	UFUNCTION(BlueprintCallable, Category = Loot)
+	float GetID();
 
 protected:
 	UPROPERTY(BlueprintReadWrite, Category = Loot)
 	FString name;
 	UPROPERTY(BlueprintReadWrite, Category = Loot)
-	FString desc;	
+	FString desc;
+	UPROPERTY(BlueprintReadWrite, Category = Loot)
+	float ID;
 };

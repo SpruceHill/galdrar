@@ -25,3 +25,6 @@ void ALoot::Tick( float DeltaTime )
 
 }
 
+FString ALoot::GetName(){ return name; }
+FString ALoot::GetDesc(){ return desc; }
+float ALoot::GetID() { return ID; }
