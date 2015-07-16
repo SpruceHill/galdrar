@@ -65,17 +65,17 @@ void AHeroCharacter::Zoom(float delta)
 
 int32 AHeroCharacter::GetSpellIdAtIndex(int32 index)
 {
-	return spells[index]->GetID();
+	return (spells[index] ? spells[index]->GetID() : -1);
 }
 
 float AHeroCharacter::GetSpellCooldownAtIndex(int32 index)
 {
-	return spells[index]->GetCooldown();
+	return (spells[index] ? spells[index]->GetCooldown() : 1);
 }
 
 float AHeroCharacter::GetSpellTimeAtIndex(int32 index)
 {
-	return spells[index]->GetTime();
+	return (spells[index] ? spells[index]->GetTime() : 1);
 }
 
 FString AHeroCharacter::GetSpellNameAtIndex(int32 index)

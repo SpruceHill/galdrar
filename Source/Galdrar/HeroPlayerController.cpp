@@ -404,6 +404,11 @@ void AHeroPlayerController::Spell4(){ Spell(3); }
 void AHeroPlayerController::Spell(int8 index)
 {
 	AHeroCharacter* hero = Cast<AHeroCharacter>(GetPawn());
+	if (!hero->GetSpell(index))
+	{
+		GEngine->AddOnScreenDebugMessage(-1, 15.0f, FColor::Red, "No spell in slot " + FString::FromInt(index+1));
+		return;
+	}
 	if (hero->GetSpell(index)->IsOnCoolDown())
 	{
 		GEngine->AddOnScreenDebugMessage(-1, 15.0f, FColor::Red, hero->GetSpell(index)->GetName() + " is not ready");
