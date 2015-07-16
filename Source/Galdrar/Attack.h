@@ -22,6 +22,7 @@ public:
 	float GetRange(){ return range; }
 	float GetAttackSpeed(){ return attackSpeed; }
 	virtual FString GetName(){ return name; }
+	FString GetDesc(){ return desc; }
 	
 	bool IsProjectile(){ return bProjectile; }
 	bool IsProjectilePenetrating(){ return bProjectilePenetration; }
@@ -49,6 +50,7 @@ protected:
 	float range;
 	float attackSpeed;
 	FString name;
+	FString desc;
 
 	float cooldown;
 	float time;

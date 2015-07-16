@@ -44,6 +44,9 @@ public:
 		inventory.Add(loot);
 	}
 
+	/*
+	*	SPELL GETTERS
+	*/
 	UFUNCTION(BlueprintCallable, Category = Spells)
 	int32 GetSpellIdAtIndex(int32 index);
 
@@ -53,8 +56,31 @@ public:
 	UFUNCTION(BlueprintCallable, Category = Spells)
 	float GetSpellTimeAtIndex(int32 index);
 
+	UFUNCTION(BlueprintCallable, Category = Spells)
+	FString GetSpellNameAtIndex(int32 index);
+
+	UFUNCTION(BlueprintCallable, Category = Spells)
+	FString GetSpellDescAtIndex(int32 index);
+
+	/*
+	*	INVENTORY GETTERS
+	*/
+	UFUNCTION(BlueprintCallable, Category = Loot)
+	int32 GetLootIdAtIndex(int32 index);
+
+	//UFUNCTION(BlueprintCallable, Category = Loot)
+	//float GetSpellCooldownAtIndex(int32 index);
+
+	//UFUNCTION(BlueprintCallable, Category = Spells)
+	//float GetSpellTimeAtIndex(int32 index);
+
+	UFUNCTION(BlueprintCallable, Category = Spells)
+	FString GetLootNameAtIndex(int32 index);
+
+	UFUNCTION(BlueprintCallable, Category = Spells)
+	FString GetLootDescAtIndex(int32 index);
+
 protected:
 	int32 lootValue;
 	TArray<ALoot*> inventory;
-
 };

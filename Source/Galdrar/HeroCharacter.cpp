@@ -77,3 +77,13 @@ float AHeroCharacter::GetSpellTimeAtIndex(int32 index)
 {
 	return spells[index]->GetTime();
 }
+
+FString AHeroCharacter::GetSpellNameAtIndex(int32 index)
+{
+	return spells[index]->GetName();
+}
+
+FString AHeroCharacter::GetSpellDescAtIndex(int32 index)
+{
+	return spells[index]->GetDesc();
+}
