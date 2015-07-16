@@ -20,7 +20,6 @@ AHeroCharacter::AHeroCharacter(const FObjectInitializer& ObjectInitializer)
 	name = "Hero";
 	stats = new CharacterStats();
 	weapon = new Sword();
-	//inventory.Init(NULL, 5);
 	spells[0] = new DragonsBreath();
 	spells[1] = new GasCloud();
 	spells[2] = new Javelin();
