@@ -2,7 +2,3 @@
 
 #include "Galdrar.h"
 #include "Valuable.h"
-
-
-
-

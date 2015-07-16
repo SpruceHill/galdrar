@@ -335,15 +335,12 @@ void AHeroPlayerController::Pickup(ALoot* loot)
 		if (AValuable* valuable = dynamic_cast<AValuable*>(loot))
 		{
 			hero->AddValuable(valuable);
-			loot->Destroy();
 		}
 		else
 		{
 			if (hero->GetInventory().Num() < 6)
 			{
 				hero->AddLoot(loot);
-				loot->SetActorHiddenInGame(true);
-				loot->SetActorEnableCollision(false);
 			}
 			else
 			{

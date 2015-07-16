@@ -37,17 +37,14 @@ public:
 
 	void Zoom(float delta);
 
-	void AddValuable(AValuable* valuable) 
-	{
-		HUDAdapter HA;
-		HA.CreateDamageIndicator(this, "+"+FString::FromInt(valuable->GetValue()), GaldrarColor::GetGoldColor(), false);
-		//HA.CreateDamageIndicator(this, "ASD", GaldrarColor::GetFrostColor(), false);
-		lootValue += valuable->GetValue();
-	}
+	UFUNCTION(BlueprintCallable, Category = Loot)
+	void AddValuable(AValuable* valuable);
 
 	void AddLoot(ALoot* loot)
 	{
-		int32 a = inventory.Add(loot);
+		inventory.Add(loot);
+		loot->SetActorHiddenInGame(true);
+		loot->SetActorEnableCollision(false);
 	}
 
 	/*

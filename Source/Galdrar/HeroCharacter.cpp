@@ -62,6 +62,14 @@ void AHeroCharacter::Zoom(float delta)
 	CameraBoom->TargetArmLength += delta;
 }
 
+void AHeroCharacter::AddValuable(AValuable* valuable)
+{
+	HUDAdapter HA;
+	HA.CreateDamageIndicator(this, "+" + FString::FromInt(valuable->GetValue()), GaldrarColor::GetGoldColor(), false);
+	lootValue += valuable->GetValue();
+	valuable->Destroy();
+}
+
 int32 AHeroCharacter::GetSpellIdAtIndex(int32 index)
 {
 	return (spells[index] ? spells[index]->GetID() : -1);

@@ -13,10 +13,9 @@ class GALDRAR_API AValuable : public ALoot
 {
 	GENERATED_BODY()
 public:
+
 	int32 GetValue(){ return value; }
 protected:
 	UPROPERTY(BlueprintReadWrite, Category = Loot)
 	int32 value;
-	
-	
 };
