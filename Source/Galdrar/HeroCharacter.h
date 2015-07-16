@@ -42,10 +42,7 @@ public:
 
 	void AddLoot(ALoot* loot)
 	{
-		GEngine->AddOnScreenDebugMessage(-1, 15.0f, FColor::Red, "Hero: addItem " + loot->GetName());
 		int32 a = inventory.Add(loot);
-		GEngine->AddOnScreenDebugMessage(-1, 15.0f, FColor::Red, inventory[a]->GetName());
-		
 	}
 
 	/*

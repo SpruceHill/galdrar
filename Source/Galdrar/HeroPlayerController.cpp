@@ -332,24 +332,23 @@ void AHeroPlayerController::Pickup(ALoot* loot)
 	AHeroCharacter* hero = Cast<AHeroCharacter>(GetPawn());
 	if (hero->GetDistanceTo(loot) < pickUpRange)
 	{
-		if (ALoot* l = dynamic_cast<ALoot*>(loot))
-		{
-			if (hero->GetInventory().Num() < 6)
-			{
-				hero->AddLoot(l);
-				l->SetActorHiddenInGame(true);
-				l->SetActorEnableCollision(false);
-			}
-			else
-			{
-				GEngine->AddOnScreenDebugMessage(-1, 15.0f, FColor::Red, "debug msg");
-				return;
-			}
-		}
-		else if (AValuable* valuable = dynamic_cast<AValuable*>(loot))
+		if (AValuable* valuable = dynamic_cast<AValuable*>(loot))
 		{
 			hero->AddValuable(valuable);
 			loot->Destroy();
+		}
+		else
+		{
+			if (hero->GetInventory().Num() < 6)
+			{
+				hero->AddLoot(loot);
+				loot->SetActorHiddenInGame(true);
+				loot->SetActorEnableCollision(false);
+			}
+			else
+			{
+				GEngine->AddOnScreenDebugMessage(-1, 15.0f, FColor::Red, "Inventory Full");
+			}
 		}
 		targetLoot = NULL;
 	}
