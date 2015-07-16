@@ -5,6 +5,8 @@
 #include "BaseCharacter.h"
 #include "Loot.h"
 #include "Valuable.h"
+#include "GaldrarColor.h"
+#include "HUDAdapter.h"
 #include "HeroCharacter.generated.h"
 
 /**
@@ -36,7 +38,10 @@ public:
 	void Zoom(float delta);
 
 	void AddValuable(AValuable* valuable) 
-	{ 
+	{
+		HUDAdapter HA;
+		HA.CreateDamageIndicator(this, "+"+FString::FromInt(valuable->GetValue()), GaldrarColor::GetGoldColor(), false);
+		//HA.CreateDamageIndicator(this, "ASD", GaldrarColor::GetFrostColor(), false);
 		lootValue += valuable->GetValue();
 	}
 
