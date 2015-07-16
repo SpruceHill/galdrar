@@ -20,7 +20,7 @@ AHeroCharacter::AHeroCharacter(const FObjectInitializer& ObjectInitializer)
 	name = "Hero";
 	stats = new CharacterStats();
 	weapon = new Sword();
-	inventory.Init(NULL, 6);
+	//inventory.Init(NULL, 5);
 	spells[0] = new DragonsBreath();
 	spells[1] = new GasCloud();
 	spells[2] = new Javelin();
@@ -86,4 +86,10 @@ FString AHeroCharacter::GetSpellNameAtIndex(int32 index)
 FString AHeroCharacter::GetSpellDescAtIndex(int32 index)
 {
 	return spells[index]->GetDesc();
+}
+
+
+TArray<ALoot*> AHeroCharacter::GetInventory()
+{
+	return inventory;
 }

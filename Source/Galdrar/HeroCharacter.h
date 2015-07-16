@@ -40,8 +40,12 @@ public:
 		lootValue += valuable->GetValue();
 	}
 
-	void AddLoot(ALoot* loot) {
-		inventory.Add(loot);
+	void AddLoot(ALoot* loot)
+	{
+		GEngine->AddOnScreenDebugMessage(-1, 15.0f, FColor::Red, "Hero: addItem " + loot->GetName());
+		int32 a = inventory.Add(loot);
+		GEngine->AddOnScreenDebugMessage(-1, 15.0f, FColor::Red, inventory[a]->GetName());
+		
 	}
 
 	/*
@@ -62,23 +66,8 @@ public:
 	UFUNCTION(BlueprintCallable, Category = Spells)
 	FString GetSpellDescAtIndex(int32 index);
 
-	/*
-	*	INVENTORY GETTERS
-	*/
 	UFUNCTION(BlueprintCallable, Category = Loot)
-	int32 GetLootIdAtIndex(int32 index);
-
-	//UFUNCTION(BlueprintCallable, Category = Loot)
-	//float GetSpellCooldownAtIndex(int32 index);
-
-	//UFUNCTION(BlueprintCallable, Category = Spells)
-	//float GetSpellTimeAtIndex(int32 index);
-
-	UFUNCTION(BlueprintCallable, Category = Spells)
-	FString GetLootNameAtIndex(int32 index);
-
-	UFUNCTION(BlueprintCallable, Category = Spells)
-	FString GetLootDescAtIndex(int32 index);
+	TArray<ALoot*> GetInventory();
 
 protected:
 	int32 lootValue;
