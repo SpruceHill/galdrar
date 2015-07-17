@@ -20,6 +20,15 @@ class GALDRAR_API AHeroPlayerController : public APlayerController
 public:
 	AHeroPlayerController(const FObjectInitializer& ObjectInitializer);
 
+	UFUNCTION(BlueprintCallable, Category = Input)
+	void Spell1();
+	UFUNCTION(BlueprintCallable, Category = Input)
+	void Spell2();
+	UFUNCTION(BlueprintCallable, Category = Input)
+	void Spell3();
+	UFUNCTION(BlueprintCallable, Category = Input)
+	void Spell4();
+
 private:
 	/** True if the controlled character should navigate to the mouse cursor. */
 	uint32 bMoveToMouseCursor : 1;
@@ -58,10 +67,6 @@ private:
 	void ZoomIn(){ Zoom(-zoomStepLength); }
 	void ZoomOut(){ Zoom(zoomStepLength); }
 
-	void Spell1();
-	void Spell2();
-	void Spell3();
-	void Spell4();
 	void Spell(int8 index);
 
 	void CancelAction();
