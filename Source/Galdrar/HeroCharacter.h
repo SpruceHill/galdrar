@@ -40,6 +40,9 @@ public:
 	UFUNCTION(BlueprintCallable, Category = Loot)
 	void AddValuable(AValuable* valuable);
 
+	UFUNCTION(BlueprintCallable, Category = Loot)
+	int32 GetLootValue();
+
 	void AddLoot(ALoot* loot)
 	{
 		inventory.Add(loot);

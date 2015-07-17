@@ -70,6 +70,11 @@ void AHeroCharacter::AddValuable(AValuable* valuable)
 	valuable->Destroy();
 }
 
+int32 AHeroCharacter::GetLootValue()
+{
+	return lootValue;
+}
+
 int32 AHeroCharacter::GetSpellIdAtIndex(int32 index)
 {
 	return (spells[index] ? spells[index]->GetID() : -1);
