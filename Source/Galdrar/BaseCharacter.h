@@ -10,6 +10,7 @@
 #include "CharacterStats.h"
 #include "Spell.h"
 #include "DamageType.h"
+#include "EffectFactory.h"
 #include "GameFramework/Character.h"
 #include "BaseCharacter.generated.h"
 
@@ -63,9 +64,32 @@ public:
 	UFUNCTION(BlueprintCallable, Category = Stats)
 	void InitStats(float health, float mana, float armour, float frostRes, float fireRes, float shockRes, float poisonRes, float dmgMultiplier, float rotRate, float movementSpeed);
 
-	void AddEffect(Effect* effect)
+	void AddEffect(EffectType type)
 	{
-		activeEffects.push_back(effect);
+		bool found = false;
+		for (Effect* e : activeEffects)
+		{
+			if (e->GetEffectType() == type)
+			{
+				found = true;
+				if (e->bStackable)
+				{
+					// Effect stackable, add new instance.
+					activeEffects.push_back(EffectFactory::GenerateEffect(stats, type));
+				}
+				else
+				{
+					// Effect not stackable, reset timer.
+					e->ResetTimer();
+				}
+			}
+		}
+		if (!found)
+		{
+			// Adding new effect.
+			activeEffects.push_back(EffectFactory::GenerateEffect(stats, type));
+		}
+		//activeEffects.push_back(effect);
 	}
 
 	void RemoveEffect(Effect* effect)

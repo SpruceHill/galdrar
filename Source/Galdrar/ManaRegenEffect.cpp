@@ -39,6 +39,7 @@ void ManaRegenEffect::Tick(float delta)
 		timeLeft -= tickRate;
 		time -= tickRate;
 	}
+	// Remove effect
 	if (timeLeft <= 0.f)
 	{
 		stats->manaReg -= damage;

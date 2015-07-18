@@ -45,9 +45,52 @@ public:
 
 	void AddLoot(ALoot* loot)
 	{
-		inventory.Add(loot);
+		bool placed = false;
+		//inventory.Add(loot);
+		if (!inventorySlot1 && !placed)
+		{
+			inventorySlot1 = loot; 
+			placed = true;
+		}
+		if (!inventorySlot2 && !placed)
+		{
+			inventorySlot2 = loot;
+			placed = true;
+		}
+		if (!inventorySlot3 && !placed)
+		{
+			placed = true;
+			inventorySlot3 = loot;
+		}
+		if (!inventorySlot4 && !placed)
+		{
+			placed = true;
+			inventorySlot4 = loot;
+		}
+		if (!inventorySlot5 && !placed)
+		{
+			placed = true;
+			inventorySlot5 = loot;
+		}
+		if (!inventorySlot6 && !placed)
+		{
+			placed = true;
+			inventorySlot6 = loot;
+		}
 		loot->SetActorHiddenInGame(true);
 		loot->SetActorEnableCollision(false);
+	}
+
+	int32 GetInventorySize()
+	{
+		int32 num = 0;
+		if (inventorySlot1) num++;
+		if (inventorySlot2) num++;
+		if (inventorySlot3) num++;
+		if (inventorySlot4) num++;
+		if (inventorySlot5) num++;
+		if (inventorySlot6) num++;
+		return num;
 	}
 
 	/*
@@ -69,9 +112,15 @@ public:
 	FString GetSpellDescAtIndex(int32 index);
 
 	UFUNCTION(BlueprintCallable, Category = Loot)
-	TArray<ALoot*> GetInventory();
+	/*TArray<ALoot*>*/ALoot* GetInventory(int32 index);
 
 protected:
 	int32 lootValue;
 	TArray<ALoot*> inventory;
+	ALoot* inventorySlot1;
+	ALoot* inventorySlot2;
+	ALoot* inventorySlot3;
+	ALoot* inventorySlot4;
+	ALoot* inventorySlot5;
+	ALoot* inventorySlot6;
 };

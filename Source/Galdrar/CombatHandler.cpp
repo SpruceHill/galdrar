@@ -39,7 +39,8 @@ void CombatHandler::AttackEnemy(ABaseCharacter* attacker, ABaseCharacter* defend
 	for(EffectType effectType : attack->GetEffectTypes())
 	{
 		ABaseCharacter* character = (EffectFactory::IsDefensive(effectType) ? attacker : defender);
-		bool found = false;
+		character->AddEffect(effectType);
+		/*bool found = false;
 		for (Effect* e : character->GetActiveEffects())
 		{
 			if (e->GetEffectType() == effectType)
@@ -61,7 +62,7 @@ void CombatHandler::AttackEnemy(ABaseCharacter* attacker, ABaseCharacter* defend
 		{
 			// Adding new effect.
 			character->AddEffect(EffectFactory::GenerateEffect(character->GetStats(), effectType));
-		}
+		}*/
 	}
 }
 

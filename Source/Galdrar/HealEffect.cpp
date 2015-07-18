@@ -34,7 +34,15 @@ void HealEffect::Tick(float delta)
 	{
 		timeLeft -= tickRate;
 		time -= tickRate;
-		stats->health += damage;
+		if (stats->health + damage >= stats->maxHealth)
+		{
+			stats->health = stats->maxHealth;
+			timeLeft = 0.001f;
+		}
+		else
+		{
+			stats->health += damage;
+		}
 		bPrintDI = true;
 	}
 	else
