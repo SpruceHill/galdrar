@@ -3,6 +3,7 @@
 #pragma once
 
 #include "GameFramework/Actor.h"
+#include "CharacterStats.h"
 #include "Loot.generated.h"
 
 /*
@@ -23,12 +24,18 @@ public:
 	// Called every frame
 	virtual void Tick( float DeltaSeconds ) override;
 
+	virtual void Activate(CharacterStats* ownerStats, CharacterStats* targetStats);
+
 	UFUNCTION(BlueprintCallable, Category = Loot)
 	FString GetName();
 	UFUNCTION(BlueprintCallable, Category = Loot)
 	FString GetDesc();
 	UFUNCTION(BlueprintCallable, Category = Loot)
 	float GetID();
+	UFUNCTION(BlueprintCallable, Category = Loot)
+	bool IsStackable();
+	UFUNCTION(BlueprintCallable, Category = Loot)
+	bool IsActivatable();
 
 protected:
 	UPROPERTY(BlueprintReadWrite, Category = Loot)
@@ -37,4 +44,12 @@ protected:
 	FString desc;
 	UPROPERTY(BlueprintReadWrite, Category = Loot)
 	float ID;
+	UPROPERTY(BlueprintReadWrite, Category = Loot)
+	bool bStackable;
+	UPROPERTY(BlueprintReadWrite, Category = Loot)
+	bool bActivatable;
+	UPROPERTY(BlueprintReadWrite, Category = Loot)
+	float time;
+	UPROPERTY(BlueprintReadWrite, Category = Loot)
+	float cooldown;
 };

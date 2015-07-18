@@ -11,6 +11,7 @@
 #include "BaseProjectile.h"
 #include "ProjectileFactory.h"
 #include "SpellHandler.h"
+#include "ItemHandler.h"
 
 AHeroPlayerController::AHeroPlayerController(const FObjectInitializer& ObjectInitializer)
 	: Super(ObjectInitializer)
@@ -160,6 +161,13 @@ void AHeroPlayerController::SetupInputComponent()
 	InputComponent->BindAction("Spell4", IE_Pressed, this, &AHeroPlayerController::Spell4);
 
 	InputComponent->BindAction("CancelAction", IE_Pressed, this, &AHeroPlayerController::CancelAction);
+
+	InputComponent->BindAction("Inventory1", IE_Pressed, this, &AHeroPlayerController::Inventory1);
+	InputComponent->BindAction("Inventory2", IE_Pressed, this, &AHeroPlayerController::Inventory2);
+	InputComponent->BindAction("Inventory3", IE_Pressed, this, &AHeroPlayerController::Inventory3);
+	InputComponent->BindAction("Inventory4", IE_Pressed, this, &AHeroPlayerController::Inventory4);
+	InputComponent->BindAction("Inventory5", IE_Pressed, this, &AHeroPlayerController::Inventory5);
+	InputComponent->BindAction("Inventory6", IE_Pressed, this, &AHeroPlayerController::Inventory6);
 }
 
 void AHeroPlayerController::Zoom(float delta)
@@ -478,4 +486,19 @@ void AHeroPlayerController::Spell(int8 index)
 		groundTarget = FVector::ZeroVector;
 		break;
 	}
+}
+
+void AHeroPlayerController::Inventory1(){ Inventory(0); }
+void AHeroPlayerController::Inventory2(){ Inventory(1); }
+void AHeroPlayerController::Inventory3(){ Inventory(2); }
+void AHeroPlayerController::Inventory4(){ Inventory(3); }
+void AHeroPlayerController::Inventory5(){ Inventory(4); }
+void AHeroPlayerController::Inventory6(){ Inventory(5); }
+
+void AHeroPlayerController::Inventory(int8 index)
+{
+	AHeroCharacter* hero = Cast<AHeroCharacter>(GetPawn());
+	//TArray<ALoot*> inv = hero->GetInventory();
+	if (hero->GetInventory().IsValidIndex(index))
+		ItemHandler::ActivateItem(hero->GetInventory()[index], hero, hero);
 }

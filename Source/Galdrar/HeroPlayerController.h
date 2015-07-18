@@ -29,6 +29,19 @@ public:
 	UFUNCTION(BlueprintCallable, Category = Input)
 	void Spell4();
 
+	UFUNCTION(BlueprintCallable, Category = Input)
+	void Inventory1();
+	UFUNCTION(BlueprintCallable, Category = Input)
+	void Inventory2();
+	UFUNCTION(BlueprintCallable, Category = Input)
+	void Inventory3();
+	UFUNCTION(BlueprintCallable, Category = Input)
+	void Inventory4();
+	UFUNCTION(BlueprintCallable, Category = Input)
+	void Inventory5();
+	UFUNCTION(BlueprintCallable, Category = Input)
+	void Inventory6();
+
 private:
 	/** True if the controlled character should navigate to the mouse cursor. */
 	uint32 bMoveToMouseCursor : 1;
@@ -68,6 +81,8 @@ private:
 	void ZoomOut(){ Zoom(zoomStepLength); }
 
 	void Spell(int8 index);
+
+	void Inventory(int8 index);
 
 	void CancelAction();
 	

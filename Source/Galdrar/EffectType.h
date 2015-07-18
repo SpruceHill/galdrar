@@ -2,4 +2,4 @@
 
 #pragma once
 
-enum class EffectType { BURNING, CHILL, FREEZE, POISON_MILD, HEAL };
+enum class EffectType { BURNING, CHILL, FREEZE, POISON_MILD, HEAL, MANA_REGEN };

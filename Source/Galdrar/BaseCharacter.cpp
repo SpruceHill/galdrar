@@ -9,7 +9,6 @@
 void ABaseCharacter::Tick(float DeltaSeconds)
 {
 	Super::Tick(DeltaSeconds);
-
 	/*time += DeltaSeconds;
 	if (time >= 1.f)
 	{

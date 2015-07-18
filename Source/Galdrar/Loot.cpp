@@ -23,8 +23,20 @@ void ALoot::Tick( float DeltaTime )
 {
 	Super::Tick( DeltaTime );
 
+	if (time > 0.f)
+	{
+		time -= DeltaTime;
+	}
+}
+
+void ALoot::Activate(CharacterStats* ownerStats, CharacterStats* targetStats)
+{
+
 }
 
 FString ALoot::GetName(){ return name; }
 FString ALoot::GetDesc(){ return desc; }
 float ALoot::GetID() { return ID; }
+
+bool ALoot::IsStackable(){ return bStackable; }
+bool ALoot::IsActivatable(){ return bActivatable; }
