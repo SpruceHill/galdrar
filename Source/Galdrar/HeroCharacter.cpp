@@ -101,7 +101,7 @@ FString AHeroCharacter::GetSpellDescAtIndex(int32 index)
 }
 
 
-/*TArray<ALoot*>*/ ALoot* AHeroCharacter::GetInventory(int32 index)
+ALoot* AHeroCharacter::GetInventory(int32 index)
 {
 	if (index == 1)
 	{
@@ -127,5 +127,4 @@ FString AHeroCharacter::GetSpellDescAtIndex(int32 index)
 	{
 		return inventorySlot6;
 	}
-	//return inventory;
 }

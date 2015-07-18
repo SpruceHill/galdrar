@@ -93,6 +93,16 @@ public:
 		return num;
 	}
 
+	void RemoveItem(ALoot* loot)
+	{
+		if (inventorySlot1 == loot) inventorySlot1->Destroy();
+		else if (inventorySlot2 == loot) inventorySlot1->Destroy();
+		else if (inventorySlot3 == loot) inventorySlot1->Destroy();
+		else if (inventorySlot4 == loot) inventorySlot1->Destroy();
+		else if (inventorySlot5 == loot) inventorySlot1->Destroy();
+		else if (inventorySlot6 == loot) inventorySlot1->Destroy();
+	}
+
 	/*
 	*	SPELL GETTERS
 	*/
@@ -112,11 +122,10 @@ public:
 	FString GetSpellDescAtIndex(int32 index);
 
 	UFUNCTION(BlueprintCallable, Category = Loot)
-	/*TArray<ALoot*>*/ALoot* GetInventory(int32 index);
+	ALoot* GetInventory(int32 index);
 
 protected:
 	int32 lootValue;
-	TArray<ALoot*> inventory;
 	ALoot* inventorySlot1;
 	ALoot* inventorySlot2;
 	ALoot* inventorySlot3;

@@ -498,15 +498,8 @@ void AHeroPlayerController::Inventory6(){ Inventory(6); }
 void AHeroPlayerController::Inventory(int8 index)
 {
 	AHeroCharacter* hero = Cast<AHeroCharacter>(GetPawn());
-	//TArray<ALoot*> inv = hero->GetInventory();
-	//if (hero->GetInventory().IsValidIndex(index))
-	//	ItemHandler::ActivateItem(hero->GetInventory()[index], hero, hero);
-	//if (index == 0)
-	//{
-		if (hero->GetInventory(index))
-		{
-			ItemHandler::ActivateItem(hero->GetInventory(index), hero, hero);
-			//return;
-		}
-	//}
+	if (hero->GetInventory(index))
+	{
+		ItemHandler::ActivateItem(hero->GetInventory(index), hero, hero);
+	}
 }
