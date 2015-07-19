@@ -95,12 +95,36 @@ public:
 
 	void RemoveItem(ALoot* loot)
 	{
-		if (inventorySlot1 == loot) inventorySlot1->Destroy();
-		else if (inventorySlot2 == loot) inventorySlot2->Destroy();
-		else if (inventorySlot3 == loot) inventorySlot3->Destroy();
-		else if (inventorySlot4 == loot) inventorySlot4->Destroy();
-		else if (inventorySlot5 == loot) inventorySlot5->Destroy();
-		else if (inventorySlot6 == loot) inventorySlot6->Destroy();
+		if (inventorySlot1 == loot)
+		{
+			inventorySlot1->Destroy();
+			inventorySlot1 = NULL;
+		}
+		else if (inventorySlot2 == loot)
+		{
+			inventorySlot2->Destroy();
+			inventorySlot2 = NULL;
+		}
+		else if (inventorySlot3 == loot)
+		{
+			 inventorySlot3->Destroy();
+			 inventorySlot3 = NULL;
+		}
+		else if (inventorySlot4 == loot)
+		{
+			inventorySlot4->Destroy();
+			inventorySlot4 = NULL;
+		}
+		else if (inventorySlot5 == loot)
+		{
+			inventorySlot5->Destroy();
+			inventorySlot5 = NULL;
+		}
+		else if (inventorySlot6 == loot)
+		{
+			inventorySlot6->Destroy();
+			inventorySlot6 = NULL;
+		}
 	}
 
 	/*

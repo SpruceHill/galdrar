@@ -31,38 +31,12 @@ void CombatHandler::AttackEnemy(ABaseCharacter* attacker, ABaseCharacter* defend
 		float damage = CalcDamage(attacker->GetStats()->damageMultiplier * attack->GetDamage(), defender->GetResistance(attack->GetDamageType()),
 			attack->GetCritMultiplier(), crit);
 
-		//HUDAdapter HA;
-		//HA.CreateDamageIndicator(defender, FString::FromInt(damage), GaldrarColor::GetDamageTypeColor(attack->GetDamageType()), crit);
-
 		defender->Wound((int32)damage, attack->GetDamageType(), crit);
 	}
 	for(EffectType effectType : attack->GetEffectTypes())
 	{
 		ABaseCharacter* character = (EffectFactory::IsDefensive(effectType) ? attacker : defender);
 		character->AddEffect(effectType);
-		/*bool found = false;
-		for (Effect* e : character->GetActiveEffects())
-		{
-			if (e->GetEffectType() == effectType)
-			{
-				found = true;
-				if (e->bStackable)
-				{
-					// Effect stackable, add new instance.
-					character->AddEffect(EffectFactory::GenerateEffect(character->GetStats(), effectType));
-				}
-				else
-				{
-					// Effect not stackable, reset timer.
-					e->ResetTimer();
-				}
-			}
-		}
-		if (!found)
-		{
-			// Adding new effect.
-			character->AddEffect(EffectFactory::GenerateEffect(character->GetStats(), effectType));
-		}*/
 	}
 }
 
