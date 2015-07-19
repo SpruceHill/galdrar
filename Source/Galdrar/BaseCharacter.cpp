@@ -17,7 +17,7 @@ void ABaseCharacter::Tick(float DeltaSeconds)
 	}*/
 	if (stats->mana < stats->maxMana) stats->mana += stats->manaReg*DeltaSeconds;
 
-	std::list<Effect*>::iterator it = activeEffects.begin();
+	/*std::list<Effect*>::iterator it = activeEffects.begin();
 	while (it != activeEffects.end())
 	{
 		Effect* effect = (*it);
@@ -43,6 +43,29 @@ void ABaseCharacter::Tick(float DeltaSeconds)
 			it = activeEffects.erase(it);
 		}
 		++it;
+	}*/
+	for (Effect* effect : activeEffects)
+	{
+		if (effect->bShouldTick)
+		{
+			effect->Tick(DeltaSeconds);
+			if (effect->doDamage)
+			{
+				float effectDamage = effect->GetDamage();
+				effectDamage *= 1 - (GetResistance(effect->GetDamageType()) / 100.f);
+				Wound((int32)effectDamage, effect->GetDamageType(), false);
+				effect->bPrintDI = false;
+			}
+			if (effect->bPrintDI)
+			{
+				HUDAdapter HA;
+				HA.CreateDamageIndicator(this, effect->GetPrint(), GaldrarColor::GetDamageTypeColor(effect->GetDamageType()), false);
+			}
+		}
+		if (effect->GetTimeLeft() <= 0.f)
+		{
+			activeEffects.Remove(effect);
+		}
 	}
 
 	for (Spell* s : spells)
