@@ -18,6 +18,7 @@ public:
 	float GetTimeLeft() { return timeLeft; }
 	DamageType GetDamageType() { return damageType; }
 	EffectType GetEffectType() { return effectType; }
+	int32 GetID(){ return ID; }
 	void ResetTimer() { timeLeft = duration; }
 	FString GetPrint(){ bPrintDI = false; return toBePrinted; }
 
@@ -33,6 +34,7 @@ protected:
 	float tickRate;
 	float time;
 	float damage;
+	int32 ID;
 	FString name;
 	FString desc;
 	FString toBePrinted;

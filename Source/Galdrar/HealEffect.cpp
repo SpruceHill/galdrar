@@ -25,6 +25,9 @@ HealEffect::HealEffect(CharacterStats* stats)
 	bPrintDI = false;
 	doDamage = false;
 	toBePrinted = "+"+FString::FromInt(damage);
+
+	// 4 = Effect, ID = 0003
+	ID = 40003;
 }
 
 void HealEffect::Tick(float delta)

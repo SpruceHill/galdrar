@@ -25,6 +25,9 @@ ManaRegenEffect::ManaRegenEffect(CharacterStats* stats)
 	bPrintDI = false;
 	doDamage = false;
 	toBePrinted = "+" + FString::FromInt(damage);
+
+	// 4 = Effect, ID = 0004
+	ID = 40004;
 }
 
 void ManaRegenEffect::Tick(float delta)

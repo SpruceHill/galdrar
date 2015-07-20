@@ -26,6 +26,9 @@ BurnEffect::BurnEffect(CharacterStats* stats)
 	bPrintDI = false;
 	doDamage = false;
 	toBePrinted = desc;
+
+	// 4 = Effect, ID = 0001
+	ID = 40001;
 }
 
 void BurnEffect::Tick(float delta)

@@ -196,3 +196,14 @@ float ABaseCharacter::GetMana()
 {
 	return stats->mana;
 }
+
+TArray<int32> ABaseCharacter::GetEffectIDs()
+{
+	TArray<int32> array;
+	for (Effect* e : activeEffects)
+	{
+		array.Add(e->GetID());
+	}
+
+	return array;
+}

@@ -121,6 +121,10 @@ public:
 	float GetMaxMana();
 	UFUNCTION(BlueprintCallable, Category = Stat)
 	float GetMana();
+
+	UFUNCTION(BlueprintCallable, Category = Effects)
+	TArray<int32> GetEffectIDs();
+
 protected:
 	CharacterStats* stats;
 	UPROPERTY(BlueprintReadWrite, Category = character)

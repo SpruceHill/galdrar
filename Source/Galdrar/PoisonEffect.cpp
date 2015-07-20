@@ -26,6 +26,9 @@ PoisonEffect::PoisonEffect(CharacterStats* stats)
 	bPrintDI = true;
 	doDamage = false;
 	toBePrinted = name;
+
+	// 4 = Effect, ID = 0002
+	ID = 40002;
 }
 
 void PoisonEffect::Tick(float delta)
