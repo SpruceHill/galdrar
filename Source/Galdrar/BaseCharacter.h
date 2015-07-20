@@ -75,8 +75,8 @@ public:
 				if (e->bStackable)
 				{
 					// Effect stackable, add new instance.
-					//activeEffects.push_back(EffectFactory::GenerateEffect(stats, type));
-					activeEffects.Add(EffectFactory::GenerateEffect(stats, type));
+					activeEffects.push_back(EffectFactory::GenerateEffect(stats, type));
+					//activeEffects.Add(EffectFactory::GenerateEffect(stats, type));
 				}
 				else
 				{
@@ -88,19 +88,19 @@ public:
 		if (!found)
 		{
 			// Adding new effect.
-			//activeEffects.push_back(EffectFactory::GenerateEffect(stats, type));
-			activeEffects.Add(EffectFactory::GenerateEffect(stats, type));
+			activeEffects.push_back(EffectFactory::GenerateEffect(stats, type));
+			//activeEffects.Add(EffectFactory::GenerateEffect(stats, type));
 		}
 		//activeEffects.push_back(effect);
 	}
 
 	void RemoveEffect(Effect* effect)
 	{
-		bool found = activeEffects.Contains(effect);/*(std::find(activeEffects.begin(), activeEffects.end(), effect) != activeEffects.end());*/
-		if (found) activeEffects.Remove(effect);//remove(effect);
+		bool found = /*activeEffects.Contains(effect);*/(std::find(activeEffects.begin(), activeEffects.end(), effect) != activeEffects.end());
+		if (found) /*activeEffects.Remove(effect);*/activeEffects.remove(effect);
 	}
 
-	/*std::list*/ TArray < Effect* > GetActiveEffects() { return activeEffects; }
+	std::list/* TArray*/< Effect* > GetActiveEffects() { return activeEffects; }
 
 	Spell* GetSpell(int8 index)
 	{
@@ -129,7 +129,7 @@ protected:
 	CharacterStats* stats;
 	UPROPERTY(BlueprintReadWrite, Category = character)
 	FString name;
-	/*std::list*/ TArray < Effect* > activeEffects;
+	std::list /*TArray */< Effect* > activeEffects;
 	Attack* weapon;
 	Spell* spells [4];
 private:
