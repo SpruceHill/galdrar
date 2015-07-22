@@ -107,19 +107,19 @@ ALoot* AHeroCharacter::GetInventory(int32 index)
 	{
 		return inventorySlot1;
 	}
-	if (index == 2)
+	else if (index == 2)
 	{
 		return inventorySlot2;
 	}
-	if (index == 3)
+	else if (index == 3)
 	{
 		return inventorySlot3;
 	}
-	if (index == 4)
+	else if (index == 4)
 	{
 		return inventorySlot4;
 	}
-	if (index == 5)
+	else if (index == 5)
 	{
 		return inventorySlot5;
 	}
