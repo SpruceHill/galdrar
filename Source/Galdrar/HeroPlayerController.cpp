@@ -338,13 +338,12 @@ void AHeroPlayerController::FaceLocation(FVector location)
 void AHeroPlayerController::Pickup(ALoot* loot)
 {
 	AHeroCharacter* hero = Cast<AHeroCharacter>(GetPawn());
-	if (hero->GetDistanceTo(loot) < pickUpRange)
+	if (hero->GetDistanceTo(loot) <= pickUpRange)
 	{
+		SetNewMoveDestination(GetPawn()->GetActorLocation());
 		if (AValuable* valuable = dynamic_cast<AValuable*>(loot))
 		{
 			hero->AddValuable(valuable);
-			// Stop moving if picked up TODO
-			SetNewMoveDestination(GetPawn()->GetActorLocation());
 		}
 		else
 		{
