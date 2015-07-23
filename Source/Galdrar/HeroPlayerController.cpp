@@ -343,6 +343,8 @@ void AHeroPlayerController::Pickup(ALoot* loot)
 		if (AValuable* valuable = dynamic_cast<AValuable*>(loot))
 		{
 			hero->AddValuable(valuable);
+			// Stop moving if picked up TODO
+			SetNewMoveDestination(GetPawn()->GetActorLocation());
 		}
 		else
 		{
