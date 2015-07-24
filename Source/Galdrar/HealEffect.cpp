@@ -14,11 +14,14 @@ HealEffect::HealEffect(CharacterStats* stats)
 	name = "Regeneration";
 	desc = "A burst of life";
 	damage = 2.f;
+
 	duration = 10.f;
 	timeLeft = 10.f;
 	tickRate = 1.f;
-	damageType = DamageType::PHYSICAL;
 	time = 0.f;
+	elapsedTime = 0.f;
+
+	damageType = DamageType::PHYSICAL;
 	bStackable = false;
 	effectType = EffectType::HEAL;
 	bShouldTick = true;
@@ -32,6 +35,7 @@ HealEffect::HealEffect(CharacterStats* stats)
 
 void HealEffect::Tick(float delta)
 {
+	elapsedTime += delta;
 	time += delta;
 	if (time > tickRate)
 	{

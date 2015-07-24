@@ -200,12 +200,37 @@ float ABaseCharacter::GetMana()
 	return stats->mana;
 }
 
+/*
+*	Effect Getters
+*/
 TArray<int32> ABaseCharacter::GetEffectIDs()
 {
 	TArray<int32> array;
 	for (Effect* e : activeEffects)
 	{
 		array.Add(e->GetID());
+	}
+
+	return array;
+}
+
+TArray<float> ABaseCharacter::GetEffectDurations()
+{
+	TArray<float> array;
+	for (Effect* e : activeEffects)
+	{
+		array.Add(e->GetDuration());
+	}
+
+	return array;
+}
+
+TArray<float> ABaseCharacter::GetEffectElapsedTimes()
+{
+	TArray<float> array;
+	for (Effect* e : activeEffects)
+	{
+		array.Add(e->GetElapsedTime());
 	}
 
 	return array;

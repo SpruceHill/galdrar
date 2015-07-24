@@ -15,11 +15,14 @@ BurnEffect::BurnEffect(CharacterStats* stats)
 	name = "Burning";
 	desc = "On fire";
 	damage = 5.f;
+
 	duration = 2.f;
 	timeLeft = 2.f;
 	tickRate = 0.5f;
-	damageType = DamageType::FIRE;
 	time = 0.f;
+	elapsedTime = 0.f;
+	
+	damageType = DamageType::FIRE;
 	bStackable = false;
 	effectType = EffectType::BURNING;
 	bShouldTick = true;
@@ -33,6 +36,7 @@ BurnEffect::BurnEffect(CharacterStats* stats)
 
 void BurnEffect::Tick(float delta)
 {
+	elapsedTime += delta;
 	time += delta;
 	if (time > tickRate)
 	{

@@ -14,11 +14,14 @@ ManaRegenEffect::ManaRegenEffect(CharacterStats* stats)
 	name = "Mana Regeneration";
 	desc = "+3 mana regeneration";
 	damage = 3.f;
+	
 	duration = 10.f;
 	timeLeft = 10.f;
 	tickRate = 1.f;
-	damageType = DamageType::PHYSICAL;
 	time = 0.f;
+	elapsedTime = 0.f;
+	
+	damageType = DamageType::PHYSICAL;
 	bStackable = false;
 	effectType = EffectType::MANA_REGEN;
 	bShouldTick = true;
@@ -32,6 +35,7 @@ ManaRegenEffect::ManaRegenEffect(CharacterStats* stats)
 
 void ManaRegenEffect::Tick(float delta)
 {
+	elapsedTime += delta;
 	if (time == 0.f)
 	{
 		stats->manaReg += damage;

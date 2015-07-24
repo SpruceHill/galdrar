@@ -124,6 +124,10 @@ public:
 
 	UFUNCTION(BlueprintCallable, Category = Effects)
 	TArray<int32> GetEffectIDs();
+	UFUNCTION(BlueprintCallable, Category = Effects)
+	TArray<float> GetEffectDurations();
+	UFUNCTION(BlueprintCallable, Category = Effects)
+	TArray<float> GetEffectElapsedTimes();
 
 protected:
 	CharacterStats* stats;

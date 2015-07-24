@@ -15,11 +15,22 @@ public:
 	virtual void Tick(float delta);
 
 	float GetDamage() { return damage; }
+
+	float GetTime() { return time; }
 	float GetTimeLeft() { return timeLeft; }
+	float GetDuration() { return duration; }
+	float GetElapsedTime() { return elapsedTime; }
+
 	DamageType GetDamageType() { return damageType; }
 	EffectType GetEffectType() { return effectType; }
+
 	int32 GetID(){ return ID; }
-	void ResetTimer() { timeLeft = duration; }
+
+	void ResetTimer()
+	{
+		elapsedTime = 0.f;
+		timeLeft = duration;
+	}
 	FString GetPrint(){ bPrintDI = false; return toBePrinted; }
 
 	bool bStackable;
@@ -29,10 +40,13 @@ public:
 	bool bPrintDI;
 
 protected:
-	float timeLeft;
 	float duration;
 	float tickRate;
+
+	float timeLeft;
 	float time;
+	float elapsedTime;
+
 	float damage;
 	int32 ID;
 	FString name;
