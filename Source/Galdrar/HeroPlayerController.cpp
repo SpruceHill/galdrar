@@ -168,6 +168,8 @@ void AHeroPlayerController::SetupInputComponent()
 	InputComponent->BindAction("Inventory4", IE_Pressed, this, &AHeroPlayerController::Inventory4);
 	InputComponent->BindAction("Inventory5", IE_Pressed, this, &AHeroPlayerController::Inventory5);
 	InputComponent->BindAction("Inventory6", IE_Pressed, this, &AHeroPlayerController::Inventory6);
+
+	InputComponent->BindAction("BloodVial", IE_Pressed, this, &AHeroPlayerController::UseBloodVial);
 }
 
 void AHeroPlayerController::Zoom(float delta)
@@ -503,4 +505,10 @@ void AHeroPlayerController::Inventory(int8 index)
 	{
 		ItemHandler::ActivateItem(hero->GetInventory(index), hero, hero);
 	}
+}
+
+void AHeroPlayerController::UseBloodVial()
+{
+	AHeroCharacter* hero = Cast<AHeroCharacter>(GetPawn());
+	hero->UseBloodVial();
 }

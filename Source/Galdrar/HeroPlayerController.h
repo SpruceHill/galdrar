@@ -85,6 +85,8 @@ private:
 	void Inventory(int8 index);
 
 	void CancelAction();
+
+	void UseBloodVial();
 	
 	// Helpers
 	void AttackEnemy(ABaseCharacter* character, Attack* attack);

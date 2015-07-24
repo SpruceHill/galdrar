@@ -7,6 +7,7 @@
 #include "Valuable.h"
 #include "GaldrarColor.h"
 #include "HUDAdapter.h"
+#include "BaseBloodVial.h"
 #include "HeroCharacter.generated.h"
 
 /**
@@ -148,6 +149,18 @@ public:
 	UFUNCTION(BlueprintCallable, Category = Loot)
 	ALoot* GetInventory(int32 index);
 
+	void UseBloodVial()
+	{
+		bloodVial->Activate();
+	}
+
+	UFUNCTION(BlueprintCallable, Category = BloodVial)
+	int32 GetBloodVialID();
+	UFUNCTION(BlueprintCallable, Category = BloodVial)
+	int32 GetBloodVialMaxCharges();
+	UFUNCTION(BlueprintCallable, Category = BloodVial)
+	int32 GetBloodVialCharges();
+
 protected:
 	int32 lootValue;
 	ALoot* inventorySlot1;
@@ -156,4 +169,6 @@ protected:
 	ALoot* inventorySlot4;
 	ALoot* inventorySlot5;
 	ALoot* inventorySlot6;
+
+	BaseBloodVial* bloodVial;
 };

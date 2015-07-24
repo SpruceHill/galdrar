@@ -13,6 +13,7 @@
 #include "Heal.h"
 #include "Javelin.h"
 #include "Teleport.h"
+#include "CommonBloodVial.h"
 
 AHeroCharacter::AHeroCharacter(const FObjectInitializer& ObjectInitializer)
 	: Super(ObjectInitializer)
@@ -24,6 +25,7 @@ AHeroCharacter::AHeroCharacter(const FObjectInitializer& ObjectInitializer)
 	spells[1] = new GasCloud();
 	spells[2] = new Javelin();
 	spells[3] = new Teleport();
+	bloodVial = new CommonBloodVial(stats);
 	this->GetMesh()->bReceivesDecals = false;
 
 	// Set size for player capsule
@@ -127,4 +129,17 @@ ALoot* AHeroCharacter::GetInventory(int32 index)
 	{
 		return inventorySlot6;
 	}
+}
+
+int32 AHeroCharacter::GetBloodVialID()
+{
+	return bloodVial->GetID();
+}
+int32 AHeroCharacter::GetBloodVialMaxCharges()
+{
+	return bloodVial->GetMaxCharges();
+}
+int32 AHeroCharacter::GetBloodVialCharges()
+{
+	return bloodVial->GetCharges();
 }
