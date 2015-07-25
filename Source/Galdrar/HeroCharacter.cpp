@@ -143,3 +143,8 @@ int32 AHeroCharacter::GetBloodVialCharges()
 {
 	return bloodVial->GetCharges();
 }
+
+void AHeroCharacter::AddBloodVialCharges(int32 nbrOfCharges)
+{
+	bloodVial->AddCharges(nbrOfCharges);
+}

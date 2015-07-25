@@ -12,23 +12,24 @@ CommonBloodVial::CommonBloodVial(CharacterStats* stats)
 	// 5 = Blood Vial, 0001 = ID
 	ID = 50001;
 
-	maxCharges = 100;
-	charges = 40;
-	cost = 20;
+	maxCharges = 5;
+	charges = 2;
+
+	healAmount = 20;
 }
 
 void CommonBloodVial::Activate()
 {
-	if (charges >= cost)
+	if (charges >= 1)
 	{
-		charges -= cost;
-		if (stats->health + cost >= stats->maxHealth)
+		charges -= 1;
+		if (stats->health + healAmount >= stats->maxHealth)
 		{
 			stats->health = stats->maxHealth;
 		}
 		else
 		{
-			stats->health += cost;
+			stats->health += healAmount;
 		}
 	}
 }

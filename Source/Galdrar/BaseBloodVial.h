@@ -20,6 +20,18 @@ public:
 	int32 GetCharges() { return charges; }
 	int32 GetID() { return ID; };
 
+	void AddCharges(int32 nbrOfCharges)
+	{
+		if (charges + nbrOfCharges >= maxCharges)
+		{
+			charges = maxCharges;
+		}
+		else
+		{
+			charges += nbrOfCharges;
+		}
+	}
+
 protected:
 	int32 ID;
 	
@@ -27,8 +39,6 @@ protected:
 	int32 maxCharges;
 	// Current amount
 	int32 charges;
-	// Cost of using the vial. Should be a multiple of charges
-	int32 cost;
 
 	CharacterStats* stats;
 };

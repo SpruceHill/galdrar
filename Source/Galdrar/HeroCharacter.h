@@ -160,6 +160,8 @@ public:
 	int32 GetBloodVialMaxCharges();
 	UFUNCTION(BlueprintCallable, Category = BloodVial)
 	int32 GetBloodVialCharges();
+	UFUNCTION(BlueprintCallable, Category = BloodVial)
+	void AddBloodVialCharges(int32 nbrOfCharges);
 
 protected:
 	int32 lootValue;

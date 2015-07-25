@@ -15,4 +15,7 @@ public:
 	~CommonBloodVial();
 
 	void Activate() override;
+
+private:
+	int32 healAmount;
 };
