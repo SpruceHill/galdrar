@@ -20,7 +20,7 @@ CommonBloodVial::CommonBloodVial(CharacterStats* stats)
 
 void CommonBloodVial::Activate()
 {
-	if (charges >= 1)
+	if (stats->health < stats->maxHealth && charges >= 1)
 	{
 		charges -= 1;
 		if (stats->health + healAmount >= stats->maxHealth)

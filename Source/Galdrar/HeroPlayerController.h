@@ -42,6 +42,9 @@ public:
 	UFUNCTION(BlueprintCallable, Category = Input)
 	void Inventory6();
 
+	UFUNCTION(BlueprintCallable, Category = Input)
+	void UseBloodVial();
+
 private:
 	/** True if the controlled character should navigate to the mouse cursor. */
 	uint32 bMoveToMouseCursor : 1;
@@ -85,8 +88,6 @@ private:
 	void Inventory(int8 index);
 
 	void CancelAction();
-
-	void UseBloodVial();
 	
 	// Helpers
 	void AttackEnemy(ABaseCharacter* character, Attack* attack);
