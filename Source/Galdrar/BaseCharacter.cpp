@@ -98,12 +98,16 @@ void ABaseCharacter::Wound(float amount, DamageType type, bool crit)
 
 	stats->health -= amount;
 	if (stats->health <= 0 && stats->health + amount > 0)
-		GEngine->AddOnScreenDebugMessage(-1, 15.0f, FColor::Red, name + " just died");
-	if (stats->health <= 0)
+	{
+		OnDeath();// GEngine->AddOnScreenDebugMessage(-1, 15.0f, FColor::Red, name + " just died");
+		SetActorEnableCollision(false);
+		SetActorHiddenInGame(true);
+	}
+	/*if (stats->health <= 0)
 	{
 		this->SetActorEnableCollision(false);
 		this->SetActorHiddenInGame(true);
-	}
+	}*/
 }
 
 void ABaseCharacter::SetHealth(float newHealth)

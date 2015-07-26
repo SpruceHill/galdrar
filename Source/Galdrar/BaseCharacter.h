@@ -129,6 +129,9 @@ public:
 	UFUNCTION(BlueprintCallable, Category = Effects)
 	TArray<float> GetEffectElapsedTimes();
 
+	UFUNCTION(BlueprintImplementableEvent, BlueprintCallable, Category = BaseCharacter)
+	void OnDeath();
+
 protected:
 	CharacterStats* stats;
 	UPROPERTY(BlueprintReadWrite, Category = character)
