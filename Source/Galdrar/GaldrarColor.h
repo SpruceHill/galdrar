@@ -17,6 +17,8 @@ class GALDRAR_API UGaldrarColor : public UBlueprintFunctionLibrary
 public:
 	static FColor GetDamageTypeColor(DamageType type);
 
+	UFUNCTION(BlueprintCallable, Category = Color)
+	static FColor GetLevelColor(int32 level);
 	
 	//DAMAGE TYPES
 	UFUNCTION(BlueprintCallable, Category = Color)

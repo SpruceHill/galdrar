@@ -10,7 +10,7 @@ AEnemyCharacter::AEnemyCharacter(const FObjectInitializer& ObjectInitializer)
 	: Super(ObjectInitializer)
 {
 	name = "Old Name";
-
+	level = 1;
 	stats = new CharacterStats();
 	this->GetMesh()->bReceivesDecals = false;
 	
@@ -19,4 +19,14 @@ AEnemyCharacter::AEnemyCharacter(const FObjectInitializer& ObjectInitializer)
 	// Configure character movement
 	bUseControllerRotationYaw = false;
 	GetCharacterMovement()->bOrientRotationToMovement = true; // Rotate character to moving direction
+}
+
+int32 AEnemyCharacter::GetLevel()
+{
+	return level;
+}
+
+void AEnemyCharacter::SetLevel(int32 newLevel)
+{
+	level = newLevel;
 }

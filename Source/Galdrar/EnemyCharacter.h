@@ -18,4 +18,15 @@ public:
 
 	UPROPERTY(EditAnywhere, Category = Behavior)
 	class UBehaviorTree* botBehavior;
+
+	UFUNCTION(BlueprintCallable, Category = Enemy)
+	int32 GetLevel();
+
+	UFUNCTION(BlueprintCallable, Category = Enemy)
+	void SetLevel(int32 newLevel);
+
+protected:
+	// Level used to generate name color 1-5
+	UPROPERTY(EditAnywhere, Category = Enemy)
+	int32 level;
 };

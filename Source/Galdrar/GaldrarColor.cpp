@@ -17,6 +17,19 @@ FColor UGaldrarColor::GetDamageTypeColor(DamageType type)
 	}
 }
 
+FColor UGaldrarColor::GetLevelColor(int32 level)
+{
+	switch (level)
+	{
+	case 1: return FColor::White;
+	case 2: return FColor::FromHex("FFDE00FF");
+	case 3: return FColor::FromHex("FF6A00FF");
+	case 4: return FColor::FromHex("FF0600FF");
+	case 5: return FColor::FromHex("9400ABFF");
+	default: return FColor::Black;
+	}
+}
+
 FColor UGaldrarColor::GetFireColor()
 {
 	return FColor::FromHex("FF5300FF");
