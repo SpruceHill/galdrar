@@ -277,6 +277,7 @@ void AHeroPlayerController::AttackEnemy(ABaseCharacter* character, Attack* attac
 		SetNewMoveDestination(hero->GetActorLocation());
 
 		FaceActor(character);
+		hero->AttackAnimation();
 		CombatHandler::AttackEnemy(hero, character, attack);
 		SpellHandler::ActivateSpell(attack, hero, character);
 

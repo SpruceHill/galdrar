@@ -16,9 +16,6 @@ ManaRegenEffect::ManaRegenEffect(CharacterStats* stats)
 	damage = 3.f;
 	
 	duration = 10.f;
-	timeLeft = 10.f;
-	tickRate = 1.f;
-	time = 0.f;
 	elapsedTime = 0.f;
 	
 	damageType = DamageType::PHYSICAL;
@@ -28,28 +25,24 @@ ManaRegenEffect::ManaRegenEffect(CharacterStats* stats)
 	bPrintDI = false;
 	doDamage = false;
 	toBePrinted = "+" + FString::FromInt(damage);
+	bRemoveOnDamageTaken = true;
 
 	// 4 = Effect, ID = 0004
 	ID = 40004;
+
+	// Apply effect
+	stats->manaReg += damage;
 }
 
 void ManaRegenEffect::Tick(float delta)
 {
 	elapsedTime += delta;
-	if (time == 0.f)
-	{
-		stats->manaReg += damage;
-	}
-	time += delta;
-	if (time > tickRate)
-	{
-		timeLeft -= tickRate;
-		time -= tickRate;
-	}
+
 	// Remove effect
-	if (timeLeft <= 0.f)
+	if (elapsedTime >= duration || stats->mana >= stats->maxMana)
 	{
 		stats->manaReg -= damage;
+		elapsedTime = duration;
 	}
 }
 

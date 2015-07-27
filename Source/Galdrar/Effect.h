@@ -17,7 +17,7 @@ public:
 	float GetDamage() { return damage; }
 
 	float GetTime() { return time; }
-	float GetTimeLeft() { return timeLeft; }
+	//float GetTimeLeft() { return timeLeft; }
 	float GetDuration() { return duration; }
 	float GetElapsedTime() { return elapsedTime; }
 
@@ -29,8 +29,13 @@ public:
 	void ResetTimer()
 	{
 		elapsedTime = 0.f;
-		timeLeft = duration;
 	}
+
+	void End()
+	{
+		elapsedTime = duration;
+	}
+
 	FString GetPrint(){ bPrintDI = false; return toBePrinted; }
 
 	bool bStackable;
@@ -38,12 +43,12 @@ public:
 	bool doDamage;
 	bool bShouldTick;
 	bool bPrintDI;
+	bool bRemoveOnDamageTaken;
 
 protected:
 	float duration;
 	float tickRate;
 
-	float timeLeft;
 	float time;
 	float elapsedTime;
 
@@ -54,4 +59,5 @@ protected:
 	FString toBePrinted;
 	DamageType damageType;
 	CharacterStats* stats;
+
 };

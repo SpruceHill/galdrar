@@ -132,6 +132,9 @@ public:
 	UFUNCTION(BlueprintImplementableEvent, BlueprintCallable, Category = BaseCharacter)
 	void OnDeath();
 
+	UFUNCTION(BlueprintImplementableEvent, Category = BaseCharacter)
+	void AttackAnimation();
+
 protected:
 	CharacterStats* stats;
 	UPROPERTY(BlueprintReadWrite, Category = character)

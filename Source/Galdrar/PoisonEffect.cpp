@@ -17,7 +17,6 @@ PoisonEffect::PoisonEffect(CharacterStats* stats)
 	damage = 3.f;
 	
 	duration = 10.f;
-	timeLeft = 10.f;
 	tickRate = 1.f;
 	time = 0.f;
 	elapsedTime = 0.f;
@@ -29,6 +28,7 @@ PoisonEffect::PoisonEffect(CharacterStats* stats)
 	bPrintDI = true;
 	doDamage = false;
 	toBePrinted = int32(damage * (1 - (stats->poisonResistance / 100.f))) > 0 ? name : "Immune";
+	bRemoveOnDamageTaken = false;
 
 	// 4 = Effect, ID = 0002
 	ID = 40002;
@@ -40,8 +40,6 @@ void PoisonEffect::Tick(float delta)
 	time += delta;
 	if (time > tickRate)
 	{
-		toBePrinted = FString::FromInt(damage * (1 - (stats->poisonResistance / 100.f))); // In case resistance has changed
-		timeLeft -= tickRate;
 		time -= tickRate;
 		doDamage = true;
 	}

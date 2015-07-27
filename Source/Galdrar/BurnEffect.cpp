@@ -17,7 +17,6 @@ BurnEffect::BurnEffect(CharacterStats* stats)
 	damage = 5.f;
 
 	duration = 2.f;
-	timeLeft = 2.f;
 	tickRate = 0.5f;
 	time = 0.f;
 	elapsedTime = 0.f;
@@ -29,6 +28,7 @@ BurnEffect::BurnEffect(CharacterStats* stats)
 	bPrintDI = false;
 	doDamage = false;
 	toBePrinted = desc;
+	bRemoveOnDamageTaken = false;
 
 	// 4 = Effect, ID = 0001
 	ID = 40001;
@@ -40,7 +40,6 @@ void BurnEffect::Tick(float delta)
 	time += delta;
 	if (time > tickRate)
 	{
-		timeLeft -= tickRate;
 		time -= tickRate;
 		doDamage = true;
 	}

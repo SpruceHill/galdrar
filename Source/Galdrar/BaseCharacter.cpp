@@ -9,12 +9,6 @@
 void ABaseCharacter::Tick(float DeltaSeconds)
 {
 	Super::Tick(DeltaSeconds);
-	/*time += DeltaSeconds;
-	if (time >= 1.f)
-	{
-		time = 0.f;
-		if(stats->mana < stats->maxMana) stats->mana += stats->manaReg;
-	}*/
 
 	GetCharacterMovement()->MaxWalkSpeed = stats->movementSpeed;
 	GetCharacterMovement()->RotationRate = FRotator(0.f, stats->rotationRate, 0.f);
@@ -42,38 +36,12 @@ void ABaseCharacter::Tick(float DeltaSeconds)
 				HA.CreateDamageIndicator(this, effect->GetPrint(), UGaldrarColor::GetDamageTypeColor(effect->GetDamageType()), false);
 			}
 		}
-		if (effect->GetTimeLeft() <= 0.f)
+		if (effect->GetElapsedTime() >= effect->GetDuration())
 		{
 			it = activeEffects.erase(it);
 		}
 		++it;
 	}
-/*	for (Effect* effect : activeEffects)
-	{
-		if (effect)
-		{
-			if (effect->bShouldTick)
-			{
-				effect->Tick(DeltaSeconds);
-				if (effect->doDamage)
-				{
-					float effectDamage = effect->GetDamage();
-					effectDamage *= 1 - (GetResistance(effect->GetDamageType()) / 100.f);
-					Wound((int32)effectDamage, effect->GetDamageType(), false);
-					effect->bPrintDI = false;
-				}
-				if (effect->bPrintDI)
-				{
-					HUDAdapter HA;
-					HA.CreateDamageIndicator(this, effect->GetPrint(), GaldrarColor::GetDamageTypeColor(effect->GetDamageType()), false);
-				}
-			}
-			if (effect->GetTimeLeft() <= 0.f)
-			{
-				activeEffects.Remove(effect);
-			}
-		}
-	}*/
 
 	for (Spell* s : spells)
 	{
@@ -107,11 +75,12 @@ void ABaseCharacter::Wound(float amount, DamageType type, bool crit)
 		SetActorEnableCollision(false);
 		SetActorHiddenInGame(true);
 	}
-	/*if (stats->health <= 0)
+
+	// Remove damage sensitive effects
+	for (Effect* e : activeEffects)
 	{
-		this->SetActorEnableCollision(false);
-		this->SetActorHiddenInGame(true);
-	}*/
+		if (e->bRemoveOnDamageTaken) e->End();
+	}
 }
 
 void ABaseCharacter::SetHealth(float newHealth)
