@@ -42,6 +42,9 @@ public:
 	void AddValuable(AValuable* valuable);
 
 	UFUNCTION(BlueprintCallable, Category = Loot)
+	void RemoveLootValue(int32 amount);
+
+	UFUNCTION(BlueprintCallable, Category = Loot)
 	int32 GetLootValue();
 
 	void AddLoot(ALoot* loot)

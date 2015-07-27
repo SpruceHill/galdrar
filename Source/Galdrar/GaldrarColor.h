@@ -2,64 +2,42 @@
 
 #pragma once
 
+#include "Kismet/BlueprintFunctionLibrary.h"
 #include "DamageType.h"
+#include "GaldrarColor.generated.h"
+
 /**
  * 
  */
-class GALDRAR_API GaldrarColor
+UCLASS()
+class GALDRAR_API UGaldrarColor : public UBlueprintFunctionLibrary
 {
+	GENERATED_BODY()
+	
 public:
+	static FColor GetDamageTypeColor(DamageType type);
 
-	static FColor GetDamageTypeColor(DamageType type)
-	{
-		switch (type)
-		{
-		case DamageType::FIRE: return GetFireColor();
-		case DamageType::FROST: return GetFrostColor();
-		case DamageType::SHOCK: return GetShockColor();
-		case DamageType::POISON: return GetPoisonColor();
-		case DamageType::PHYSICAL: return GetPhysicalColor();
-		case DamageType::TRUE: return GetTrueDamageColor();
-		default: return FColor::Black;
-		}
-	}
-
-	/*
-	*	DAMAGE TYPES
-	*/
-	static FColor GetFireColor()
-	{
-		return FColor::FromHex("FF5300FF");
-	}
-	static FColor GetFrostColor()
-	{
-		return FColor::FromHex("6BBEFFFF");
-	}
-	static FColor GetShockColor()
-	{
-		return FColor::FromHex("B410FFFF");
-	}
-	static FColor GetPoisonColor()
-	{
-		return FColor::FromHex("009866FF");
-	}
-	static FColor GetPhysicalColor()
-	{
-		return FColor::White;
-	}
-	static FColor GetTrueDamageColor()
-	{
-		return FColor::White;
-	}
+	
+	//DAMAGE TYPES
+	UFUNCTION(BlueprintCallable, Category = Color)
+	static FColor GetFireColor();
+	UFUNCTION(BlueprintCallable, Category = Color)
+	static FColor GetFrostColor();
+	UFUNCTION(BlueprintCallable, Category = Color)
+	static FColor GetShockColor();
+	UFUNCTION(BlueprintCallable, Category = Color)
+	static FColor GetPoisonColor();
+	UFUNCTION(BlueprintCallable, Category = Color)
+	static FColor GetPhysicalColor();
+	UFUNCTION(BlueprintCallable, Category = Color)
+	static FColor GetTrueDamageColor();
 
 	// GOLD
-	static FColor GetGoldColor()
-	{
-		return FColor::FromHex("DAA520FF");
-	}
+	UFUNCTION(BlueprintCallable, Category = Color)
+	static FColor GetGoldColor();
 
-	static FColor GetHealColor()
-	{
-		return FColor::Green;
-	}
+	// HEAL
+	UFUNCTION(BlueprintCallable, Category = Color)
+	static FColor GetHealColor();
+
 };

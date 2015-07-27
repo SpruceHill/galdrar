@@ -439,7 +439,7 @@ void AHeroPlayerController::Spell(int8 index)
 			hud->RemoveAOETemplate();
 			hud->RemoveRangeIndicator();
 			
-			hud->CreateRangeIndicator(hero, hero->GetSpell(index)->GetRange(), GaldrarColor::GetDamageTypeColor(hero->GetSpell(index)->GetDamageType()));
+			hud->CreateRangeIndicator(hero, hero->GetSpell(index)->GetRange(), UGaldrarColor::GetDamageTypeColor(hero->GetSpell(index)->GetDamageType()));
 		}
 		break;
 	
@@ -454,10 +454,10 @@ void AHeroPlayerController::Spell(int8 index)
 				hud->RemoveAOETemplate();
 				hud->RemoveRangeIndicator();
 				
-				hud->CreateRangeIndicator(hero, hero->GetSpell(index)->GetRange(), GaldrarColor::GetDamageTypeColor(hero->GetSpell(index)->GetDamageType()));
+				hud->CreateRangeIndicator(hero, hero->GetSpell(index)->GetRange(), UGaldrarColor::GetDamageTypeColor(hero->GetSpell(index)->GetDamageType()));
 				
 				hud->CreateAOECircle(hero, hero->GetSpell(index)->GetRadius(), 
-					GaldrarColor::GetDamageTypeColor(hero->GetSpell(index)->GetDamageType()));
+					UGaldrarColor::GetDamageTypeColor(hero->GetSpell(index)->GetDamageType()));
 			}
 		}
 		else if (hero->GetSpell(index)->GetSpellTarget() == Spell::SpellTarget::CONE)
@@ -467,10 +467,10 @@ void AHeroPlayerController::Spell(int8 index)
 				hud->RemoveAOETemplate();
 				hud->RemoveRangeIndicator();
 				
-				hud->CreateRangeIndicator(hero, hero->GetSpell(index)->GetRange(), GaldrarColor::GetDamageTypeColor(hero->GetSpell(index)->GetDamageType()));
+				hud->CreateRangeIndicator(hero, hero->GetSpell(index)->GetRange(), UGaldrarColor::GetDamageTypeColor(hero->GetSpell(index)->GetDamageType()));
 				
 				hud->CreateAOECone(hero, hero->GetSpell(index)->GetRange(), hero->GetSpell(index)->GetRadius(),
-					GaldrarColor::GetDamageTypeColor(hero->GetSpell(index)->GetDamageType()));
+					UGaldrarColor::GetDamageTypeColor(hero->GetSpell(index)->GetDamageType()));
 			}
 		}
 		break;

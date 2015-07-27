@@ -13,7 +13,7 @@ CommonBloodVial::CommonBloodVial(CharacterStats* stats)
 	ID = 50001;
 
 	maxCharges = 5;
-	charges = 2;
+	charges = 0;
 
 	healAmount = 20;
 }

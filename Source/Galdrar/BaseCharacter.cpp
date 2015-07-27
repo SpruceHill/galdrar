@@ -15,6 +15,10 @@ void ABaseCharacter::Tick(float DeltaSeconds)
 		time = 0.f;
 		if(stats->mana < stats->maxMana) stats->mana += stats->manaReg;
 	}*/
+
+	GetCharacterMovement()->MaxWalkSpeed = stats->movementSpeed;
+	GetCharacterMovement()->RotationRate = FRotator(0.f, stats->rotationRate, 0.f);
+
 	if (stats->mana < stats->maxMana) stats->mana += stats->manaReg*DeltaSeconds;
 
 	std::list<Effect*>::iterator it = activeEffects.begin();
@@ -35,7 +39,7 @@ void ABaseCharacter::Tick(float DeltaSeconds)
 			if (effect->bPrintDI)
 			{
 				HUDAdapter HA;
-				HA.CreateDamageIndicator(this, effect->GetPrint(), GaldrarColor::GetDamageTypeColor(effect->GetDamageType()), false);
+				HA.CreateDamageIndicator(this, effect->GetPrint(), UGaldrarColor::GetDamageTypeColor(effect->GetDamageType()), false);
 			}
 		}
 		if (effect->GetTimeLeft() <= 0.f)
@@ -80,7 +84,7 @@ void ABaseCharacter::Tick(float DeltaSeconds)
 void ABaseCharacter::Heal(float amount)
 {
 	HUDAdapter HA;
-	HA.CreateDamageIndicator(this, "+"+FString::FromInt(amount), GaldrarColor::GetHealColor(), false);
+	HA.CreateDamageIndicator(this, "+"+FString::FromInt(amount), UGaldrarColor::GetHealColor(), false);
 	if (stats->health + amount > stats->maxHealth)
 	{
 		stats->health = stats->maxHealth;
@@ -94,7 +98,7 @@ void ABaseCharacter::Heal(float amount)
 void ABaseCharacter::Wound(float amount, DamageType type, bool crit)
 {
 	HUDAdapter HA;
-	HA.CreateDamageIndicator(this, FString::FromInt(amount), GaldrarColor::GetDamageTypeColor(type), crit);
+	HA.CreateDamageIndicator(this, FString::FromInt(amount), UGaldrarColor::GetDamageTypeColor(type), crit);
 
 	stats->health -= amount;
 	if (stats->health <= 0 && stats->health + amount > 0)

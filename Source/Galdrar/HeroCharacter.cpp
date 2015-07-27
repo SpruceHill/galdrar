@@ -67,9 +67,15 @@ void AHeroCharacter::Zoom(float delta)
 void AHeroCharacter::AddValuable(AValuable* valuable)
 {
 	HUDAdapter HA;
-	HA.CreateDamageIndicator(this, "+" + FString::FromInt(valuable->GetValue()), GaldrarColor::GetGoldColor(), false);
+	HA.CreateDamageIndicator(this, "+" + FString::FromInt(valuable->GetValue()), UGaldrarColor::GetGoldColor(), false);
 	lootValue += valuable->GetValue();
 	valuable->Destroy();
+}
+
+void AHeroCharacter::RemoveLootValue(int32 amount)
+{
+	if (lootValue - amount < 0) lootValue = 0;
+	else lootValue -= amount;
 }
 
 int32 AHeroCharacter::GetLootValue()
