@@ -2,10 +2,11 @@
 
 #include "Galdrar.h"
 #include "EnemyAIController.h"
-#include "EnemyCharacter.h"
+#include "BaseCharacter.h"
 #include "HeroCharacter.h"
 #include "BehaviorTree/Blackboard/BlackboardKeyType_Object.h"
 #include "BehaviorTree/Blackboard/BlackboardKeyType_Vector.h"
+#include "BehaviorTree/Blackboard/BlackboardKeyType_Bool.h"
 #include "BehaviorTree/BlackboardComponent.h"
 
 AEnemyAIController::AEnemyAIController(const FObjectInitializer& ObjectInitializer)
@@ -21,6 +22,9 @@ void AEnemyAIController::Possess(class APawn* inPawn)
 	AEnemyCharacter* bot = Cast<AEnemyCharacter>(inPawn);
 	if (bot && bot->botBehavior)
 	{
+		bIsPossessing = true;
+		if (!persistantPawn) persistantPawn = bot;
+
 		blackboardComp->InitializeBlackboard(*(bot->botBehavior->BlackboardAsset));
 		enemyKeyID = blackboardComp->GetKeyID("Enemy");
 		enemyLocationID = blackboardComp->GetKeyID("Destination");
@@ -31,14 +35,15 @@ void AEnemyAIController::Possess(class APawn* inPawn)
 
 void AEnemyAIController::SetEnemy(class APawn* inPawn)
 {
-
 	blackboardComp->SetValue<UBlackboardKeyType_Object>(enemyKeyID, inPawn);
 	blackboardComp->SetValue<UBlackboardKeyType_Vector>(enemyLocationID, inPawn->GetActorLocation());
 }
+
 void AEnemyAIController::SearchForEnemy()
 {
-	APawn* bot = GetPawn();
-	if (bot == NULL) { return; }
+	ABaseCharacter* bot = Cast<ABaseCharacter>(GetPawn());
+	if (bot == NULL) { GEngine->AddOnScreenDebugMessage(-1, 15.0f, FColor::Blue, "BOT NULL"); return; }
+
 	const FVector location = bot->GetActorLocation();
 	float bestDistanceSquared = MAX_FLT;
 	

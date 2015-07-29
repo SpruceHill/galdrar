@@ -35,22 +35,28 @@ void AHeroPlayerController::PlayerTick(float DeltaTime)
 
 	UpdateCursorOverState();
 
+	AHeroCharacter* hero = Cast<AHeroCharacter>(GetPawn());
+
+	bStunned = hero->IsStunned();
+	if (bStunned) DisableInput(this);
+	else EnableInput(this);
+
 	// Keep updating the destination every tick while desired
-	if (bMoveToMouseCursor)
+	if (bMoveToMouseCursor && !bStunned)
 	{
 		MoveToMouseCursor();
 	}
 	
-	if (groundTarget != FVector::ZeroVector)
+	if (groundTarget != FVector::ZeroVector && !bStunned)
 	{
 		if (scheduledAttack) 
 			AttackGround(groundTarget, scheduledAttack);
 	}
-	else if (targetCharacter)
+	else if (targetCharacter && !bStunned)
 	{
 		AttackEnemy(targetCharacter, scheduledAttack);
 	}
-	else if (targetLoot)
+	else if (targetLoot && !bStunned)
 	{
 		Pickup(targetLoot);
 	}
@@ -58,7 +64,6 @@ void AHeroPlayerController::PlayerTick(float DeltaTime)
 	// Camera smooth zoom
 	if (bShouldZoom)
 	{
-		AHeroCharacter* hero = Cast<AHeroCharacter>(GetPawn());
 		if (hero->GetCameraBoom()->TargetArmLength < targetZoom){
 			hero->SetCameraBoom(hero->GetCameraBoom()->TargetArmLength + zoomSpeed);
 		}
@@ -405,10 +410,10 @@ void AHeroPlayerController::CancelAction()
 	}
 }
 
-void AHeroPlayerController::Spell1(){ Spell(0); }
-void AHeroPlayerController::Spell2(){ Spell(1); }
-void AHeroPlayerController::Spell3(){ Spell(2); }
-void AHeroPlayerController::Spell4(){ Spell(3); }
+void AHeroPlayerController::Spell1(){ if (!bStunned) Spell(0); }
+void AHeroPlayerController::Spell2(){ if (!bStunned) Spell(1); }
+void AHeroPlayerController::Spell3(){ if (!bStunned) Spell(2); }
+void AHeroPlayerController::Spell4(){ if (!bStunned) Spell(3); }
 
 void AHeroPlayerController::Spell(int8 index)
 {

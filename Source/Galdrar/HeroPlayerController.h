@@ -64,6 +64,7 @@ private:
 	HUDAdapter HA;
 	Attack* scheduledAttack;
 	Attack* primedAttack;
+	bool bStunned;
 
 	virtual void BeginPlay() override;
 	virtual void PlayerTick(float DeltaTime) override;

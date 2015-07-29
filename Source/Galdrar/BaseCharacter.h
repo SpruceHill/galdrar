@@ -113,6 +113,9 @@ public:
 		return DamageAmount;
 	}
 
+	UFUNCTION(BlueprintCallable, Category = Stats)
+	void Stun(float duration);
+
 	UFUNCTION(BlueprintCallable, Category = Stat)
 	float GetHealth();
 	UFUNCTION(BlueprintCallable, Category = Stat)
@@ -129,6 +132,9 @@ public:
 	UFUNCTION(BlueprintCallable, Category = Effects)
 	TArray<float> GetEffectElapsedTimes();
 
+	UFUNCTION(BlueprintCallable, Category = BaseCharacter)
+	bool IsStunned();
+
 	UFUNCTION(BlueprintImplementableEvent, BlueprintCallable, Category = BaseCharacter)
 	void OnDeath();
 
@@ -137,11 +143,13 @@ public:
 
 protected:
 	CharacterStats* stats;
-	UPROPERTY(BlueprintReadWrite, Category = character)
+	UPROPERTY(BlueprintReadWrite, Category = BaseCharacter)
 	FString name;
 	std::list /*TArray */< Effect* > activeEffects;
 	Attack* weapon;
 	Spell* spells [4];
+	bool bStunned = false;
 private:
 	float time = 0.f;
+	float stunTime = 0.f;
 };

@@ -3,6 +3,7 @@
 #pragma once
 
 #include "AIController.h"
+#include "EnemyCharacter.h"
 #include "EnemyAIController.generated.h"
 
 
@@ -33,5 +34,9 @@ public:
 protected:
 	uint8 enemyKeyID;
 	uint8 enemyLocationID;
+
 	float aggroDistance = 400.f;
+
+	AEnemyCharacter* persistantPawn;
+	bool bIsPossessing;
 };

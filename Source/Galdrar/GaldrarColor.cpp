@@ -25,7 +25,7 @@ FColor UGaldrarColor::GetLevelColor(int32 level)
 	case 2: return FColor::FromHex("FFDE00FF");
 	case 3: return FColor::FromHex("FF6A00FF");
 	case 4: return FColor::FromHex("FF0600FF");
-	case 5: return FColor::FromHex("9400ABFF");
+	case 5: return FColor::FromHex("8800C1FF");
 	default: return FColor::Black;
 	}
 }

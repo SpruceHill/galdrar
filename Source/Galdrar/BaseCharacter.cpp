@@ -13,8 +13,10 @@ void ABaseCharacter::Tick(float DeltaSeconds)
 	GetCharacterMovement()->MaxWalkSpeed = stats->movementSpeed;
 	GetCharacterMovement()->RotationRate = FRotator(0.f, stats->rotationRate, 0.f);
 
+	// Mana regen
 	if (stats->mana < stats->maxMana) stats->mana += stats->manaReg*DeltaSeconds;
 
+	// Tick effects
 	std::list<Effect*>::iterator it = activeEffects.begin();
 	while (it != activeEffects.end())
 	{
@@ -43,9 +45,22 @@ void ABaseCharacter::Tick(float DeltaSeconds)
 		++it;
 	}
 
+	// Tick spells
 	for (Spell* s : spells)
 	{
 		if (s) s->Tick(DeltaSeconds);
+	}
+
+	// Tick stun
+	if (bStunned)
+	{
+		time += DeltaSeconds;
+		if (time >= stunTime)
+		{
+			GEngine->AddOnScreenDebugMessage(-1, 15.0f, FColor::Red, name + " is no longer stunned");
+			bStunned = false;
+			time = 0.f;
+		}
 	}
 }
 
@@ -71,7 +86,8 @@ void ABaseCharacter::Wound(float amount, DamageType type, bool crit)
 	stats->health -= amount;
 	if (stats->health <= 0 && stats->health + amount > 0)
 	{
-		OnDeath();// GEngine->AddOnScreenDebugMessage(-1, 15.0f, FColor::Red, name + " just died");
+		DisableInput(Cast<APlayerController>(GetController()));
+		OnDeath();
 		SetActorEnableCollision(false);
 		SetActorHiddenInGame(true);
 	}
@@ -157,6 +173,14 @@ void ABaseCharacter::InitStats(float health, float mana, float armour, float fro
 	}
 }
 
+void ABaseCharacter::Stun(float duration)
+{
+	HUDAdapter HA;
+	HA.CreateDamageIndicator(this, "Stunned", FColor::White, false);
+	stunTime = duration;
+	bStunned = true;
+}
+
 float ABaseCharacter::GetHealth()
 {
 	return stats->health;
@@ -211,4 +235,9 @@ TArray<float> ABaseCharacter::GetEffectElapsedTimes()
 	}
 
 	return array;
+}
+
+bool ABaseCharacter::IsStunned()
+{
+	return bStunned;
 }
