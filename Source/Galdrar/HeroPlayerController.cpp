@@ -418,6 +418,14 @@ void AHeroPlayerController::Spell4(){ if (!bStunned) Spell(3); }
 void AHeroPlayerController::Spell(int8 index)
 {
 	AHeroCharacter* hero = Cast<AHeroCharacter>(GetPawn());
+
+	if (hero->IsSilenced())
+	{
+		// TOAST
+		GEngine->AddOnScreenDebugMessage(-1, 15.0f, FColor::Green, "Silenced");
+		return;
+	}
+
 	if (!hero->GetSpell(index))
 	{
 		GEngine->AddOnScreenDebugMessage(-1, 15.0f, FColor::Red, "No spell in slot " + FString::FromInt(index+1));

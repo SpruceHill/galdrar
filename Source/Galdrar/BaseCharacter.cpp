@@ -54,12 +54,13 @@ void ABaseCharacter::Tick(float DeltaSeconds)
 	// Tick stun
 	if (bStunned)
 	{
-		time += DeltaSeconds;
-		if (time >= stunTime)
+		stunTime += DeltaSeconds;
+		if (stunTime >= stunDuration)
 		{
 			GEngine->AddOnScreenDebugMessage(-1, 15.0f, FColor::Red, name + " is no longer stunned");
 			bStunned = false;
-			time = 0.f;
+			stunTime = 0.f;
+			stunDuration = 0.f;
 		}
 	}
 }
@@ -175,10 +176,32 @@ void ABaseCharacter::InitStats(float health, float mana, float armour, float fro
 
 void ABaseCharacter::Stun(float duration)
 {
-	HUDAdapter HA;
-	HA.CreateDamageIndicator(this, "Stunned", FColor::White, false);
-	stunTime = duration;
-	bStunned = true;
+	if (!bStunned)
+	{
+		HUDAdapter HA;
+		HA.CreateDamageIndicator(this, "Stunned", FColor::White, false);
+	}
+	// Extend stun time if new stun is applied
+	if (stunDuration - stunTime < duration)
+	{
+		stunDuration = stunTime + duration;
+		bStunned = true;
+	}
+}
+
+void ABaseCharacter::Silence(float duration)
+{
+	if (!bSilenced)
+	{
+		HUDAdapter HA;
+		HA.CreateDamageIndicator(this, "Silenced", FColor::White, false);
+	}
+	// Extend silence time if new silence is applied
+	if (silenceDuration - silenceTime < duration)
+	{
+		silenceDuration = silenceTime + duration;
+		bSilenced = true;
+	}
 }
 
 float ABaseCharacter::GetHealth()
@@ -240,4 +263,9 @@ TArray<float> ABaseCharacter::GetEffectElapsedTimes()
 bool ABaseCharacter::IsStunned()
 {
 	return bStunned;
+}
+
+bool ABaseCharacter::IsSilenced()
+{
+	return bSilenced;
 }
