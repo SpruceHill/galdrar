@@ -11,6 +11,11 @@ void HUDAdapter::CreateDamageIndicator(ABaseCharacter* character, const FString&
 	HUDInstance->CreateDamageIndicator(character, text, indicatorColor, crit);
 }
 
+void HUDAdapter::Toast(const FString& text)
+{
+	HUDInstance->Toast(text);
+}
+
 AGaldrarHUD* HUDAdapter::GetHUD()
 {
 	return HUDInstance;

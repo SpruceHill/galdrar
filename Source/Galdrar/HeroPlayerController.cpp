@@ -361,7 +361,7 @@ void AHeroPlayerController::Pickup(ALoot* loot)
 			}
 			else
 			{
-				GEngine->AddOnScreenDebugMessage(-1, 15.0f, FColor::Red, "Inventory Full");
+				HA.Toast("Inventory full");
 			}
 		}
 		targetLoot = NULL;
@@ -421,8 +421,7 @@ void AHeroPlayerController::Spell(int8 index)
 
 	if (hero->IsSilenced())
 	{
-		// TOAST
-		GEngine->AddOnScreenDebugMessage(-1, 15.0f, FColor::Green, "Silenced");
+		HA.Toast("Silenced");
 		return;
 	}
 
@@ -433,12 +432,12 @@ void AHeroPlayerController::Spell(int8 index)
 	}
 	if (hero->GetSpell(index)->IsOnCoolDown())
 	{
-		GEngine->AddOnScreenDebugMessage(-1, 15.0f, FColor::Red, hero->GetSpell(index)->GetName() + " is not ready");
+		HA.Toast(hero->GetSpell(index)->GetName() + " is not ready");
 		return;
 	}
 	if (hero->GetStats()->mana < hero->GetSpell(index)->GetManaCost())
 	{
-		GEngine->AddOnScreenDebugMessage(-1, 15.0f, FColor::Red, "Not enough mana");
+		HA.Toast("Not enough mana");
 		return;
 	}
 

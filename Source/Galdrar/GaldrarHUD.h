@@ -34,6 +34,9 @@ public:
 	UFUNCTION(BlueprintImplementableEvent, BlueprintCallable, Category = HUD)
 	void CreateMovementLocationIndicator(FVector location);
 
+	UFUNCTION(BlueprintImplementableEvent, BlueprintCallable, Category = HUD)
+	void Toast(const FString& text);
+
 	UFUNCTION(BlueprintCallable, Category = "Spells")
 	void RemoveAOETemplate();
 	
