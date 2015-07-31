@@ -105,17 +105,20 @@ void AHeroPlayerController::UpdateCursorOverState()
 			CurrentMouseCursor = EMouseCursor::Crosshairs;
 		}
 		// If cursor is over a character
-		if (ABaseCharacter* character = dynamic_cast<ABaseCharacter*>(Hit.GetActor()))
-		{
-			if (AGaldrarHUD* hud = dynamic_cast<AGaldrarHUD*>(GetHUD()))
+		//if (Hit.GetActor() != GetPawn())
+		//{
+			if (ABaseCharacter* character = dynamic_cast<ABaseCharacter*>(Hit.GetActor()))
 			{
-				hud->SetFocusedCharacter(character);
-			}
+				if (AGaldrarHUD* hud = dynamic_cast<AGaldrarHUD*>(GetHUD()))
+				{
+					hud->SetFocusedCharacter(character);
+				}
 
-			// Set cursor style when on character
-			if (!bSelectingGroundTarget)
-				CurrentMouseCursor = (bSelectingUnitTarget ? EMouseCursor::EyeDropper : EMouseCursor::Hand);
-		}
+				// Set cursor style when on character
+				if (!bSelectingGroundTarget)
+					CurrentMouseCursor = (bSelectingUnitTarget ? EMouseCursor::EyeDropper : EMouseCursor::Hand);
+			}
+		//}
 		// If cursor is over loot
 		else if (ALoot* loot = dynamic_cast<ALoot*>(Hit.GetActor()))
 		{
@@ -237,13 +240,16 @@ void AHeroPlayerController::OnSetDestinationPressed()
 		}
 		else if (ABaseCharacter* character = dynamic_cast<ABaseCharacter*>(Hit.GetActor()))
 		{
-			if (!primedAttack)
-			{
-				AHeroCharacter* hero = Cast<AHeroCharacter>(GetPawn());
-				primedAttack = hero->GetWeapon();
-			}
-			AttackEnemy(character, primedAttack);
-			primedAttack = NULL;
+			//if (character != GetPawn())
+			//{
+				if (!primedAttack)
+				{
+					AHeroCharacter* hero = Cast<AHeroCharacter>(GetPawn());
+					primedAttack = hero->GetWeapon();
+				}
+				AttackEnemy(character, primedAttack);
+				primedAttack = NULL;
+			//}
 		}
 		else if (ALoot* loot = dynamic_cast<ALoot*>(Hit.GetActor()))
 		{

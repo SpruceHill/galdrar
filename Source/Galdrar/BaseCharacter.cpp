@@ -89,8 +89,12 @@ void ABaseCharacter::Wound(float amount, DamageType type, bool crit)
 	{
 		DisableInput(Cast<APlayerController>(GetController()));
 		OnDeath();
-		SetActorEnableCollision(false);
-		SetActorHiddenInGame(true);
+
+		GetCapsuleComponent()->SetCollisionEnabled(ECollisionEnabled::NoCollision);
+		GetMesh()->SetCollisionResponseToChannel(ECollisionChannel::ECC_Pawn, ECollisionResponse::ECR_Ignore);
+		GetMesh()->SetCollisionResponseToChannel(ECollisionChannel::ECC_PhysicsBody, ECollisionResponse::ECR_Ignore);
+		GetMesh()->SetCollisionEnabled(ECollisionEnabled::QueryAndPhysics);
+		GetMesh()->SetSimulatePhysics(true);
 	}
 
 	// Remove damage sensitive effects
