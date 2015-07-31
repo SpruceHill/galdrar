@@ -91,6 +91,8 @@ void ABaseCharacter::Wound(float amount, DamageType type, bool crit)
 		OnDeath();
 
 		GetCapsuleComponent()->SetCollisionEnabled(ECollisionEnabled::NoCollision);
+		GetMesh()->SetCollisionObjectType(ECollisionChannel::ECC_WorldDynamic);
+		GetMesh()->SetCollisionResponseToAllChannels(ECollisionResponse::ECR_Block);
 		GetMesh()->SetCollisionResponseToChannel(ECollisionChannel::ECC_Pawn, ECollisionResponse::ECR_Ignore);
 		GetMesh()->SetCollisionResponseToChannel(ECollisionChannel::ECC_PhysicsBody, ECollisionResponse::ECR_Ignore);
 		GetMesh()->SetCollisionEnabled(ECollisionEnabled::QueryAndPhysics);
