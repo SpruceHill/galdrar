@@ -57,6 +57,9 @@ AHeroCharacter::AHeroCharacter(const FObjectInitializer& ObjectInitializer)
 	TopDownCameraComponent->AttachTo(CameraBoom, USpringArmComponent::SocketName);
 	TopDownCameraComponent->bUsePawnControlRotation = false; // Camera does not rotate relative to arm
 
+	CursorHitbox = CreateDefaultSubobject<UCapsuleComponent>(TEXT("CursorHitbox"));
+	CursorHitbox->SetCollisionProfileName(TEXT("UI"));
+	CursorHitbox->AttachParent = RootComponent;
 }
 
 void AHeroCharacter::Zoom(float delta)

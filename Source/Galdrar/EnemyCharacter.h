@@ -14,6 +14,9 @@ class GALDRAR_API AEnemyCharacter : public ABaseCharacter
 	GENERATED_BODY()
 	
 public:
+	//UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = BaseCharacter, meta = (AllowPrivateAccess = "true"))
+	//class UCapsuleComponent* CursorHitbox;
+
 	AEnemyCharacter(const FObjectInitializer& ObjectInitializer);
 
 	UPROPERTY(EditAnywhere, Category = Behavior)

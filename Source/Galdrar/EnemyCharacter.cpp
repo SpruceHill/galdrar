@@ -19,6 +19,10 @@ AEnemyCharacter::AEnemyCharacter(const FObjectInitializer& ObjectInitializer)
 	// Configure character movement
 	bUseControllerRotationYaw = false;
 	GetCharacterMovement()->bOrientRotationToMovement = true; // Rotate character to moving direction
+
+	CursorHitbox = CreateDefaultSubobject<UCapsuleComponent>(TEXT("CursorHitbox"));
+	CursorHitbox->SetCollisionProfileName(TEXT("UI"));
+	CursorHitbox->AttachParent = RootComponent;
 }
 
 int32 AEnemyCharacter::GetLevel()

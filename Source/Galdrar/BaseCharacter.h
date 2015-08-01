@@ -14,15 +14,12 @@
 #include "GameFramework/Character.h"
 #include "BaseCharacter.generated.h"
 
-
-UCLASS(abstract)
+UCLASS()
 class GALDRAR_API ABaseCharacter : public ACharacter
 {
 	GENERATED_BODY()
 
 public:
-	// Called every frame
-
 	virtual void Tick(float DeltaSeconds) override;
 
 	FString GetName() { return name; }
@@ -148,6 +145,9 @@ public:
 	void AttackAnimation();
 
 protected:
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = BaseCharacter, meta = (AllowPrivateAccess = "true"))
+	class UCapsuleComponent* CursorHitbox;
+
 	CharacterStats* stats;
 	UPROPERTY(BlueprintReadWrite, Category = BaseCharacter)
 	FString name;
@@ -156,6 +156,7 @@ protected:
 	Spell* spells [4];
 	bool bStunned = false;
 	bool bSilenced = false;
+
 private:
 	float stunTime = 0.f;
 	float stunDuration = 0.f;

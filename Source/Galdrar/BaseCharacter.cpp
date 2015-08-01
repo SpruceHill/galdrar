@@ -5,7 +5,6 @@
 #include "HUDAdapter.h"
 #include "GaldrarColor.h"
 
-
 void ABaseCharacter::Tick(float DeltaSeconds)
 {
 	Super::Tick(DeltaSeconds);
@@ -95,8 +94,10 @@ void ABaseCharacter::Wound(float amount, DamageType type, bool crit)
 		GetMesh()->SetCollisionResponseToAllChannels(ECollisionResponse::ECR_Block);
 		GetMesh()->SetCollisionResponseToChannel(ECollisionChannel::ECC_Pawn, ECollisionResponse::ECR_Ignore);
 		GetMesh()->SetCollisionResponseToChannel(ECollisionChannel::ECC_PhysicsBody, ECollisionResponse::ECR_Ignore);
+		GetMesh()->SetCollisionResponseToChannel(ECollisionChannel::ECC_Visibility, ECollisionResponse::ECR_Ignore);
 		GetMesh()->SetCollisionEnabled(ECollisionEnabled::QueryAndPhysics);
 		GetMesh()->SetSimulatePhysics(true);
+		CursorHitbox->SetCollisionEnabled(ECollisionEnabled::NoCollision);
 	}
 
 	// Remove damage sensitive effects
