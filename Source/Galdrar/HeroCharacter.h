@@ -50,16 +50,16 @@ public:
 	void AddLoot(ALoot* loot)
 	{
 		bool placed = false;
-		//inventory.Add(loot);
+
 		if (!inventorySlot1 && !placed)
 		{
-			inventorySlot1 = loot; 
 			placed = true;
+			inventorySlot1 = loot; 
 		}
 		if (!inventorySlot2 && !placed)
 		{
-			inventorySlot2 = loot;
 			placed = true;
+			inventorySlot2 = loot;
 		}
 		if (!inventorySlot3 && !placed)
 		{
@@ -130,24 +130,6 @@ public:
 			inventorySlot6 = NULL;
 		}
 	}
-
-	/*
-	*	SPELL GETTERS
-	*/
-	UFUNCTION(BlueprintCallable, Category = Spells)
-	int32 GetSpellIdAtIndex(int32 index);
-
-	UFUNCTION(BlueprintCallable, Category = Spells)
-	float GetSpellCooldownAtIndex(int32 index);
-	
-	UFUNCTION(BlueprintCallable, Category = Spells)
-	float GetSpellTimeAtIndex(int32 index);
-
-	UFUNCTION(BlueprintCallable, Category = Spells)
-	FString GetSpellNameAtIndex(int32 index);
-
-	UFUNCTION(BlueprintCallable, Category = Spells)
-	FString GetSpellDescAtIndex(int32 index);
 
 	UFUNCTION(BlueprintCallable, Category = Loot)
 	ALoot* GetInventory(int32 index);

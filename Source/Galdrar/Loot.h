@@ -31,7 +31,7 @@ public:
 	UFUNCTION(BlueprintCallable, Category = Loot)
 	FString GetDesc();
 	UFUNCTION(BlueprintCallable, Category = Loot)
-	float GetID();
+	int32 GetID();
 	UFUNCTION(BlueprintCallable, Category = Loot)
 	bool IsStackable();
 	UFUNCTION(BlueprintCallable, Category = Loot)
@@ -43,7 +43,7 @@ protected:
 	UPROPERTY(BlueprintReadWrite, Category = Loot)
 	FString desc;
 	UPROPERTY(BlueprintReadWrite, Category = Loot)
-	float ID;
+	int32 ID;
 	UPROPERTY(BlueprintReadWrite, Category = Loot)
 	bool bStackable;
 	UPROPERTY(BlueprintReadWrite, Category = Loot)

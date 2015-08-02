@@ -86,32 +86,6 @@ int32 AHeroCharacter::GetLootValue()
 	return lootValue;
 }
 
-int32 AHeroCharacter::GetSpellIdAtIndex(int32 index)
-{
-	return (spells[index] ? spells[index]->GetID() : -1);
-}
-
-float AHeroCharacter::GetSpellCooldownAtIndex(int32 index)
-{
-	return (spells[index] ? spells[index]->GetCooldown() : 1);
-}
-
-float AHeroCharacter::GetSpellTimeAtIndex(int32 index)
-{
-	return (spells[index] ? spells[index]->GetTime() : 1);
-}
-
-FString AHeroCharacter::GetSpellNameAtIndex(int32 index)
-{
-	return spells[index]->GetName();
-}
-
-FString AHeroCharacter::GetSpellDescAtIndex(int32 index)
-{
-	return spells[index]->GetDesc();
-}
-
-
 ALoot* AHeroCharacter::GetInventory(int32 index)
 {
 	if (index == 1)

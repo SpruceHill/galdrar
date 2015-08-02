@@ -443,7 +443,7 @@ void AHeroPlayerController::Spell(int8 index)
 	}
 	if (hero->GetStats()->mana < hero->GetSpell(index)->GetManaCost())
 	{
-		HA.Toast("Not enough mana");
+		HA.Toast("Not enough mana to use " + hero->GetSpell(index)->GetName());
 		return;
 	}
 

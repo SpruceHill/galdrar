@@ -231,6 +231,32 @@ float ABaseCharacter::GetMana()
 	return stats->mana;
 }
 
+
+int32 ABaseCharacter::GetSpellIdAtIndex(int32 index)
+{
+	return (spells[index] ? spells[index]->GetID() : -1);
+}
+
+float ABaseCharacter::GetSpellCooldownAtIndex(int32 index)
+{
+	return (spells[index] ? spells[index]->GetCooldown() : 1);
+}
+
+float ABaseCharacter::GetSpellTimeAtIndex(int32 index)
+{
+	return (spells[index] ? spells[index]->GetTime() : 1);
+}
+
+FString ABaseCharacter::GetSpellNameAtIndex(int32 index)
+{
+	return spells[index]->GetName();
+}
+
+FString ABaseCharacter::GetSpellDescAtIndex(int32 index)
+{
+	return spells[index]->GetDesc();
+}
+
 float ABaseCharacter::GetSpellManaCostAtIndex(int32 index)
 {
 	return spells[index]->GetManaCost();

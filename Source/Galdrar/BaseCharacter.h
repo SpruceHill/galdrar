@@ -125,6 +125,24 @@ public:
 	UFUNCTION(BlueprintCallable, Category = Stat)
 	float GetMana();
 
+	/*
+	*	SPELL GETTERS
+	*/
+	UFUNCTION(BlueprintCallable, Category = Spells)
+	int32 GetSpellIdAtIndex(int32 index);
+
+	UFUNCTION(BlueprintCallable, Category = Spells)
+	float GetSpellCooldownAtIndex(int32 index);
+
+	UFUNCTION(BlueprintCallable, Category = Spells)
+	float GetSpellTimeAtIndex(int32 index);
+
+	UFUNCTION(BlueprintCallable, Category = Spells)
+	FString GetSpellNameAtIndex(int32 index);
+
+	UFUNCTION(BlueprintCallable, Category = Spells)
+	FString GetSpellDescAtIndex(int32 index);
+
 	UFUNCTION(BlueprintCallable, Category = Spells)
 	float GetSpellManaCostAtIndex(int32 index);
 
