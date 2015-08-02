@@ -231,6 +231,11 @@ float ABaseCharacter::GetMana()
 	return stats->mana;
 }
 
+float ABaseCharacter::GetSpellManaCostAtIndex(int32 index)
+{
+	return spells[index]->GetManaCost();
+}
+
 /*
 *	Effect Getters
 */

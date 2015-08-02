@@ -125,6 +125,9 @@ public:
 	UFUNCTION(BlueprintCallable, Category = Stat)
 	float GetMana();
 
+	UFUNCTION(BlueprintCallable, Category = Spells)
+	float GetSpellManaCostAtIndex(int32 index);
+
 	UFUNCTION(BlueprintCallable, Category = Effects)
 	TArray<int32> GetEffectIDs();
 	UFUNCTION(BlueprintCallable, Category = Effects)
