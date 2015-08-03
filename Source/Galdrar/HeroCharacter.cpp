@@ -88,23 +88,23 @@ int32 AHeroCharacter::GetLootValue()
 
 ALoot* AHeroCharacter::GetInventory(int32 index)
 {
-	if (index == 1)
+	if (index == 0)
 	{
 		return inventorySlot1;
 	}
-	else if (index == 2)
+	else if (index == 1)
 	{
 		return inventorySlot2;
 	}
-	else if (index == 3)
+	else if (index == 2)
 	{
 		return inventorySlot3;
 	}
-	else if (index == 4)
+	else if (index == 3)
 	{
 		return inventorySlot4;
 	}
-	else if (index == 5)
+	else if (index == 4)
 	{
 		return inventorySlot5;
 	}

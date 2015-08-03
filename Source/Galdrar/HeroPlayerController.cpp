@@ -510,12 +510,12 @@ void AHeroPlayerController::Spell(int8 index)
 	}
 }
 
-void AHeroPlayerController::Inventory1(){ Inventory(1); }
-void AHeroPlayerController::Inventory2(){ Inventory(2); }
-void AHeroPlayerController::Inventory3(){ Inventory(3); }
-void AHeroPlayerController::Inventory4(){ Inventory(4); }
-void AHeroPlayerController::Inventory5(){ Inventory(5); }
-void AHeroPlayerController::Inventory6(){ Inventory(6); }
+void AHeroPlayerController::Inventory1(){ Inventory(0); }
+void AHeroPlayerController::Inventory2(){ Inventory(1); }
+void AHeroPlayerController::Inventory3(){ Inventory(2); }
+void AHeroPlayerController::Inventory4(){ Inventory(3); }
+void AHeroPlayerController::Inventory5(){ Inventory(4); }
+void AHeroPlayerController::Inventory6(){ Inventory(5); }
 
 void AHeroPlayerController::Inventory(int8 index)
 {

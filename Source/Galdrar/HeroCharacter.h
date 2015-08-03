@@ -49,39 +49,32 @@ public:
 
 	void AddLoot(ALoot* loot)
 	{
-		bool placed = false;
-
-		if (!inventorySlot1 && !placed)
+		if (!inventorySlot1)
 		{
-			placed = true;
 			inventorySlot1 = loot; 
 		}
-		if (!inventorySlot2 && !placed)
+		else if (!inventorySlot2)
 		{
-			placed = true;
 			inventorySlot2 = loot;
 		}
-		if (!inventorySlot3 && !placed)
+		else if (!inventorySlot3)
 		{
-			placed = true;
 			inventorySlot3 = loot;
 		}
-		if (!inventorySlot4 && !placed)
+		else if (!inventorySlot4)
 		{
-			placed = true;
 			inventorySlot4 = loot;
 		}
-		if (!inventorySlot5 && !placed)
+		else if (!inventorySlot5)
 		{
-			placed = true;
 			inventorySlot5 = loot;
 		}
-		if (!inventorySlot6 && !placed)
+		else if (!inventorySlot6)
 		{
-			placed = true;
 			inventorySlot6 = loot;
 		}
 		loot->SetActorHiddenInGame(true);
+		loot->DisableComponentsSimulatePhysics();
 		loot->SetActorEnableCollision(false);
 	}
 
@@ -101,32 +94,32 @@ public:
 	{
 		if (inventorySlot1 == loot)
 		{
-			inventorySlot1->Destroy();
+			inventorySlot1->MarkPendingKill();
 			inventorySlot1 = NULL;
 		}
 		else if (inventorySlot2 == loot)
 		{
-			inventorySlot2->Destroy();
+			inventorySlot2->MarkPendingKill();
 			inventorySlot2 = NULL;
 		}
 		else if (inventorySlot3 == loot)
 		{
-			 inventorySlot3->Destroy();
-			 inventorySlot3 = NULL;
+			inventorySlot3->MarkPendingKill();
+			inventorySlot3 = NULL;
 		}
 		else if (inventorySlot4 == loot)
 		{
-			inventorySlot4->Destroy();
+			inventorySlot4->MarkPendingKill();
 			inventorySlot4 = NULL;
 		}
 		else if (inventorySlot5 == loot)
 		{
-			inventorySlot5->Destroy();
+			inventorySlot5->MarkPendingKill();
 			inventorySlot5 = NULL;
 		}
 		else if (inventorySlot6 == loot)
 		{
-			inventorySlot6->Destroy();
+			inventorySlot6->MarkPendingKill();
 			inventorySlot6 = NULL;
 		}
 	}

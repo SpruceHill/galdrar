@@ -15,7 +15,6 @@ ALoot::ALoot()
 void ALoot::BeginPlay()
 {
 	Super::BeginPlay();
-	
 }
 
 // Called every frame
