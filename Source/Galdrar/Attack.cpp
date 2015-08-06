@@ -6,7 +6,7 @@
 #include "DamageType.h"
 #include <list>
 
-Attack::Attack(FString name, float damage, DamageType type, float critMultiplier, float range, float attackSpeed, const std::list < EffectType > effectTypes)
+Attack::Attack(FString name, float damage, EGaldrarDamageType type, float critMultiplier, float range, float attackSpeed, const std::list < EffectType > effectTypes)
 {
 	this->name = name;
 	this->damage = damage;
@@ -21,7 +21,7 @@ Attack::Attack()
 {
 	// Setting defaults, should never be called.
 	damage = 0;
-	damageType = DamageType::PHYSICAL;
+	damageType = EGaldrarDamageType::PHYSICAL;
 	critMultiplier = 1.f;
 	range = 0.f;
 	attackSpeed = 1.f;

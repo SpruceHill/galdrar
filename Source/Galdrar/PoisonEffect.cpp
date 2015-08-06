@@ -21,7 +21,7 @@ PoisonEffect::PoisonEffect(CharacterStats* stats)
 	time = 0.f;
 	elapsedTime = 0.f;
 	
-	damageType = DamageType::POISON;
+	damageType = EGaldrarDamageType::POISON;
 	bStackable = false;
 	effectType = EffectType::POISON_MILD;
 	bShouldTick = true;

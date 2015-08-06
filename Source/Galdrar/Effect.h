@@ -1,7 +1,7 @@
 // Copyright Spruce Hill, All rights reserved.
 
 #pragma once
-#include "DamageType.h"
+#include "GaldrarDamageType.h"
 #include "CharacterStats.h"
 #include "EffectType.h"
 /**
@@ -21,7 +21,7 @@ public:
 	float GetDuration() { return duration; }
 	float GetElapsedTime() { return elapsedTime; }
 
-	DamageType GetDamageType() { return damageType; }
+	EGaldrarDamageType GetDamageType() { return damageType; }
 	EffectType GetEffectType() { return effectType; }
 
 	int32 GetID(){ return ID; }
@@ -57,7 +57,7 @@ protected:
 	FString name;
 	FString desc;
 	FString toBePrinted;
-	DamageType damageType;
+	EGaldrarDamageType damageType;
 	CharacterStats* stats;
 
 };

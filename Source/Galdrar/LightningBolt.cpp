@@ -17,7 +17,7 @@ LightningBolt::LightningBolt()
 	damage = 10.f;
 	cooldown = 5.f;
 	time = 0.f;
-	damageType = DamageType::SHOCK;
+	damageType = EGaldrarDamageType::SHOCK;
 	range = 400.f;
 
 	// 2 = Spell, ID = 0005

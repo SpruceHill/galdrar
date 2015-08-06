@@ -7,7 +7,7 @@ Sword::Sword()
 {
 	name = "Sword"; 
 	damage = 20.f; 
-	damageType = DamageType::PHYSICAL;
+	damageType = EGaldrarDamageType::PHYSICAL;
 	critMultiplier = 1.5f;
 	range = 100.f;
 	attackSpeed = 1.f;

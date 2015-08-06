@@ -78,7 +78,7 @@ void ABaseCharacter::Heal(float amount)
 	}
 }
 
-void ABaseCharacter::Wound(float amount, DamageType type, bool crit)
+void ABaseCharacter::Wound(float amount, EGaldrarDamageType type, bool crit)
 {
 	HUDAdapter HA;
 	HA.CreateDamageIndicator(this, FString::FromInt(amount), UGaldrarColor::GetDamageTypeColor(type), crit);

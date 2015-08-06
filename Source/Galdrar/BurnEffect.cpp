@@ -21,7 +21,7 @@ BurnEffect::BurnEffect(CharacterStats* stats)
 	time = 0.f;
 	elapsedTime = 0.f;
 	
-	damageType = DamageType::FIRE;
+	damageType = EGaldrarDamageType::FIRE;
 	bStackable = false;
 	effectType = EffectType::BURNING;
 	bShouldTick = true;

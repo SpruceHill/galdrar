@@ -1,7 +1,7 @@
 // Copyright Spruce Hill, All rights reserved.
 
 #pragma once
-#include "DamageType.h"
+#include "GaldrarDamageType.h"
 #include <list>
 #include "Effect.h"
 #include "EffectType.h"
@@ -13,10 +13,10 @@
 class GALDRAR_API Attack
 {
 public:
-	Attack(FString name, float damage, DamageType type, float critMultiplier, float range, float attackSpeed, const std::list < EffectType > effectTypes);
+	Attack(FString name, float damage, EGaldrarDamageType type, float critMultiplier, float range, float attackSpeed, const std::list < EffectType > effectTypes);
 	
 	float GetDamage(){ return damage; }
-	DamageType GetDamageType(){ return damageType; }
+	EGaldrarDamageType GetDamageType(){ return damageType; }
 	float GetCritMultiplier(){ return critMultiplier; }
 	std::list < EffectType > GetEffectTypes(){ return effectTypes; }
 	float GetRange(){ return range; }
@@ -44,7 +44,7 @@ public:
 protected:
 	bool bDoesDamage;
 	float damage;
-	DamageType damageType;
+	EGaldrarDamageType damageType;
 	float critMultiplier;
 	std::list < EffectType > effectTypes;
 	float range;

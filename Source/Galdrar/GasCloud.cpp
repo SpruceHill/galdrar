@@ -18,7 +18,7 @@ GasCloud::GasCloud()
 	cooldown = 5.f;
 	time = 0.f;
 	effectTypes.push_back(EffectType::POISON_MILD);
-	damageType = DamageType::POISON;
+	damageType = EGaldrarDamageType::POISON;
 	range = 600.f;
 
 	// 2 = Spell, ID = 0002

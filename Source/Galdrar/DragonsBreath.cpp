@@ -18,7 +18,7 @@ DragonsBreath::DragonsBreath()
 	cooldown = 5.f;
 	time = 0.f;
 	effectTypes.push_back(EffectType::BURNING);
-	damageType = DamageType::FIRE;
+	damageType = EGaldrarDamageType::FIRE;
 	range = 600.f;
 
 	// 2 = Spell, ID = 0001

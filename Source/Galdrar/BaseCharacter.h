@@ -2,14 +2,13 @@
 
 #pragma once
 
-#include "DamageType.h"
+#include "GaldrarDamageType.h"
 #include "Attack.h"
 #include <list>
 #include <algorithm>
 #include "Effect.h"
 #include "CharacterStats.h"
 #include "Spell.h"
-#include "DamageType.h"
 #include "EffectFactory.h"
 #include "GameFramework/Character.h"
 #include "BaseCharacter.generated.h"
@@ -30,15 +29,14 @@ public:
 
 	CharacterStats* GetStats() { return stats; }
 
-	float GetResistance(DamageType type)
+	float GetResistance(EGaldrarDamageType type)
 	{
 		switch (type) {
-		case DamageType::PHYSICAL: return stats->armour;
-		case DamageType::FROST: return stats->frostResistance;
-		case DamageType::FIRE: return stats->fireResistance;
-		case DamageType::SHOCK: return stats->shockResistance;
-		case DamageType::POISON: return stats->poisonResistance;
-		case DamageType::TRUE: return 0.f;
+		case EGaldrarDamageType::PHYSICAL: return stats->armour;
+		case EGaldrarDamageType::FROST: return stats->frostResistance;
+		case EGaldrarDamageType::FIRE: return stats->fireResistance;
+		case EGaldrarDamageType::SHOCK: return stats->shockResistance;
+		case EGaldrarDamageType::POISON: return stats->poisonResistance;
 		default: return 0.f;
 		}
 		return 0.f;
@@ -47,7 +45,7 @@ public:
 	UFUNCTION(BlueprintCallable, Category = Stats)
 	void Heal(float amount);
 
-	void Wound(float amount, DamageType type, bool crit);
+	void Wound(float amount, EGaldrarDamageType type, bool crit);
 
 	UFUNCTION(BlueprintCallable, Category = Stats)
 	void SetHealth(float newHealth);
@@ -73,7 +71,6 @@ public:
 				{
 					// Effect stackable, add new instance.
 					activeEffects.push_back(EffectFactory::GenerateEffect(stats, type));
-					//activeEffects.Add(EffectFactory::GenerateEffect(stats, type));
 				}
 				else
 				{
@@ -86,18 +83,16 @@ public:
 		{
 			// Adding new effect.
 			activeEffects.push_back(EffectFactory::GenerateEffect(stats, type));
-			//activeEffects.Add(EffectFactory::GenerateEffect(stats, type));
 		}
-		//activeEffects.push_back(effect);
 	}
 
 	void RemoveEffect(Effect* effect)
 	{
-		bool found = /*activeEffects.Contains(effect);*/(std::find(activeEffects.begin(), activeEffects.end(), effect) != activeEffects.end());
-		if (found) /*activeEffects.Remove(effect);*/activeEffects.remove(effect);
+		bool found = (std::find(activeEffects.begin(), activeEffects.end(), effect) != activeEffects.end());
+		if (found) activeEffects.remove(effect);
 	}
 
-	std::list/* TArray*/< Effect* > GetActiveEffects() { return activeEffects; }
+	std::list< Effect* > GetActiveEffects() { return activeEffects; }
 
 	Spell* GetSpell(int8 index)
 	{

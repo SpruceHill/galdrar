@@ -3,16 +3,15 @@
 #include "Galdrar.h"
 #include "GaldrarColor.h"
 
-FColor UGaldrarColor::GetDamageTypeColor(DamageType type)
+FColor UGaldrarColor::GetDamageTypeColor(EGaldrarDamageType type)
 {
 	switch (type)
 	{
-	case DamageType::FIRE: return GetFireColor();
-	case DamageType::FROST: return GetFrostColor();
-	case DamageType::SHOCK: return GetShockColor();
-	case DamageType::POISON: return GetPoisonColor();
-	case DamageType::PHYSICAL: return GetPhysicalColor();
-	case DamageType::TRUE: return GetTrueDamageColor();
+	case EGaldrarDamageType::FIRE: return GetFireColor();
+	case EGaldrarDamageType::FROST: return GetFrostColor();
+	case EGaldrarDamageType::SHOCK: return GetShockColor();
+	case EGaldrarDamageType::POISON: return GetPoisonColor();
+	case EGaldrarDamageType::PHYSICAL: return GetPhysicalColor();
 	default: return FColor::Black;
 	}
 }

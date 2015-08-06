@@ -18,7 +18,7 @@ ManaRegenEffect::ManaRegenEffect(CharacterStats* stats)
 	duration = 10.f;
 	elapsedTime = 0.f;
 	
-	damageType = DamageType::PHYSICAL;
+	damageType = EGaldrarDamageType::PHYSICAL;
 	bStackable = false;
 	effectType = EffectType::MANA_REGEN;
 	bShouldTick = true;

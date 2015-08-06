@@ -17,7 +17,7 @@ Javelin::Javelin()
 	damage = 30.f;
 	cooldown = 5.f;
 	time = 0.f;
-	damageType = DamageType::PHYSICAL;
+	damageType = EGaldrarDamageType::PHYSICAL;
 	range = 1600.f;
 
 	// 2 = Spell, ID = 0004

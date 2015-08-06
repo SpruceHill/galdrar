@@ -17,7 +17,7 @@ HealSpell::HealSpell()
 	damage = 10.f;
 	cooldown = 5.f;
 	time = 0.f;
-	damageType = DamageType::TRUE;
+	damageType = EGaldrarDamageType::PHYSICAL;
 	range = 200.f;
 
 	// 2 = Spell, ID = 0003
