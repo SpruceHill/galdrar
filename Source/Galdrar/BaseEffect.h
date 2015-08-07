@@ -3,7 +3,6 @@
 #pragma once
 
 #include "GameFramework/Actor.h"
-#include "DamageType.h"
 #include "CharacterStats.h"
 #include "BaseEffect.generated.h"
 

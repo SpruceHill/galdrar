@@ -3,7 +3,6 @@
 #include "Galdrar.h"
 #include "Attack.h"
 #include "Effect.h"
-#include "DamageType.h"
 #include <list>
 
 Attack::Attack(FString name, float damage, EGaldrarDamageType type, float critMultiplier, float range, float attackSpeed, const std::list < EffectType > effectTypes)

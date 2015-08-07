@@ -3,10 +3,7 @@
 #include "Galdrar.h"
 #include "CombatHandler.h"
 #include "BaseCharacter.h"
-#include "DamageType.h"
-#include "GaldrarHUD.h"
 #include "GaldrarColor.h"
-#include "HUDAdapter.h"
 #include "Weapon.h"
 #include "EffectFactory.h"
 

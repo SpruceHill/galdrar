@@ -1,8 +1,6 @@
 // Copyright Spruce Hill, All rights reserved.
 
 #pragma once
-
-#include "Engine/UserDefinedEnum.h"
 #include "GaldrarDamageType.generated.h"
 
 /**

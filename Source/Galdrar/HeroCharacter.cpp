@@ -4,7 +4,6 @@
 #include "HeroCharacter.h"
 #include "Attack.h"
 #include "Sword.h"
-#include "DamageType.h"
 #include "BurnEffect.h"
 #include "EffectType.h"
 #include "DragonsBreath.h"

@@ -3,7 +3,6 @@
 #pragma once
 
 #include "Kismet/BlueprintFunctionLibrary.h"
-#include "DamageType.h"
 #include "GaldrarColor.generated.h"
 
 /**

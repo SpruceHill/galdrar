@@ -4,7 +4,6 @@
 
 #include "Attack.h"
 #include "EffectType.h"
-#include "DamageType.h"
 #include <list>
 
 class GALDRAR_API Spell : public Attack
