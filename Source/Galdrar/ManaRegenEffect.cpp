@@ -8,7 +8,7 @@ ManaRegenEffect::ManaRegenEffect()
 	// Sould not be called
 }
 
-ManaRegenEffect::ManaRegenEffect(CharacterStats* stats)
+ManaRegenEffect::ManaRegenEffect(UCharacterStatsComponent* stats)
 {
 	this->stats = stats;
 	name = "Mana Regeneration";

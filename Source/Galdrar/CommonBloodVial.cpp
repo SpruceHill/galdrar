@@ -5,7 +5,7 @@
 
 CommonBloodVial::CommonBloodVial(){ /* Do not call */ }
 
-CommonBloodVial::CommonBloodVial(CharacterStats* stats)
+CommonBloodVial::CommonBloodVial(UCharacterStatsComponent* stats)
 {
 	this->stats = stats;
 

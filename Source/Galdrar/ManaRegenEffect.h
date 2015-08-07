@@ -11,7 +11,7 @@ class GALDRAR_API ManaRegenEffect : public Effect
 {
 public:
 	ManaRegenEffect();
-	ManaRegenEffect(CharacterStats* stats);
+	ManaRegenEffect(UCharacterStatsComponent* stats);
 	~ManaRegenEffect();
 
 	virtual void Tick(float delta) override;

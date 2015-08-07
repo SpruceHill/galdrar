@@ -7,7 +7,7 @@
 #include <list>
 #include <algorithm>
 #include "Effect.h"
-#include "CharacterStats.h"
+#include "CharacterStatsComponent.h"
 #include "Spell.h"
 #include "EffectFactory.h"
 #include "GameFramework/Character.h"
@@ -27,7 +27,7 @@ public:
 
 	Attack* GetWeapon() { return weapon; }
 
-	CharacterStats* GetStats() { return stats; }
+	UCharacterStatsComponent* GetStats() { return stats; }
 
 	float GetResistance(EGaldrarDamageType type)
 	{
@@ -164,7 +164,8 @@ protected:
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = BaseCharacter, meta = (AllowPrivateAccess = "true"))
 	class UCapsuleComponent* CursorHitbox;
 
-	CharacterStats* stats;
+	UPROPERTY(BlueprintReadWrite, Category = BaseCharacter)
+	UCharacterStatsComponent* stats;
 	UPROPERTY(BlueprintReadWrite, Category = BaseCharacter)
 	FString name;
 	std::list < Effect* > activeEffects;

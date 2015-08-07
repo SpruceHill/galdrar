@@ -11,7 +11,7 @@ class GALDRAR_API BurnEffect : public Effect
 {
 public:
 	BurnEffect();
-	BurnEffect(CharacterStats* stats);
+	BurnEffect(UCharacterStatsComponent* stats);
 	
 	virtual void Tick(float delta) override;
 };

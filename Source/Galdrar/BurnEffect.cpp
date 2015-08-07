@@ -2,14 +2,14 @@
 
 #include "Galdrar.h"
 #include "BurnEffect.h"
-#include "CharacterStats.h"
+#include "CharacterStatsComponent.h"
 
 BurnEffect::BurnEffect()
 {
 	//Should not be called
 }
 
-BurnEffect::BurnEffect(CharacterStats* stats)
+BurnEffect::BurnEffect(UCharacterStatsComponent* stats)
 {
 	this->stats = stats;
 	name = "Burning";

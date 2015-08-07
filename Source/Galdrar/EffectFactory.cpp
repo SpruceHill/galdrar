@@ -7,7 +7,7 @@
 #include "HealEffect.h"
 #include "ManaRegenEffect.h"
 
-Effect* EffectFactory::GenerateEffect(CharacterStats* stats, EffectType type)
+Effect* EffectFactory::GenerateEffect(UCharacterStatsComponent* stats, EffectType type)
 {
 	switch (type)
 	{

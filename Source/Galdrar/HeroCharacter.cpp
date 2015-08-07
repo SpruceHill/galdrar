@@ -18,7 +18,7 @@ AHeroCharacter::AHeroCharacter(const FObjectInitializer& ObjectInitializer)
 	: Super(ObjectInitializer)
 {
 	name = "Hero";
-	stats = new CharacterStats();
+	stats = CreateDefaultSubobject<UCharacterStatsComponent>(TEXT("Stats"));
 	weapon = new Sword();
 	spells[0] = new DragonsBreath();
 	spells[1] = new GasCloud();

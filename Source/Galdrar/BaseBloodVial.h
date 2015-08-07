@@ -11,7 +11,7 @@ class GALDRAR_API BaseBloodVial
 {
 public:
 	BaseBloodVial();
-	BaseBloodVial(CharacterStats* stats);
+	BaseBloodVial(UCharacterStatsComponent* stats);
 	~BaseBloodVial();
 
 	virtual void Activate();
@@ -40,5 +40,5 @@ protected:
 	// Current amount
 	int32 charges;
 
-	CharacterStats* stats;
+	UCharacterStatsComponent* stats;
 };

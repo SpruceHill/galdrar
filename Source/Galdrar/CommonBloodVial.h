@@ -11,7 +11,7 @@ class GALDRAR_API CommonBloodVial : public BaseBloodVial
 {
 public:
 	CommonBloodVial();
-	CommonBloodVial(CharacterStats* stats);
+	CommonBloodVial(UCharacterStatsComponent* stats);
 	~CommonBloodVial();
 
 	void Activate() override;

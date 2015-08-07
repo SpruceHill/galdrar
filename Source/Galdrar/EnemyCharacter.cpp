@@ -11,7 +11,7 @@ AEnemyCharacter::AEnemyCharacter(const FObjectInitializer& ObjectInitializer)
 {
 	name = "Old Name";
 	level = 1;
-	stats = new CharacterStats();
+	stats = stats = CreateDefaultSubobject<UCharacterStatsComponent>(TEXT("Stats"));
 	this->GetMesh()->bReceivesDecals = false;
 	
 	AIControllerClass = AEnemyAIController::StaticClass();

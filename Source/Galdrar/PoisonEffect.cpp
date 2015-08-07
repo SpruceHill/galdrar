@@ -2,14 +2,14 @@
 
 #include "Galdrar.h"
 #include "PoisonEffect.h"
-#include "CharacterStats.h"
+#include "CharacterStatsComponent.h"
 
 PoisonEffect::PoisonEffect()
 {
 	//Should not be called
 }
 
-PoisonEffect::PoisonEffect(CharacterStats* stats)
+PoisonEffect::PoisonEffect(UCharacterStatsComponent* stats)
 {
 	this->stats = stats;
 	name = "Poisoned";

@@ -8,7 +8,7 @@ HealEffect::HealEffect()
 	// Should not be called
 }
 
-HealEffect::HealEffect(CharacterStats* stats)
+HealEffect::HealEffect(UCharacterStatsComponent* stats)
 {
 	this->stats = stats;
 	name = "Regeneration";

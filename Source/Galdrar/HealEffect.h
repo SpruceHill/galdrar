@@ -11,7 +11,7 @@ class GALDRAR_API HealEffect : public Effect
 {
 public:
 	HealEffect();
-	HealEffect(CharacterStats* stats);
+	HealEffect(UCharacterStatsComponent* stats);
 	~HealEffect();
 
 	virtual void Tick(float delta) override;

@@ -2,7 +2,7 @@
 
 #pragma once
 #include "GaldrarDamageType.h"
-#include "CharacterStats.h"
+#include "CharacterStatsComponent.h"
 #include "EffectType.h"
 /**
  * 
@@ -11,13 +11,12 @@ class GALDRAR_API Effect
 {
 public:
 	Effect();
-	Effect(CharacterStats* stats);
+	Effect(UCharacterStatsComponent* stats);
 	virtual void Tick(float delta);
 
 	float GetDamage() { return damage; }
 
 	float GetTime() { return time; }
-	//float GetTimeLeft() { return timeLeft; }
 	float GetDuration() { return duration; }
 	float GetElapsedTime() { return elapsedTime; }
 
@@ -58,6 +57,6 @@ protected:
 	FString desc;
 	FString toBePrinted;
 	EGaldrarDamageType damageType;
-	CharacterStats* stats;
+	UCharacterStatsComponent* stats;
 
 };

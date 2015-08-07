@@ -11,7 +11,7 @@ class GALDRAR_API PoisonEffect : public Effect
 {
 public:
 	PoisonEffect();
-	PoisonEffect(CharacterStats* stats);
+	PoisonEffect(UCharacterStatsComponent* stats);
 
 	virtual void Tick(float delta) override;
 };

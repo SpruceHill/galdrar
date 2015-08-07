@@ -5,7 +5,7 @@
 
 BaseBloodVial::BaseBloodVial(){ /* Do not call */ }
 
-BaseBloodVial::BaseBloodVial(CharacterStats* stats)
+BaseBloodVial::BaseBloodVial(UCharacterStatsComponent* stats)
 {
 }
 

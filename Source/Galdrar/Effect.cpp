@@ -9,7 +9,7 @@ Effect::Effect()
 	//Should not be called
 }
 
-Effect::Effect(CharacterStats* stats)
+Effect::Effect(UCharacterStatsComponent* stats)
 {
 }
 void Effect::Tick(float delta)
