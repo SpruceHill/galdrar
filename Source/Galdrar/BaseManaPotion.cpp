@@ -3,7 +3,7 @@
 #include "Galdrar.h"
 #include "BaseManaPotion.h"
 
-void ABaseManaPotion::Activate(CharacterStats* ownerStats, CharacterStats* targetStats)
+void ABaseManaPotion::Activate(UCharacterStatsComponent* ownerStats, UCharacterStatsComponent* targetStats)
 {
 	targetStats->manaReg += 2.f;
 }

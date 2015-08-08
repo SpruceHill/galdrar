@@ -3,7 +3,6 @@
 #pragma once
 
 #include "GameFramework/Actor.h"
-#include "CharacterStats.h"
 #include "Loot.generated.h"
 
 /*
@@ -24,7 +23,7 @@ public:
 	// Called every frame
 	virtual void Tick( float DeltaSeconds ) override;
 
-	virtual void Activate(CharacterStats* ownerStats, CharacterStats* targetStats);
+	virtual void Activate(UCharacterStatsComponent* ownerStats, UCharacterStatsComponent* targetStats);
 
 	UFUNCTION(BlueprintCallable, Category = Loot)
 	FString GetName();

@@ -13,6 +13,6 @@ class GALDRAR_API ABaseManaPotion : public ALoot
 {
 	GENERATED_BODY()
 public:
-	void Activate(CharacterStats* ownerStats, CharacterStats* targetStats) override;
+	void Activate(UCharacterStatsComponent* ownerStats, UCharacterStatsComponent* targetStats) override;
 	
 };

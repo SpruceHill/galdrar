@@ -123,64 +123,6 @@ void ABaseCharacter::DecreaseMana(float amount)
 	else stats->mana -= amount;
 }
 
-void ABaseCharacter::InitStats(float health, float mana, float armour, float frostRes, float fireRes, float shockRes, float poisonRes, float dmgMultiplier, float rotRate, float movementSpeed)
-{
-	if (health != 0.f)
-	{
-		stats->defaultMaxHealth = health;
-		stats->maxHealth = health;
-		stats->health = health;
-	}
-	if (mana != 0.f)
-	{
-		stats->defaultMaxMana = mana;
-		stats->maxMana = mana;
-		stats->mana = mana;
-	}
-	if (armour != 0.f)
-	{
-		stats->defaultArmour = armour;
-		stats->armour = armour;
-	}
-	if (frostRes != 0.f)
-	{
-		stats->defaultFrostRes = frostRes;
-		stats->frostResistance = frostRes;
-	}
-	if (fireRes != 0.f)
-	{
-		stats->defaultFireRes = fireRes;
-		stats->fireResistance = fireRes;
-	}
-	if (shockRes != 0.f)
-	{
-		stats->defaultShockRes = shockRes;
-		stats->shockResistance = shockRes;
-	}
-	if (poisonRes != 0.f)
-	{
-		stats->defaultPoisonRes = poisonRes;
-		stats->poisonResistance = poisonRes;
-	}
-	if (dmgMultiplier != 0.f)
-	{
-		stats->defaultDamageMultiplier = dmgMultiplier;
-		stats->damageMultiplier = dmgMultiplier;
-	}
-	if (rotRate != 0.f)
-	{
-		stats->defaultRotationRate = rotRate;
-		stats->rotationRate = rotRate;
-		GetCharacterMovement()->RotationRate = FRotator(0.f, rotRate, 0.f);
-	}
-	if (movementSpeed != 0.f)
-	{
-		stats->defaultMovementSpeed = movementSpeed;
-		stats->movementSpeed = movementSpeed;
-		GetCharacterMovement()->MaxWalkSpeed = movementSpeed;
-	}
-}
-
 void ABaseCharacter::Stun(float duration)
 {
 	if (!bStunned)

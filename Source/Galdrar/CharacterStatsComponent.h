@@ -22,63 +22,63 @@ public:
 	virtual void TickComponent( float DeltaTime, ELevelTick TickType, FActorComponentTickFunction* ThisTickFunction ) override;
 
 	/* COMBAT STATS */
-	UPROPERTY(BlueprintReadWrite, Category = CharacterStats)
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = CharacterStats)
 	float defaultMaxHealth;
-	UPROPERTY(BlueprintReadWrite, Category = CharacterStats)
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = CharacterStats)
 	float maxHealth;
-	UPROPERTY(BlueprintReadWrite, Category = CharacterStats)
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = CharacterStats)
 	float health;
 
-	UPROPERTY(BlueprintReadWrite, Category = CharacterStats)
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = CharacterStats)
 	float defaultMaxMana;
-	UPROPERTY(BlueprintReadWrite, Category = CharacterStats)
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = CharacterStats)
 	float maxMana;
-	UPROPERTY(BlueprintReadWrite, Category = CharacterStats)
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = CharacterStats)
 	float mana;
 
-	UPROPERTY(BlueprintReadWrite, Category = CharacterStats)
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = CharacterStats)
 	float defaultManaReg;
-	UPROPERTY(BlueprintReadWrite, Category = CharacterStats)
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = CharacterStats)
 	float manaReg;
 
-	UPROPERTY(BlueprintReadWrite, Category = CharacterStats)
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = CharacterStats)
 	float defaultArmour;
-	UPROPERTY(BlueprintReadWrite, Category = CharacterStats)
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = CharacterStats)
 	float armour;
 
-	UPROPERTY(BlueprintReadWrite, Category = CharacterStats)
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = CharacterStats)
 	float defaultFrostRes;
-	UPROPERTY(BlueprintReadWrite, Category = CharacterStats)
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = CharacterStats)
 	float frostResistance;
 
-	UPROPERTY(BlueprintReadWrite, Category = CharacterStats)
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = CharacterStats)
 	float defaultFireRes;
-	UPROPERTY(BlueprintReadWrite, Category = CharacterStats)
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = CharacterStats)
 	float fireResistance;
 
-	UPROPERTY(BlueprintReadWrite, Category = CharacterStats)
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = CharacterStats)
 	float defaultShockRes;
-	UPROPERTY(BlueprintReadWrite, Category = CharacterStats)
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = CharacterStats)
 	float shockResistance;
 
-	UPROPERTY(BlueprintReadWrite, Category = CharacterStats)
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = CharacterStats)
 	float defaultPoisonRes;
-	UPROPERTY(BlueprintReadWrite, Category = CharacterStats)
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = CharacterStats)
 	float poisonResistance;
 
-	UPROPERTY(BlueprintReadWrite, Category = CharacterStats)
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = CharacterStats)
 	float defaultDamageMultiplier;
-	UPROPERTY(BlueprintReadWrite, Category = CharacterStats)
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = CharacterStats)
 	float damageMultiplier;
 
 	/* MOVEMENT STATS */
-	UPROPERTY(BlueprintReadWrite, Category = CharacterStats)
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = CharacterStats)
 	float defaultRotationRate;
-	UPROPERTY(BlueprintReadWrite, Category = CharacterStats)
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = CharacterStats)
 	float rotationRate;
 
-	UPROPERTY(BlueprintReadWrite, Category = CharacterStats)
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = CharacterStats)
 	float defaultMovementSpeed;
-	UPROPERTY(BlueprintReadWrite, Category = CharacterStats)
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = CharacterStats)
 	float movementSpeed;
 };

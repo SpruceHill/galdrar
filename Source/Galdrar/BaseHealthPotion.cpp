@@ -3,7 +3,7 @@
 #include "Galdrar.h"
 #include "BaseHealthPotion.h"
 
-void ABaseHealthPotion::Activate(CharacterStats* ownerStats, CharacterStats* targetStats)
+void ABaseHealthPotion::Activate(UCharacterStatsComponent* ownerStats, UCharacterStatsComponent* targetStats)
 {
 	targetStats->health += 2.f;
 }

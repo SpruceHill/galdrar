@@ -28,7 +28,7 @@ void ALoot::Tick( float DeltaTime )
 	}
 }
 
-void ALoot::Activate(CharacterStats* ownerStats, CharacterStats* targetStats)
+void ALoot::Activate(UCharacterStatsComponent* ownerStats, UCharacterStatsComponent* targetStats)
 {
 
 }

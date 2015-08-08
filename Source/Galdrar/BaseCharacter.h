@@ -56,9 +56,6 @@ public:
 	UFUNCTION(BlueprintCallable, Category = Stats)
 	void DecreaseMana(float amount);
 
-	UFUNCTION(BlueprintCallable, Category = Stats)
-	void InitStats(float health, float mana, float armour, float frostRes, float fireRes, float shockRes, float poisonRes, float dmgMultiplier, float rotRate, float movementSpeed);
-
 	void AddEffect(EffectType type)
 	{
 		bool found = false;
@@ -164,7 +161,7 @@ protected:
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = BaseCharacter, meta = (AllowPrivateAccess = "true"))
 	class UCapsuleComponent* CursorHitbox;
 
-	UPROPERTY(BlueprintReadWrite, Category = BaseCharacter)
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = BaseCharacter)
 	UCharacterStatsComponent* stats;
 	UPROPERTY(BlueprintReadWrite, Category = BaseCharacter)
 	FString name;
