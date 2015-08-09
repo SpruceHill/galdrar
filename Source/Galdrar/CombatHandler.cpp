@@ -34,14 +34,9 @@ void CombatHandler::AttackEnemy(ABaseCharacter* attacker, ABaseCharacter* defend
 	for (int i = 0; i < attack->GetEffectTypes().Num(); i++)
 	{
 		ABaseCharacter* character = (UEffectFunctionLibrary::IsDefensive(attack->GetEffectTypes()[i]) ? attacker : defender);
-		UEffectFunctionLibrary::GenerateEffect(defender, attack->GetEffectTypes()[i]);
+		if (character->GetHealth() > 0)
+			character->AddEffect(attack->GetEffectTypes()[i]);
 	}
-	/*
-	for(EffectType effectType : attack->GetEffectTypes())
-	{
-		ABaseCharacter* character = (OldEffectFactory::IsDefensive(effectType) ? attacker : defender);
-		character->AddEffect(effectType);
-	}*/
 }
 
 bool CombatHandler::IsCritical(FVector attackerForward, FVector defenderForward)

@@ -12,8 +12,12 @@ UCLASS()
 class GALDRAR_API UHealEffectComponent : public UBaseEffectComponent
 {
 	GENERATED_BODY()
-	
-	
+
+public:
+
+	UHealEffectComponent();
+
+	void TickComponent(float DeltaTime, ELevelTick TickType, FActorComponentTickFunction* ThisTickFunction) override;
 	
 	
 };

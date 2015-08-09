@@ -4,10 +4,13 @@
 #include "EffectFunctionLibrary.h"
 #include "BurnEffectComponent.h"
 #include "GasCloudEffectComponent.h"
+#include "HealEffectComponent.h"
+#include "ManaRegenerationEffectComponent.h"
 
 void UEffectFunctionLibrary::GenerateEffect(ABaseCharacter* character, TSubclassOf<UBaseEffectComponent> effectType)
 {
 	UBaseEffectComponent* effect = NULL;
+
 	if (effectType->IsChildOf(UBurnEffectComponent::StaticClass()))
 	{
 		effect = NewObject<UBurnEffectComponent>(character);
@@ -16,7 +19,15 @@ void UEffectFunctionLibrary::GenerateEffect(ABaseCharacter* character, TSubclass
 	{
 		effect = NewObject<UGasCloudEffectComponent>(character);
 	}
-	
+	else if (effectType->IsChildOf(UHealEffectComponent::StaticClass()))
+	{
+		effect = NewObject<UHealEffectComponent>(character);
+	}
+	else if (effectType->IsChildOf(UManaRegenerationEffectComponent::StaticClass()))
+	{
+		effect = NewObject<UManaRegenerationEffectComponent>(character);
+	}
+
 	if (effect)
 	{
 		character->AddInstanceComponent(effect);

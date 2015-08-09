@@ -3,7 +3,7 @@
 #include "Galdrar.h"
 #include "GasCloudEffectComponent.h"
 #include "BaseCharacter.h"
-
+#include "CombatHandler.h"
 
 // Sets default values for this component's properties
 UGasCloudEffectComponent::UGasCloudEffectComponent()
@@ -28,15 +28,15 @@ UGasCloudEffectComponent::UGasCloudEffectComponent()
 void UGasCloudEffectComponent::TickComponent(float DeltaTime, ELevelTick TickType, FActorComponentTickFunction* ThisTickFunction)
 {
 	Super::TickComponent(DeltaTime, TickType, ThisTickFunction);
-
 	elapsedTime += DeltaTime;
 	time += DeltaTime;
+
 	if (time > tickRate)
 	{
 		time -= tickRate;
 		if (ABaseCharacter* character = dynamic_cast<ABaseCharacter*>(GetOwner()))
 		{
-			character->Wound(damage, damageType, false);
+			character->Wound((int32)CombatHandler::CalcDamage(damage, character->GetResistance(damageType), 0, false), damageType, false);
 		}
 	}
 

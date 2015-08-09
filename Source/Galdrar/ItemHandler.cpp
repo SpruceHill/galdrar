@@ -11,13 +11,13 @@ void ItemHandler::ActivateItem(ALoot* item, AHeroCharacter* owner, ABaseCharacte
 	{
 	// Health potion
 	case 30002: 
-		target->AddEffect(EffectType::HEAL);
+		//target->AddEffect(EffectType::HEAL);
 		owner->RemoveItem(item);
 		item->Destroy();
 		break;
 	// Mana potion
 	case 30003: 
-		target->AddEffect(EffectType::MANA_REGEN);
+		//target->AddEffect(EffectType::MANA_REGEN);
 		owner->RemoveItem(item);
 		item->Destroy();
 		break;

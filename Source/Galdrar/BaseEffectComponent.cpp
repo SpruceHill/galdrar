@@ -21,7 +21,6 @@ void UBaseEffectComponent::InitializeComponent()
 {
 	Super::InitializeComponent();
 	// ...
-	GEngine->AddOnScreenDebugMessage(-1, 15.0f, FColor::Red, "INIT");
 }
 
 

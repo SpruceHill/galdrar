@@ -45,7 +45,7 @@ public:
 	UFUNCTION(BlueprintCallable, Category = Stats)
 	void Heal(float amount);
 
-	void Wound(float amount, EGaldrarDamageType type, bool crit);
+	void Wound(int32 amount, EGaldrarDamageType type, bool crit);
 
 	UFUNCTION(BlueprintCallable, Category = Stats)
 	void SetHealth(float newHealth);
@@ -56,38 +56,11 @@ public:
 	UFUNCTION(BlueprintCallable, Category = Stats)
 	void DecreaseMana(float amount);
 
-	void AddEffect(EffectType type)
-	{
-		bool found = false;
-		for (Effect* e : activeEffects)
-		{
-			if (e->GetEffectType() == type)
-			{
-				found = true;
-				if (e->bStackable)
-				{
-					// Effect stackable, add new instance.
-					//activeEffects.push_back(EffectFactory::GenerateEffect(stats, type));
-				}
-				else
-				{
-					// Effect not stackable, reset timer.
-					e->ResetTimer();
-				}
-			}
-		}
-		if (!found)
-		{
-			// Adding new effect.
-			//activeEffects.push_back(EffectFactory::GenerateEffect(stats, type));
-		}
-	}
+	UFUNCTION(BlueprintCallable, Category = BaseCharacter)
+	void AddEffect(TSubclassOf<UBaseEffectComponent> effectType);
 
-	void RemoveEffect(Effect* effect)
-	{
-		bool found = (std::find(activeEffects.begin(), activeEffects.end(), effect) != activeEffects.end());
-		if (found) activeEffects.remove(effect);
-	}
+	UFUNCTION(BlueprintCallable, Category = BaseCharacter)
+	void RemoveEffect(UBaseEffectComponent* effect);
 
 	std::list< Effect* > GetActiveEffects() { return activeEffects; }
 

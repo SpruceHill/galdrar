@@ -4,6 +4,7 @@
 #include "BaseCharacter.h"
 #include "HUDAdapter.h"
 #include "GaldrarColor.h"
+#include "EffectFunctionLibrary.h"
 
 void ABaseCharacter::Tick(float DeltaSeconds)
 {
@@ -14,35 +15,6 @@ void ABaseCharacter::Tick(float DeltaSeconds)
 
 	// Mana regen
 	if (stats->mana < stats->maxMana) stats->mana += stats->manaReg*DeltaSeconds;
-
-	// Tick effects
-	std::list<Effect*>::iterator it = activeEffects.begin();
-	while (it != activeEffects.end())
-	{
-		Effect* effect = (*it);
-
-		if (effect->bShouldTick)
-		{
-			effect->Tick(DeltaSeconds);
-			if (effect->doDamage)
-			{
-				float effectDamage = effect->GetDamage();
-				effectDamage *= 1 - (GetResistance(effect->GetDamageType()) / 100.f);
-				Wound((int32)effectDamage, effect->GetDamageType(), false);
-				effect->bPrintDI = false;
-			}
-			if (effect->bPrintDI)
-			{
-				HUDAdapter HA;
-				HA.CreateDamageIndicator(this, effect->GetPrint(), UGaldrarColor::GetDamageTypeColor(effect->GetDamageType()), false);
-			}
-		}
-		if (effect->GetElapsedTime() >= effect->GetDuration())
-		{
-			it = activeEffects.erase(it);
-		}
-		++it;
-	}
 
 	// Tick spells
 	for (Spell* s : spells)
@@ -78,7 +50,7 @@ void ABaseCharacter::Heal(float amount)
 	}
 }
 
-void ABaseCharacter::Wound(float amount, EGaldrarDamageType type, bool crit)
+void ABaseCharacter::Wound(int32 amount, EGaldrarDamageType type, bool crit)
 {
 	HUDAdapter HA;
 	HA.CreateDamageIndicator(this, FString::FromInt(amount), UGaldrarColor::GetDamageTypeColor(type), crit);
@@ -88,6 +60,11 @@ void ABaseCharacter::Wound(float amount, EGaldrarDamageType type, bool crit)
 	{
 		DisableInput(Cast<APlayerController>(GetController()));
 		OnDeath();
+
+		for (UActorComponent* ac : GetActiveEffectComponents())
+		{
+			ac->MarkPendingKill();
+		}
 
 		GetCapsuleComponent()->SetCollisionEnabled(ECollisionEnabled::NoCollision);
 		GetMesh()->SetCollisionObjectType(ECollisionChannel::ECC_WorldDynamic);
@@ -151,6 +128,41 @@ void ABaseCharacter::Silence(float duration)
 		silenceDuration = silenceTime + duration;
 		bSilenced = true;
 	}
+}
+
+void ABaseCharacter::AddEffect(TSubclassOf<UBaseEffectComponent> effectType)
+{
+	if (int32(effectType.GetDefaultObject()->GetDamage() 
+		* (1 - (GetResistance(effectType.GetDefaultObject()->GetDamageType())
+		/ 100.f))) < 1)
+	{
+		HUDAdapter HA;
+		HA.CreateDamageIndicator(this, "Resisted", UGaldrarColor::GetDamageTypeColor(effectType.GetDefaultObject()->GetDamageType()), false);
+		return;
+	}
+
+	bool found = false;
+	for (UActorComponent* ac : GetActiveEffectComponents())
+	{
+		UBaseEffectComponent* ec = Cast<UBaseEffectComponent>(ac);
+
+		if (ec->StaticClass() == effectType)
+		{
+			bool found = true;
+			if (ec->bStackable)
+				UEffectFunctionLibrary::GenerateEffect(this, effectType);
+			else
+				ec->ResetTimer();
+		}
+	}
+	if (!found)
+		UEffectFunctionLibrary::GenerateEffect(this, effectType);
+}
+
+void ABaseCharacter::RemoveEffect(UBaseEffectComponent* effect)
+{
+	if (GetActiveEffectComponents().Contains(effect))
+		effect->MarkPendingKill();
 }
 
 float ABaseCharacter::GetHealth()
