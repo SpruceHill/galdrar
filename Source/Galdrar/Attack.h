@@ -5,6 +5,7 @@
 #include <list>
 #include "Effect.h"
 #include "EffectType.h"
+#include "BaseEffectComponent.h"
 #include "Runtime/Engine/Classes/Slate/SlateBrushAsset.h"
 
 /**
@@ -13,12 +14,12 @@
 class GALDRAR_API Attack
 {
 public:
-	Attack(FString name, float damage, EGaldrarDamageType type, float critMultiplier, float range, float attackSpeed, const std::list < EffectType > effectTypes);
+	Attack(FString name, float damage, EGaldrarDamageType type, float critMultiplier, float range, float attackSpeed, const TArray<TSubclassOf<UBaseEffectComponent>> effectTypes);
 	
 	float GetDamage(){ return damage; }
 	EGaldrarDamageType GetDamageType(){ return damageType; }
 	float GetCritMultiplier(){ return critMultiplier; }
-	std::list < EffectType > GetEffectTypes(){ return effectTypes; }
+	TArray<TSubclassOf<UBaseEffectComponent>> GetEffectTypes(){ return effectTypes; }
 	float GetRange(){ return range; }
 	float GetAttackSpeed(){ return attackSpeed; }
 	virtual FString GetName(){ return name; }
@@ -46,7 +47,7 @@ protected:
 	float damage;
 	EGaldrarDamageType damageType;
 	float critMultiplier;
-	std::list < EffectType > effectTypes;
+	TArray<TSubclassOf<UBaseEffectComponent>> effectTypes;
 	float range;
 	float attackSpeed;
 	FString name;

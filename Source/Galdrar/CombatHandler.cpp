@@ -5,7 +5,8 @@
 #include "BaseCharacter.h"
 #include "GaldrarColor.h"
 #include "Weapon.h"
-#include "EffectFactory.h"
+#include "OldEffectFactory.h"
+#include "EffectFunctionLibrary.h"
 
 float CombatHandler::CalcDamage(float damage, float resistance, float critPercentage, bool crit)
 {
@@ -30,11 +31,17 @@ void CombatHandler::AttackEnemy(ABaseCharacter* attacker, ABaseCharacter* defend
 
 		defender->Wound((int32)damage, attack->GetDamageType(), crit);
 	}
+	for (int i = 0; i < attack->GetEffectTypes().Num(); i++)
+	{
+		ABaseCharacter* character = (UEffectFunctionLibrary::IsDefensive(attack->GetEffectTypes()[i]) ? attacker : defender);
+		UEffectFunctionLibrary::GenerateEffect(defender, attack->GetEffectTypes()[i]);
+	}
+	/*
 	for(EffectType effectType : attack->GetEffectTypes())
 	{
-		ABaseCharacter* character = (EffectFactory::IsDefensive(effectType) ? attacker : defender);
+		ABaseCharacter* character = (OldEffectFactory::IsDefensive(effectType) ? attacker : defender);
 		character->AddEffect(effectType);
-	}
+	}*/
 }
 
 bool CombatHandler::IsCritical(FVector attackerForward, FVector defenderForward)

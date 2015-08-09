@@ -2,6 +2,7 @@
 
 #include "Galdrar.h"
 #include "GasCloud.h"
+#include "GasCloudEffectComponent.h"
 
 GasCloud::GasCloud()
 {
@@ -17,7 +18,7 @@ GasCloud::GasCloud()
 	damage = 0.f;
 	cooldown = 5.f;
 	time = 0.f;
-	effectTypes.push_back(EffectType::POISON_MILD);
+	effectTypes.Add(UGasCloudEffectComponent::StaticClass());
 	damageType = EGaldrarDamageType::POISON;
 	range = 600.f;
 

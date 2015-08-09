@@ -249,3 +249,8 @@ bool ABaseCharacter::IsSilenced()
 {
 	return bSilenced;
 }
+
+TArray<UActorComponent*> ABaseCharacter::GetActiveEffectComponents()
+{
+	return GetComponentsByClass(UBaseEffectComponent::StaticClass());
+}

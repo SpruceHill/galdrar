@@ -12,6 +12,8 @@
 #include "ProjectileFactory.h"
 #include "SpellHandler.h"
 #include "ItemHandler.h"
+#include "EffectFunctionLibrary.h"
+#include "BurnEffectComponent.h"
 
 AHeroPlayerController::AHeroPlayerController(const FObjectInitializer& ObjectInitializer)
 	: Super(ObjectInitializer)

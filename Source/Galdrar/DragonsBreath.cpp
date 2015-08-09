@@ -2,6 +2,7 @@
 
 #include "Galdrar.h"
 #include "DragonsBreath.h"
+#include "BurnEffectComponent.h"
 
 DragonsBreath::DragonsBreath()
 {
@@ -17,7 +18,7 @@ DragonsBreath::DragonsBreath()
 	damage = 20.f;
 	cooldown = 5.f;
 	time = 0.f;
-	effectTypes.push_back(EffectType::BURNING);
+	effectTypes.Add(UBurnEffectComponent::StaticClass());
 	damageType = EGaldrarDamageType::FIRE;
 	range = 600.f;
 

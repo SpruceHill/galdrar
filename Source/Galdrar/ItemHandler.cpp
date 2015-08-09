@@ -3,7 +3,7 @@
 #include "Galdrar.h"
 #include "ItemHandler.h"
 #include "ManaRegenEffect.h"
-#include "EffectFactory.h"
+#include "OldEffectFactory.h"
 
 void ItemHandler::ActivateItem(ALoot* item, AHeroCharacter* owner, ABaseCharacter* target)
 {

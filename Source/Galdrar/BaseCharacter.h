@@ -9,7 +9,7 @@
 #include "Effect.h"
 #include "CharacterStatsComponent.h"
 #include "Spell.h"
-#include "EffectFactory.h"
+#include "BaseEffectComponent.h"
 #include "GameFramework/Character.h"
 #include "BaseCharacter.generated.h"
 
@@ -67,7 +67,7 @@ public:
 				if (e->bStackable)
 				{
 					// Effect stackable, add new instance.
-					activeEffects.push_back(EffectFactory::GenerateEffect(stats, type));
+					//activeEffects.push_back(EffectFactory::GenerateEffect(stats, type));
 				}
 				else
 				{
@@ -79,7 +79,7 @@ public:
 		if (!found)
 		{
 			// Adding new effect.
-			activeEffects.push_back(EffectFactory::GenerateEffect(stats, type));
+			//activeEffects.push_back(EffectFactory::GenerateEffect(stats, type));
 		}
 	}
 
@@ -156,6 +156,9 @@ public:
 
 	UFUNCTION(BlueprintImplementableEvent, Category = BaseCharacter)
 	void AttackAnimation();
+
+	UFUNCTION(BlueprintCallable, Category = BaseCharacter)
+	TArray<UActorComponent*> GetActiveEffectComponents();
 
 protected:
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = BaseCharacter, meta = (AllowPrivateAccess = "true"))
