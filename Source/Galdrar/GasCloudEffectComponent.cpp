@@ -36,7 +36,7 @@ void UGasCloudEffectComponent::TickComponent(float DeltaTime, ELevelTick TickTyp
 		time -= tickRate;
 		if (ABaseCharacter* character = dynamic_cast<ABaseCharacter*>(GetOwner()))
 		{
-			character->Wound((int32)CombatHandler::CalcDamage(damage, character->GetResistance(damageType), 0, false), damageType, false);
+			character->Wound(CombatHandler::CalcDamage(damage, character->GetResistance(damageType), 0, false), damageType, false);
 		}
 	}
 

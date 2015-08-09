@@ -132,6 +132,7 @@ void ABaseCharacter::Silence(float duration)
 
 void ABaseCharacter::AddEffect(TSubclassOf<UBaseEffectComponent> effectType)
 {
+	// Character restist effect if the damage it deals is below 1 after resistance check.
 	if (int32(effectType.GetDefaultObject()->GetDamage() 
 		* (1 - (GetResistance(effectType.GetDefaultObject()->GetDamageType())
 		/ 100.f))) < 1)
