@@ -231,9 +231,10 @@ float ABaseCharacter::GetSpellManaCostAtIndex(int32 index)
 TArray<int32> ABaseCharacter::GetEffectIDs()
 {
 	TArray<int32> array;
-	for (Effect* e : activeEffects)
+	for (UActorComponent* ac : GetActiveEffectComponents())
 	{
-		array.Add(e->GetID());
+		UBaseEffectComponent* ec = Cast<UBaseEffectComponent>(ac);
+		array.Add(ec->GetID());
 	}
 
 	return array;
@@ -242,9 +243,10 @@ TArray<int32> ABaseCharacter::GetEffectIDs()
 TArray<float> ABaseCharacter::GetEffectDurations()
 {
 	TArray<float> array;
-	for (Effect* e : activeEffects)
+	for (UActorComponent* ac : GetActiveEffectComponents())
 	{
-		array.Add(e->GetDuration());
+		UBaseEffectComponent* ec = Cast<UBaseEffectComponent>(ac);
+		array.Add(ec->GetDuration());
 	}
 
 	return array;
@@ -253,9 +255,10 @@ TArray<float> ABaseCharacter::GetEffectDurations()
 TArray<float> ABaseCharacter::GetEffectElapsedTimes()
 {
 	TArray<float> array;
-	for (Effect* e : activeEffects)
+	for (UActorComponent* ac : GetActiveEffectComponents())
 	{
-		array.Add(e->GetElapsedTime());
+		UBaseEffectComponent* ec = Cast<UBaseEffectComponent>(ac);
+		array.Add(ec->GetElapsedTime());
 	}
 
 	return array;

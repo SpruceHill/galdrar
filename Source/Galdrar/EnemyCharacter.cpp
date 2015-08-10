@@ -4,7 +4,6 @@
 #include "EnemyCharacter.h"
 #include "EnemyAIController.h"
 #include "BaseCharacter.h"
-#include "BurnEffect.h"
 
 AEnemyCharacter::AEnemyCharacter(const FObjectInitializer& ObjectInitializer)
 	: Super(ObjectInitializer)

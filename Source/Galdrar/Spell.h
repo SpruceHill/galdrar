@@ -3,7 +3,6 @@
 #pragma once
 
 #include "Attack.h"
-#include "EffectType.h"
 #include <list>
 
 class GALDRAR_API Spell : public Attack

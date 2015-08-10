@@ -2,8 +2,6 @@
 
 #include "Galdrar.h"
 #include "ItemHandler.h"
-#include "ManaRegenEffect.h"
-#include "OldEffectFactory.h"
 #include "HealEffectComponent.h"
 #include "ManaRegenerationEffectComponent.h"
 

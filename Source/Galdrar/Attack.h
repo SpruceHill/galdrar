@@ -3,8 +3,6 @@
 #pragma once
 #include "GaldrarDamageType.h"
 #include <list>
-#include "Effect.h"
-#include "EffectType.h"
 #include "BaseEffectComponent.h"
 #include "Runtime/Engine/Classes/Slate/SlateBrushAsset.h"
 

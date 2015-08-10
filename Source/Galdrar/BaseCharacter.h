@@ -6,7 +6,6 @@
 #include "Attack.h"
 #include <list>
 #include <algorithm>
-#include "Effect.h"
 #include "CharacterStatsComponent.h"
 #include "Spell.h"
 #include "BaseEffectComponent.h"
@@ -61,8 +60,6 @@ public:
 
 	UFUNCTION(BlueprintCallable, Category = BaseCharacter)
 	void RemoveEffect(UBaseEffectComponent* effect);
-
-	std::list< Effect* > GetActiveEffects() { return activeEffects; }
 
 	Spell* GetSpell(int8 index)
 	{
@@ -141,7 +138,6 @@ protected:
 	UCharacterStatsComponent* stats;
 	UPROPERTY(BlueprintReadWrite, Category = BaseCharacter)
 	FString name;
-	std::list < Effect* > activeEffects;
 	Attack* weapon;
 	Spell* spells [4];
 	bool bStunned = false;
