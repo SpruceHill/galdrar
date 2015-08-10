@@ -4,20 +4,22 @@
 #include "ItemHandler.h"
 #include "ManaRegenEffect.h"
 #include "OldEffectFactory.h"
+#include "HealEffectComponent.h"
+#include "ManaRegenerationEffectComponent.h"
 
 void ItemHandler::ActivateItem(ALoot* item, AHeroCharacter* owner, ABaseCharacter* target)
 {
-	switch ((int32)item->GetID())
+	switch (item->GetID())
 	{
 	// Health potion
-	case 30002: 
-		//target->AddEffect(EffectType::HEAL);
+	case 30002:
+		target->AddEffect(UHealEffectComponent::StaticClass());
 		owner->RemoveItem(item);
 		item->Destroy();
 		break;
 	// Mana potion
 	case 30003: 
-		//target->AddEffect(EffectType::MANA_REGEN);
+		target->AddEffect(UManaRegenerationEffectComponent::StaticClass());
 		owner->RemoveItem(item);
 		item->Destroy();
 		break;

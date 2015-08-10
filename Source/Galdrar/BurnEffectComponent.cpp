@@ -45,5 +45,5 @@ void UBurnEffectComponent::TickComponent(float DeltaTime, ELevelTick TickType, F
 	}
 
 	// If time has run out, delete  this effect.
-	if (elapsedTime > duration) MarkPendingKill();
+	if (elapsedTime > duration) Remove();
 }

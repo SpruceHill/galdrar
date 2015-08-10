@@ -36,3 +36,9 @@ bool UBaseEffectComponent::IsDefensive()
 {
 	return bDefensive;
 }
+
+void UBaseEffectComponent::Remove()
+{
+	MarkPendingKill();
+	GetOwner()->RemoveOwnedComponent(this);
+}

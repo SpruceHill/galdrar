@@ -56,6 +56,15 @@ void ABaseCharacter::Wound(int32 amount, EGaldrarDamageType type, bool crit)
 	HA.CreateDamageIndicator(this, FString::FromInt(amount), UGaldrarColor::GetDamageTypeColor(type), crit);
 
 	stats->health -= amount;
+
+	// Remove damage sensitive effects
+	for (UActorComponent * ac : GetActiveEffectComponents())
+	{
+		UBaseEffectComponent* ec = Cast<UBaseEffectComponent>(ac);
+		if (ec->bRemoveOnDamageTaken) ec->Remove();
+	}
+
+	// Fatal blow
 	if (stats->health <= 0 && stats->health + amount > 0)
 	{
 		DisableInput(Cast<APlayerController>(GetController()));
@@ -66,6 +75,7 @@ void ABaseCharacter::Wound(int32 amount, EGaldrarDamageType type, bool crit)
 			ac->MarkPendingKill();
 		}
 
+		// Make Ragdoll
 		GetCapsuleComponent()->SetCollisionEnabled(ECollisionEnabled::NoCollision);
 		GetMesh()->SetCollisionObjectType(ECollisionChannel::ECC_WorldDynamic);
 		GetMesh()->SetCollisionResponseToAllChannels(ECollisionResponse::ECR_Block);
@@ -75,12 +85,6 @@ void ABaseCharacter::Wound(int32 amount, EGaldrarDamageType type, bool crit)
 		GetMesh()->SetCollisionEnabled(ECollisionEnabled::QueryAndPhysics);
 		GetMesh()->SetSimulatePhysics(true);
 		CursorHitbox->SetCollisionEnabled(ECollisionEnabled::NoCollision);
-	}
-
-	// Remove damage sensitive effects
-	for (Effect* e : activeEffects)
-	{
-		if (e->bRemoveOnDamageTaken) e->End();
 	}
 }
 
@@ -146,24 +150,28 @@ void ABaseCharacter::AddEffect(TSubclassOf<UBaseEffectComponent> effectType)
 	for (UActorComponent* ac : GetActiveEffectComponents())
 	{
 		UBaseEffectComponent* ec = Cast<UBaseEffectComponent>(ac);
-
-		if (ec->StaticClass() == effectType)
+		
+		if (ec->IsA(effectType))
 		{
-			bool found = true;
+			found = true;
 			if (ec->bStackable)
+			{
 				UEffectFunctionLibrary::GenerateEffect(this, effectType);
+			}
 			else
 				ec->ResetTimer();
 		}
 	}
 	if (!found)
+	{
 		UEffectFunctionLibrary::GenerateEffect(this, effectType);
+	}
 }
 
 void ABaseCharacter::RemoveEffect(UBaseEffectComponent* effect)
 {
 	if (GetActiveEffectComponents().Contains(effect))
-		effect->MarkPendingKill();
+		effect->Remove();
 }
 
 float ABaseCharacter::GetHealth()

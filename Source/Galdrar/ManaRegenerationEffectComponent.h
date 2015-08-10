@@ -13,7 +13,10 @@ class GALDRAR_API UManaRegenerationEffectComponent : public UBaseEffectComponent
 {
 	GENERATED_BODY()
 	
-	
-	
-	
+public:
+	UManaRegenerationEffectComponent();
+
+	void TickComponent(float DeltaTime, ELevelTick TickType, FActorComponentTickFunction* ThisTickFunction) override;
+
+	virtual void Remove() override;
 };

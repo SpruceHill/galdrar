@@ -14,6 +14,7 @@ enum EGaldrarDamageType
 	SHOCK		UMETA(DisplayName = "Shock"),
 	POISON		UMETA(DisplayName = "Poison"),
 	PHYSICAL	UMETA(DisplayName = "Physical"),
+	NONE		UMETA(DisplayName = "None"),
 };
 
 

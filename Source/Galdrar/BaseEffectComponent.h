@@ -22,6 +22,8 @@ public:
 	// Called every frame
 	virtual void TickComponent( float DeltaTime, ELevelTick TickType, FActorComponentTickFunction* ThisTickFunction ) override;
 
+	virtual void Remove();
+
 	bool IsDefensive();
 
 	float GetDamage() { return damage; }
@@ -36,11 +38,6 @@ public:
 	void ResetTimer()
 	{
 		elapsedTime = 0.f;
-	}
-
-	void End()
-	{
-		elapsedTime = duration;
 	}
 
 	FString GetPrint(){ bPrintDI = false; return toBePrinted; }

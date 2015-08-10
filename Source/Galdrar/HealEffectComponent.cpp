@@ -17,9 +17,9 @@ UHealEffectComponent::UHealEffectComponent()
 	time = 0.f;
 	elapsedTime = 0.f;
 
-	damageType = EGaldrarDamageType::PHYSICAL;
+	damageType = EGaldrarDamageType::NONE;
 	bStackable = false;
-	bRemoveOnDamageTaken = false;
+	bRemoveOnDamageTaken = true;
 
 	// 4 = Effect, ID = 0003
 	ID = 40003;
@@ -37,12 +37,15 @@ void UHealEffectComponent::TickComponent(float DeltaTime, ELevelTick TickType, F
 		time -= tickRate;
 		if (ABaseCharacter* character = dynamic_cast<ABaseCharacter*>(GetOwner()))
 		{
-			character->Heal(damage);
+			if (character->GetStats()->health < character->GetStats()->maxHealth)
+				character->Heal(damage);
+			else
+				Remove();
 		}
 	}
 
-	// If time has run out, delete  this effect.
-	if (elapsedTime > duration) MarkPendingKill();
+	// If time has run out, delete this effect.
+	if (elapsedTime > duration) Remove();
 }
 
 

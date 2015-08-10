@@ -40,6 +40,6 @@ void UGasCloudEffectComponent::TickComponent(float DeltaTime, ELevelTick TickTyp
 		}
 	}
 
-	// If time has run out, delete  this effect.
-	if (elapsedTime > duration) MarkPendingKill();
+	// If time has run out, delete this effect.
+	if (elapsedTime > duration) Remove();
 }
