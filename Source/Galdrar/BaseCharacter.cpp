@@ -225,6 +225,11 @@ float ABaseCharacter::GetSpellManaCostAtIndex(int32 index)
 	return spells[index]->GetManaCost();
 }
 
+EGaldrarDamageType ABaseCharacter::GetSpellDamageTypeAtIndex(int32 index)
+{
+	return spells[index]->GetDamageType();
+}
+
 /*
 *	Effect Getters
 */

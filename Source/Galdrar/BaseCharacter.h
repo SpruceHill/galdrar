@@ -108,6 +108,9 @@ public:
 	UFUNCTION(BlueprintCallable, Category = Spells)
 	float GetSpellManaCostAtIndex(int32 index);
 
+	UFUNCTION(BlueprintCallable, Category = Spells)
+	EGaldrarDamageType GetSpellDamageTypeAtIndex(int32 index);
+
 	UFUNCTION(BlueprintCallable, Category = Effects)
 	TArray<int32> GetEffectIDs();
 	UFUNCTION(BlueprintCallable, Category = Effects)
