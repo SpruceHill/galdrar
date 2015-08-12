@@ -7,7 +7,6 @@
 #include "Valuable.h"
 #include "GaldrarColor.h"
 #include "HUDAdapter.h"
-#include "BaseBloodVial.h"
 #include "BloodVialComponent.h"
 #include "HeroCharacter.generated.h"
 
@@ -150,8 +149,6 @@ protected:
 	ALoot* inventorySlot4;
 	ALoot* inventorySlot5;
 	ALoot* inventorySlot6;
-
-	//BaseBloodVial* bloodVial;
 
 	UBloodVialComponent* bloodVialComponent;
 };

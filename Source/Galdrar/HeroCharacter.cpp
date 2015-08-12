@@ -10,7 +10,6 @@
 #include "Heal.h"
 #include "Javelin.h"
 #include "Teleport.h"
-#include "CommonBloodVial.h"
 #include "StandardBloodVial.h"
 
 AHeroCharacter::AHeroCharacter(const FObjectInitializer& ObjectInitializer)
@@ -23,7 +22,6 @@ AHeroCharacter::AHeroCharacter(const FObjectInitializer& ObjectInitializer)
 	spells[1] = new GasCloud();
 	spells[2] = new Javelin();
 	spells[3] = new Teleport();
-	//bloodVial = new CommonBloodVial(stats);
 	bloodVialComponent = CreateDefaultSubobject<UStandardBloodVial>(TEXT("BloodVial"));
 	this->GetMesh()->bReceivesDecals = false;
 
