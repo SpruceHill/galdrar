@@ -7,7 +7,7 @@
 DragonsBreath::DragonsBreath()
 {
 	name = "Dragon's Breath";
-	desc = "Shoot a ball of fire onto your enemies – damaging anyone in its path (20 fire damage) and sets them on fire.";
+	desc = "Shoot a ball of fire onto your enemies – dealing 20 fire damage to everyone in its path and sets them on fire.";
 	spellType = SpellType::DRAGONS_BREATH;
 	activation = Activation::TARGET_GROUND;
 	spellTarget = SpellTarget::CONE;

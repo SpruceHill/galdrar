@@ -42,3 +42,17 @@ void UBaseEffectComponent::Remove()
 	MarkPendingKill();
 	GetOwner()->RemoveOwnedComponent(this);
 }
+
+float UBaseEffectComponent::GetDamage() { return damage; }
+
+float UBaseEffectComponent::GetTime() { return time; }
+
+float UBaseEffectComponent::GetDuration() { return duration; }
+
+float UBaseEffectComponent::GetElapsedTime() { return elapsedTime; }
+
+EGaldrarDamageType UBaseEffectComponent::GetDamageType() { return damageType; }
+
+int32 UBaseEffectComponent::GetID(){ return ID; }
+
+void UBaseEffectComponent::ResetTimer(){ elapsedTime = 0.f; }

@@ -24,28 +24,32 @@ public:
 
 	virtual void Remove();
 
+	UFUNCTION(BlueprintCallable, Category = EffectComponent)
 	bool IsDefensive();
 
-	float GetDamage() { return damage; }
-	float GetTime() { return time; }
-	float GetDuration() { return duration; }
-	float GetElapsedTime() { return elapsedTime; }
+	UFUNCTION(BlueprintCallable, Category = EffectComponent)
+	float GetDamage();
 
-	EGaldrarDamageType GetDamageType() { return damageType; }
+	UFUNCTION(BlueprintCallable, Category = EffectComponent)
+	float GetTime();
 
-	int32 GetID(){ return ID; }
+	UFUNCTION(BlueprintCallable, Category = EffectComponent)
+	float GetDuration();
 
-	void ResetTimer()
-	{
-		elapsedTime = 0.f;
-	}
+	UFUNCTION(BlueprintCallable, Category = EffectComponent)
+	float GetElapsedTime();
 
-	FString GetPrint(){ bPrintDI = false; return toBePrinted; }
+	UFUNCTION(BlueprintCallable, Category = EffectComponent)
+	EGaldrarDamageType GetDamageType();
+
+	UFUNCTION(BlueprintCallable, Category = EffectComponent)
+	int32 GetID();
+
+	UFUNCTION(BlueprintCallable, Category = EffectComponent)
+	void ResetTimer();
 
 	bool bStackable;
-	bool doDamage;
 	bool bShouldTick;
-	bool bPrintDI;
 	bool bRemoveOnDamageTaken;
 
 protected:

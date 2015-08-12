@@ -20,8 +20,6 @@ UBurnEffectComponent::UBurnEffectComponent()
 
 	damageType = EGaldrarDamageType::FIRE;
 	bStackable = false;
-	bPrintDI = false;
-	toBePrinted = desc;
 	bRemoveOnDamageTaken = false;
 
 	// 4 = Effect, ID = 0001
