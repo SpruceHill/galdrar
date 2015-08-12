@@ -8,6 +8,7 @@
 #include "GaldrarColor.h"
 #include "HUDAdapter.h"
 #include "BaseBloodVial.h"
+#include "BloodVialComponent.h"
 #include "HeroCharacter.generated.h"
 
 /**
@@ -129,7 +130,7 @@ public:
 
 	void UseBloodVial()
 	{
-		bloodVial->Activate();
+		bloodVialComponent->Use();
 	}
 
 	UFUNCTION(BlueprintCallable, Category = BloodVial)
@@ -150,5 +151,7 @@ protected:
 	ALoot* inventorySlot5;
 	ALoot* inventorySlot6;
 
-	BaseBloodVial* bloodVial;
+	//BaseBloodVial* bloodVial;
+
+	UBloodVialComponent* bloodVialComponent;
 };
