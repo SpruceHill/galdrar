@@ -230,45 +230,6 @@ EGaldrarDamageType ABaseCharacter::GetSpellDamageTypeAtIndex(int32 index)
 	return spells[index]->GetDamageType();
 }
 
-/*
-*	Effect Getters
-*/
-TArray<int32> ABaseCharacter::GetEffectIDs()
-{
-	TArray<int32> array;
-	for (UActorComponent* ac : GetActiveEffectComponents())
-	{
-		UBaseEffectComponent* ec = Cast<UBaseEffectComponent>(ac);
-		array.Add(ec->GetID());
-	}
-
-	return array;
-}
-
-TArray<float> ABaseCharacter::GetEffectDurations()
-{
-	TArray<float> array;
-	for (UActorComponent* ac : GetActiveEffectComponents())
-	{
-		UBaseEffectComponent* ec = Cast<UBaseEffectComponent>(ac);
-		array.Add(ec->GetDuration());
-	}
-
-	return array;
-}
-
-TArray<float> ABaseCharacter::GetEffectElapsedTimes()
-{
-	TArray<float> array;
-	for (UActorComponent* ac : GetActiveEffectComponents())
-	{
-		UBaseEffectComponent* ec = Cast<UBaseEffectComponent>(ac);
-		array.Add(ec->GetElapsedTime());
-	}
-
-	return array;
-}
-
 bool ABaseCharacter::IsStunned()
 {
 	return bStunned;

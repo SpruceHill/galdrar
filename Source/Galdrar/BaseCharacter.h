@@ -111,13 +111,6 @@ public:
 	UFUNCTION(BlueprintCallable, Category = Spells)
 	EGaldrarDamageType GetSpellDamageTypeAtIndex(int32 index);
 
-	UFUNCTION(BlueprintCallable, Category = Effects)
-	TArray<int32> GetEffectIDs();
-	UFUNCTION(BlueprintCallable, Category = Effects)
-	TArray<float> GetEffectDurations();
-	UFUNCTION(BlueprintCallable, Category = Effects)
-	TArray<float> GetEffectElapsedTimes();
-
 	UFUNCTION(BlueprintCallable, Category = BaseCharacter)
 	bool IsStunned();
 
