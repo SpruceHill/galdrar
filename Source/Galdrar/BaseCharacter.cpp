@@ -15,6 +15,8 @@ void ABaseCharacter::Tick(float DeltaSeconds)
 
 	// Mana regen
 	if (stats->mana < stats->maxMana) stats->mana += stats->manaReg*DeltaSeconds;
+	// Rage Deregen
+	if (stats->rage > 0) RemoveRage(stats->rageDegenerationRate*DeltaSeconds);
 
 	// Tick spells
 	for (Spell* s : spells)
@@ -104,6 +106,46 @@ void ABaseCharacter::DecreaseMana(float amount)
 	else stats->mana -= amount;
 }
 
+void ABaseCharacter::GenerateRage(float amount)
+{
+	// If rage bar is full
+	if (stats->rage + amount > stats->defaultMaxMana)
+	{
+		stats->rage = stats->defaultMaxMana;
+		stats->maxMana = 0;
+		stats->mana = 0;
+	}
+	else
+	{
+		stats->rage += amount;
+
+		// Cap mana to new max value if nesessary
+		if (stats->mana > stats->maxMana - amount)
+		{
+			stats->mana = stats->maxMana - amount;
+		}
+		else
+		{
+			stats->mana -= amount;
+		}
+		stats->maxMana -= amount;
+	}
+}
+
+void ABaseCharacter::RemoveRage(float amount)
+{
+	if (stats->rage - amount < 0.f)
+	{
+		stats->maxMana -= stats->rage - amount;
+		stats->rage = 0.f;
+	}
+	else
+	{
+		stats->maxMana += amount;
+		stats->rage -= amount;
+	}
+}
+
 void ABaseCharacter::Stun(float duration)
 {
 	if (!bStunned)
@@ -191,7 +233,8 @@ float ABaseCharacter::GetMaxMana()
 
 float ABaseCharacter::GetMana()
 {
-	return stats->mana;
+	if (stats->maxMana - stats->rage < stats->mana) return (stats->maxMana - stats->rage);
+	else return stats->mana;
 }
 
 

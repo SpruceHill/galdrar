@@ -427,6 +427,8 @@ void AHeroPlayerController::Spell(int8 index)
 {
 	AHeroCharacter* hero = Cast<AHeroCharacter>(GetPawn());
 
+	hero->GenerateRage(10);
+
 	if (hero->IsSilenced())
 	{
 		HA.Toast("Silenced");

@@ -24,6 +24,10 @@ UCharacterStatsComponent::UCharacterStatsComponent()
 	defaultManaReg = 1.f;
 	manaReg = 1.f;
 
+	rage = 0.f;
+	rageGenerationMultiplier = 2.f;
+	rageDegenerationRate = 1.f;
+
 	defaultArmour = 0.f;
 	armour = 0.f;
 

@@ -42,6 +42,13 @@ public:
 	float manaReg;
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = CharacterStats)
+	float rage;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = CharacterStats)
+	float rageGenerationMultiplier;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = CharacterStats)
+	float rageDegenerationRate;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = CharacterStats)
 	float defaultArmour;
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = CharacterStats)
 	float armour;

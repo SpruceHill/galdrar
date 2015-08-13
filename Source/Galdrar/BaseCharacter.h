@@ -55,6 +55,12 @@ public:
 	UFUNCTION(BlueprintCallable, Category = Stats)
 	void DecreaseMana(float amount);
 
+	UFUNCTION(BlueprintCallable, Category = Stats)
+	void GenerateRage(float amount);
+
+	UFUNCTION(BlueprintCallable, Category = Stats)
+	void RemoveRage(float amount);
+
 	UFUNCTION(BlueprintCallable, Category = BaseCharacter)
 	void AddEffect(TSubclassOf<UBaseEffectComponent> effectType);
 
