@@ -59,6 +59,9 @@ void ABaseCharacter::Wound(int32 amount, EGaldrarDamageType type, bool crit)
 
 	stats->health -= amount;
 
+	// Build rage
+	GenerateRage(amount * stats->rageGenerationMultiplier);
+
 	// Remove damage sensitive effects
 	for (UActorComponent * ac : GetActiveEffectComponents())
 	{
