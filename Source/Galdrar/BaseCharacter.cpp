@@ -14,7 +14,7 @@ void ABaseCharacter::Tick(float DeltaSeconds)
 	GetCharacterMovement()->RotationRate = FRotator(0.f, stats->rotationRate, 0.f);
 
 	// Mana regen
-	if (stats->mana < stats->maxMana) stats->mana += stats->manaReg*DeltaSeconds;
+	if (stats->mana < stats->maxMana - stats->rage) stats->mana += stats->manaReg*DeltaSeconds;
 	// Rage Deregen
 	if (stats->rage > 0) RemoveRage(stats->rageDegenerationRate*DeltaSeconds);
 
@@ -90,16 +90,6 @@ void ABaseCharacter::Wound(int32 amount, EGaldrarDamageType type, bool crit)
 	}
 }
 
-void ABaseCharacter::SetHealth(float newHealth)
-{
-	stats->health = newHealth;
-}
-
-void ABaseCharacter::SetMana(float newMana)
-{
-	stats->mana = newMana;
-}
-
 void ABaseCharacter::DecreaseMana(float amount)
 {
 	if (stats->mana - amount <= 0.f) stats->mana = 0.f;
@@ -109,26 +99,22 @@ void ABaseCharacter::DecreaseMana(float amount)
 void ABaseCharacter::GenerateRage(float amount)
 {
 	// If rage bar is full
-	if (stats->rage + amount > stats->defaultMaxMana)
+	if (stats->rage + (amount * stats->damageMultiplier) > stats->maxMana)
 	{
-		stats->rage = stats->defaultMaxMana;
-		stats->maxMana = 0;
+		stats->rage = stats->maxMana;
 		stats->mana = 0;
 	}
 	else
 	{
-		stats->rage += amount;
+		stats->rage += (amount * stats->damageMultiplier);
 
-		// Cap mana to new max value if nesessary
-		if (stats->mana > stats->maxMana - amount)
+		// If mana should be affected
+		if (stats->maxMana - stats->rage < stats->mana)
 		{
-			stats->mana = stats->maxMana - amount;
+			if (stats->mana - amount < 0) stats->mana = 0;
+			//else stats->mana -= amount;
+			else stats->mana = stats->maxMana-stats->rage;
 		}
-		else
-		{
-			stats->mana -= amount;
-		}
-		stats->maxMana -= amount;
 	}
 }
 
@@ -136,12 +122,10 @@ void ABaseCharacter::RemoveRage(float amount)
 {
 	if (stats->rage - amount < 0.f)
 	{
-		stats->maxMana -= stats->rage - amount;
 		stats->rage = 0.f;
 	}
 	else
 	{
-		stats->maxMana += amount;
 		stats->rage -= amount;
 	}
 }
@@ -233,10 +217,8 @@ float ABaseCharacter::GetMaxMana()
 
 float ABaseCharacter::GetMana()
 {
-	if (stats->maxMana - stats->rage < stats->mana) return (stats->maxMana - stats->rage);
-	else return stats->mana;
+	return stats->mana;
 }
-
 
 int32 ABaseCharacter::GetSpellIdAtIndex(int32 index)
 {

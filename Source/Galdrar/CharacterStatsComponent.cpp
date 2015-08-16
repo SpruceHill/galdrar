@@ -26,7 +26,7 @@ UCharacterStatsComponent::UCharacterStatsComponent()
 
 	rage = 0.f;
 	rageGenerationMultiplier = 2.f;
-	rageDegenerationRate = 1.f;
+	rageDegenerationRate = 5.f;
 
 	defaultArmour = 0.f;
 	armour = 0.f;

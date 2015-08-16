@@ -47,12 +47,6 @@ public:
 	void Wound(int32 amount, EGaldrarDamageType type, bool crit);
 
 	UFUNCTION(BlueprintCallable, Category = Stats)
-	void SetHealth(float newHealth);
-
-	UFUNCTION(BlueprintCallable, Category = Stats)
-	void SetMana(float newMana);
-
-	UFUNCTION(BlueprintCallable, Category = Stats)
 	void DecreaseMana(float amount);
 
 	UFUNCTION(BlueprintCallable, Category = Stats)

@@ -389,6 +389,9 @@ void AHeroPlayerController::OnSetDestinationReleased()
 
 void AHeroPlayerController::CancelAction()
 {
+	AHeroCharacter* hero = Cast<AHeroCharacter>(GetPawn());
+	hero->GenerateRage(10);
+
 	bSelectingUnitTarget = false;
 	bSelectingGroundTarget = false;
 
@@ -426,8 +429,6 @@ void AHeroPlayerController::Spell4(){ if (!bStunned) Spell(3); }
 void AHeroPlayerController::Spell(int8 index)
 {
 	AHeroCharacter* hero = Cast<AHeroCharacter>(GetPawn());
-
-	hero->GenerateRage(10);
 
 	if (hero->IsSilenced())
 	{
