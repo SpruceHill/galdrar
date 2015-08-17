@@ -23,6 +23,11 @@ UGasCloudEffectComponent::UGasCloudEffectComponent()
 
 	// 4 = Effect, ID = 0002
 	ID = 40002;
+
+	if (ABaseCharacter* character = dynamic_cast<ABaseCharacter*>(GetOwner()))
+	{
+		character->GetStats()->movementSpeed -= 150;
+	}
 }
 
 void UGasCloudEffectComponent::TickComponent(float DeltaTime, ELevelTick TickType, FActorComponentTickFunction* ThisTickFunction)
@@ -41,5 +46,12 @@ void UGasCloudEffectComponent::TickComponent(float DeltaTime, ELevelTick TickTyp
 	}
 
 	// If time has run out, delete this effect.
-	if (elapsedTime > duration) Remove();
+	if (elapsedTime > duration)
+	{
+		if (ABaseCharacter* character = dynamic_cast<ABaseCharacter*>(GetOwner()))
+		{
+			character->GetStats()->movementSpeed += 150;
+		}
+		Remove();
+	}
 }

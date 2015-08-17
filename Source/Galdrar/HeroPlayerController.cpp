@@ -389,9 +389,6 @@ void AHeroPlayerController::OnSetDestinationReleased()
 
 void AHeroPlayerController::CancelAction()
 {
-	AHeroCharacter* hero = Cast<AHeroCharacter>(GetPawn());
-	hero->GenerateRage(10);
-
 	bSelectingUnitTarget = false;
 	bSelectingGroundTarget = false;
 
