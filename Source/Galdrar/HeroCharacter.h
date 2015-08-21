@@ -73,9 +73,7 @@ public:
 		{
 			inventorySlot6 = loot;
 		}
-		loot->SetActorHiddenInGame(true);
-		loot->DisableComponentsSimulatePhysics();
-		loot->SetActorEnableCollision(false);
+		loot->OnPickup();
 	}
 
 	int32 GetInventorySize()

@@ -69,7 +69,7 @@ void AHeroCharacter::AddValuable(AValuable* valuable)
 	HUDAdapter HA;
 	HA.CreateDamageIndicator(this, "+" + FString::FromInt(valuable->GetValue()), UGaldrarColor::GetGoldColor(), false);
 	lootValue += valuable->GetValue();
-	valuable->Destroy();
+	valuable->OnPickup();
 }
 
 void AHeroCharacter::RemoveLootValue(int32 amount)

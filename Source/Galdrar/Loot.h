@@ -25,6 +25,10 @@ public:
 
 	virtual void Activate(UCharacterStatsComponent* ownerStats, UCharacterStatsComponent* targetStats);
 
+	// Implement in blueprint
+	UFUNCTION(BlueprintImplementableEvent, Category = Loot)
+	void OnPickup();
+
 	UFUNCTION(BlueprintCallable, Category = Loot)
 	FString GetName();
 	UFUNCTION(BlueprintCallable, Category = Loot)
@@ -37,6 +41,9 @@ public:
 	bool IsActivatable();
 
 protected:
+	UFUNCTION(BlueprintCallable, Category = Loot)
+	void Disable();
+
 	UPROPERTY(BlueprintReadWrite, Category = Loot)
 	FString name;
 	UPROPERTY(BlueprintReadWrite, Category = Loot)

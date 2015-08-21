@@ -33,6 +33,13 @@ void ALoot::Activate(UCharacterStatsComponent* ownerStats, UCharacterStatsCompon
 
 }
 
+void ALoot::Disable()
+{
+	SetActorHiddenInGame(true);
+	DisableComponentsSimulatePhysics();
+	SetActorEnableCollision(false);
+}
+
 FString ALoot::GetName(){ return name; }
 FString ALoot::GetDesc(){ return desc; }
 int32 ALoot::GetID() { return ID; }
