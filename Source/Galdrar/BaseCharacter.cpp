@@ -59,6 +59,8 @@ void ABaseCharacter::Wound(int32 amount, EGaldrarDamageType type, bool crit)
 
 	stats->health -= amount;
 
+	OnTakeDamage(type);
+
 	// Build rage
 	GenerateRage(amount * stats->rageGenerationMultiplier);
 
