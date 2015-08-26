@@ -78,26 +78,42 @@ public:
 	float GetID();
 
 protected:
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Attack)
 	bool bDoesDamage;
-	EGaldrarDamageType damageType;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Attack)
+	TEnumAsByte<EGaldrarDamageType> damageType;
 	
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Attack)
 	float damage;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Attack)
 	float critMultiplier;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Attack)
 	float range;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Attack)
 	float attackSpeed;
 
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Attack)
 	TArray<TSubclassOf<UBaseEffectComponent>> effectTypes;
 	
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Attack)
 	FString name;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Attack)
 	FString desc;
 
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Attack)
 	float cooldown;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Attack)
 	float time;
 
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Attack)
 	bool bProjectile;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Attack)
 	bool bProjectilePenetration;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Attack)
 	float projectileWidth;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Attack)
 	float projectileSpeed;
 
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Attack)
 	float ID;
 };
