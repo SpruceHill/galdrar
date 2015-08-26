@@ -2,14 +2,19 @@
 
 #pragma once
 
-#include "Weapon.h"
+#include "BaseWeapon.h"
+#include "Sword.generated.h"
 
 /**
  * 
  */
-class GALDRAR_API Sword : public Weapon
+UCLASS()
+class GALDRAR_API USword : public UBaseWeapon
 {
+	GENERATED_BODY()
+	
 public:
-	Sword();
-	~Sword();
+	USword();
+	
+	
 };

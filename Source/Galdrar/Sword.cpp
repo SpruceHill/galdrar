@@ -3,10 +3,10 @@
 #include "Galdrar.h"
 #include "Sword.h"
 
-Sword::Sword()
+USword::USword()
 {
-	name = "Sword"; 
-	damage = 20.f; 
+	name = "Sword";
+	damage = 20.f;
 	damageType = EGaldrarDamageType::PHYSICAL;
 	critMultiplier = 1.5f;
 	range = 100.f;
@@ -22,6 +22,4 @@ Sword::Sword()
 	ID = 10001;
 }
 
-Sword::~Sword()
-{
-}
+

@@ -4,13 +4,12 @@
 #include "DragonsBreath.h"
 #include "BurnEffectComponent.h"
 
-DragonsBreath::DragonsBreath()
+UDragonsBreath::UDragonsBreath()
 {
 	name = "Dragon's Breath";
 	desc = "Shoot a ball of fire onto your enemies - dealing 20 fire damage to everyone in its path and sets them on fire.";
-	spellType = SpellType::DRAGONS_BREATH;
-	activation = Activation::TARGET_GROUND;
-	spellTarget = SpellTarget::CONE;
+	activation = EActivation::TARGET_GROUND;
+	spellTarget = ESpellTarget::CONE;
 	manaCost = 40.f;
 	radius = 200.f;
 	bProjectile = true;
@@ -25,8 +24,4 @@ DragonsBreath::DragonsBreath()
 
 	// 2 = Spell, ID = 0001
 	ID = 20001;
-}
-
-DragonsBreath::~DragonsBreath()
-{
 }

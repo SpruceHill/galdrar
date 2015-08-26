@@ -2,14 +2,18 @@
 
 #pragma once
 
-#include "Spell.h"
+#include "BaseSpell.h"
+#include "DragonsBreath.generated.h"
 
 /**
  * 
  */
-class GALDRAR_API DragonsBreath : public Spell
+UCLASS()
+class GALDRAR_API UDragonsBreath : public UBaseSpell
 {
+	GENERATED_BODY()
 public:
-	DragonsBreath();
-	~DragonsBreath();
+	UDragonsBreath();
+	
+	
 };

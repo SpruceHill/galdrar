@@ -1,7 +1,7 @@
 // Copyright Spruce Hill, All rights reserved.
 
 #include "Galdrar.h"
-#include "GasCloud.h"
+#include "OldGasCloud.h"
 #include "GasCloudEffectComponent.h"
 
 GasCloud::GasCloud()

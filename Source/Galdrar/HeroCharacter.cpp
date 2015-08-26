@@ -3,21 +3,19 @@
 #include "Galdrar.h"
 #include "HeroCharacter.h"
 #include "Attack.h"
+#include "StandardBloodVial.h"
 #include "Sword.h"
 #include "DragonsBreath.h"
-#include "GasCloud.h"
-#include "LightningBolt.h"
-#include "Heal.h"
-#include "Javelin.h"
-#include "Teleport.h"
-#include "StandardBloodVial.h"
-
 AHeroCharacter::AHeroCharacter(const FObjectInitializer& ObjectInitializer)
 	: Super(ObjectInitializer)
 {
 	name = "Hero";
 	stats = CreateDefaultSubobject<UCharacterStatsComponent>(TEXT("Stats"));
-	//weapon = new Sword();
+	weapon = CreateDefaultSubobject<USword>(TEXT("Sword"));
+	spells.Add(CreateDefaultSubobject<UDragonsBreath>(TEXT("Dragons1")));
+	spells.Add(CreateDefaultSubobject<UDragonsBreath>(TEXT("Dragons2")));
+	spells.Add(CreateDefaultSubobject<UDragonsBreath>(TEXT("Dragons3")));
+	spells.Add(CreateDefaultSubobject<UDragonsBreath>(TEXT("Dragons4")));
 	//spells[0] = new DragonsBreath();
 	//spells[1] = new GasCloud();
 	//spells[2] = new Javelin();
