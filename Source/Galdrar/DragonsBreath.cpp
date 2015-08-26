@@ -35,8 +35,10 @@ UDragonsBreath::UDragonsBreath()
 
 void UDragonsBreath::ActivateAttack(FVector location, ABaseCharacter* target)
 {
+	time = cooldown;
 	if (ABaseCharacter* character = dynamic_cast<ABaseCharacter*>(GetOwner()))
 	{
+		character->DecreaseMana(manaCost);
 		FActorSpawnParameters SpawnParameters;
 		ABaseProjectile* BPProjectile = GetWorld()->SpawnActor<ABaseProjectile>(ProjectileReference, character->GetActorLocation(), character->GetActorForwardVector().Rotation(), SpawnParameters);
 		BPProjectile->Initialize(character, this);

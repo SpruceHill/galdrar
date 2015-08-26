@@ -31,7 +31,10 @@ void UAttackComponent::TickComponent( float DeltaTime, ELevelTick TickType, FAct
 {
 	Super::TickComponent( DeltaTime, TickType, ThisTickFunction );
 
-	// ...
+	if (time > 0.f)
+	{
+		time -= DeltaTime;
+	}
 }
 
 float UAttackComponent::GetDamage(){ return damage; }
@@ -58,7 +61,10 @@ float UAttackComponent::GetProjectileWidth(){ return projectileWidth; }
 
 float UAttackComponent::GetProjectileSpeed(){ return projectileSpeed; }
 
-void UAttackComponent::ActivateAttack(FVector destination, ABaseCharacter* target){ return; }
+void UAttackComponent::ActivateAttack(FVector destination, ABaseCharacter* target)
+{
+	time = cooldown;
+}
 
 bool UAttackComponent::IsOnCoolDown(){ return time > 0; }
 

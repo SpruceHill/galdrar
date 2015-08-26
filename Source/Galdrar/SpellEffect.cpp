@@ -49,6 +49,6 @@ void ASpellEffect::Trigger(AActor* actor)
 {
 	if (ABaseCharacter* bc = dynamic_cast<ABaseCharacter*>(actor))
 	{
-		//if (caster && bc && attack) CombatHandler::AttackEnemy(caster, bc, attack);
+		if (caster && bc && attack) CombatHandler::AttackEnemy(caster, bc, attack);
 	}
 }
