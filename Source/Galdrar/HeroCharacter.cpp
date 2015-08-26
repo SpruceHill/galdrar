@@ -17,11 +17,11 @@ AHeroCharacter::AHeroCharacter(const FObjectInitializer& ObjectInitializer)
 {
 	name = "Hero";
 	stats = CreateDefaultSubobject<UCharacterStatsComponent>(TEXT("Stats"));
-	weapon = new Sword();
-	spells[0] = new DragonsBreath();
-	spells[1] = new GasCloud();
-	spells[2] = new Javelin();
-	spells[3] = new Teleport();
+	//weapon = new Sword();
+	//spells[0] = new DragonsBreath();
+	//spells[1] = new GasCloud();
+	//spells[2] = new Javelin();
+	//spells[3] = new Teleport();
 	bloodVialComponent = CreateDefaultSubobject<UStandardBloodVial>(TEXT("BloodVial"));
 	this->GetMesh()->bReceivesDecals = false;
 

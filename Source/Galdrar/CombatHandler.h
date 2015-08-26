@@ -10,7 +10,7 @@
 class GALDRAR_API CombatHandler
 {
 public:
-	static void AttackEnemy(ABaseCharacter* attacker, ABaseCharacter* defender, Attack* attack);
+	static void AttackEnemy(ABaseCharacter* attacker, ABaseCharacter* defender, UAttackComponent* attack);
 	static bool IsCritical(FVector attackerForward, FVector defenderForward);
 	static float CalcDamage(float damage, float resistance, float critPercentage, bool crit);
 private:

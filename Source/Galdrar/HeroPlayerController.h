@@ -62,8 +62,8 @@ private:
 	FVector groundTarget;
 	ALoot* targetLoot;
 	HUDAdapter HA;
-	Attack* scheduledAttack;
-	Attack* primedAttack;
+	UAttackComponent* scheduledAttack;
+	UAttackComponent* primedAttack;
 	bool bStunned;
 
 	virtual void BeginPlay() override;
@@ -91,8 +91,8 @@ private:
 	void CancelAction();
 	
 	// Helpers
-	void AttackEnemy(ABaseCharacter* character, Attack* attack);
-	void AttackGround(FVector location, Attack* attack);
+	void AttackEnemy(ABaseCharacter* character, UAttackComponent* attack);
+	void AttackGround(FVector location, UAttackComponent* attack);
 	void Pickup(ALoot* loot);
 
 	void FaceActor(AActor* actorToFace);

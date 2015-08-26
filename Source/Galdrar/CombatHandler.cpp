@@ -18,7 +18,7 @@ float CombatHandler::CalcDamage(float damage, float resistance, float critPercen
 	return calculatedDamage;
 }
 
-void CombatHandler::AttackEnemy(ABaseCharacter* attacker, ABaseCharacter* defender, Attack* attack)
+void CombatHandler::AttackEnemy(ABaseCharacter* attacker, ABaseCharacter* defender, UAttackComponent* attack)
 {
 	if (attack->DoesDamage())
 	{

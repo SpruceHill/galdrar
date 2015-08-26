@@ -7,7 +7,8 @@
 #include <list>
 #include <algorithm>
 #include "CharacterStatsComponent.h"
-#include "Spell.h"
+#include "BaseWeapon.h"
+#include "BaseSpell.h"
 #include "BaseEffectComponent.h"
 #include "GameFramework/Character.h"
 #include "BaseCharacter.generated.h"
@@ -24,7 +25,7 @@ public:
 
 	float GetDamage() { return weapon->GetDamage(); }
 
-	Attack* GetWeapon() { return weapon; }
+	UBaseWeapon* GetWeapon() { return weapon; }
 
 	UCharacterStatsComponent* GetStats() { return stats; }
 
@@ -61,7 +62,7 @@ public:
 	UFUNCTION(BlueprintCallable, Category = BaseCharacter)
 	void RemoveEffect(UBaseEffectComponent* effect);
 
-	Spell* GetSpell(int8 index)
+	UBaseSpell* GetSpell(int8 index)
 	{
 		return spells[index];
 	}
@@ -135,11 +136,19 @@ protected:
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = BaseCharacter)
 	UCharacterStatsComponent* stats;
+	
 	UPROPERTY(BlueprintReadWrite, Category = BaseCharacter)
 	FString name;
-	Attack* weapon;
-	Spell* spells [4];
+	
+	UPROPERTY(BlueprintReadWrite, Category = BaseCharacter)
+	UBaseWeapon* weapon;
+	
+	UPROPERTY(BlueprintReadWrite, Category = BaseCharacter)
+	TArray<UBaseSpell*> spells;
+
+	UPROPERTY(BlueprintReadWrite, Category = BaseCharacter)
 	bool bStunned = false;
+	UPROPERTY(BlueprintReadWrite, Category = BaseCharacter)
 	bool bSilenced = false;
 
 private:

@@ -4,7 +4,6 @@
 
 #include "Components/ActorComponent.h"
 #include "BaseEffectComponent.h"
-#include "BaseCharacter.h"
 #include "AttackComponent.generated.h"
 
 

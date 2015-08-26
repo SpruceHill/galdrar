@@ -281,7 +281,7 @@ void AHeroPlayerController::OnSetDestinationPressed()
 	}
 }
 
-void AHeroPlayerController::AttackEnemy(ABaseCharacter* character, Attack* attack)
+void AHeroPlayerController::AttackEnemy(ABaseCharacter* character, UAttackComponent* attack)
 {
 	AHeroCharacter* hero = Cast<AHeroCharacter>(GetPawn());
 	if (hero->GetDistanceTo(character) < attack->GetRange())
@@ -292,7 +292,7 @@ void AHeroPlayerController::AttackEnemy(ABaseCharacter* character, Attack* attac
 		FaceActor(character);
 		hero->AttackAnimation();
 		CombatHandler::AttackEnemy(hero, character, attack);
-		SpellHandler::ActivateSpell(attack, hero, character);
+		//SpellHandler::ActivateSpell(attack, hero, character);
 
 		targetCharacter = NULL;
 		primedAttack = NULL;
@@ -315,7 +315,7 @@ void AHeroPlayerController::AttackEnemy(ABaseCharacter* character, Attack* attac
 	}
 }
 
-void AHeroPlayerController::AttackGround(FVector location, Attack* attack)
+void AHeroPlayerController::AttackGround(FVector location, UAttackComponent* attack)
 {
 	AHeroCharacter* hero = Cast<AHeroCharacter>(GetPawn());
 	if (FVector::Dist(hero->GetActorLocation(), location) < attack->GetRange())
@@ -324,7 +324,7 @@ void AHeroPlayerController::AttackGround(FVector location, Attack* attack)
 		SetNewMoveDestination(hero->GetActorLocation());
 
 		FaceLocation(location);
-		SpellHandler::ActivateSpell(attack, GetWorld(), location, hero);
+		//SpellHandler::ActivateSpell(attack, GetWorld(), location, hero);
 
 		if (attack == primedAttack) primedAttack = NULL;
 		scheduledAttack = NULL;
