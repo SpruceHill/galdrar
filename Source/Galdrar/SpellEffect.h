@@ -22,7 +22,7 @@ public:
 	// Called every frame
 	virtual void Tick( float DeltaSeconds ) override;
 
-	void Initialize(ABaseCharacter* caster, Attack* attack);
+	void Initialize(ABaseCharacter* caster, UAttackComponent* attack);
 
 	UFUNCTION(BlueprintCallable, Category = SpellEffect)
 	void Trigger(AActor* actor);
@@ -37,5 +37,5 @@ public:
 	float time;
 
 	ABaseCharacter* caster;
-	Attack* attack;
+	UAttackComponent* attack;
 };

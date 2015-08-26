@@ -5,36 +5,36 @@
 #include "ProjectileFactory.h"
 
 // Target unit
-void SpellHandler::ActivateSpell(Attack* attack, ABaseCharacter* caster, ABaseCharacter* target)
+void SpellHandler::ActivateSpell(UAttackComponent* attack, ABaseCharacter* caster, ABaseCharacter* target)
 {
-	attack->Activate();
+	/*attack->Activate();
 	Spell* spell = (Spell*)attack;
 	switch (spell->GetSpellType())
 	{
 	case Spell::SpellType::HEAL: 
 		target->Heal(spell->GetDamage());
 		break;
-	}
+	}*/
 }
 // Target ground
-void SpellHandler::ActivateSpell(Attack* attack, UWorld* world, FVector location, ABaseCharacter* caster)
+void SpellHandler::ActivateSpell(UAttackComponent* attack, UWorld* world, FVector location, ABaseCharacter* caster)
 {
-	attack->Activate();
-	Spell* spell = (Spell*)attack;
-	caster->DecreaseMana(spell->GetManaCost());
+	/*attack->Activate();
+	//Spell* spell = (Spell*)attack;
+	caster->DecreaseMana(attack->GetManaCost());
 	switch (spell->GetSpellType())
 	{
 	case Spell::SpellType::DRAGONS_BREATH: 
-		UProjectileFactory::SpawnAttackEffect(world, caster, location, spell); 
+		UProjectileFactory::SpawnAttackEffect(world, caster, location, attack); 
 		break;
 	case Spell::SpellType::JAVELIN: 
-		UProjectileFactory::SpawnAttackEffect(world, caster, location, spell);
+		UProjectileFactory::SpawnAttackEffect(world, caster, location, attack);
 		break;
 	case Spell::SpellType::GAS_CLOUD: 
-		UProjectileFactory::SpawnAttackEffect(world, caster, location, spell); 
+		UProjectileFactory::SpawnAttackEffect(world, caster, location, attack); 
 		break;
 	case Spell::SpellType::LIGHNING_BOLT: 
-		UProjectileFactory::SpawnAttackEffect(world, caster, location, spell); 
+		UProjectileFactory::SpawnAttackEffect(world, caster, location, attack); 
 		break;
 	case Spell::SpellType::TELEPORT:
 		
@@ -64,10 +64,10 @@ void SpellHandler::ActivateSpell(Attack* attack, UWorld* world, FVector location
 		}
 		caster->SetActorRotation(forward.Rotation());
 		break;
-	}
+	}*/
 }
 // Self
-void SpellHandler::ActivateSpell(Attack* attack, ABaseCharacter* caster)
+void SpellHandler::ActivateSpell(UAttackComponent* attack, ABaseCharacter* caster)
 {
-	attack->Activate();
+	attack->ActivateAttack(FVector::ZeroVector, NULL);
 }

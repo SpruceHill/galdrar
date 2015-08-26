@@ -16,6 +16,6 @@ class GALDRAR_API UProjectileFactory : public UBlueprintFunctionLibrary
 {
 	GENERATED_BODY()
 public:
-	static void SpawnAttackEffect(UWorld* world, ABaseCharacter* attacker, FVector targetLocation, Attack* attack);
-	static void SpawnProjectile(UWorld* world, ABaseCharacter* attacker, FVector targetLocation, Attack* attack);
+	static void SpawnAttackEffect(UWorld* world, ABaseCharacter* attacker, FVector targetLocation, UAttackComponent* attack);
+	static void SpawnProjectile(UWorld* world, ABaseCharacter* attacker, FVector targetLocation, UAttackComponent* attack);
 };

@@ -26,7 +26,7 @@ public:
 	UFUNCTION(BlueprintCallable, Category = Projectile)
 	void Hit(AActor* actor);
 
-	void Initialize(ABaseCharacter* caster, Attack* attack)
+	void Initialize(ABaseCharacter* caster, UAttackComponent* attack)
 	{
 		this->caster = caster;
 		this->attack = attack; 
@@ -48,7 +48,7 @@ protected:
 	//FVector targetLocation;
 	UPROPERTY(BlueprintReadOnly, Category = Projectile)
 	ABaseCharacter* caster;
-	Attack* attack;
+	UAttackComponent* attack;
 	UPROPERTY(BlueprintReadOnly, Category = Projectile)
 	FVector origin;
 };

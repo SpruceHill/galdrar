@@ -3,6 +3,7 @@
 #pragma once
 
 #include "BaseSpell.h"
+#include "BaseProjectile.h"
 #include "DragonsBreath.generated.h"
 
 /**
@@ -15,5 +16,8 @@ class GALDRAR_API UDragonsBreath : public UBaseSpell
 public:
 	UDragonsBreath();
 	
-	
+	void ActivateAttack(FVector location, ABaseCharacter* target) override;
+
+private:
+	TSubclassOf<class ABaseProjectile> ProjectileReference;
 };

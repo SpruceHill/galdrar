@@ -32,7 +32,7 @@ void ASpellEffect::Tick( float DeltaTime )
 
 }
 
-void ASpellEffect::Initialize(ABaseCharacter* caster, Attack* attack)
+void ASpellEffect::Initialize(ABaseCharacter* caster, UAttackComponent* attack)
 {
 	this->caster = caster;
 	this->attack = attack;

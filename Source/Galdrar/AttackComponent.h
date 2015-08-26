@@ -59,7 +59,7 @@ public:
 	float GetProjectileSpeed();
 
 	UFUNCTION(BlueprintCallable, Category = Attack)
-	virtual void ActivateAttack(FVector destination, ABaseCharacter* target);
+	virtual void ActivateAttack(FVector location, ABaseCharacter* target);
 	
 	UFUNCTION(BlueprintCallable, Category = Attack)
 	bool IsOnCoolDown();

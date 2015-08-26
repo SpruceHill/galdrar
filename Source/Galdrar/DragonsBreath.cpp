@@ -3,6 +3,7 @@
 #include "Galdrar.h"
 #include "DragonsBreath.h"
 #include "BurnEffectComponent.h"
+#include "ProjectileFactory.h"
 
 UDragonsBreath::UDragonsBreath()
 {
@@ -24,4 +25,20 @@ UDragonsBreath::UDragonsBreath()
 
 	// 2 = Spell, ID = 0001
 	ID = 20001;
+
+	static ConstructorHelpers::FObjectFinder<UBlueprint> DBprojectileBlueprint(TEXT("Blueprint'/Game/SpellEffects/Projectiles/DragonsBreathProjectile'"));
+	if (DBprojectileBlueprint.Object)
+	{
+		ProjectileReference = (UClass*)DBprojectileBlueprint.Object->GeneratedClass;
+	}
+}
+
+void UDragonsBreath::ActivateAttack(FVector location, ABaseCharacter* target)
+{
+	if (ABaseCharacter* character = dynamic_cast<ABaseCharacter*>(GetOwner()))
+	{
+		FActorSpawnParameters SpawnParameters;
+		ABaseProjectile* BPProjectile = GetWorld()->SpawnActor<ABaseProjectile>(ProjectileReference, character->GetActorLocation(), character->GetActorForwardVector().Rotation(), SpawnParameters);
+		BPProjectile->Initialize(character, this);
+	}
 }

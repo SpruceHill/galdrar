@@ -5,14 +5,14 @@
 #include "BaseProjectile.h"
 #include "SpellEffect.h"
 
-void UProjectileFactory::SpawnAttackEffect(UWorld* world, ABaseCharacter* attacker, FVector targetLocation, Attack* attack)
+void UProjectileFactory::SpawnAttackEffect(UWorld* world, ABaseCharacter* attacker, FVector targetLocation, UAttackComponent* attack)
 {
-	Spell* spell = (Spell*)attack;
-	if (spell)
-	{
-		if (spell->IsProjectile())
+	//Spell* spell = (Spell*)attack;
+	//if (spell)
+	//{
+	/*	if (spell->IsProjectile())
 		{
-			UProjectileFactory::SpawnProjectile(world, attacker, targetLocation, spell);
+			UProjectileFactory::SpawnProjectile(world, attacker, targetLocation, attack);
 		}
 		else
 		{
@@ -37,12 +37,12 @@ void UProjectileFactory::SpawnAttackEffect(UWorld* world, ABaseCharacter* attack
 				GEngine->AddOnScreenDebugMessage(-1, 15.0f, FColor::Red, "SpellEffect Spawn Failed");
 			}
 		}
-	}
+	//}*/
 }
 
-void UProjectileFactory::SpawnProjectile(UWorld* world, ABaseCharacter* attacker, FVector targetLocation, Attack* attack)
+void UProjectileFactory::SpawnProjectile(UWorld* world, ABaseCharacter* attacker, FVector targetLocation, UAttackComponent* attack)
 {
-	FActorSpawnParameters SpawnParameters;
+	/*FActorSpawnParameters SpawnParameters;
 	SpawnParameters.bNoCollisionFail = true; //TODO: NOW WORKING
 	ABaseProjectile* base = world->SpawnActor<ABaseProjectile>(ABaseProjectile::StaticClass(), attacker->GetActorLocation(), attacker->GetActorForwardVector().Rotation(), SpawnParameters);
 	ABaseProjectile* BPProjectile = NULL;
@@ -71,5 +71,5 @@ void UProjectileFactory::SpawnProjectile(UWorld* world, ABaseCharacter* attacker
 	else
 	{
 		GEngine->AddOnScreenDebugMessage(-1, 15.0f, FColor::Red, "Projectile Spawn Failed");
-	}
+	}*/
 }
