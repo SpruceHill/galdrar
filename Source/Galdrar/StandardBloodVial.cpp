@@ -27,7 +27,6 @@ UStandardBloodVial::UStandardBloodVial()
 void UStandardBloodVial::InitializeComponent()
 {
 	Super::InitializeComponent();
-
 	// ...
 
 }
