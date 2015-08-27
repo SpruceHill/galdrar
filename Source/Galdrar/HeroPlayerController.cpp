@@ -4,7 +4,7 @@
 #include "HeroPlayerController.h"
 #include "AI/Navigation/NavigationSystem.h"
 #include "HeroCharacter.h"
-#include "CombatHandler.h"
+#include "CombatFunctionLibrary.h"
 #include "GaldrarHUD.h"
 #include "GaldrarColor.h"
 #include "ItemHandler.h"
@@ -286,7 +286,7 @@ void AHeroPlayerController::AttackEnemy(ABaseCharacter* character, UAttackCompon
 
 		FaceActor(character);
 		hero->AttackAnimation();
-		CombatHandler::AttackEnemy(hero, character, attack);
+		UCombatFunctionLibrary::AttackEnemy(hero, character, attack);
 		attack->ActivateAttack(FVector::ZeroVector, character);
 
 		targetCharacter = NULL;

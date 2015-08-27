@@ -28,12 +28,6 @@ void ABaseCharacter::Tick(float DeltaSeconds)
 	// Rage Deregen
 	if (stats->rage > 0) RemoveRage(stats->rageDegenerationRate*DeltaSeconds);
 
-	// Tick spells
-	//for (Spell* s : spells)
-	//{
-	//	if (s) s->Tick(DeltaSeconds);
-	//}
-
 	// Tick stun
 	if (bStunned)
 	{

@@ -2,7 +2,7 @@
 
 #include "Galdrar.h"
 #include "SpellEffect.h"
-#include "CombatHandler.h"
+#include "CombatFunctionLibrary.h"
 
 
 // Sets default values
@@ -43,6 +43,6 @@ void ASpellEffect::Trigger(AActor* actor)
 {
 	if (ABaseCharacter* bc = dynamic_cast<ABaseCharacter*>(actor))
 	{
-		if (caster && bc && attack) CombatHandler::AttackEnemy(caster, bc, attack);
+		if (caster && bc && attack) UCombatFunctionLibrary::AttackEnemy(caster, bc, attack);
 	}
 }
