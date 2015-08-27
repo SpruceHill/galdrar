@@ -2,7 +2,6 @@
 
 #include "Galdrar.h"
 #include "HeroCharacter.h"
-#include "Attack.h"
 #include "StandardBloodVial.h"
 #include "Sword.h"
 #include "DragonsBreath.h"

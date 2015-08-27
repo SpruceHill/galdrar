@@ -4,7 +4,6 @@
 
 #include "GameFramework/Actor.h"
 #include "BaseCharacter.h"
-#include "Attack.h"
 #include "SpellEffect.generated.h"
 
 UCLASS()

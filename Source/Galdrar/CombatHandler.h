@@ -2,7 +2,6 @@
 
 #pragma once
 #include "BaseCharacter.h"
-#include "Attack.h"
 
 /**
  * 

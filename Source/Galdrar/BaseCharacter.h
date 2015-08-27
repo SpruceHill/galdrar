@@ -3,9 +3,6 @@
 #pragma once
 
 #include "GaldrarDamageType.h"
-#include "Attack.h"
-#include <list>
-#include <algorithm>
 #include "CharacterStatsComponent.h"
 #include "BaseWeapon.h"
 #include "BaseSpell.h"
