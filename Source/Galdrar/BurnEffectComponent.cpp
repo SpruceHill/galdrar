@@ -3,7 +3,7 @@
 #include "Galdrar.h"
 #include "BurnEffectComponent.h"
 #include "BaseCharacter.h"
-#include "CombatHandler.h"
+#include "CombatFunctionLibrary.h"
 
 
 // Sets default values for this component's properties
@@ -38,7 +38,7 @@ void UBurnEffectComponent::TickComponent(float DeltaTime, ELevelTick TickType, F
 		time -= tickRate;
 		if (ABaseCharacter* character = dynamic_cast<ABaseCharacter*>(GetOwner()))
 		{
-			character->Wound(CombatHandler::CalcDamage(damage, character->GetResistance(damageType), 0, false), damageType, false);
+			character->Wound(UCombatFunctionLibrary::CalcDamage(damage, character->GetResistance(damageType), 0, false), damageType, false);
 		}
 	}
 
