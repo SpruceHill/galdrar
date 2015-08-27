@@ -19,6 +19,10 @@ class GALDRAR_API ABaseCharacter : public ACharacter
 	GENERATED_BODY()
 
 public:
+	UFUNCTION(BlueprintCallable, Category = BaseCharacter)
+		void InitializeSpells(TSubclassOf<UBaseSpell> spell1, TSubclassOf<UBaseSpell> spell2,
+		TSubclassOf<UBaseSpell> spell3, TSubclassOf<UBaseSpell> spell4);
+
 	virtual void Tick(float DeltaSeconds) override;
 
 	FString GetName() { return name; }
@@ -145,6 +149,15 @@ protected:
 	
 	UPROPERTY(BlueprintReadWrite, Category = BaseCharacter)
 	TArray<UBaseSpell*> spells;
+
+	UPROPERTY(BlueprintReadWrite, Category = BaseCharacter)
+	UBaseSpell* spell1;
+	UPROPERTY(BlueprintReadWrite, Category = BaseCharacter)
+	UBaseSpell* spell2;
+	UPROPERTY(BlueprintReadWrite, Category = BaseCharacter)
+	UBaseSpell* spell3;
+	UPROPERTY(BlueprintReadWrite, Category = BaseCharacter)
+	UBaseSpell* spell4;
 
 	UPROPERTY(BlueprintReadWrite, Category = BaseCharacter)
 	bool bStunned = false;

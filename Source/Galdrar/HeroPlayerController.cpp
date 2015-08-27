@@ -293,7 +293,6 @@ void AHeroPlayerController::AttackEnemy(ABaseCharacter* character, UAttackCompon
 		hero->AttackAnimation();
 		CombatHandler::AttackEnemy(hero, character, attack);
 		attack->ActivateAttack(FVector::ZeroVector, character);
-		//SpellHandler::ActivateSpell(attack, hero, character);
 
 		targetCharacter = NULL;
 		primedAttack = NULL;
@@ -326,7 +325,6 @@ void AHeroPlayerController::AttackGround(FVector location, UAttackComponent* att
 
 		FaceLocation(location);
 		attack->ActivateAttack(location, NULL);
-		//SpellHandler::ActivateSpell(attack, GetWorld(), location, hero);
 
 		if (attack == primedAttack) primedAttack = NULL;
 		scheduledAttack = NULL;

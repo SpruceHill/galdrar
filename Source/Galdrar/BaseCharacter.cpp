@@ -5,6 +5,21 @@
 #include "HUDAdapter.h"
 #include "GaldrarColor.h"
 #include "EffectFunctionLibrary.h"
+#include "DragonsBreath.h"
+
+void ABaseCharacter::InitializeSpells(TSubclassOf<UBaseSpell> spell1, TSubclassOf<UBaseSpell> spell2,
+	TSubclassOf<UBaseSpell> spell3, TSubclassOf<UBaseSpell> spell4)
+{
+	UDragonsBreath* comp1 = NewObject<UDragonsBreath>(this);
+	UDragonsBreath* comp2 = NewObject<UDragonsBreath>(this);
+	UDragonsBreath* comp3 = NewObject<UDragonsBreath>(this);
+	UDragonsBreath* comp4 = NewObject<UDragonsBreath>(this);
+
+	spells.Add(comp1);
+	spells.Add(comp2);
+	spells.Add(comp3);
+	spells.Add(comp4);
+}
 
 void ABaseCharacter::Tick(float DeltaSeconds)
 {
@@ -227,37 +242,61 @@ float ABaseCharacter::GetMana()
 
 int32 ABaseCharacter::GetSpellIdAtIndex(int32 index)
 {
-	return (spells[index] ? spells[index]->GetID() : -1);
+	if (index == 0) return spell1->GetID();
+	else if (index == 1) return spell2->GetID();
+	else if (index == 2) return spell3->GetID();
+	else return spell4->GetID();
+	//return (spells[index] ? spells[index]->GetID() : -1);
 }
 
 float ABaseCharacter::GetSpellCooldownAtIndex(int32 index)
 {
-	return (spells[index] ? spells[index]->GetCooldown() : 1);
+	if (index == 0) return spell1->GetCooldown();
+	else if (index == 1) return spell2->GetCooldown();
+	else if (index == 2) return spell3->GetCooldown();
+	else return spell4->GetCooldown();
+	//return (spells[index] ? spells[index]->GetCooldown() : 1);
 }
 
 float ABaseCharacter::GetSpellTimeAtIndex(int32 index)
 {
-	return (spells[index] ? spells[index]->GetTime() : 1);
+	if (index == 0) return spell1->GetTime();
+	else if (index == 1) return spell2->GetTime();
+	else if (index == 2) return spell3->GetTime();
+	else return spell4->GetTime();
+	//return (spells[index] ? spells[index]->GetTime() : 1);
 }
 
 FString ABaseCharacter::GetSpellNameAtIndex(int32 index)
 {
-	return spells[index]->GetName();
+	if (index == 0) return spell1->GetName();
+	else if (index == 1) return spell2->GetName();
+	else if (index == 2) return spell3->GetName();
+	else return spell4->GetName();
 }
 
 FString ABaseCharacter::GetSpellDescAtIndex(int32 index)
 {
-	return spells[index]->GetDesc();
+	if (index == 0) return spell1->GetDesc();
+	else if (index == 1) return spell2->GetDesc();
+	else if (index == 2) return spell3->GetDesc();
+	else return spell4->GetDesc();
 }
 
 float ABaseCharacter::GetSpellManaCostAtIndex(int32 index)
 {
-	return spells[index]->GetManaCost();
+	if (index == 0) return spell1->GetManaCost();
+	else if (index == 1) return spell2->GetManaCost();
+	else if (index == 2) return spell3->GetManaCost();
+	else return spell4->GetManaCost();
 }
 
 EGaldrarDamageType ABaseCharacter::GetSpellDamageTypeAtIndex(int32 index)
 {
-	return spells[index]->GetDamageType();
+	if (index == 0) return spell1->GetDamageType();
+	else if (index == 1) return spell2->GetDamageType();
+	else if (index == 2) return spell3->GetDamageType();
+	else return spell4->GetDamageType();
 }
 
 bool ABaseCharacter::IsStunned()

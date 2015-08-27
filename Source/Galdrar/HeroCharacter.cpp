@@ -6,21 +6,22 @@
 #include "StandardBloodVial.h"
 #include "Sword.h"
 #include "DragonsBreath.h"
+#include "GasCloud.h"
 AHeroCharacter::AHeroCharacter(const FObjectInitializer& ObjectInitializer)
 	: Super(ObjectInitializer)
 {
 	name = "Hero";
 	stats = CreateDefaultSubobject<UCharacterStatsComponent>(TEXT("Stats"));
 	weapon = CreateDefaultSubobject<USword>(TEXT("Sword"));
-	spells.Add(CreateDefaultSubobject<UDragonsBreath>(TEXT("Dragons1")));
-	spells.Add(CreateDefaultSubobject<UDragonsBreath>(TEXT("Dragons2")));
-	spells.Add(CreateDefaultSubobject<UDragonsBreath>(TEXT("Dragons3")));
-	spells.Add(CreateDefaultSubobject<UDragonsBreath>(TEXT("Dragons4")));
-	//spells[0] = new DragonsBreath();
-	//spells[1] = new GasCloud();
-	//spells[2] = new Javelin();
-	//spells[3] = new Teleport();
+
+	spell1 = CreateDefaultSubobject<UGasCloud>(TEXT("Gas"));
+	spell2 = CreateDefaultSubobject<UDragonsBreath>(TEXT("Dragons7"));
+	spell3 = CreateDefaultSubobject<UDragonsBreath>(TEXT("Dragons9"));
+	spell4 = CreateDefaultSubobject<UDragonsBreath>(TEXT("Dragons39"));
+
+
 	bloodVialComponent = CreateDefaultSubobject<UStandardBloodVial>(TEXT("BloodVial"));
+	
 	this->GetMesh()->bReceivesDecals = false;
 
 	// Set size for player capsule
