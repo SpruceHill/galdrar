@@ -5,15 +5,10 @@
 #include "AI/Navigation/NavigationSystem.h"
 #include "HeroCharacter.h"
 #include "CombatHandler.h"
-#include "Attack.h"
 #include "GaldrarHUD.h"
 #include "GaldrarColor.h"
-#include "BaseProjectile.h"
-#include "ProjectileFactory.h"
-#include "SpellHandler.h"
 #include "ItemHandler.h"
 #include "EffectFunctionLibrary.h"
-#include "BurnEffectComponent.h"
 
 AHeroPlayerController::AHeroPlayerController(const FObjectInitializer& ObjectInitializer)
 	: Super(ObjectInitializer)
@@ -451,7 +446,7 @@ void AHeroPlayerController::Spell(int8 index)
 
 	switch (hero->GetSpell(index)->GetActivation())
 	{
-	case Spell::Activation::TARGET_UNIT :
+	case EActivation::TARGET_UNIT :
 		bSelectingGroundTarget = false;
 		bSelectingUnitTarget = true;
 		primedAttack = hero->GetSpell(index);
@@ -464,11 +459,11 @@ void AHeroPlayerController::Spell(int8 index)
 		}
 		break;
 	
-	case Spell::Activation::TARGET_GROUND :
+	case EActivation::TARGET_GROUND :
 		bSelectingGroundTarget = true;
 		bSelectingUnitTarget = false;
 		primedAttack = hero->GetSpell(index);
-		if (hero->GetSpell(index)->GetSpellTarget() == Spell::SpellTarget::CIRCLE)
+		if (hero->GetSpell(index)->GetSpellTarget() == ESpellTarget::CIRCLE)
 		{
 			if (AGaldrarHUD* hud = dynamic_cast<AGaldrarHUD*>(GetHUD()))
 			{
@@ -481,7 +476,7 @@ void AHeroPlayerController::Spell(int8 index)
 					UGaldrarColor::GetDamageTypeColor(hero->GetSpell(index)->GetDamageType()));
 			}
 		}
-		else if (hero->GetSpell(index)->GetSpellTarget() == Spell::SpellTarget::CONE)
+		else if (hero->GetSpell(index)->GetSpellTarget() == ESpellTarget::CONE)
 		{
 			if (AGaldrarHUD* hud = dynamic_cast<AGaldrarHUD*>(GetHUD()))
 			{
@@ -496,16 +491,16 @@ void AHeroPlayerController::Spell(int8 index)
 		}
 		break;
 
-	case Spell::Activation::PASSIVE :
+	case EActivation::PASSIVE :
 		GEngine->AddOnScreenDebugMessage(-1, 15.0f, FColor::Red, "Passive");
 		break;
 
-	case Spell::Activation::ATTACK_MODIFIER :
+	case EActivation::ATTACK_MODIFIER :
 		GEngine->AddOnScreenDebugMessage(-1, 15.0f, FColor::Red, "Attack Modifier");
 		groundTarget = FVector::ZeroVector;
 		break;
 
-	case Spell::Activation::SELF :
+	case EActivation::SELF :
 		hero->GetSpell(index)->ActivateAttack(FVector::ZeroVector, hero);
 		groundTarget = FVector::ZeroVector;
 		break;

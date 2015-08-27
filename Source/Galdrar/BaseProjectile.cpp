@@ -10,27 +10,6 @@ ABaseProjectile::ABaseProjectile()
 {
  	// Set this actor to call Tick() every frame.  You can turn this off to improve performance if you don't need it.
 	PrimaryActorTick.bCanEverTick = true;
-
-	// Dragon's Breath
-	static ConstructorHelpers::FObjectFinder<UBlueprint> DBprojectileBlueprint(TEXT("Blueprint'/Game/SpellEffects/Projectiles/DragonsBreathProjectile'"));
-	if (DBprojectileBlueprint.Object)
-	{
-		DragonsBreathBluePrintReference = (UClass*)DBprojectileBlueprint.Object->GeneratedClass;
-	}
-
-	// Javelin
-	static ConstructorHelpers::FObjectFinder<UBlueprint> JprojectileBlueprint(TEXT("Blueprint'/Game/SpellEffects/Projectiles/JavelinProjectile'"));
-	if (JprojectileBlueprint.Object)
-	{
-		JavelinBluePrintReference = (UClass*)JprojectileBlueprint.Object->GeneratedClass;
-	}
-
-	// Lightning Bolt
-	static ConstructorHelpers::FObjectFinder<UBlueprint> LBprojectileBlueprint(TEXT("Blueprint'/Game/SpellEffects/Projectiles/LightningBoltProjectile'"));
-	if (LBprojectileBlueprint.Object)
-	{
-		LightningBoltBluePrintReference = (UClass*)LBprojectileBlueprint.Object->GeneratedClass;
-	}
 }
 
 // Called when the game starts or when spawned

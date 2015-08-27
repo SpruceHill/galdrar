@@ -5,7 +5,6 @@
 #include "GameFramework/HUD.h"
 #include "BaseCharacter.h"
 #include "Loot.h"
-#include "AOETemplate.h"
 #include "GaldrarHUD.generated.h"
 
 /**
