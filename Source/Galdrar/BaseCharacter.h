@@ -68,7 +68,10 @@ public:
 
 	UBaseSpell* GetSpell(int8 index)
 	{
-		return spells[index];
+		if (index == 0) return spell1;
+		else if (index == 1) return spell2;
+		else if (index == 2) return spell3;
+		else return spell4;
 	}
 
 	float TakeDamage(float DamageAmount, struct FDamageEvent const& DamageEvent, class AController* EventInstigator, class AActor* DamageCauser) override

@@ -19,6 +19,6 @@ public:
 	void ActivateAttack(FVector location, ABaseCharacter* target) override;
 
 private:
-	//TSubclassOf<class ASpellEffect> blueprintReference;
+	TSubclassOf<class ASpellEffect> blueprintReference;
 
 };

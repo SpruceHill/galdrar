@@ -10,15 +10,10 @@
 void ABaseCharacter::InitializeSpells(TSubclassOf<UBaseSpell> spell1, TSubclassOf<UBaseSpell> spell2,
 	TSubclassOf<UBaseSpell> spell3, TSubclassOf<UBaseSpell> spell4)
 {
-	UDragonsBreath* comp1 = NewObject<UDragonsBreath>(this);
-	UDragonsBreath* comp2 = NewObject<UDragonsBreath>(this);
-	UDragonsBreath* comp3 = NewObject<UDragonsBreath>(this);
-	UDragonsBreath* comp4 = NewObject<UDragonsBreath>(this);
-
-	spells.Add(comp1);
-	spells.Add(comp2);
-	spells.Add(comp3);
-	spells.Add(comp4);
+	this->spell1 = NewObject<UDragonsBreath>(this);
+	this->spell2 = NewObject<UDragonsBreath>(this);
+	this->spell3 = NewObject<UDragonsBreath>(this);
+	this->spell4 = NewObject<UDragonsBreath>(this);
 }
 
 void ABaseCharacter::Tick(float DeltaSeconds)

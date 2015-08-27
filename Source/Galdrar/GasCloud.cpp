@@ -25,23 +25,23 @@ UGasCloud::UGasCloud()
 	// 2 = Spell, ID = 0002
 	ID = 20002;
 
-	/*static ConstructorHelpers::FObjectFinder<UBlueprint> DBprojectileBlueprint(TEXT("Blueprint'/Game/SpellEffects/GasCloudSpellEffect'"));
+	static ConstructorHelpers::FObjectFinder<UBlueprint> DBprojectileBlueprint(TEXT("Blueprint'/Game/SpellEffects/GasCloudSpellEffect'"));
 	if (DBprojectileBlueprint.Object)
 	{
 		blueprintReference = (UClass*)DBprojectileBlueprint.Object->GeneratedClass;
-	}*/
+	}
 }
 
 void UGasCloud::ActivateAttack(FVector location, ABaseCharacter* target)
 {
 	time = cooldown;
-	/*if (ABaseCharacter* character = dynamic_cast<ABaseCharacter*>(GetOwner()))
+	if (ABaseCharacter* character = dynamic_cast<ABaseCharacter*>(GetOwner()))
 	{
 		character->DecreaseMana(manaCost);
 		FActorSpawnParameters SpawnParameters;
 		ASpellEffect* BPProjectile = GetWorld()->SpawnActor<ASpellEffect>(blueprintReference, location, FRotator(0, 0, 0), SpawnParameters);
 		BPProjectile->Initialize(character, this);
-	}*/
+	}
 }
 
 
