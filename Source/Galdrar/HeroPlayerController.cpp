@@ -506,7 +506,7 @@ void AHeroPlayerController::Spell(int8 index)
 		break;
 
 	case Spell::Activation::SELF :
-		GEngine->AddOnScreenDebugMessage(-1, 15.0f, FColor::Red, "Self");
+		hero->GetSpell(index)->ActivateAttack(FVector::ZeroVector, hero);
 		groundTarget = FVector::ZeroVector;
 		break;
 	}

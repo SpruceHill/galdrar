@@ -2,14 +2,26 @@
 
 #pragma once
 
-#include "Spell.h"
+#include "BaseSpell.h"
+#include "SpellEffect.h"
+#include "Heal.generated.h"
 
 /**
  * 
  */
-class GALDRAR_API HealSpell : public Spell
+UCLASS()
+class GALDRAR_API UHeal : public UBaseSpell
 {
+	GENERATED_BODY()
 public:
-	HealSpell();
-	~HealSpell();
+	UHeal();
+
+	void ActivateAttack(FVector location, ABaseCharacter* target) override;
+
+private:
+	TSubclassOf<class ASpellEffect> blueprintReference;
+
+	
+	
+	
 };

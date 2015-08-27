@@ -3,13 +3,13 @@
 #include "Galdrar.h"
 #include "Javelin.h"
 
-Javelin::Javelin()
+UJavelin::UJavelin()
 {
 	name = "Javelin";
-	spellType = SpellType::JAVELIN;
-	activation = Activation::TARGET_GROUND;
-	spellTarget = SpellTarget::CONE;
-	manaCost = 40.f;
+	desc = "Hurtle a spear in any direction. Stunning on impact.";
+	activation = EActivation::TARGET_GROUND;
+	spellTarget = ESpellTarget::CONE;
+	manaCost = 30.f;
 	radius = 50.f;
 	bProjectile = true;
 	bDoesDamage = true;
@@ -22,8 +22,24 @@ Javelin::Javelin()
 
 	// 2 = Spell, ID = 0004
 	ID = 20004;
+
+	static ConstructorHelpers::FObjectFinder<UBlueprint> DBprojectileBlueprint(TEXT("Blueprint'/Game/SpellEffects/Projectiles/JavelinProjectile'"));
+	if (DBprojectileBlueprint.Object)
+	{
+		blueprintReference = (UClass*)DBprojectileBlueprint.Object->GeneratedClass;
+	}
 }
 
-Javelin::~Javelin()
+void UJavelin::ActivateAttack(FVector location, ABaseCharacter* target)
 {
+	time = cooldown;
+	if (ABaseCharacter* character = dynamic_cast<ABaseCharacter*>(GetOwner()))
+	{
+		character->DecreaseMana(manaCost);
+		FActorSpawnParameters SpawnParameters;
+		ABaseProjectile* BPProjectile = GetWorld()->SpawnActor<ABaseProjectile>(blueprintReference, character->GetActorLocation(), character->GetActorForwardVector().Rotation(), SpawnParameters);
+		BPProjectile->Initialize(character, this);
+	}
 }
+
+

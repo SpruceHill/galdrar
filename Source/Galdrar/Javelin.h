@@ -2,14 +2,25 @@
 
 #pragma once
 
-#include "Spell.h"
+#include "BaseSpell.h"
+#include "Javelin.generated.h"
 
 /**
  * 
  */
-class GALDRAR_API Javelin : public Spell
+UCLASS()
+class GALDRAR_API UJavelin : public UBaseSpell
 {
+	GENERATED_BODY()
+	
 public:
-	Javelin();
-	~Javelin();
+	UJavelin();
+
+	void ActivateAttack(FVector location, ABaseCharacter* target) override;
+
+private:
+	TSubclassOf<class ASpellEffect> blueprintReference;
+
+	
+	
 };

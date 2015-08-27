@@ -149,9 +149,6 @@ protected:
 	
 	UPROPERTY(BlueprintReadWrite, Category = BaseCharacter)
 	UBaseWeapon* weapon;
-	
-	UPROPERTY(BlueprintReadWrite, Category = BaseCharacter)
-	TArray<UBaseSpell*> spells;
 
 	UPROPERTY(BlueprintReadWrite, Category = BaseCharacter)
 	UBaseSpell* spell1;

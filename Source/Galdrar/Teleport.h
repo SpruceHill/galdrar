@@ -2,13 +2,19 @@
 
 #pragma once
 
-#include "Spell.h"
+#include "BaseSpell.h"
+#include "Teleport.generated.h"
+
 /**
  * 
  */
-class GALDRAR_API Teleport : public Spell
+UCLASS()
+class GALDRAR_API UTeleport : public UBaseSpell
 {
+	GENERATED_BODY()
 public:
-	Teleport();
-	~Teleport();
+	UTeleport();
+
+	void ActivateAttack(FVector location, ABaseCharacter* target) override;
+	
 };

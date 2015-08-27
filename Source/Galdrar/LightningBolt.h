@@ -2,14 +2,25 @@
 
 #pragma once
 
-#include "Spell.h"
+#include "BaseSpell.h"
+#include "LightningBolt.generated.h"
 
 /**
  * 
  */
-class GALDRAR_API LightningBolt : public Spell
+UCLASS()
+class GALDRAR_API ULightningBolt : public UBaseSpell
 {
+	GENERATED_BODY()
+
 public:
-	LightningBolt();
-	~LightningBolt();
+	ULightningBolt();
+
+	void ActivateAttack(FVector location, ABaseCharacter* target) override;
+
+private:
+	TSubclassOf<class ASpellEffect> blueprintReference;
+	
+	
+	
 };

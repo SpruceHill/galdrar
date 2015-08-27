@@ -7,6 +7,11 @@
 #include "Sword.h"
 #include "DragonsBreath.h"
 #include "GasCloud.h"
+#include "Heal.h"
+#include "Teleport.h"
+#include "LightningBolt.h"
+#include "Javelin.h"
+
 AHeroCharacter::AHeroCharacter(const FObjectInitializer& ObjectInitializer)
 	: Super(ObjectInitializer)
 {
@@ -14,10 +19,10 @@ AHeroCharacter::AHeroCharacter(const FObjectInitializer& ObjectInitializer)
 	stats = CreateDefaultSubobject<UCharacterStatsComponent>(TEXT("Stats"));
 	weapon = CreateDefaultSubobject<USword>(TEXT("Sword"));
 
-	spell1 = CreateDefaultSubobject<UGasCloud>(TEXT("Gas"));
-	spell2 = CreateDefaultSubobject<UDragonsBreath>(TEXT("Dragons7"));
-	spell3 = CreateDefaultSubobject<UDragonsBreath>(TEXT("Dragons9"));
-	spell4 = CreateDefaultSubobject<UDragonsBreath>(TEXT("Dragons39"));
+	spell1 = CreateDefaultSubobject<UDragonsBreath>(TEXT("Dragons"));
+	spell2 = CreateDefaultSubobject<UGasCloud>(TEXT("Gas"));
+	spell3 = CreateDefaultSubobject<UHeal>(TEXT("Heal"));
+	spell4 = CreateDefaultSubobject<UJavelin>(TEXT("Javelin"));
 
 
 	bloodVialComponent = CreateDefaultSubobject<UStandardBloodVial>(TEXT("BloodVial"));

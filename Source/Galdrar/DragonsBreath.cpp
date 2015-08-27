@@ -3,7 +3,6 @@
 #include "Galdrar.h"
 #include "DragonsBreath.h"
 #include "BurnEffectComponent.h"
-#include "ProjectileFactory.h"
 
 UDragonsBreath::UDragonsBreath()
 {
