@@ -13,6 +13,11 @@ TEnumAsByte<EActivation::Type> UBaseSpell::GetActivation()
 	return activation;
 }
 
+TEnumAsByte<EResourceType::Type> UBaseSpell::GetResourceType()
+{
+	return resourceType;
+}
+
 float UBaseSpell::GetManaCost()
 { 
 	return manaCost; 

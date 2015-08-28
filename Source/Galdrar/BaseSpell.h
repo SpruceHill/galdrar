@@ -28,6 +28,15 @@ namespace EActivation
 		SELF			UMETA(DisplayName = "Self"),
 	};
 }
+UENUM(BlueprintType)
+namespace EResourceType
+{
+	enum Type
+	{
+		MANA	UMETA(DisplayName = "Mana"),
+		RAGE	UMETA(DisplayName = "Rage"),
+	};
+}
 /**
  * 
  */
@@ -44,6 +53,9 @@ public:
 	TEnumAsByte<EActivation::Type> GetActivation();
 
 	UFUNCTION(BlueprintCallable, Category = Spell)
+	TEnumAsByte<EResourceType::Type> GetResourceType();
+
+	UFUNCTION(BlueprintCallable, Category = Spell)
 	float GetManaCost();
 
 	UFUNCTION(BlueprintCallable, Category = Spell)
@@ -55,6 +67,9 @@ protected:
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Spell)
 	TEnumAsByte<EActivation::Type> activation;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Spell)
+	TEnumAsByte<EResourceType::Type> resourceType;
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Spell)
 	float manaCost;

@@ -284,6 +284,33 @@ void AHeroPlayerController::AttackEnemy(ABaseCharacter* character, UAttackCompon
 		// Stop moving (HACK)
 		SetNewMoveDestination(hero->GetActorLocation());
 
+		// Double check if mana or rage still is high enough to use spell
+		if (UBaseSpell* spell = dynamic_cast<UBaseSpell*>(attack))
+		{
+			if (spell->GetResourceType() == EResourceType::MANA)
+			{
+				if (hero->GetStats()->mana < spell->GetManaCost())
+				{
+					HA.Toast("Not enough mana to use " + spell->GetName());
+					if (attack == primedAttack) primedAttack = NULL;
+					scheduledAttack = NULL;
+					targetCharacter = NULL;
+					return;
+				}
+			}
+			else
+			{
+				if (hero->GetStats()->rage < spell->GetManaCost())
+				{
+					HA.Toast("Not enough rage to use " + spell->GetName());
+					if (attack == primedAttack) primedAttack = NULL;
+					scheduledAttack = NULL;
+					targetCharacter = NULL;
+					return;
+				}
+			}
+		}
+
 		FaceActor(character);
 		hero->AttackAnimation();
 		UCombatFunctionLibrary::AttackEnemy(hero, character, attack);
@@ -317,6 +344,31 @@ void AHeroPlayerController::AttackGround(FVector location, UAttackComponent* att
 	{
 		// Stop moving (HACK)
 		SetNewMoveDestination(hero->GetActorLocation());
+
+		// Double check if mana or rage still is high enough to use spell
+		if (UBaseSpell* spell = dynamic_cast<UBaseSpell*>(attack))
+		{
+			if (spell->GetResourceType() == EResourceType::MANA)
+			{
+				if (hero->GetStats()->mana < spell->GetManaCost())
+				{
+					HA.Toast("Not enough mana to use " + spell->GetName());
+					if (attack == primedAttack) primedAttack = NULL;
+					scheduledAttack = NULL;
+					return;
+				}
+			}
+			else
+			{
+				if (hero->GetStats()->rage < spell->GetManaCost())
+				{
+					HA.Toast("Not enough rage to use " + spell->GetName());
+					if (attack == primedAttack) primedAttack = NULL;
+					scheduledAttack = NULL;
+					return;
+				}
+			}
+		}
 
 		FaceLocation(location);
 		attack->ActivateAttack(location, NULL);
@@ -438,10 +490,22 @@ void AHeroPlayerController::Spell(int8 index)
 		HA.Toast(hero->GetSpell(index)->GetName() + " is not ready");
 		return;
 	}
-	if (hero->GetStats()->mana < hero->GetSpell(index)->GetManaCost())
+
+	if (hero->GetSpell(index)->GetResourceType() == EResourceType::MANA)
 	{
-		HA.Toast("Not enough mana to use " + hero->GetSpell(index)->GetName());
-		return;
+		if (hero->GetStats()->mana < hero->GetSpell(index)->GetManaCost())
+		{
+			HA.Toast("Not enough mana to use " + hero->GetSpell(index)->GetName());
+			return;
+		}
+	}
+	else
+	{
+		if (hero->GetStats()->rage < hero->GetSpell(index)->GetManaCost())
+		{
+			HA.Toast("Not enough rage to use " + hero->GetSpell(index)->GetName());
+			return;
+		}
 	}
 
 	switch (hero->GetSpell(index)->GetActivation())

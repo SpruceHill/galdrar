@@ -9,6 +9,7 @@ ULightningBolt::ULightningBolt()
 	desc = "Shoot a bolt that electrecutes your foes.";
 	activation = EActivation::TARGET_GROUND;
 	spellTarget = ESpellTarget::CONE;
+	resourceType = EResourceType::MANA;
 	manaCost = 10.f;
 	radius = 50.f;
 	bProjectile = true;

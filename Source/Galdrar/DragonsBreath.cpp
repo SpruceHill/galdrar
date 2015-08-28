@@ -10,6 +10,7 @@ UDragonsBreath::UDragonsBreath()
 	desc = "Shoot a ball of fire onto your enemies - dealing 20 fire damage to everyone in its path and sets them on fire.";
 	activation = EActivation::TARGET_GROUND;
 	spellTarget = ESpellTarget::CONE;
+	resourceType = EResourceType::MANA;
 	manaCost = 40.f;
 	radius = 200.f;
 	bProjectile = true;

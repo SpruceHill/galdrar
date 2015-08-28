@@ -10,6 +10,7 @@ UHeal::UHeal()
 	desc = "+40 health to target.";
 	activation = EActivation::SELF;
 	spellTarget = ESpellTarget::UNIT;
+	resourceType = EResourceType::MANA;
 	manaCost = 15.f;
 	radius = 50.f;
 	bProjectile = false;

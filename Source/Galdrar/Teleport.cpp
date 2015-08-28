@@ -9,6 +9,7 @@ UTeleport::UTeleport()
 	desc = "Instantly appear at a different location.";
 	activation = EActivation::TARGET_GROUND;
 	spellTarget = ESpellTarget::CIRCLE;
+	resourceType = EResourceType::MANA;
 	manaCost = 5.f;
 	radius = 50.f;
 	bProjectile = false;

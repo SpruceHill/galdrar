@@ -9,6 +9,7 @@ UJavelin::UJavelin()
 	desc = "Hurtle a spear in any direction. Stunning on impact.";
 	activation = EActivation::TARGET_GROUND;
 	spellTarget = ESpellTarget::CONE;
+	resourceType = EResourceType::RAGE;
 	manaCost = 30.f;
 	radius = 50.f;
 	bProjectile = true;
@@ -35,7 +36,7 @@ void UJavelin::ActivateAttack(FVector location, ABaseCharacter* target)
 	time = cooldown;
 	if (ABaseCharacter* character = dynamic_cast<ABaseCharacter*>(GetOwner()))
 	{
-		character->DecreaseMana(manaCost);
+		character->RemoveRage(manaCost);
 		FActorSpawnParameters SpawnParameters;
 		ABaseProjectile* BPProjectile = GetWorld()->SpawnActor<ABaseProjectile>(blueprintReference, character->GetActorLocation(), character->GetActorForwardVector().Rotation(), SpawnParameters);
 		BPProjectile->Initialize(character, this);

@@ -10,6 +10,7 @@ UGasCloud::UGasCloud()
 	desc = "Summon a cloud of poisonous gas.";
 	activation = EActivation::TARGET_GROUND;
 	spellTarget = ESpellTarget::CIRCLE;
+	resourceType = EResourceType::MANA;
 	manaCost = 20.f;
 	radius = 300.f;
 	bProjectile = false;
