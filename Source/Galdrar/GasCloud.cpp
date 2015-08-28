@@ -41,7 +41,7 @@ void UGasCloud::ActivateAttack(FVector location, ABaseCharacter* target)
 		character->DecreaseMana(manaCost);
 		FActorSpawnParameters SpawnParameters;
 		ASpellEffect* BPProjectile = GetWorld()->SpawnActor<ASpellEffect>(blueprintReference, location, FRotator(0, 0, 0), SpawnParameters);
-		BPProjectile->Initialize(character, this);
+		if (BPProjectile) BPProjectile->Initialize(character, this);
 	}
 }
 

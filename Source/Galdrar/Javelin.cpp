@@ -39,7 +39,7 @@ void UJavelin::ActivateAttack(FVector location, ABaseCharacter* target)
 		character->RemoveRage(manaCost);
 		FActorSpawnParameters SpawnParameters;
 		ABaseProjectile* BPProjectile = GetWorld()->SpawnActor<ABaseProjectile>(blueprintReference, character->GetActorLocation(), character->GetActorForwardVector().Rotation(), SpawnParameters);
-		BPProjectile->Initialize(character, this);
+		if (BPProjectile) BPProjectile->Initialize(character, this);
 	}
 }
 

@@ -42,6 +42,19 @@ void ABaseCharacter::Tick(float DeltaSeconds)
 	}
 }
 
+float ABaseCharacter::GetResistance(EGaldrarDamageType type)
+{
+	switch (type) {
+	case EGaldrarDamageType::PHYSICAL: return stats->armour;
+	case EGaldrarDamageType::FROST: return stats->frostResistance;
+	case EGaldrarDamageType::FIRE: return stats->fireResistance;
+	case EGaldrarDamageType::SHOCK: return stats->shockResistance;
+	case EGaldrarDamageType::POISON: return stats->poisonResistance;
+	default: return 0.f;
+	}
+	return 0.f;
+}
+
 void ABaseCharacter::Heal(float amount)
 {
 	HUDAdapter HA;

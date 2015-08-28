@@ -30,22 +30,13 @@ public:
 
 	UCharacterStatsComponent* GetStats() { return stats; }
 
-	float GetResistance(EGaldrarDamageType type)
-	{
-		switch (type) {
-		case EGaldrarDamageType::PHYSICAL: return stats->armour;
-		case EGaldrarDamageType::FROST: return stats->frostResistance;
-		case EGaldrarDamageType::FIRE: return stats->fireResistance;
-		case EGaldrarDamageType::SHOCK: return stats->shockResistance;
-		case EGaldrarDamageType::POISON: return stats->poisonResistance;
-		default: return 0.f;
-		}
-		return 0.f;
-	}
+	UFUNCTION(BlueprintCallable, Category = Stats)
+	float GetResistance(EGaldrarDamageType type);
 
 	UFUNCTION(BlueprintCallable, Category = Stats)
 	void Heal(float amount);
 
+	UFUNCTION(BlueprintCallable, Category = Stats)
 	void Wound(int32 amount, EGaldrarDamageType type, bool crit);
 
 	UFUNCTION(BlueprintCallable, Category = Stats)
