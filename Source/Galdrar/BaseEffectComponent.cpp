@@ -32,6 +32,10 @@ void UBaseEffectComponent::TickComponent( float DeltaTime, ELevelTick TickType, 
 	// ...
 }
 
+FString UBaseEffectComponent::GetName(){ return name; }
+
+FString UBaseEffectComponent::GetDesc(){ return desc; }
+
 bool UBaseEffectComponent::IsDefensive()
 {
 	return bDefensive;

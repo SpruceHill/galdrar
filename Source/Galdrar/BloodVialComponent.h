@@ -25,6 +25,12 @@ public:
 	virtual void Use();
 
 	UFUNCTION(BlueprintCallable, Category = BloodVial)
+	FString GetName();
+
+	UFUNCTION(BlueprintCallable, Category = BloodVial)
+	FString GetDesc();
+
+	UFUNCTION(BlueprintCallable, Category = BloodVial)
 	int32 GetMaxCharges();
 
 	UFUNCTION(BlueprintCallable, Category = BloodVial)
@@ -37,6 +43,10 @@ public:
 	void AddCharges(int32 nbrOfCharges);
 
 protected:
+	FString name;
+
+	FString desc;
+
 	int32 ID;
 
 	// Number of charges that can be spent

@@ -11,7 +11,7 @@ UStandardBloodVial::UStandardBloodVial()
 	// Set this component to be initialized when the game starts, and to be ticked every frame.  You can turn these features
 	// off to improve performance if you don't need them.
 	bWantsInitializeComponent = true;
-	PrimaryComponentTick.bCanEverTick = true;
+	PrimaryComponentTick.bCanEverTick = false;
 
 	// 5 = Blood Vial, 0001 = ID
 	ID = 50001;
@@ -20,6 +20,9 @@ UStandardBloodVial::UStandardBloodVial()
 	charges = 0;
 
 	healAmount = 20;
+
+	name = "Standard Blood Vial";
+	desc = "Use to regain " + FString::FromInt(healAmount) + " health.";
 }
 
 

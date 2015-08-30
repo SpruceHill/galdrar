@@ -114,6 +114,11 @@ ALoot* AHeroCharacter::GetInventory(int32 index)
 	}
 }
 
+UBloodVialComponent* AHeroCharacter::GetBloodVial()
+{
+	return bloodVialComponent;
+}
+
 int32 AHeroCharacter::GetBloodVialID()
 {
 	return bloodVialComponent->GetID();

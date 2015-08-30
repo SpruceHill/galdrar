@@ -131,6 +131,9 @@ public:
 	}
 
 	UFUNCTION(BlueprintCallable, Category = BloodVial)
+	UBloodVialComponent* GetBloodVial();
+
+	UFUNCTION(BlueprintCallable, Category = BloodVial)
 	int32 GetBloodVialID();
 	UFUNCTION(BlueprintCallable, Category = BloodVial)
 	int32 GetBloodVialMaxCharges();

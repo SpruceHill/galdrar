@@ -25,6 +25,12 @@ public:
 	virtual void Remove();
 
 	UFUNCTION(BlueprintCallable, Category = EffectComponent)
+	FString GetName();
+
+	UFUNCTION(BlueprintCallable, Category = EffectComponent)
+	FString GetDesc();
+
+	UFUNCTION(BlueprintCallable, Category = EffectComponent)
 	bool IsDefensive();
 
 	UFUNCTION(BlueprintCallable, Category = EffectComponent)

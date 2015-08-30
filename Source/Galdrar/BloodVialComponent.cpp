@@ -43,6 +43,8 @@ void UBloodVialComponent::Use()
 	}
 }
 
+FString UBloodVialComponent::GetName(){ return name; }
+FString UBloodVialComponent::GetDesc(){ return desc; }
 int32 UBloodVialComponent::GetMaxCharges() { return maxCharges; }
 int32 UBloodVialComponent::GetCharges() { return charges; }
 int32 UBloodVialComponent::GetID() { return ID; };
