@@ -24,6 +24,8 @@ AHeroPlayerController::AHeroPlayerController(const FObjectInitializer& ObjectIni
 	bSelectingGroundTarget = false;
 
 	groundTarget = FVector::ZeroVector;
+
+	hoveredCharacter = NULL;
 }
 
 void AHeroPlayerController::PlayerTick(float DeltaTime)
@@ -90,7 +92,6 @@ void AHeroPlayerController::UpdateCursorOverState()
 	// Trace to see what is under the mouse cursor
 	FHitResult Hit;
 	GetHitResultUnderCursor(ECC_Visibility, false, Hit);
-
 	if (Hit.bBlockingHit)
 	{
 		if (bSelectingGroundTarget)
@@ -101,21 +102,20 @@ void AHeroPlayerController::UpdateCursorOverState()
 		{
 			CurrentMouseCursor = EMouseCursor::Crosshairs;
 		}
+		
 		// If cursor is over a character
-		//if (Hit.GetActor() != GetPawn())
-		//{
-			if (ABaseCharacter* character = dynamic_cast<ABaseCharacter*>(Hit.GetActor()))
+		if (ABaseCharacter* character = dynamic_cast<ABaseCharacter*>(Hit.GetActor()))
+		{
+			if (AGaldrarHUD* hud = dynamic_cast<AGaldrarHUD*>(GetHUD()))
 			{
-				if (AGaldrarHUD* hud = dynamic_cast<AGaldrarHUD*>(GetHUD()))
-				{
-					hud->SetFocusedCharacter(character);
-				}
-
-				// Set cursor style when on character
-				if (!bSelectingGroundTarget)
-					CurrentMouseCursor = (bSelectingUnitTarget ? EMouseCursor::EyeDropper : EMouseCursor::Hand);
+				hud->SetFocusedCharacter(character);
 			}
-		//}
+
+			// Set cursor style when on character
+			if (!bSelectingGroundTarget)
+				CurrentMouseCursor = (bSelectingUnitTarget ? EMouseCursor::EyeDropper : EMouseCursor::Hand);
+		}
+
 		// If cursor is over loot
 		else if (ALoot* loot = dynamic_cast<ALoot*>(Hit.GetActor()))
 		{

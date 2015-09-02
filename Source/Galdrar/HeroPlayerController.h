@@ -65,6 +65,7 @@ private:
 	UAttackComponent* scheduledAttack;
 	UAttackComponent* primedAttack;
 	bool bStunned;
+	ABaseCharacter* hoveredCharacter;
 
 	virtual void BeginPlay() override;
 	virtual void PlayerTick(float DeltaTime) override;

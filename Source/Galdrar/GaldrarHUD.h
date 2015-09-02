@@ -42,7 +42,17 @@ public:
 	UFUNCTION(BlueprintCallable, Category = "Spells")
 	void RemoveRangeIndicator();
 
-	void SetFocusedCharacter(ABaseCharacter* character) { focusedCharacter = character; }
+	void SetFocusedCharacter(ABaseCharacter* character)
+	{
+		if (focusedCharacter)
+		{
+			// Stop highlighting old character
+			focusedCharacter->GetMesh()->SetRenderCustomDepth(false);
+		}
+		focusedCharacter = character;
+		// Highlight if valid
+		if (character) character->GetMesh()->SetRenderCustomDepth(true);
+	}
 	
 	ABaseCharacter* GetFocusedCharacter() { return focusedCharacter; }
 
