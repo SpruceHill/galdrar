@@ -40,8 +40,6 @@ void ALoot::Disable()
 	SetActorEnableCollision(false);
 }
 
-FString ALoot::GetName(){ return name; }
-FString ALoot::GetDesc(){ return desc; }
 int32 ALoot::GetID() { return ID; }
 
 bool ALoot::IsStackable(){ return bStackable; }

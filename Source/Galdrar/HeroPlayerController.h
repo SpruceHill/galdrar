@@ -57,10 +57,10 @@ private:
 	bool bShouldZoom;
 	bool bSelectingUnitTarget;
 	bool bSelectingGroundTarget;
-	float pickUpRange = 120.f;
+	float pickUpRange = 150.f;
 	ABaseCharacter* targetCharacter;
 	FVector groundTarget;
-	ALoot* targetLoot;
+	ABaseInteractable* targetLoot;
 	HUDAdapter HA;
 	UAttackComponent* scheduledAttack;
 	UAttackComponent* primedAttack;
@@ -94,7 +94,7 @@ private:
 	// Helpers
 	void AttackEnemy(ABaseCharacter* character, UAttackComponent* attack);
 	void AttackGround(FVector location, UAttackComponent* attack);
-	void Pickup(ALoot* loot);
+	void Pickup(ABaseInteractable* interactable);
 
 	void FaceActor(AActor* actorToFace);
 	void FaceLocation(FVector location);

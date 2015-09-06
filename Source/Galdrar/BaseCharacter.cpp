@@ -224,6 +224,21 @@ void ABaseCharacter::RemoveEffect(UBaseEffectComponent* effect)
 		effect->Remove();
 }
 
+void ABaseCharacter::AddEffectRenderState(EEffectRenderState::Type renderState)
+{
+	if (!renderStates.Contains(renderState)) SpawnRenderEffect(renderState);
+	renderStates.Add(renderState);
+}
+
+void ABaseCharacter::RemoveEffectRenderState(EEffectRenderState::Type renderState)
+{
+	renderStates.Remove(renderState);
+	if (!renderStates.Contains(renderState))
+	{
+		DestroyRenderEffect(renderState);
+	}
+}
+
 float ABaseCharacter::GetHealth()
 {
 	return stats->health;

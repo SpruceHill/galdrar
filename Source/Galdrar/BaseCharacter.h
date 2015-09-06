@@ -39,6 +39,8 @@ public:
 	UFUNCTION(BlueprintCallable, Category = Stats)
 	void Wound(int32 amount, EGaldrarDamageType type, bool crit);
 
+	// Mana / Rage
+	
 	UFUNCTION(BlueprintCallable, Category = Stats)
 	void DecreaseMana(float amount);
 
@@ -48,11 +50,27 @@ public:
 	UFUNCTION(BlueprintCallable, Category = Stats)
 	void RemoveRage(float amount);
 
+	// Effects
+	
 	UFUNCTION(BlueprintCallable, Category = BaseCharacter)
 	void AddEffect(TSubclassOf<UBaseEffectComponent> effectType);
 
 	UFUNCTION(BlueprintCallable, Category = BaseCharacter)
 	void RemoveEffect(UBaseEffectComponent* effect);
+
+	// RENDER EFFECTS
+
+	UFUNCTION(BlueprintCallable, Category = BaseCharacter)
+	void AddEffectRenderState(EEffectRenderState::Type renderState);
+
+	UFUNCTION(BlueprintCallable, Category = BaseCharacter)
+	void RemoveEffectRenderState(EEffectRenderState::Type renderState);
+
+	UFUNCTION(BlueprintImplementableEvent, BlueprintCallable, Category = BaseCharacter)
+	void SpawnRenderEffect(EEffectRenderState::Type renderState);
+
+	UFUNCTION(BlueprintImplementableEvent, BlueprintCallable, Category = BaseCharacter)
+	void DestroyRenderEffect(EEffectRenderState::Type renderState);
 
 	UBaseSpell* GetSpell(int8 index)
 	{
@@ -151,6 +169,9 @@ protected:
 	bool bStunned = false;
 	UPROPERTY(BlueprintReadWrite, Category = BaseCharacter)
 	bool bSilenced = false;
+
+	UPROPERTY(BlueprintReadWrite, Category = BaseCharacter)
+	TArray<TEnumAsByte<EEffectRenderState::Type>> renderStates;
 
 private:
 	float stunTime = 0.f;

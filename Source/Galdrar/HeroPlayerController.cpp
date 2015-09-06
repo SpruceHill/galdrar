@@ -117,15 +117,15 @@ void AHeroPlayerController::UpdateCursorOverState()
 		}
 
 		// If cursor is over loot
-		else if (ALoot* loot = dynamic_cast<ALoot*>(Hit.GetActor()))
+		else if (ABaseInteractable* loot = dynamic_cast<ABaseInteractable*>(Hit.GetActor()))
 		{
 			if (AGaldrarHUD* hud = dynamic_cast<AGaldrarHUD*>(GetHUD()))
 			{
-				hud->SetFocusedLoot(loot);
+				if (loot->active) hud->SetFocusedLoot(loot);
 			}
 
 			// Set cursor style when on loot
-			if (!(bSelectingUnitTarget || bSelectingGroundTarget)) CurrentMouseCursor = EMouseCursor::Hand;
+			if (!(bSelectingUnitTarget || bSelectingGroundTarget) && loot->active) CurrentMouseCursor = EMouseCursor::Hand;
 		}
 		// Floor, walls etc
 		else
@@ -248,7 +248,7 @@ void AHeroPlayerController::OnSetDestinationPressed()
 				primedAttack = NULL;
 			//}
 		}
-		else if (ALoot* loot = dynamic_cast<ALoot*>(Hit.GetActor()))
+		else if (ABaseInteractable* loot = dynamic_cast<ABaseInteractable*>(Hit.GetActor()))
 		{
 			primedAttack = NULL;
 			Pickup(loot);
@@ -398,17 +398,17 @@ void AHeroPlayerController::FaceLocation(FVector location)
 }
 
 
-void AHeroPlayerController::Pickup(ALoot* loot)
+void AHeroPlayerController::Pickup(ABaseInteractable* interactable)
 {
 	AHeroCharacter* hero = Cast<AHeroCharacter>(GetPawn());
-	if (hero->GetDistanceTo(loot) <= pickUpRange)
+	if (hero->GetDistanceTo(interactable) <= pickUpRange)
 	{
 		SetNewMoveDestination(GetPawn()->GetActorLocation());
-		if (AValuable* valuable = dynamic_cast<AValuable*>(loot))
+		if (AValuable* valuable = dynamic_cast<AValuable*>(interactable))
 		{
 			hero->AddValuable(valuable);
 		}
-		else
+		else if(ALoot* loot = dynamic_cast<ALoot*>(interactable))
 		{
 			if (hero->GetInventorySize() < 6)
 			{
@@ -419,11 +419,15 @@ void AHeroPlayerController::Pickup(ALoot* loot)
 				HA.Toast("Inventory full");
 			}
 		}
+		else
+		{
+			interactable->Interact(hero);
+		}
 		targetLoot = NULL;
 	}
 	else // Not in range
 	{
-		targetLoot = loot;
+		targetLoot = interactable;
 		SetNewMoveDestination(targetLoot->GetActorLocation());
 	}
 }

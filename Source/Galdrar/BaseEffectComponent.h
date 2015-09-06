@@ -6,6 +6,17 @@
 #include "GaldrarDamageType.h"
 #include "BaseEffectComponent.generated.h"
 
+UENUM(BlueprintType)
+namespace EEffectRenderState
+{
+	enum Type
+	{
+		ON_FIRE		UMETA(DisplayName = "On Fire"),
+		FROZEN		UMETA(DisplayName = "Frozen"),
+		POISONED	UMETA(DisplayName = "Poisoned"),
+		ELECTRIFIED	UMETA(DisplayName = "Electrified"),
+	};
+}
 
 UCLASS( ClassGroup=(Custom), meta=(BlueprintSpawnableComponent) )
 class GALDRAR_API UBaseEffectComponent : public UActorComponent

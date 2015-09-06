@@ -3,13 +3,14 @@
 #pragma once
 
 #include "GameFramework/Actor.h"
+#include "BaseInteractable.h"
 #include "Loot.generated.h"
 
 /*
 * This class represents everything that can be picked up in the world.
 */
 UCLASS(abstract)
-class GALDRAR_API ALoot : public AActor
+class GALDRAR_API ALoot : public ABaseInteractable
 {
 	GENERATED_BODY()
 	
@@ -30,10 +31,6 @@ public:
 	void OnPickup();
 
 	UFUNCTION(BlueprintCallable, Category = Loot)
-	FString GetName();
-	UFUNCTION(BlueprintCallable, Category = Loot)
-	FString GetDesc();
-	UFUNCTION(BlueprintCallable, Category = Loot)
 	int32 GetID();
 	UFUNCTION(BlueprintCallable, Category = Loot)
 	bool IsStackable();
@@ -44,10 +41,6 @@ protected:
 	UFUNCTION(BlueprintCallable, Category = Loot)
 	void Disable();
 
-	UPROPERTY(BlueprintReadWrite, Category = Loot)
-	FString name;
-	UPROPERTY(BlueprintReadWrite, Category = Loot)
-	FString desc;
 	UPROPERTY(BlueprintReadWrite, Category = Loot)
 	int32 ID;
 	UPROPERTY(BlueprintReadWrite, Category = Loot)

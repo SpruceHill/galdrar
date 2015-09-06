@@ -56,14 +56,25 @@ public:
 	
 	ABaseCharacter* GetFocusedCharacter() { return focusedCharacter; }
 
-	void SetFocusedLoot(ALoot* loot) { focusedLoot = loot; }
-	ALoot* GetFocusedLoot() { return focusedLoot; }
+	void SetFocusedLoot(ABaseInteractable* loot)
+	{
+		if (focusedLoot)
+		{
+			// Stop highlighting old character
+			focusedLoot->GetMesh()->SetRenderCustomDepth(false);
+		}
+		focusedLoot = loot;
+		// Highlight if valid
+		if (loot) loot->GetMesh()->SetRenderCustomDepth(true);
+	}
+
+	ABaseInteractable* GetFocusedLoot() { return focusedLoot; }
 
 	UPROPERTY(BlueprintReadWrite, Category = hud)
 	ABaseCharacter* focusedCharacter;
 
 	UPROPERTY(BlueprintReadWrite, Category = hud)
-	ALoot* focusedLoot;
+	ABaseInteractable* focusedLoot;
 
 	UPROPERTY(BlueprintReadWrite, Category = hud)
 	UDecalComponent* rangeIndicator;
