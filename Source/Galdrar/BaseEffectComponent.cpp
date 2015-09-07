@@ -48,7 +48,7 @@ void UBaseEffectComponent::Remove()
 	{
 		if (ABaseCharacter* character = dynamic_cast<ABaseCharacter*>(GetOwner()))
 		{
-			character->RemoveEffectRenderState(EEffectRenderState::Type::ON_FIRE);
+			character->RemoveEffectRenderState(ERS);
 		}
 	}
 

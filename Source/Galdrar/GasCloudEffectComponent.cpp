@@ -24,6 +24,8 @@ UGasCloudEffectComponent::UGasCloudEffectComponent()
 	// 4 = Effect, ID = 0002
 	ID = 40002;
 
+	SetRenderState(EEffectRenderState::Type::POISONED);
+
 	if (ABaseCharacter* character = dynamic_cast<ABaseCharacter*>(GetOwner()))
 	{
 		character->GetStats()->movementSpeed -= 150;

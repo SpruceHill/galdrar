@@ -26,11 +26,6 @@ UBurnEffectComponent::UBurnEffectComponent()
 	ID = 40001;
 
 	SetRenderState(EEffectRenderState::Type::ON_FIRE);
-
-	/*if (ABaseCharacter* character = dynamic_cast<ABaseCharacter*>(GetOwner()))
-	{
-		character->AddEffectRenderState(EEffectRenderState::Type::ON_FIRE);
-	}*/
 }
 
 void UBurnEffectComponent::TickComponent(float DeltaTime, ELevelTick TickType, FActorComponentTickFunction* ThisTickFunction)
