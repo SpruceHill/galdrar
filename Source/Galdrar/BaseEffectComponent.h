@@ -15,6 +15,7 @@ namespace EEffectRenderState
 		FROZEN		UMETA(DisplayName = "Frozen"),
 		POISONED	UMETA(DisplayName = "Poisoned"),
 		ELECTRIFIED	UMETA(DisplayName = "Electrified"),
+		NO_STATE	UMETA(DisplayName = "None"),
 	};
 }
 
@@ -65,6 +66,9 @@ public:
 	UFUNCTION(BlueprintCallable, Category = EffectComponent)
 	void ResetTimer();
 
+	UFUNCTION(BlueprintCallable, Category = EffectComponent)
+	void SetRenderState(EEffectRenderState::Type RS);
+
 	bool bStackable;
 	bool bShouldTick;
 	bool bRemoveOnDamageTaken;
@@ -84,4 +88,7 @@ protected:
 	FString desc;
 	FString toBePrinted;
 	EGaldrarDamageType damageType;
+
+	UPROPERTY(BlueprintReadWrite, Category = EffectComponent)
+	TEnumAsByte<EEffectRenderState::Type> ERS = EEffectRenderState::Type::NO_STATE;
 };

@@ -2,6 +2,7 @@
 
 #include "Galdrar.h"
 #include "BaseEffectComponent.h"
+#include "BaseCharacter.h"
 
 
 // Sets default values for this component's properties
@@ -43,6 +44,14 @@ bool UBaseEffectComponent::IsDefensive()
 
 void UBaseEffectComponent::Remove()
 {
+	if (ERS != EEffectRenderState::Type::NO_STATE)
+	{
+		if (ABaseCharacter* character = dynamic_cast<ABaseCharacter*>(GetOwner()))
+		{
+			character->RemoveEffectRenderState(EEffectRenderState::Type::ON_FIRE);
+		}
+	}
+
 	MarkPendingKill();
 	GetOwner()->RemoveOwnedComponent(this);
 }
@@ -60,3 +69,15 @@ EGaldrarDamageType UBaseEffectComponent::GetDamageType() { return damageType; }
 int32 UBaseEffectComponent::GetID(){ return ID; }
 
 void UBaseEffectComponent::ResetTimer(){ elapsedTime = 0.f; }
+
+void UBaseEffectComponent::SetRenderState(EEffectRenderState::Type RS)
+{
+	ERS = RS;
+	if (RS != EEffectRenderState::Type::NO_STATE)
+	{
+		if (ABaseCharacter* character = dynamic_cast<ABaseCharacter*>(GetOwner()))
+		{
+			character->AddEffectRenderState(RS);
+		}
+	}
+}

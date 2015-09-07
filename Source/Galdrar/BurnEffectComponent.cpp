@@ -25,10 +25,12 @@ UBurnEffectComponent::UBurnEffectComponent()
 	// 4 = Effect, ID = 0001
 	ID = 40001;
 
-	if (ABaseCharacter* character = dynamic_cast<ABaseCharacter*>(GetOwner()))
+	SetRenderState(EEffectRenderState::Type::ON_FIRE);
+
+	/*if (ABaseCharacter* character = dynamic_cast<ABaseCharacter*>(GetOwner()))
 	{
 		character->AddEffectRenderState(EEffectRenderState::Type::ON_FIRE);
-	}
+	}*/
 }
 
 void UBurnEffectComponent::TickComponent(float DeltaTime, ELevelTick TickType, FActorComponentTickFunction* ThisTickFunction)
@@ -49,14 +51,4 @@ void UBurnEffectComponent::TickComponent(float DeltaTime, ELevelTick TickType, F
 
 	// If time has run out, delete  this effect.
 	if (elapsedTime > duration) Remove();
-}
-
-void UBurnEffectComponent::Remove()
-{
-	if (ABaseCharacter* character = dynamic_cast<ABaseCharacter*>(GetOwner()))
-	{
-		character->RemoveEffectRenderState(EEffectRenderState::Type::ON_FIRE);
-	}
-	MarkPendingKill();
-	GetOwner()->RemoveOwnedComponent(this);
 }
