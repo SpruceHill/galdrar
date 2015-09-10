@@ -13,7 +13,7 @@ namespace ETraitActivation
 		ON_ATTACKED		UMETA(DisplayName = "On Attacked"),
 		ON_ATTACKING	UMETA(DisplayName = "On Attacking"),
 		ON_USEITEM		UMETA(DisplayName = "On Use Item"),
-		ON_CREATION		UMETA(DisplayName = "On Creatopm"),
+		ON_CREATION		UMETA(DisplayName = "On Creation"),
 	};
 }
 
@@ -33,6 +33,7 @@ public:
 	virtual void TickComponent( float DeltaTime, ELevelTick TickType, FActorComponentTickFunction* ThisTickFunction ) override;
 	
 	// Should be called as soon as the activation state is reached.
+	UFUNCTION(BlueprintCallable, Category = Trait)
 	virtual void ActivateTrait();
 
 protected:
