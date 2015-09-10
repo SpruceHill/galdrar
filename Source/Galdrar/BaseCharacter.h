@@ -6,6 +6,7 @@
 #include "CharacterStatsComponent.h"
 #include "BaseWeapon.h"
 #include "BaseSpell.h"
+#include "BaseTrait.h"
 #include "BaseEffectComponent.h"
 #include "GameFramework/Character.h"
 #include "BaseCharacter.generated.h"
@@ -16,9 +17,6 @@ class GALDRAR_API ABaseCharacter : public ACharacter
 	GENERATED_BODY()
 
 public:
-	UFUNCTION(BlueprintCallable, Category = BaseCharacter)
-		void InitializeSpells(TSubclassOf<UBaseSpell> spell1, TSubclassOf<UBaseSpell> spell2,
-		TSubclassOf<UBaseSpell> spell3, TSubclassOf<UBaseSpell> spell4);
 
 	virtual void Tick(float DeltaSeconds) override;
 
@@ -164,6 +162,11 @@ protected:
 	UBaseSpell* spell3;
 	UPROPERTY(BlueprintReadWrite, Category = BaseCharacter)
 	UBaseSpell* spell4;
+
+	UPROPERTY(BlueprintReadWrite, Category = BaseCharacter)
+	UBaseTrait* trait1;
+	UPROPERTY(BlueprintReadWrite, Category = BaseCharacter)
+	UBaseTrait* trait2;
 
 	UPROPERTY(BlueprintReadWrite, Category = BaseCharacter)
 	bool bStunned = false;

@@ -10,21 +10,16 @@
 #include "Teleport.h"
 #include "LightningBolt.h"
 #include "Javelin.h"
+#include "AngerManagement.h"
+#include "Berserker.h"
+#include "Hardened.h"
+#include "HotHeaded.h"
 
 AHeroCharacter::AHeroCharacter(const FObjectInitializer& ObjectInitializer)
 	: Super(ObjectInitializer)
 {
 	name = "Hero";
 	stats = CreateDefaultSubobject<UCharacterStatsComponent>(TEXT("Stats"));
-	weapon = CreateDefaultSubobject<USword>(TEXT("Sword"));
-
-	spell1 = CreateDefaultSubobject<UDragonsBreath>(TEXT("Dragons"));
-	spell2 = CreateDefaultSubobject<UGasCloud>(TEXT("Gas"));
-	spell3 = CreateDefaultSubobject<UHeal>(TEXT("Heal"));
-	spell4 = CreateDefaultSubobject<UJavelin>(TEXT("Javelin"));
-
-
-	bloodVialComponent = CreateDefaultSubobject<UStandardBloodVial>(TEXT("BloodVial"));
 	
 	this->GetMesh()->bReceivesDecals = false;
 
@@ -61,6 +56,89 @@ AHeroCharacter::AHeroCharacter(const FObjectInitializer& ObjectInitializer)
 	CursorHitbox->SetCollisionProfileName(TEXT("UI"));
 	CursorHitbox->AttachParent = RootComponent;
 }
+
+void AHeroCharacter::InitializeHero(
+	TSubclassOf<UBaseWeapon> MainWeapon,
+	TSubclassOf<UBaseSpell> NewSpell1,
+	TSubclassOf<UBaseSpell> NewSpell2,
+	TSubclassOf<UBaseSpell> NewSpell3,
+	TSubclassOf<UBaseSpell> NewSpell4,
+	TSubclassOf<UBaseTrait> NewTrait1,
+	TSubclassOf<UBaseTrait> NewTrait2,
+	TSubclassOf<UBloodVialComponent> NewBloodVial
+	)
+{
+	// WEAPONS
+	if (MainWeapon->IsChildOf(USword::StaticClass())) weapon = NewObject<USword>(this);
+
+	// SPELL 1
+	if (NewSpell1->IsChildOf(UDragonsBreath::StaticClass())) spell1 = NewObject<UDragonsBreath>(this);
+	else if (NewSpell1->IsChildOf(UGasCloud::StaticClass())) spell1 = NewObject<UGasCloud>(this);
+	else if (NewSpell1->IsChildOf(UHeal::StaticClass())) spell1 = NewObject<UHeal>(this);
+	else if (NewSpell1->IsChildOf(UJavelin::StaticClass())) spell1 = NewObject<UJavelin>(this);
+	else if (NewSpell1->IsChildOf(ULightningBolt::StaticClass())) spell1 = NewObject<ULightningBolt>(this);
+	else if (NewSpell1->IsChildOf(UTeleport::StaticClass())) spell1 = NewObject<UTeleport>(this);
+
+	// SPELL 2
+	if (NewSpell2->IsChildOf(UDragonsBreath::StaticClass())) spell2 = NewObject<UDragonsBreath>(this);
+	else if (NewSpell2->IsChildOf(UGasCloud::StaticClass())) spell2 = NewObject<UGasCloud>(this);
+	else if (NewSpell2->IsChildOf(UHeal::StaticClass())) spell2 = NewObject<UHeal>(this);
+	else if (NewSpell2->IsChildOf(UJavelin::StaticClass())) spell2 = NewObject<UJavelin>(this);
+	else if (NewSpell2->IsChildOf(ULightningBolt::StaticClass())) spell2 = NewObject<ULightningBolt>(this);
+	else if (NewSpell2->IsChildOf(UTeleport::StaticClass())) spell2 = NewObject<UTeleport>(this);
+
+	// SPELL 3
+	if (NewSpell3->IsChildOf(UDragonsBreath::StaticClass())) spell3 = NewObject<UDragonsBreath>(this);
+	else if (NewSpell3->IsChildOf(UGasCloud::StaticClass())) spell3 = NewObject<UGasCloud>(this);
+	else if (NewSpell3->IsChildOf(UHeal::StaticClass())) spell3 = NewObject<UHeal>(this);
+	else if (NewSpell3->IsChildOf(UJavelin::StaticClass())) spell3 = NewObject<UJavelin>(this);
+	else if (NewSpell3->IsChildOf(ULightningBolt::StaticClass())) spell3 = NewObject<ULightningBolt>(this);
+	else if (NewSpell3->IsChildOf(UTeleport::StaticClass())) spell3 = NewObject<UTeleport>(this);
+
+	// SPELL 4
+	if (NewSpell4->IsChildOf(UDragonsBreath::StaticClass())) spell4 = NewObject<UDragonsBreath>(this);
+	else if (NewSpell4->IsChildOf(UGasCloud::StaticClass())) spell4 = NewObject<UGasCloud>(this);
+	else if (NewSpell4->IsChildOf(UHeal::StaticClass())) spell4 = NewObject<UHeal>(this);
+	else if (NewSpell4->IsChildOf(UJavelin::StaticClass())) spell4 = NewObject<UJavelin>(this);
+	else if (NewSpell4->IsChildOf(ULightningBolt::StaticClass())) spell4 = NewObject<ULightningBolt>(this);
+	else if (NewSpell4->IsChildOf(UTeleport::StaticClass())) spell4 = NewObject<UTeleport>(this);
+
+	// TRAIT 1
+	if (NewTrait1->IsChildOf(UAngerManagement::StaticClass())) trait1 = NewObject<UAngerManagement>(this);
+	else if (NewTrait1->IsChildOf(UBerserker::StaticClass())) trait1 = NewObject<UBerserker>(this);
+	else if (NewTrait1->IsChildOf(UHardened::StaticClass())) trait1 = NewObject<UHardened>(this);
+	else if (NewTrait1->IsChildOf(UHotHeaded::StaticClass())) trait1 = NewObject<UHotHeaded>(this);
+
+	// TRAIT 2
+	if (NewTrait2->IsChildOf(UAngerManagement::StaticClass())) trait2 = NewObject<UAngerManagement>(this);
+	else if (NewTrait2->IsChildOf(UBerserker::StaticClass())) trait2 = NewObject<UBerserker>(this);
+	else if (NewTrait2->IsChildOf(UHardened::StaticClass())) trait2 = NewObject<UHardened>(this);
+	else if (NewTrait2->IsChildOf(UHotHeaded::StaticClass())) trait2 = NewObject<UHotHeaded>(this);
+
+	// Blood Vial
+	if (NewBloodVial->IsChildOf(UStandardBloodVial::StaticClass())) bloodVialComponent = NewObject<UStandardBloodVial>(this);
+
+	// REGISTER COMPONENTS
+	AddInstanceComponent(weapon);
+	AddInstanceComponent(spell1);
+	AddInstanceComponent(spell2);
+	AddInstanceComponent(spell3);
+	AddInstanceComponent(spell4);
+	AddInstanceComponent(trait1);
+	AddInstanceComponent(trait2);
+	AddInstanceComponent(bloodVialComponent);
+	
+	weapon->RegisterComponent();
+	spell1->RegisterComponent();
+	spell2->RegisterComponent();
+	spell3->RegisterComponent();
+	spell4->RegisterComponent();
+	trait1->RegisterComponent();
+	trait2->RegisterComponent();
+	bloodVialComponent->RegisterComponent();
+
+}
+
 
 void AHeroCharacter::Zoom(float delta)
 {

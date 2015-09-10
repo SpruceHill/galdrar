@@ -29,6 +29,18 @@ class GALDRAR_API AHeroCharacter : public ABaseCharacter
 public:
 	AHeroCharacter(const FObjectInitializer& ObjectInitializer);
 
+	UFUNCTION(BlueprintCallable, Category = HeroCharacter)
+	void InitializeHero(
+			TSubclassOf<UBaseWeapon> MainWeapon,
+			TSubclassOf<UBaseSpell> NewSpell1,
+			TSubclassOf<UBaseSpell> NewSpell2,
+			TSubclassOf<UBaseSpell> NewSpell3,
+			TSubclassOf<UBaseSpell> NewSpell4,
+			TSubclassOf<UBaseTrait> NewTrait1,
+			TSubclassOf<UBaseTrait> NewTrait2,
+			TSubclassOf<UBloodVialComponent> NewBloodVial
+			);
+
 	/** Returns TopDownCameraComponent subobject **/
 	FORCEINLINE class UCameraComponent* GetTopDownCameraComponent() const { return TopDownCameraComponent; }
 	/** Returns CameraBoom subobject **/
