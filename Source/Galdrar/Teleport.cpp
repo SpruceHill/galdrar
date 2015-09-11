@@ -41,7 +41,7 @@ void UTeleport::ActivateAttack(FVector location, ABaseCharacter* target)
 		FVector end = location;
 		end.Z -= 300;
 		ECollisionChannel CollisionChannel = ECC_WorldStatic;
-		GetWorld()->LineTraceSingle(HitOut, start, end, CollisionChannel, TraceParams);
+		GetWorld()->LineTraceSingleByChannel(HitOut, start, end, CollisionChannel, TraceParams);
 
 		FVector result = HitOut.Location;
 		FVector forward = character->GetActorForwardVector();

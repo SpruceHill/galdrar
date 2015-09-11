@@ -6,7 +6,7 @@
 void ULootSpawner::SpawnLootAtActor(AActor* actor, TSubclassOf<ALoot> loot)
 {
 	FActorSpawnParameters SpawnParameters;
-	SpawnParameters.bNoCollisionFail = true;
+	SpawnParameters.SpawnCollisionHandlingOverride;
 	actor->GetWorld()->SpawnActor<ALoot>(loot, actor->GetActorLocation(), FRotator(0, 0, 0), SpawnParameters);
 }
 
