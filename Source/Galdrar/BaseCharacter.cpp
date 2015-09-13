@@ -147,6 +147,8 @@ void ABaseCharacter::Stun(float duration)
 {
 	if (!bStunned)
 	{
+		OnStunned();
+
 		HUDAdapter HA;
 		HA.CreateDamageIndicator(this, "Stunned", FColor::White, false);
 	}
@@ -154,8 +156,8 @@ void ABaseCharacter::Stun(float duration)
 	if (stunDuration - stunTime < duration)
 	{
 		stunDuration = stunTime + duration;
-		bStunned = true;
 	}
+	bStunned = true;
 }
 
 void ABaseCharacter::Silence(float duration)

@@ -138,6 +138,9 @@ public:
 	UFUNCTION(BlueprintImplementableEvent, Category = BaseCharacter)
 	void AttackAnimation();
 
+	UFUNCTION(BlueprintImplementableEvent, Category = BaseCharacter)
+	void OnStunned();
+
 	UFUNCTION(BlueprintCallable, Category = BaseCharacter)
 	TArray<UActorComponent*> GetActiveEffectComponents();
 
