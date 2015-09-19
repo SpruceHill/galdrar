@@ -71,6 +71,12 @@ void AHeroCharacter::InitializeHero(
 	// WEAPONS
 	if (MainWeapon->IsChildOf(USword::StaticClass())) weapon = NewObject<USword>(this);
 
+	// TODO: SHould work
+	// Read https://wiki.unrealengine.com/Blueprint_Node:_Create_Object_from_Blueprint
+	//spell1 = Cast<UBaseSpell>(NewObject<UObject>(NewSpell1));
+	//spell1 = NewObject<UBaseSpell>(NewSpell1);
+	
+	
 	// SPELL 1
 	if (NewSpell1->IsChildOf(UDragonsBreath::StaticClass())) spell1 = NewObject<UDragonsBreath>(this);
 	else if (NewSpell1->IsChildOf(UGasCloud::StaticClass())) spell1 = NewObject<UGasCloud>(this);
@@ -78,7 +84,7 @@ void AHeroCharacter::InitializeHero(
 	else if (NewSpell1->IsChildOf(UJavelin::StaticClass())) spell1 = NewObject<UJavelin>(this);
 	else if (NewSpell1->IsChildOf(ULightningBolt::StaticClass())) spell1 = NewObject<ULightningBolt>(this);
 	else if (NewSpell1->IsChildOf(UTeleport::StaticClass())) spell1 = NewObject<UTeleport>(this);
-
+	
 	// SPELL 2
 	if (NewSpell2->IsChildOf(UDragonsBreath::StaticClass())) spell2 = NewObject<UDragonsBreath>(this);
 	else if (NewSpell2->IsChildOf(UGasCloud::StaticClass())) spell2 = NewObject<UGasCloud>(this);

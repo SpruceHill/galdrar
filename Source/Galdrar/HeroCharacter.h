@@ -163,5 +163,6 @@ protected:
 	ALoot* inventorySlot5;
 	ALoot* inventorySlot6;
 
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = HeroCharacter)
 	UBloodVialComponent* bloodVialComponent;
 };

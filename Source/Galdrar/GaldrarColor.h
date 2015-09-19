@@ -41,5 +41,4 @@ public:
 	// HEAL
 	UFUNCTION(BlueprintCallable, Category = Color)
 	static FColor GetHealColor();
-
 };
