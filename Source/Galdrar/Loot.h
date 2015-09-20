@@ -36,6 +36,8 @@ public:
 	bool IsStackable();
 	UFUNCTION(BlueprintCallable, Category = Loot)
 	bool IsActivatable();
+	UFUNCTION(BlueprintCallable, Category = Loot)
+	float GetWeight();
 
 protected:
 	UFUNCTION(BlueprintCallable, Category = Loot)
@@ -51,4 +53,7 @@ protected:
 	float time;
 	UPROPERTY(BlueprintReadWrite, Category = Loot)
 	float cooldown;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Armor, meta = (AllowPrivateAccess = "true"))
+	float weight;
 };

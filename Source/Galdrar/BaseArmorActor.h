@@ -22,6 +22,18 @@ namespace EArmorColor
 	};
 }
 
+UENUM(BlueprintType)
+namespace EArmorSlot
+{
+	enum Type
+	{
+		AS_HEAD		UMETA(DisplayName = "Head"),
+		AS_CHEST	UMETA(DisplayName = "Chest"),
+		AC_HANDS	UMETA(DisplayName = "Hands"),
+		AC_FEET		UMETA(DisplayName = "Feet"),
+	};
+}
+
 UCLASS()
 class GALDRAR_API ABaseArmorActor : public AActor
 {
@@ -40,6 +52,13 @@ public:
 	// Called every frame
 	virtual void Tick( float DeltaSeconds ) override;
 
+protected:
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Armor, meta = (AllowPrivateAccess = "true"))
+	TEnumAsByte<EArmorSlot::Type> armorSlot;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Armor, meta = (AllowPrivateAccess = "true"))
+	bool isSlave;
 	
-	
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Armor, meta = (AllowPrivateAccess = "true"))
+	float weight;
 };

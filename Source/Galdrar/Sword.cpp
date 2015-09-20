@@ -14,7 +14,7 @@ USword::USword()
 	cooldown = 1.f;
 	bDoesDamage = true;
 
-	weight = 1.f;
+	weight = 20.f;
 	kills = 0;
 	twoHanded = false;
 

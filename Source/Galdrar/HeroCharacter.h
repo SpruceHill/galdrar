@@ -85,6 +85,7 @@ public:
 		{
 			inventorySlot6 = loot;
 		}
+		stats->movementSpeed -= loot->GetWeight();
 		loot->OnPickup();
 	}
 
@@ -132,6 +133,7 @@ public:
 			inventorySlot6->MarkPendingKill();
 			inventorySlot6 = NULL;
 		}
+		stats->movementSpeed += loot->GetWeight();
 	}
 
 	UFUNCTION(BlueprintCallable, Category = Loot)

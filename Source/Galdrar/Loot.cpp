@@ -44,3 +44,4 @@ int32 ALoot::GetID() { return ID; }
 
 bool ALoot::IsStackable(){ return bStackable; }
 bool ALoot::IsActivatable(){ return bActivatable; }
+float ALoot::GetWeight(){ return weight; }
