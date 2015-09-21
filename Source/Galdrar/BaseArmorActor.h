@@ -29,8 +29,9 @@ namespace EArmorSlot
 	{
 		AS_HEAD		UMETA(DisplayName = "Head"),
 		AS_CHEST	UMETA(DisplayName = "Chest"),
-		AC_HANDS	UMETA(DisplayName = "Hands"),
-		AC_FEET		UMETA(DisplayName = "Feet"),
+		AS_HANDS	UMETA(DisplayName = "Hands"),
+		AS_FEET		UMETA(DisplayName = "Feet"),
+		AS_SHIELD	UMETA(DisplayName = "Shield"),
 	};
 }
 
