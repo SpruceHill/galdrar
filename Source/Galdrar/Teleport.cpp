@@ -18,7 +18,7 @@ UTeleport::UTeleport()
 	damage = 10.f;
 	cooldown = 2.f;
 	time = 0.f;
-	damageType = EGaldrarDamageType::PHYSICAL;
+	damageType = EGaldrarDamageType::NONE;
 	range = 600.f;
 
 	// 2 = Spell, ID = 0006

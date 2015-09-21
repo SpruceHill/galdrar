@@ -12,6 +12,7 @@ FColor UGaldrarColor::GetDamageTypeColor(EGaldrarDamageType type)
 	case EGaldrarDamageType::SHOCK: return GetShockColor();
 	case EGaldrarDamageType::POISON: return GetPoisonColor();
 	case EGaldrarDamageType::PHYSICAL: return GetPhysicalColor();
+	case EGaldrarDamageType::NONE: return GetTrueDamageColor();
 	default: return FColor::Black;
 	}
 }
@@ -51,7 +52,7 @@ FColor UGaldrarColor::GetPhysicalColor()
 }
 FColor UGaldrarColor::GetTrueDamageColor()
 {
-	return FColor::White;
+	return FColor::FromHex("FEE20EFF");
 }
 
 // GOLD
