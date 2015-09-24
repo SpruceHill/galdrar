@@ -325,3 +325,9 @@ TArray<UActorComponent*> ABaseCharacter::GetActiveEffectComponents()
 {
 	return GetComponentsByClass(UBaseEffectComponent::StaticClass());
 }
+
+void ABaseCharacter::MissedAttack()
+{
+	HUDAdapter HA;
+	HA.CreateDamageIndicator(this, "Miss", FColor::White, false);
+}

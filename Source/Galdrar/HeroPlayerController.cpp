@@ -311,14 +311,28 @@ void AHeroPlayerController::AttackEnemy(ABaseCharacter* character, UAttackCompon
 			}
 		}
 
-		FaceActor(character);
-		hero->AttackAnimation();
-		UCombatFunctionLibrary::AttackEnemy(hero, character, attack);
-		attack->ActivateAttack(FVector::ZeroVector, character);
+		// Cooldown
+		if (!attack->IsOnCoolDown())
+		{
 
-		targetCharacter = NULL;
-		primedAttack = NULL;
-		scheduledAttack = NULL;
+			FaceActor(character);
+			hero->AttackAnimation();
+
+			cacheHero = hero;
+			cacheTarget = character;
+			cacheAttack = attack;
+
+			FTimerHandle UniqueHandle;
+			FTimerDelegate RespawnDelegate = FTimerDelegate::CreateUObject(this, &AHeroPlayerController::AttackDelay);
+			GetWorldTimerManager().SetTimer(UniqueHandle, RespawnDelegate, attack->GetNextAttackDelay(), false);
+
+			//UCombatFunctionLibrary::AttackEnemy(hero, character, attack);
+			attack->ActivateAttack(FVector::ZeroVector, character);
+
+			targetCharacter = NULL;
+			primedAttack = NULL;
+			scheduledAttack = NULL;
+		}
 	}
 	else // Not in range
 	{
@@ -337,8 +351,19 @@ void AHeroPlayerController::AttackEnemy(ABaseCharacter* character, UAttackCompon
 	}
 }
 
+void AHeroPlayerController::AttackDelay()
+{
+	UCombatFunctionLibrary::AttackEnemy(cacheHero, cacheTarget, cacheAttack);
+}
+
 void AHeroPlayerController::AttackGround(FVector location, UAttackComponent* attack)
 {
+	if (!attack)
+	{
+		GEngine->AddOnScreenDebugMessage(-1, 15.0f, FColor::Red, "PlayerController::AttackGround ATTACK IS NULL");
+		return;
+	}
+
 	AHeroCharacter* hero = Cast<AHeroCharacter>(GetPawn());
 	if (FVector::Dist(hero->GetActorLocation(), location) < attack->GetRange())
 	{

@@ -129,6 +129,9 @@ public:
 	UFUNCTION(BlueprintCallable, Category = BaseCharacter)
 	bool IsSilenced();
 
+	UFUNCTION(BlueprintCallable, Category = BaseCharacter)
+	void MissedAttack();
+
 	UFUNCTION(BlueprintImplementableEvent, BlueprintCallable, Category = BaseCharacter)
 	void OnTakeDamage(EGaldrarDamageType type);
 

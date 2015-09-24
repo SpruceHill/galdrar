@@ -20,6 +20,11 @@ USword::USword()
 
 	// 1 = Weapon, ID 0001
 	ID = 10001;
+
+	animationAttackDelay.Add(0.3f);
+	animationAttackDelay.Add(0.2f);
+	animationAttackDelay.Add(0.2f);
+	animationAttackDelay.Add(0.3f);
 }
 
 

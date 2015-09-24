@@ -76,6 +76,9 @@ public:
 	UFUNCTION(BlueprintCallable, Category = Attack)
 	float GetID();
 
+	UFUNCTION(BlueprintCallable, Category = Weapon)
+	float GetNextAttackDelay();
+
 protected:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Attack)
 	bool bDoesDamage;
@@ -115,4 +118,10 @@ protected:
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Attack)
 	float ID;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Armor, meta = (AllowPrivateAccess = "true"))
+	TArray<float> animationAttackDelay;
+
+private:
+	int8 animationIndex = 0;
 };

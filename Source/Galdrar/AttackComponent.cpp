@@ -75,3 +75,10 @@ float UAttackComponent::GetCooldown(){ return cooldown; }
 bool UAttackComponent::DoesDamage(){ return bDoesDamage; }
 
 float UAttackComponent::GetID(){ return ID; }
+
+float UAttackComponent::GetNextAttackDelay()
+{
+	animationIndex++;
+	if (animationIndex >= animationAttackDelay.Num()) animationIndex = 0;
+	return animationAttackDelay[animationIndex];
+}

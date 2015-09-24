@@ -99,4 +99,9 @@ private:
 	void FaceActor(AActor* actorToFace);
 	void FaceLocation(FVector location);
 
+	void AttackDelay();
+	AHeroCharacter* cacheHero;
+	ABaseCharacter* cacheTarget;
+	UAttackComponent* cacheAttack;
+
 };

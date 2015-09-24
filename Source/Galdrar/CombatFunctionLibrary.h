@@ -24,7 +24,4 @@ public:
 private:
 	// Degrees behind the player which will allow for backstabs (times 2)
 	static const uint8 backStabDegree = 45;
-	
-	
-	
 };

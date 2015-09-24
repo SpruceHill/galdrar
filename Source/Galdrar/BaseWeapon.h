@@ -19,7 +19,7 @@ public:
 	int32 GetKills();
 	UFUNCTION(BlueprintCallable, Category = Weapon)
 	bool IsTwoHanded();
-	
+
 protected:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Weapon)
 	float weight;
