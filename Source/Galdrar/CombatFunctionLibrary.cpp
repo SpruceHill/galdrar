@@ -19,6 +19,7 @@ float UCombatFunctionLibrary::CalcDamage(float damage, float resistance, float c
 
 void UCombatFunctionLibrary::AttackEnemy(ABaseCharacter* attacker, ABaseCharacter* defender, UAttackComponent* attack)
 {
+
 	// Spells should not be affected
 	if (UBaseWeapon* weapon = dynamic_cast<UBaseWeapon*>(attack))
 	{
@@ -27,9 +28,8 @@ void UCombatFunctionLibrary::AttackEnemy(ABaseCharacter* attacker, ABaseCharacte
 		float angle = FMath::Acos(FVector::DotProduct(attacker->GetActorForwardVector(), tmp));
 
 		// Attacker will miss if target has moved away or shifted to a position to the side or behind the attacker.
-		// 0 == Right infront, 3 == Right behind. These values are strange but they work.
-		if (attacker->GetDistanceTo(defender) > attack->GetRange() ||
-			(angle > 1.5f))
+		// 0 == Right infront, 3.1415... (PI) == Right behind.
+		if (attacker->GetDistanceTo(defender) > attack->GetRange() || (angle > 1.3f))
 		{
 			attacker->MissedAttack();
 			return;
