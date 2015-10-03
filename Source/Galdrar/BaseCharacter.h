@@ -142,6 +142,9 @@ public:
 	void AttackAnimation();
 
 	UFUNCTION(BlueprintImplementableEvent, Category = BaseCharacter)
+	void OnSpellCast(bool directional);
+
+	UFUNCTION(BlueprintImplementableEvent, Category = BaseCharacter)
 	void OnStunned();
 
 	UFUNCTION(BlueprintCallable, Category = BaseCharacter)

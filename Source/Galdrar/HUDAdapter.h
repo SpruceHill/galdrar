@@ -16,6 +16,8 @@ public:
 	
 	void CreateDamageIndicator(ABaseCharacter* character, const FString& text, FColor indicatorColor, bool crit);
 
+	void CreateCharacterTextPopup(ABaseCharacter* character, const FString& text, FColor indicatorColor);
+
 	void Toast(const FString& text);
 
 	static void SetHUD(AGaldrarHUD* hud);

@@ -21,6 +21,9 @@ public:
 	UFUNCTION(BlueprintImplementableEvent, BlueprintCallable, Category = "Damage")
 	void CreateDamageIndicator(ABaseCharacter* character, const FString& text, FColor indicatorColor, bool crit);
 
+	UFUNCTION(BlueprintImplementableEvent, BlueprintCallable, Category = "Text")
+	void CreateCharacterTextPopup(ABaseCharacter* character, const FString& text, FColor indicatorColor);
+
 	UFUNCTION(BlueprintImplementableEvent, BlueprintCallable, Category = "Spells")
 	void CreateAOECircle(ABaseCharacter* character, float radius, FColor damageTypeColor);
 

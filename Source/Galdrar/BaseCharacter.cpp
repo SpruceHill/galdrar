@@ -150,7 +150,7 @@ void ABaseCharacter::Stun(float duration)
 		OnStunned();
 
 		HUDAdapter HA;
-		HA.CreateDamageIndicator(this, "Stunned", FColor::White, false);
+		HA.CreateCharacterTextPopup(this, "Stunned", FColor::White);
 	}
 	// Extend stun time if new stun is applied
 	if (stunDuration - stunTime < duration)
@@ -165,7 +165,7 @@ void ABaseCharacter::Silence(float duration)
 	if (!bSilenced)
 	{
 		HUDAdapter HA;
-		HA.CreateDamageIndicator(this, "Silenced", FColor::White, false);
+		HA.CreateCharacterTextPopup(this, "Silenced", FColor::White);
 	}
 	// Extend silence time if new silence is applied
 	if (silenceDuration - silenceTime < duration)
@@ -185,7 +185,7 @@ void ABaseCharacter::AddEffect(TSubclassOf<UBaseEffectComponent> effectType)
 		/ 100.f))) < 1)
 	{
 		HUDAdapter HA;
-		HA.CreateDamageIndicator(this, "Resisted", UGaldrarColor::GetDamageTypeColor(effectType.GetDefaultObject()->GetDamageType()), false);
+		HA.CreateCharacterTextPopup(this, "Resisted", UGaldrarColor::GetDamageTypeColor(effectType.GetDefaultObject()->GetDamageType()));
 		return;
 	}
 
@@ -329,5 +329,5 @@ TArray<UActorComponent*> ABaseCharacter::GetActiveEffectComponents()
 void ABaseCharacter::MissedAttack()
 {
 	HUDAdapter HA;
-	HA.CreateDamageIndicator(this, "Miss", FColor::White, false);
+	HA.CreateCharacterTextPopup(this, "Miss", FColor::White);
 }

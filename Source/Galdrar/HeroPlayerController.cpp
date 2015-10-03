@@ -281,8 +281,8 @@ void AHeroPlayerController::AttackEnemy(ABaseCharacter* character, UAttackCompon
 	AHeroCharacter* hero = Cast<AHeroCharacter>(GetPawn());
 	if (hero->GetDistanceTo(character) < attack->GetRange())
 	{
-		// Stop moving (HACK)
-		SetNewMoveDestination(hero->GetActorLocation());
+		// Stop moving
+		hero->GetMovementComponent()->StopMovementImmediately();
 
 		// Double check if mana or rage still is high enough to use spell
 		if (UBaseSpell* spell = dynamic_cast<UBaseSpell*>(attack))
@@ -314,7 +314,6 @@ void AHeroPlayerController::AttackEnemy(ABaseCharacter* character, UAttackCompon
 		// Cooldown
 		if (!attack->IsOnCoolDown())
 		{
-
 			FaceActor(character);
 			hero->AttackAnimation();
 
@@ -324,9 +323,9 @@ void AHeroPlayerController::AttackEnemy(ABaseCharacter* character, UAttackCompon
 
 			FTimerHandle UniqueHandle;
 			FTimerDelegate RespawnDelegate = FTimerDelegate::CreateUObject(this, &AHeroPlayerController::AttackDelay);
-			GetWorldTimerManager().SetTimer(UniqueHandle, RespawnDelegate, attack->GetNextAttackDelay(), false);
+			GetWorldTimerManager().SetTimer(UniqueHandle, RespawnDelegate, attack->GetNextAttackDelay() / attack->GetAttackSpeed(), false);
 
-			//UCombatFunctionLibrary::AttackEnemy(hero, character, attack);
+			// Put on cooldown
 			attack->ActivateAttack(FVector::ZeroVector, character);
 
 			targetCharacter = NULL;
@@ -367,8 +366,8 @@ void AHeroPlayerController::AttackGround(FVector location, UAttackComponent* att
 	AHeroCharacter* hero = Cast<AHeroCharacter>(GetPawn());
 	if (FVector::Dist(hero->GetActorLocation(), location) < attack->GetRange())
 	{
-		// Stop moving (HACK)
-		SetNewMoveDestination(hero->GetActorLocation());
+		// Stop moving
+		hero->GetMovementComponent()->StopMovementImmediately();
 
 		// Double check if mana or rage still is high enough to use spell
 		if (UBaseSpell* spell = dynamic_cast<UBaseSpell*>(attack))
@@ -393,6 +392,8 @@ void AHeroPlayerController::AttackGround(FVector location, UAttackComponent* att
 					return;
 				}
 			}
+
+			hero->OnSpellCast(spell->GetSpellTarget() == ESpellTarget::CONE);
 		}
 
 		FaceLocation(location);
@@ -594,6 +595,7 @@ void AHeroPlayerController::Spell(int8 index)
 		break;
 
 	case EActivation::SELF :
+		hero->OnSpellCast(false);
 		hero->GetSpell(index)->ActivateAttack(FVector::ZeroVector, hero);
 		groundTarget = FVector::ZeroVector;
 		break;
