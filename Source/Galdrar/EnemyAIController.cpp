@@ -37,6 +37,11 @@ void AEnemyAIController::SetEnemy(class APawn* inPawn)
 {
 	blackboardComp->SetValue<UBlackboardKeyType_Object>(enemyKeyID, inPawn);
 	blackboardComp->SetValue<UBlackboardKeyType_Vector>(enemyLocationID, inPawn->GetActorLocation());
+
+	// Rotate attacker towards the target
+	FVector newLookAt = inPawn->GetActorLocation().operator-=(GetPawn()->GetActorLocation());
+	newLookAt.Z = 1; // Make sure character is always upright (attacking on stairs etc.)
+	GetPawn()->SetActorRotation(newLookAt.Rotation());
 }
 
 void AEnemyAIController::SearchForEnemy()
@@ -65,5 +70,36 @@ void AEnemyAIController::SearchForEnemy()
 	if (bestPawn)
 	{
 		SetEnemy(bestPawn);
+		bot->GetStats()->movementSpeed = bot->GetStats()->defaultMovementSpeed; // TODO FIX
+	}
+}
+
+void AEnemyAIController::WalkRandomly()
+{
+	// Don't assign a new place to walk if the pawn is already in motion
+	if (GetPawn()->GetMovementComponent()->Velocity.Size() > 20) return;
+	
+	AEnemyCharacter* EnemyCharacter = Cast<AEnemyCharacter>(GetPawn());
+	EnemyCharacter->GetStats()->movementSpeed = 150; // TODO let each BaseCharacter decide its walk speed. (Adjust maxmovementspeed)
+
+	int32 DeltaX = FMath::RandRange(-500, 500);
+	int32 DeltaY = FMath::RandRange(-500, 500);
+	
+	const FVector DestLocation = FVector(
+		EnemyCharacter->GetActorLocation().X + DeltaX, 
+		EnemyCharacter->GetActorLocation().Y + DeltaY, 
+		EnemyCharacter->GetActorLocation().Z
+		);
+	
+	if (EnemyCharacter)
+	{
+		UNavigationSystem* const NavSys = GetWorld()->GetNavigationSystem();
+		float const Distance = FVector::Dist(DestLocation, EnemyCharacter->GetActorLocation());
+
+		// Walk if far enough or ordered stand still (HACK)
+		if (NavSys && ((Distance > 120.0f) || DestLocation == EnemyCharacter->GetActorLocation()))
+		{
+			NavSys->SimpleMoveToLocation(this, DestLocation);
+		}
 	}
 }

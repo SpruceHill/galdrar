@@ -31,6 +31,9 @@ public:
 	UFUNCTION(BlueprintCallable, Category = Behavior)
 	void SearchForEnemy();
 
+	UFUNCTION(BlueprintCallable, Category = Behavior)
+	void WalkRandomly();
+
 protected:
 	uint8 enemyKeyID;
 	uint8 enemyLocationID;

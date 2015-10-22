@@ -147,6 +147,8 @@ void ABaseCharacter::Stun(float duration)
 {
 	if (!bStunned)
 	{
+		GetMovementComponent()->StopMovementImmediately();
+
 		OnStunned();
 
 		HUDAdapter HA;
