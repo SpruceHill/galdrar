@@ -8,6 +8,8 @@
 #include "BehaviorTree/Blackboard/BlackboardKeyType_Vector.h"
 #include "BehaviorTree/Blackboard/BlackboardKeyType_Bool.h"
 #include "BehaviorTree/BlackboardComponent.h"
+#include "AIDeterrentFilter.h"
+#include "AIBlockFilter.h"
 
 AEnemyAIController::AEnemyAIController(const FObjectInitializer& ObjectInitializer)
 	: Super(ObjectInitializer)
@@ -62,8 +64,11 @@ void AEnemyAIController::SearchForEnemy()
 			const float distanceSquared = FVector::Dist(testPawn->GetActorLocation(), location);
 			if (distanceSquared < bestDistanceSquared && distanceSquared < aggroDistance)
 			{
-				bestDistanceSquared = distanceSquared;
-				bestPawn = testPawn;
+				if (LineOfSightTo(testPawn))
+				{
+					bestDistanceSquared = distanceSquared;
+					bestPawn = testPawn;
+				}
 			}
 		}
 	}
@@ -96,10 +101,21 @@ void AEnemyAIController::WalkRandomly()
 		UNavigationSystem* const NavSys = GetWorld()->GetNavigationSystem();
 		float const Distance = FVector::Dist(DestLocation, EnemyCharacter->GetActorLocation());
 
+		FVector Distance2 = NavSys->GetRandomPointInNavigableRadius
+			(
+			GetWorld(),
+			EnemyCharacter->GetActorLocation(),
+			500,
+			NULL,
+			UAIBlockFilter::StaticClass()
+			);
+
+
 		// Walk if far enough or ordered stand still (HACK)
 		if (NavSys && ((Distance > 120.0f) || DestLocation == EnemyCharacter->GetActorLocation()))
 		{
-			NavSys->SimpleMoveToLocation(this, DestLocation);
+			MoveToLocation(DestLocation, 50.f, true, true, true, false, UAIBlockFilter::StaticClass(), true);
+			//NavSys->SimpleMoveToLocation(this, Distance2);
 		}
 	}
 }
