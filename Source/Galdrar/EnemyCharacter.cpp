@@ -22,6 +22,9 @@ AEnemyCharacter::AEnemyCharacter(const FObjectInitializer& ObjectInitializer)
 	CursorHitbox = CreateDefaultSubobject<UCapsuleComponent>(TEXT("CursorHitbox"));
 	CursorHitbox->SetCollisionProfileName(TEXT("UI"));
 	CursorHitbox->AttachParent = RootComponent;
+
+	GetCharacterMovement()->MaxWalkSpeedCrouched = 100.f;
+	GetCharacterMovement()->GetNavAgentPropertiesRef().bCanCrouch = true;
 }
 
 int32 AEnemyCharacter::GetLevel()
@@ -32,4 +35,9 @@ int32 AEnemyCharacter::GetLevel()
 void AEnemyCharacter::SetLevel(int32 newLevel)
 {
 	level = newLevel;
+}
+
+void AEnemyCharacter::ShouldWalk(bool shouldWalk)
+{
+	GetCharacterMovement()->bWantsToCrouch = shouldWalk;
 }

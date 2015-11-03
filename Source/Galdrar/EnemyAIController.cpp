@@ -53,7 +53,7 @@ void AEnemyAIController::SetEnemy(class APawn* inPawn)
 
 void AEnemyAIController::SearchForEnemy()
 {
-	ABaseCharacter* bot = Cast<ABaseCharacter>(GetPawn());
+	AEnemyCharacter* bot = Cast<AEnemyCharacter>(GetPawn());
 	if (bot == NULL) { GEngine->AddOnScreenDebugMessage(-1, 15.0f, FColor::Blue, "BOT NULL"); return; }
 
 	const FVector location = bot->GetActorLocation();
@@ -80,7 +80,7 @@ void AEnemyAIController::SearchForEnemy()
 	if (bestPawn)
 	{
 		SetEnemy(bestPawn);
-		bot->GetStats()->movementSpeed = bot->GetStats()->defaultMovementSpeed; // TODO FIX
+		bot->ShouldWalk(false);
 	}
 }
 
@@ -90,21 +90,10 @@ void AEnemyAIController::WalkRandomly()
 	if (GetPawn()->GetMovementComponent()->Velocity.Size() > 20) return;
 	
 	AEnemyCharacter* EnemyCharacter = Cast<AEnemyCharacter>(GetPawn());
-	EnemyCharacter->GetStats()->movementSpeed = 150; // TODO let each BaseCharacter decide its walk speed. (Adjust maxmovementspeed)
 
-	int32 DeltaX = FMath::RandRange(-500, 500);
-	int32 DeltaY = FMath::RandRange(-500, 500);
-	
-	const FVector DestLocation = FVector(
-		EnemyCharacter->GetActorLocation().X + DeltaX, 
-		EnemyCharacter->GetActorLocation().Y + DeltaY, 
-		EnemyCharacter->GetActorLocation().Z
-		);
-	
 	if (EnemyCharacter)
 	{
 		UNavigationSystem* const NavSys = GetWorld()->GetNavigationSystem();
-		float const Distance = FVector::Dist(DestLocation, EnemyCharacter->GetActorLocation());
 
 		FVector randomNavPoint = NavSys->GetRandomPointInNavigableRadius
 			(
@@ -115,18 +104,11 @@ void AEnemyAIController::WalkRandomly()
 			UAIBlockFilter::StaticClass()
 			);
 
+		// Don't take too small steps, allow animation to play out
 		if (NavSys && FVector::Dist(EnemyCharacter->GetActorLocation(), randomNavPoint) > 120.0f)
-			MoveToLocation(randomNavPoint, 50.f, true, true, true, false, UAIBlockFilter::StaticClass(), true);
-
-		/*
-
-		// Walk if far enough or ordered stand still (HACK)
-		if (NavSys && ((Distance > 120.0f) || DestLocation == EnemyCharacter->GetActorLocation()))
 		{
-			MoveToLocation(DestLocation, 50.f, true, true, true, false, UAIBlockFilter::StaticClass(), true);
-			//NavSys->SimpleMoveToLocation(this, Distance2);
+			EnemyCharacter->ShouldWalk(true);
+			MoveToLocation(randomNavPoint, 50.f, true, true, true, false, UAIBlockFilter::StaticClass(), true);
 		}
-
-		*/
 	}
 }
