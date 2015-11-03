@@ -16,6 +16,9 @@ AEnemyAIController::AEnemyAIController(const FObjectInitializer& ObjectInitializ
 {
 	blackboardComp = CreateDefaultSubobject<UBlackboardComponent>(TEXT("BlackboardComp"));
 	behaviorTreeComp = CreateDefaultSubobject<UBehaviorTreeComponent>(TEXT("BehaviorTreeComp"));
+
+	aggroDistance = 400.f;
+	maxWalkRadius = 600.f;
 }
 
 void AEnemyAIController::Possess(class APawn* inPawn)
@@ -32,6 +35,8 @@ void AEnemyAIController::Possess(class APawn* inPawn)
 		enemyLocationID = blackboardComp->GetKeyID("Destination");
 
 		behaviorTreeComp->StartTree(*(bot->botBehavior));
+
+		pawnOrigin = bot->GetActorLocation();
 	}
 }
 
@@ -101,15 +106,19 @@ void AEnemyAIController::WalkRandomly()
 		UNavigationSystem* const NavSys = GetWorld()->GetNavigationSystem();
 		float const Distance = FVector::Dist(DestLocation, EnemyCharacter->GetActorLocation());
 
-		FVector Distance2 = NavSys->GetRandomPointInNavigableRadius
+		FVector randomNavPoint = NavSys->GetRandomPointInNavigableRadius
 			(
 			GetWorld(),
-			EnemyCharacter->GetActorLocation(),
-			500,
+			pawnOrigin,
+			maxWalkRadius,
 			NULL,
 			UAIBlockFilter::StaticClass()
 			);
 
+		if (NavSys && FVector::Dist(EnemyCharacter->GetActorLocation(), randomNavPoint) > 120.0f)
+			MoveToLocation(randomNavPoint, 50.f, true, true, true, false, UAIBlockFilter::StaticClass(), true);
+
+		/*
 
 		// Walk if far enough or ordered stand still (HACK)
 		if (NavSys && ((Distance > 120.0f) || DestLocation == EnemyCharacter->GetActorLocation()))
@@ -117,5 +126,7 @@ void AEnemyAIController::WalkRandomly()
 			MoveToLocation(DestLocation, 50.f, true, true, true, false, UAIBlockFilter::StaticClass(), true);
 			//NavSys->SimpleMoveToLocation(this, Distance2);
 		}
+
+		*/
 	}
 }

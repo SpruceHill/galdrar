@@ -38,8 +38,11 @@ protected:
 	uint8 enemyKeyID;
 	uint8 enemyLocationID;
 
-	float aggroDistance = 400.f;
+	float aggroDistance;
 
 	AEnemyCharacter* persistantPawn;
 	bool bIsPossessing;
+
+	FVector pawnOrigin;
+	float maxWalkRadius;
 };
