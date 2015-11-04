@@ -57,7 +57,7 @@ void AEnemyAIController::SearchForEnemy()
 	if (bot == NULL) { GEngine->AddOnScreenDebugMessage(-1, 15.0f, FColor::Blue, "BOT NULL"); return; }
 
 	const FVector location = bot->GetActorLocation();
-	float bestDistanceSquared = MAX_FLT;
+	float bestDistanceSquared = aggroDistance;
 	
 	// Find the hero closest to this enemy
 	AHeroCharacter* bestPawn = NULL;
@@ -67,13 +67,11 @@ void AEnemyAIController::SearchForEnemy()
 		if (testPawn)
 		{
 			const float distanceSquared = FVector::Dist(testPawn->GetActorLocation(), location);
-			if (distanceSquared < bestDistanceSquared && distanceSquared < aggroDistance)
+
+			if (distanceSquared < bestDistanceSquared && LineOfSightTo(testPawn))
 			{
-				if (LineOfSightTo(testPawn))
-				{
-					bestDistanceSquared = distanceSquared;
-					bestPawn = testPawn;
-				}
+				bestDistanceSquared = distanceSquared;
+				bestPawn = testPawn;
 			}
 		}
 	}
@@ -89,9 +87,7 @@ void AEnemyAIController::WalkRandomly()
 	// Don't assign a new place to walk if the pawn is already in motion
 	if (GetPawn()->GetMovementComponent()->Velocity.Size() > 20) return;
 	
-	AEnemyCharacter* EnemyCharacter = Cast<AEnemyCharacter>(GetPawn());
-
-	if (EnemyCharacter)
+	if (AEnemyCharacter* EnemyCharacter = dynamic_cast<AEnemyCharacter*>(GetPawn()))
 	{
 		UNavigationSystem* const NavSys = GetWorld()->GetNavigationSystem();
 

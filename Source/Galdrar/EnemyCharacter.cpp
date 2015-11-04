@@ -25,6 +25,7 @@ AEnemyCharacter::AEnemyCharacter(const FObjectInitializer& ObjectInitializer)
 
 	GetCharacterMovement()->MaxWalkSpeedCrouched = 100.f;
 	GetCharacterMovement()->GetNavAgentPropertiesRef().bCanCrouch = true;
+	GetCharacterMovement()->CrouchedHalfHeight = GetCapsuleComponent()->GetUnscaledCapsuleHalfHeight();
 }
 
 int32 AEnemyCharacter::GetLevel()
