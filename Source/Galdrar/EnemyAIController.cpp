@@ -66,7 +66,7 @@ void AEnemyAIController::SearchForEnemy()
 	for (FConstPawnIterator it = GetWorld()->GetPawnIterator(); it; ++it)
 	{
 		AHeroCharacter* testPawn = Cast<AHeroCharacter>(*it);
-		if (testPawn)
+		if (testPawn && testPawn->IsAlive())
 		{
 			const float distanceSquared = FVector::Dist(testPawn->GetActorLocation(), location);
 
@@ -116,17 +116,20 @@ void AEnemyAIController::Attack()
 	UObject* uo = blackboardComp->GetValue<UBlackboardKeyType_Object>(enemyKeyID);
 	if (AHeroCharacter* hero = dynamic_cast<AHeroCharacter*>(uo))
 	{
-		AEnemyCharacter* bot = Cast<AEnemyCharacter>(GetPawn());
-		
-		if (bot->GetDistanceTo(hero) < bot->GetWeapon()->GetRange() && !bot->GetWeapon()->IsOnCoolDown())
+		if (hero->IsAlive())
 		{
-			bot->AttackAnimation();
+			AEnemyCharacter* bot = Cast<AEnemyCharacter>(GetPawn());
 
-			FTimerHandle UniqueHandle;
-			FTimerDelegate RespawnDelegate = FTimerDelegate::CreateUObject(this, &AEnemyAIController::AttackDelay);
-			GetWorldTimerManager().SetTimer(UniqueHandle, RespawnDelegate, bot->GetWeapon()->GetNextAttackDelay() / bot->GetWeapon()->GetAttackSpeed(), false);
+			if (bot->GetDistanceTo(hero) < bot->GetWeapon()->GetRange() && !bot->GetWeapon()->IsOnCoolDown())
+			{
+				bot->AttackAnimation();
 
-			bot->GetWeapon()->ActivateAttack(FVector::ZeroVector, hero);
+				FTimerHandle UniqueHandle;
+				FTimerDelegate RespawnDelegate = FTimerDelegate::CreateUObject(this, &AEnemyAIController::AttackDelay);
+				GetWorldTimerManager().SetTimer(UniqueHandle, RespawnDelegate, bot->GetWeapon()->GetNextAttackDelay() / bot->GetWeapon()->GetAttackSpeed(), false);
+
+				bot->GetWeapon()->ActivateAttack(FVector::ZeroVector, hero);
+			}
 		}
 	}
 }
@@ -138,5 +141,9 @@ void AEnemyAIController::AttackDelay()
 	if (AHeroCharacter* hero = dynamic_cast<AHeroCharacter*>(uo))
 	{
 		UCombatFunctionLibrary::AttackEnemy(bot, hero, bot->GetWeapon());
+		if (!hero->IsAlive())
+		{
+			blackboardComp->ClearValue("Enemy");
+		}
 	}
 }

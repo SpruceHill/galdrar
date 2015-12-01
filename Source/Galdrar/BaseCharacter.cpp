@@ -85,6 +85,7 @@ void ABaseCharacter::Wound(int32 amount, EGaldrarDamageType type, bool crit)
 		DisableInput(Cast<APlayerController>(GetController()));
 		OnDeath();
 
+		// Destroy all active effects
 		for (UActorComponent* ac : GetActiveEffectComponents())
 		{
 			ac->MarkPendingKill();
@@ -232,6 +233,11 @@ void ABaseCharacter::RemoveEffectRenderState(EEffectRenderState::Type renderStat
 	{
 		DestroyRenderEffect(renderState);
 	}
+}
+
+bool ABaseCharacter::IsAlive()
+{
+	return stats->health > 0;
 }
 
 float ABaseCharacter::GetHealth()

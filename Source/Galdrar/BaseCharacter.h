@@ -91,6 +91,9 @@ public:
 	void Silence(float duration);
 
 	UFUNCTION(BlueprintCallable, Category = Stat)
+	bool IsAlive();
+
+	UFUNCTION(BlueprintCallable, Category = Stat)
 	float GetHealth();
 	UFUNCTION(BlueprintCallable, Category = Stat)
 	float GetMaxHealth();
