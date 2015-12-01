@@ -131,6 +131,10 @@ void AEnemyAIController::Attack()
 				bot->GetWeapon()->ActivateAttack(FVector::ZeroVector, hero);
 			}
 		}
+		else
+		{
+			blackboardComp->ClearValue("Enemy");
+		}
 	}
 }
 
