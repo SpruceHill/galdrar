@@ -4,6 +4,7 @@
 #include "EnemyCharacter.h"
 #include "EnemyAIController.h"
 #include "BaseCharacter.h"
+#include "BotWeapon.h"
 
 AEnemyCharacter::AEnemyCharacter(const FObjectInitializer& ObjectInitializer)
 	: Super(ObjectInitializer)
@@ -12,6 +13,7 @@ AEnemyCharacter::AEnemyCharacter(const FObjectInitializer& ObjectInitializer)
 	level = 1;
 	stats = CreateDefaultSubobject<UCharacterStatsComponent>(TEXT("Stats"));
 	this->GetMesh()->bReceivesDecals = false;
+	weapon = CreateDefaultSubobject<UBotWeapon>(TEXT("Weapon"));
 	
 	AIControllerClass = AEnemyAIController::StaticClass();
 

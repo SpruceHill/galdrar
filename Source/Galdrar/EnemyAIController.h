@@ -34,15 +34,22 @@ public:
 	UFUNCTION(BlueprintCallable, Category = Behavior)
 	void WalkRandomly();
 
+	UFUNCTION(BlueprintCallable, Category = Behavior)
+	void Attack();
+
 protected:
 	uint8 enemyKeyID;
 	uint8 enemyLocationID;
 
 	float aggroDistance;
+	float loseTrackDistance;
 
 	AEnemyCharacter* persistantPawn;
 	bool bIsPossessing;
 
 	FVector pawnOrigin;
 	float maxWalkRadius;
+
+private:
+	void AttackDelay();
 };

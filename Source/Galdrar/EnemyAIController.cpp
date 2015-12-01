@@ -10,6 +10,7 @@
 #include "BehaviorTree/BlackboardComponent.h"
 #include "AIDeterrentFilter.h"
 #include "AIBlockFilter.h"
+#include "CombatFunctionLibrary.h"
 
 AEnemyAIController::AEnemyAIController(const FObjectInitializer& ObjectInitializer)
 	: Super(ObjectInitializer)
@@ -18,6 +19,7 @@ AEnemyAIController::AEnemyAIController(const FObjectInitializer& ObjectInitializ
 	behaviorTreeComp = CreateDefaultSubobject<UBehaviorTreeComponent>(TEXT("BehaviorTreeComp"));
 
 	aggroDistance = 400.f;
+	loseTrackDistance = 1000.f;
 	maxWalkRadius = 600.f;
 }
 
@@ -106,5 +108,35 @@ void AEnemyAIController::WalkRandomly()
 			EnemyCharacter->ShouldWalk(true);
 			MoveToLocation(randomNavPoint, 50.f, true, true, true, false, UAIBlockFilter::StaticClass(), true);
 		}
+	}
+}
+
+void AEnemyAIController::Attack()
+{
+	UObject* uo = blackboardComp->GetValue<UBlackboardKeyType_Object>(enemyKeyID);
+	if (AHeroCharacter* hero = dynamic_cast<AHeroCharacter*>(uo))
+	{
+		AEnemyCharacter* bot = Cast<AEnemyCharacter>(GetPawn());
+		
+		if (bot->GetDistanceTo(hero) < bot->GetWeapon()->GetRange() && !bot->GetWeapon()->IsOnCoolDown())
+		{
+			bot->AttackAnimation();
+
+			FTimerHandle UniqueHandle;
+			FTimerDelegate RespawnDelegate = FTimerDelegate::CreateUObject(this, &AEnemyAIController::AttackDelay);
+			GetWorldTimerManager().SetTimer(UniqueHandle, RespawnDelegate, bot->GetWeapon()->GetNextAttackDelay() / bot->GetWeapon()->GetAttackSpeed(), false);
+
+			bot->GetWeapon()->ActivateAttack(FVector::ZeroVector, hero);
+		}
+	}
+}
+
+void AEnemyAIController::AttackDelay()
+{
+	AEnemyCharacter* bot = Cast<AEnemyCharacter>(GetPawn());
+	UObject* uo = blackboardComp->GetValue<UBlackboardKeyType_Object>(enemyKeyID);
+	if (AHeroCharacter* hero = dynamic_cast<AHeroCharacter*>(uo))
+	{
+		UCombatFunctionLibrary::AttackEnemy(bot, hero, bot->GetWeapon());
 	}
 }
