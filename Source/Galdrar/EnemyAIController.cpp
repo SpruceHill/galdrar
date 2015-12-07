@@ -23,6 +23,15 @@ AEnemyAIController::AEnemyAIController(const FObjectInitializer& ObjectInitializ
 	maxWalkRadius = 600.f;
 }
 
+void AEnemyAIController::Tick(float DeltaSeconds)
+{
+	AEnemyCharacter* bot = Cast<AEnemyCharacter>(GetPawn());
+	if (!bot->IsAlive())
+	{
+		behaviorTreeComp->StopTree();
+	}
+}
+
 void AEnemyAIController::Possess(class APawn* inPawn)
 {
 	Super::Possess(inPawn);

@@ -18,6 +18,8 @@ class GALDRAR_API AEnemyAIController : public AAIController
 public:
 	AEnemyAIController(const FObjectInitializer& ObjectInitializer);
 
+	virtual void Tick(float DeltaSeconds) override;
+
 	UPROPERTY(transient)
 	class UBlackboardComponent* blackboardComp;
 	
